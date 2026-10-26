@@ -1,6 +1,6 @@
-# 小小成就 Android 3.1.0
+# 小小成就 Android 3.2.0
 
-版本号 310，沿用原签名，可覆盖安装。删除重复的原生标题与菜单栏，网站顶栏和底部导航负责日常操作；账号页的“安卓工具箱”保留刷新、浏览器打开与帮助。只处理可信站点主框架的用户点击，不新增 JavaScript 原生桥。
+版本号 320，沿用原签名，可覆盖安装。删除重复的原生标题与菜单栏，网站顶栏和底部导航负责日常操作；账号页的“安卓工具箱”保留刷新、浏览器打开与帮助。只处理可信站点主框架的用户点击，不新增 JavaScript 原生桥。
 
 Android 11 及以上由容器统一处理系统栏、屏幕开孔与键盘占用区域，并消费 Insets，避免网页重复留白；较旧版本沿用系统布局与 adjustResize。WebView 启用 viewport 适配。实现参考 [Edge-to-edge](https://developer.android.com/develop/ui/views/layout/edge-to-edge) 与 [WebSettings](https://developer.android.com/reference/android/webkit/WebSettings)。
 

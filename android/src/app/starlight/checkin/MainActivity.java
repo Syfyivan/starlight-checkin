@@ -66,7 +66,7 @@ public final class MainActivity extends Activity {
         web.getSettings().setDomStorageEnabled(true);
         web.getSettings().setUseWideViewPort(true);
         web.getSettings().setLoadWithOverviewMode(true);
-        web.getSettings().setUserAgentString(web.getSettings().getUserAgentString() + " StarlightAndroid/3.1.0");
+        web.getSettings().setUserAgentString(web.getSettings().getUserAgentString() + " StarlightAndroid/3.2.0");
         web.getSettings().setAllowFileAccess(false);
         web.getSettings().setAllowContentAccess(true);
         web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);

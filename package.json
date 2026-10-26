@@ -1,6 +1,6 @@
 {
   "name": "starlight-checkin",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -10,6 +10,6 @@
     "start": "node server.mjs",
     "demo": "node server.mjs --demo",
     "test": "node --test --test-concurrency=1 test/*.test.mjs",
-    "check": "node --check server.mjs && node --check lib/store.mjs && node --check lib/common.mjs && node --check lib/migrate.mjs && node --check lib/identity.mjs && node --check lib/rewards.mjs && node --check public/invitations.js && node --check public/plans.js && node --check public/app.js && node --check public/sw.js && node --check lib/community.mjs && node --check public/community.js && node --check public/rooms.js"
+    "check": "node --check server.mjs && node --check lib/store.mjs && node --check lib/common.mjs && node --check lib/migrate.mjs && node --check lib/identity.mjs && node --check lib/rewards.mjs && node --check lib/scoring.mjs && node --check public/invitations.js && node --check public/plans.js && node --check public/app.js && node --check public/sw.js && node --check lib/community.mjs && node --check public/community.js && node --check public/rooms.js"
   }
 }
