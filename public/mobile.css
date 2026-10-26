@@ -200,6 +200,9 @@ dialog{width:calc(100vw - 24px);max-width:540px;max-height:calc(100dvh - 24px);b
 .auth-story p{font-size:12px;line-height:1.9}
 .auth-bottom{display:none}
 .auth-form-wrap{padding:30px 28px 48px}
+.auth-compact .auth-story{min-height:90px;padding:24px 28px;background:transparent;border-bottom:1px solid var(--line)}
+.auth-compact .auth-story>div:not(.brand){display:none}
+.auth-compact .auth-story .brand{position:static}
 .auth-form h2{font-size:24px}
 .auth-form>p{font-size:12px}
 .welcome-steps{gap:18px;margin:24px 0}

@@ -406,3 +406,5 @@ dialog::backdrop{background:#1e30275e;backdrop-filter:blur(3px)}
 .market-preview[open] summary{margin-bottom:16px}
 .welcome-steps li>span{color:var(--muted);font-size:12px;padding-top:2px}
 .welcome-steps small{display:block;color:var(--muted);font-size:13px;line-height:1.8;margin-top:4px}
+
+.auth-switch{font-size:13px;color:var(--muted);text-align:center;margin:18px 0}.auth-switch button{color:var(--green);font-weight:600;padding:5px 8px}.auth-footnote{font-size:12px;line-height:1.9;color:var(--muted);margin-top:24px}.auth-footnote button{padding:4px 0;color:var(--green)}
