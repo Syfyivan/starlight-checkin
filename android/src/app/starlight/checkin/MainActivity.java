@@ -45,34 +45,28 @@ public final class MainActivity extends Activity {
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setBackgroundColor(Color.rgb(246, 247, 242));
-        root.setOnApplyWindowInsetsListener((view, insets) -> {
-            if (Build.VERSION.SDK_INT >= 30) {
-                android.graphics.Insets bars = insets.getInsets(WindowInsets.Type.systemBars());
-                view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
-            } else {
-                view.setPadding(insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(), insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
-            }
-            return insets;
-        });
-        LinearLayout toolbar = new LinearLayout(this);
-        TextView title = new TextView(this);
-        title.setText("  ✳ 小小成就");
-        title.setTextSize(17);
-        title.setTextColor(Color.rgb(40, 78, 59));
-        title.setGravity(android.view.Gravity.CENTER_VERTICAL);
-        toolbar.addView(title, new LinearLayout.LayoutParams(0, Math.round(48 * getResources().getDisplayMetrics().density), 1));
-        Button menu = new Button(this);
-        menu.setText("菜单");
-        menu.setContentDescription("刷新、浏览器打开与使用帮助");
-        menu.setOnClickListener(v -> showMenu());
-        toolbar.addView(menu);
-        root.addView(toolbar);
+        if (Build.VERSION.SDK_INT >= 30) {
+            getWindow().setDecorFitsSystemWindows(false);
+            root.setOnApplyWindowInsetsListener((view, insets) -> {
+                android.graphics.Insets bars = insets.getInsets(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+                android.graphics.Insets keyboard = insets.getInsets(WindowInsets.Type.ime());
+                view.setPadding(bars.left, bars.top, bars.right, Math.max(bars.bottom, keyboard.bottom));
+                return WindowInsets.CONSUMED;
+            });
+        }
+        getWindow().setStatusBarColor(Color.rgb(246, 247, 242));
+        getWindow().setNavigationBarColor(Color.rgb(246, 247, 242));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         progress = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
-        root.addView(progress, new LinearLayout.LayoutParams(-1, 5));
+        progress.setVisibility(View.GONE);
+        root.addView(progress, new LinearLayout.LayoutParams(-1, Math.round(2 * getResources().getDisplayMetrics().density)));
         web = new WebView(this);
         web.setBackgroundColor(Color.rgb(246, 247, 242));
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setDomStorageEnabled(true);
+        web.getSettings().setUseWideViewPort(true);
+        web.getSettings().setLoadWithOverviewMode(true);
+        web.getSettings().setUserAgentString(web.getSettings().getUserAgentString() + " StarlightAndroid/3.1.0");
         web.getSettings().setAllowFileAccess(false);
         web.getSettings().setAllowContentAccess(true);
         web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
@@ -84,6 +78,10 @@ public final class MainActivity extends Activity {
             @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (!request.isForMainFrame()) return false;
                 Uri uri = request.getUrl();
+                if ("starlight://tools".equals(uri.toString())) {
+                    if (request.hasGesture() && view.getUrl() != null && trusted(Uri.parse(view.getUrl()))) showMenu();
+                    return true;
+                }
                 if (trusted(uri) && !uri.getPath().contains("/downloads/")) return false;
                 if (request.hasGesture()) external(uri);
                 return true;
@@ -129,6 +127,7 @@ public final class MainActivity extends Activity {
         Button retry = new Button(this);retry.setText("再连一次");retry.setOnClickListener(v -> web.loadUrl(retryUrl));error.addView(retry);
         error.setVisibility(View.GONE);root.addView(error, new LinearLayout.LayoutParams(-1, 0, 1));
         setContentView(root);
+        root.requestApplyInsets();
         if (state == null || web.restoreState(state) == null) openIntent(getIntent());
     }
 

@@ -1,0 +1,112 @@
+/* Phone layouts share the web navigation; the Android shell adds no second header. */
+.reward-guide{color:var(--muted);font-size:13px;margin:-10px 0 16px}
+.reward-guide summary{cursor:pointer;width:fit-content;padding:8px 0}
+.reward-guide p{max-width:700px;padding:0 0 8px;line-height:1.7}
+@media(max-width:760px),(max-width:960px) and (max-height:500px){
+  body{font-size:14px}
+  .sidebar{width:auto;height:calc(64px + env(safe-area-inset-bottom));inset:auto 0 0;border:0;border-top:1px solid var(--line);padding:0 4px env(safe-area-inset-bottom);background:#fbfcf8f5;backdrop-filter:blur(12px);display:block}
+  .sidebar .brand,.nav-label,.sidebar-bottom,.breadcrumb{display:none}
+  .nav{flex-direction:row;gap:0;height:100%;justify-content:space-around}
+  .nav button{flex:1;min-width:0;flex-direction:column;justify-content:center;gap:3px;font-size:11px;padding:7px 2px;border-radius:0}
+  .nav button.active{background:none;color:var(--green);box-shadow:inset 0 3px #628753}
+  .nav button .icon{width:21px;height:21px}
+  .layout{margin-left:0;padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+  .topbar{height:calc(56px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 12px 0;gap:8px}
+  .mobile-brand{display:flex;font-size:17px;gap:5px;min-width:0;flex:1}
+  .mobile-brand .brand-symbol{font-size:26px}
+  .mobile-brand>div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mobile-brand small,.mail-label{display:none}
+  .top-actions{gap:5px;flex-shrink:0;max-width:65%}
+  .top-actions .avatar,.mail-button{min-width:40px;height:40px}
+  .mail-button{padding:6px;justify-content:center;gap:0}
+  .mail-button b{position:absolute;right:0;top:0}
+  .coin-pill{padding:5px 8px;gap:5px;min-height:40px;min-width:0;font-size:11px}
+  .coin-pill strong{max-width:74px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .coin-pill .coin-icon{width:18px;height:18px;font-size:11px}
+  .main{padding:12px 12px 22px}
+  .space-bar{display:grid;grid-template-columns:minmax(0,1fr) 40px auto;gap:2px;margin:0 0 14px;padding:0;border:0;background:transparent;box-shadow:none}
+  .space-bar label{display:none}
+  .space-bar select{width:100%;max-width:none;min-width:0;font-size:14px;padding:10px 8px;min-height:44px;text-overflow:ellipsis}
+  .space-bar>.text-btn{min-height:44px;font-size:12px;padding:6px;white-space:nowrap}
+  .space-bar>.room-settings-btn{min-width:40px;justify-content:center;padding:8px}
+  .space-bar>.text-btn:not(.room-settings-btn) .icon{display:none}
+  .page-heading{gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .page-heading h1,.plan-heading h1,.compact-heading h1{font-size:21px;letter-spacing:0}
+  .page-heading p{font-size:13px;line-height:1.6;max-width:none;margin-top:5px}
+  .page-heading .eyebrow{display:none}
+  .page-heading>.btn{font-size:12px;min-height:40px;margin:0;padding:7px 10px}
+  .reward-guide{margin:0 0 8px;font-size:12px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:4px}
+  .chip{flex-shrink:0;white-space:nowrap;min-height:40px;font-size:12px;padding:7px 12px}
+  .wish-grid{grid-template-columns:minmax(0,1fr);gap:12px}
+  .wish-card,.wish-ticket{display:grid;grid-template-columns:88px minmax(0,1fr);border-radius:16px;overflow:hidden}
+  .wish-card .wish-art,.wish-ticket .wish-art{height:auto;min-height:158px;border-radius:0;border:0;overflow:hidden}
+  .wish-art:before,.wish-art:after,.wish-tier,.wish-spark{display:none}
+  .wish-sticker{font-size:34px;top:25px;left:0;width:100%;text-align:center;transform:none}
+  .wish-value{font-size:25px;bottom:24px;left:0;right:0;text-align:center;line-height:1.3}
+  .wish-value small{font-size:12px}
+  .wish-value>span{font-size:10px;margin-top:7px;letter-spacing:1px}
+  .wish-card .reward-content,.wish-ticket .ticket-bottom{padding:12px;min-width:0}
+  .wish-card .category{font-size:10px;padding:1px 5px;margin-bottom:4px}
+  .wish-card .reward-content h3,.wish-ticket h3{font-size:15px;line-height:1.5;overflow-wrap:anywhere}
+  .wish-card .reward-content p,.wish-ticket .ticket-bottom p{min-height:0;font-size:12px;line-height:1.65;margin:5px 0 10px;color:#6b786c;overflow-wrap:anywhere}
+  .wish-card .reward-bottom{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .wish-card .price{font-size:18px;gap:4px}
+  .wish-card .price small{font-size:10px}
+  .wish-card .price .coin-icon{display:none}
+  .wish-card .reward-bottom .btn{font-size:12px;min-height:40px;width:auto;padding:8px 10px}
+  .wish-card .reward-stock{font-size:10px;margin-top:8px;padding-top:7px;flex-wrap:wrap;gap:3px}
+  .wish-ticket .ticket-status{font-size:12px;margin-top:5px;overflow-wrap:anywhere}
+  .wish-ticket .ticket-bottom .btn{font-size:13px;min-height:42px;padding:8px}
+  .wish-ticket .ticket-bottom .text-btn{min-height:40px;font-size:12px}
+  .ticket-code{font-size:10px;overflow-wrap:anywhere}
+  .panel,.plans-panel{padding:14px;border-radius:14px}
+  .plan-heading{flex-wrap:wrap;align-items:center}
+  .plan-heading p{font-size:12px}
+  .plan-buttons{gap:6px}
+  .plan-buttons .btn{font-size:12px;min-height:40px;padding:7px 10px}
+  .plan-toolbar{flex-wrap:wrap}
+  .task-tabs{gap:14px}
+  .task-tabs button,.segmented button{min-height:40px;font-size:12px}
+  .task-title{font-size:15px;overflow-wrap:anywhere}
+  .task-meta{font-size:11px;gap:5px}
+  .task-row{gap:9px}
+  .task-actions .icon-button{min-width:32px;min-height:36px;padding:7px}
+  .task-actions .icon-button .icon{width:17px;height:17px}
+  .task-reward{font-size:12px}
+  .daily-bonus-line{font-size:12px;padding:8px 10px}
+  .daily-bonus-line .text-btn{min-height:36px;font-size:12px}
+  .compact-machine{padding:14px}
+  .reel-heading strong{font-size:15px}
+  .reel-heading>div{font-size:11px}
+  .reel-arrow{width:40px;height:40px}
+  .reel-card{flex-basis:132px;padding:12px 8px}
+  .reel-card strong{font-size:13px}
+  .draw-choices strong{font-size:13px}
+  .compact-machine .btn{font-size:13px;min-height:44px}
+  .draw-footnote{font-size:12px}
+  .reward-tools .btn,.admin-tabs button{font-size:12px;min-height:40px}
+  .record-main{min-width:0}
+  .record-main strong{font-size:13px;overflow-wrap:anywhere}
+  .record-main small{font-size:11px}
+  .record-row .btn,.record-row .text-btn{min-height:40px}
+  .family-strip{margin-top:0}
+  .notice,.demo-banner{font-size:12px;line-height:1.6}
+  dialog{padding:0;width:calc(100vw - 24px);max-width:560px;max-height:calc(100dvh - 24px);border-radius:18px;overflow:auto}
+  .dialog-head{padding:14px 16px;position:sticky;top:0;background:#fff;z-index:1;gap:8px}
+  .dialog-head h2{font-size:17px}
+  .dialog-close{min-width:40px;min-height:40px}
+  .dialog-body{padding:16px}
+  .field label{font-size:13px}
+  .field input,.field select,.field textarea{font-size:16px;min-height:44px}
+  .form-actions .btn{min-height:44px}
+  .subtext,.field-help{font-size:12px}
+  .toast{bottom:calc(76px + env(safe-area-inset-bottom));font-size:13px}
+  .template-categories{max-height:none}
+}
+@media(max-width:380px){
+  .coin-pill>span:last-child{display:none}
+  .form-row{grid-template-columns:1fr}
+  .wish-card,.wish-ticket{grid-template-columns:76px minmax(0,1fr)}
+  .wish-card .reward-content,.wish-ticket .ticket-bottom{padding:10px}
+}
