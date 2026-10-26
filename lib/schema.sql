@@ -1,0 +1,53 @@
+PRAGMA journal_mode=WAL;
+PRAGMA foreign_keys=ON;
+PRAGMA busy_timeout=5000;
+CREATE TABLE IF NOT EXISTS users (
+ id TEXT PRIMARY KEY, username TEXT UNIQUE NOT NULL, name TEXT NOT NULL,
+ password TEXT NOT NULL, role TEXT NOT NULL CHECK(role IN ('admin','member')),
+ enabled INTEGER NOT NULL DEFAULT 1, created TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS sessions (
+ token TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), csrf TEXT NOT NULL, expires INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS invites (
+ hash TEXT PRIMARY KEY, label TEXT NOT NULL, remaining INTEGER NOT NULL, expires INTEGER NOT NULL, created TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS tasks (
+ id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), title TEXT NOT NULL,
+ category TEXT NOT NULL, points INTEGER NOT NULL, recurrence TEXT NOT NULL,
+ start_date TEXT NOT NULL, archived INTEGER NOT NULL DEFAULT 0, created TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS completions (
+ id TEXT PRIMARY KEY, task_id TEXT NOT NULL REFERENCES tasks(id), user_id TEXT NOT NULL REFERENCES users(id),
+ day TEXT NOT NULL, points INTEGER NOT NULL, done INTEGER NOT NULL, note TEXT NOT NULL DEFAULT '',
+ updated TEXT NOT NULL, UNIQUE(task_id,day)
+);
+CREATE TABLE IF NOT EXISTS ledger (
+ seq INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT UNIQUE NOT NULL, user_id TEXT NOT NULL REFERENCES users(id),
+ amount INTEGER NOT NULL, kind TEXT NOT NULL, note TEXT NOT NULL, ref TEXT NOT NULL, created TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ledger_user ON ledger(user_id,seq);
+CREATE TABLE IF NOT EXISTS prizes (
+ id TEXT PRIMARY KEY, title TEXT NOT NULL, description TEXT NOT NULL, emoji TEXT NOT NULL, tone TEXT NOT NULL,
+ cost INTEGER NOT NULL CHECK(cost>0), stock INTEGER NOT NULL CHECK(stock>=0),
+ weight INTEGER NOT NULL CHECK(weight>=0), wait_days INTEGER NOT NULL CHECK(wait_days>=0), active INTEGER NOT NULL DEFAULT 1
+);
+CREATE TABLE IF NOT EXISTS cards (
+ id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), prize_id TEXT NOT NULL REFERENCES prizes(id),
+ title TEXT NOT NULL, description TEXT NOT NULL, emoji TEXT NOT NULL, tone TEXT NOT NULL,
+ source TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'ready', available TEXT NOT NULL,
+ created TEXT NOT NULL, requested TEXT, fulfilled TEXT, delivery_note TEXT NOT NULL DEFAULT ''
+);
+CREATE TABLE IF NOT EXISTS draws (
+ id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), prize_id TEXT, card_id TEXT,
+ cost INTEGER NOT NULL, odds TEXT NOT NULL, created TEXT NOT NULL, day TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS operations (
+ user_id TEXT NOT NULL REFERENCES users(id), key TEXT NOT NULL, action TEXT NOT NULL,
+ fingerprint TEXT NOT NULL, result TEXT NOT NULL, PRIMARY KEY(user_id,key)
+);
+CREATE TABLE IF NOT EXISTS lessons (
+ user_id TEXT NOT NULL REFERENCES users(id), lesson TEXT NOT NULL, created TEXT NOT NULL,
+ PRIMARY KEY(user_id,lesson)
+);

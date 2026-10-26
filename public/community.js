@@ -1,0 +1,92 @@
+export function communityUI({getState,api,refresh,render,navigate,openDialog,dialog,esc,time,field,textarea,actions,toast,roomLabel}){
+  let inbox={entries:[],next:null},logs={entries:[],next:null},direction='received',tab='letters',diaryOriginal='',diaryDay='',sharePreview=null;
+  const shown=new Set(),state=()=>getState(),closed=()=>state().space.status!=='active';
+  const scopeName={activity:'任务动态',diary:'日记',both:'任务动态和日记'},statusName={pending:'等回复',accepted:'已同意',declined:'暂不同意',cancelled:'已撤回 / 已结束',done:'通知'};
+  async function load(page,more=false){
+    if(page==='inbox'){const r=await api('community/inbox?direction='+direction+(more&&inbox.next?'&before='+inbox.next:''));inbox={...r,entries:more?[...inbox.entries,...r.entries]:r.entries};}
+    if(page==='logs'){const r=await api('community/logs?space_id='+encodeURIComponent(state().space.id)+(more&&logs.next?'&before='+logs.next:''));logs={...r,entries:more?[...logs.entries,...r.entries]:r.entries};}
+  }
+  function badge(){const n=state().community.pendingCount||state().community.unread;return `<button class="mail-button" data-page="inbox" aria-label="我的信箱${n?'，'+n+' 封待处理或未读':''}"><span aria-hidden="true">✉</span><span class="mail-label">信箱</span>${n?`<b>${Math.min(n,99)}${n>99?'+':''}</b>`:''}</button>`;}
+  function familyStrip(){const f=state().family;if(!f)return '';return `<div class="family-strip" aria-label="家庭成员计划">${f.members.map(m=>`<button class="family-person ${m.space_id===state().space.id?'selected':''}" data-action="switch-room" data-id="${m.space_id}"><span>${esc(m.name)}${m.user_id===state().user.id?' · 我':''}${m.is_admin?' ♡':''}</span><small>${m.done}/${m.total} 已完成</small></button>`).join('')}</div>`;}
+  function roomInfo(){
+    const s=state(),f=s.family,c=s.closure;
+    const pending=c.pending?`<div class="notice soft"><strong>💌 有一份${c.pending.mode==='deleted'?'删除小屋':'解除关系'}申请</strong><p>${c.pending.votes.filter(v=>v.decision==='accepted').length} / ${c.pending.votes.length} 位伙伴已同意。</p>${c.pending.requester_id===s.user.id?`<button class="text-btn" data-action="close-cancel" data-id="${c.pending.id}">撤回这份申请</button>`:'<button class="text-btn" data-page="inbox">去信箱回复</button>'}</div>`:'';
+    const members=f?`<p class="subtext">${f.members.length} / 6 位伙伴 · ♡ 是奖品管家。大家各做计划、各自攒币，共享奖池和库存。</p><div class="family-members">${f.members.map(m=>`<div class="record-row"><span class="avatar">${esc(m.name.slice(0,1))}</span><div class="record-main"><strong>${esc(m.name)}${m.user_id===s.user.id?' · 我':''}</strong><small>@${esc(m.username)} · ${m.done}/${m.total} 已完成${m.is_admin?' · 奖品管家':''}</small></div><button class="text-btn" data-action="switch-room" data-id="${m.space_id}">看计划</button></div>`).join('')}</div>${!closed()?`<button class="btn secondary full-width mt" data-action="family-invite" ${f.members.length>=6||c.pending?'disabled':''}>💌 邀请一位家人</button>`:''}${!closed()&&f.creator_id===s.user.id?`<details class="mt"><summary>安排 1–2 位奖品管家</summary><form id="family-admins-form"><p class="subtext">只有管家可以改奖池、核销卡片；他们也能正常做任务领奖。变更会通知全体成员并记入日志。</p>${f.members.map(m=>`<label class="checkbox-label"><input type="checkbox" name="admins" value="${m.user_id}" ${m.is_admin?'checked':''}>${esc(m.name)}</label>`).join('')}${actions('保存管家名单')}</form></details>`:''}`:`<p>${s.space.personal?'这间个人小屋只属于你。':'这间小屋只有你们两个人能看。'}</p>`;
+    openDialog(f?'🏡 '+esc(f.name):'这间小屋的约定',`${members}${pending}<div class="welcome-links"><button class="text-btn" data-page="logs">📒 看小屋日志</button>${s.admin?'<button class="text-btn" data-page="admin">🎁 奖品与报销</button>':''}</div>${closed()?'<p class="notice soft">小屋已经收好，不能继续攒币和兑换。计划与日志仍可查看，已有卡仍可报销。</p>':c.canRequest&&!c.pending?`<details class="room-close-options"><summary>解除关系 / 删除小屋</summary><p class="subtext">${f?'需要其余每一位家人':'需要另一位伙伴'}同意才生效。已发出的卡仍可兑现，日志和账本保留。${c.legacyCreator?'这间旧小屋没有记录创建人，双方都可以发起。':''}</p><button class="btn secondary full-width" data-action="close-request" data-mode="unbound">申请解除关系</button><button class="text-btn full-width mt" data-action="close-request" data-mode="deleted">申请删除小屋</button></details>`:''}`);
+  }
+  function snapshotHTML(snapshot){
+    const d=snapshot;return `<div class="day-snapshot"><p class="subtext">${esc(d.name)} · ${esc(d.day)} · ${scopeName[d.scope]}</p>${d.scope!=='activity'?`<section><h3>📖 这一天的日记</h3><div class="journal-text">${esc(d.diary?.content||'这一天还没有写日记。')}</div></section>`:''}${d.scope!=='diary'?`<section><h3>🌱 任务动态</h3>${d.activity.length?d.activity.map(e=>`<div class="record-row"><div class="record-main"><strong>${esc(e.summary)}</strong><small>${time(e.created)}</small></div></div>`).join(''):'<p class="subtext">这一天没有新记录。</p>'}${d.truncated?'<p>仅展示前 1000 条动态。</p>':''}<details class="mt"><summary>这一天的打卡记录（${d.completions.length}）</summary>${d.completions.map(c=>`<div class="record-row"><div class="record-main"><strong>${c.done?'✓':'↩'} ${esc(c.title)}</strong><small>${c.done?'已完成':'已撤销'}${c.note?' · '+esc(c.note):''}</small></div></div>`).join('')}</details></section>`:''}</div>`;
+  }
+  function mailText(m){const p=m.payload,who=m.recipient_id&&m.recipient_id!==state().user.id?m.recipient_name:'你';return m.kind==='view_day'?`${m.sender_name} 想看看${who} ${p.day} 的${scopeName[p.scope]}。`:m.kind==='room_close'?`${m.sender_name} 想${p.mode==='deleted'?'删除':'解除'}「${p.room_name}」${p.family?'家庭':''}。需要所有伙伴同意才会生效。`:m.kind==='friend'?`${m.sender_name} 想和${who}成为好友。成为好友后仍需另外申请，才能查看某一天的动态或日记。`:p.text||m.subject;}
+  async function mailDialog(m){
+    const received=m.recipient_id===state().user.id||!m.recipient_id,pending=received&&m.status==='pending';
+    let extra='';sharePreview=null;
+    if(pending&&m.kind==='view_day'){
+      sharePreview=await api('community/share-preview?id='+encodeURIComponent(m.id));
+      extra=`<details class="share-preview" open><summary>即将分享的内容，先看一眼</summary>${snapshotHTML(sharePreview.snapshot)}</details><p class="subtext">只分享上面的快照。之后修改日记不会自动更新给朋友；你可以随时撤回访问。任务动态不含其他成员、房间名称或奖池。</p>`;
+    }
+    const controls=pending?`<form id="mail-response-form" data-id="${m.id}">${m.kind==='room_close'?'<p class="subtext">同意后，等所有人点头，小屋才会关闭；旧卡和历史记录仍保留。你也可以暂不同意。</p>':''}${extra}<div class="error-text" role="alert"></div><div class="form-actions"><button class="btn secondary" name="decision" value="no" type="submit">暂不同意</button><button class="btn" name="decision" value="yes" type="submit">${m.kind==='view_day'?'同意分享以上内容':'同意'}</button></div></form>`:`<p class="subtext">${statusName[m.status]||''}</p>${m.share_id&&!m.share_revoked?`<button class="btn" data-action="day-share" data-id="${m.share_id}">查看已同意的内容</button>${received?`<button class="text-btn mt" data-action="share-revoke" data-id="${m.share_id}">撤回这份查看权限</button>`:''}`:''}`;
+    openDialog(m.kind==='notice'?esc(m.subject):'💌 '+esc(m.sender_name||'朋友')+' 来信啦',`<p>${esc(mailText(m))}</p>${controls}`);
+    if(received){await api('community/read',{ids:[m.id]});if(!m.read_at){state().community.unread=Math.max(0,state().community.unread-1);m.read_at=new Date().toISOString();}}
+  }
+  function notify(){if(dialog.open)return;const m=state().community.pending.find(m=>!shown.has(state().user.id+':'+m.id));if(!m)return;shown.add(state().user.id+':'+m.id);openDialog('💌 有伙伴在等你的回复',`<p>${esc(mailText(m))}</p><p class="subtext">申请也会留在你的信箱里，可以稍后再决定。</p><div class="form-actions"><button class="btn secondary" data-action="close">稍后看看</button><button class="btn" data-action="pending-mail" data-id="${m.id}">看看这份申请</button></div>`);}
+  function inboxPage(){const s=state();return `<div class="compact-heading"><div><h1>我的信箱</h1><p class="subtext">只装申请和小通知，没有聊天。日记和动态，由你决定分享给谁。</p></div><button class="btn secondary sm" data-action="friend-add">＋ 加好友</button></div><div class="admin-tabs"><button class="${tab==='letters'&&direction==='received'?'active':''}" data-action="mail-tab" data-value="received">收到的信${s.community.pendingCount?' · '+s.community.pendingCount+' 待回复':''}</button><button class="${tab==='letters'&&direction==='sent'?'active':''}" data-action="mail-tab" data-value="sent">寄出的信</button><button class="${tab==='friends'?'active':''}" data-action="mail-tab" data-value="friends">好友 · ${s.community.friends.length}</button></div>${tab==='friends'?`<section class="panel">${s.community.friends.map(f=>`<div class="record-row friend-row"><span class="avatar">${esc(f.name.slice(0,1))}</span><div class="record-main"><strong>${esc(f.name)}</strong><small>@${esc(f.username)}</small></div><button class="btn secondary sm" data-action="friend-view" data-id="${f.id}">申请看看</button><button class="text-btn" data-action="friend-remove" data-id="${f.id}">移除</button></div>`).join('')||'<p class="subtext">还没有好友。用朋友的登录账号，寄出第一张小请柬吧。</p>'}</section>`:`<section class="panel mail-list">${inbox.entries.map(m=>`<button class="mail-row ${!m.read_at&&direction==='received'?'unread':''}" data-action="mail-open" data-id="${m.id}"><span class="mail-emoji">${m.kind==='room_close'?'🏡':m.kind==='friend'?'🌱':m.kind==='view_day'?'📖':'✉'}</span><span class="record-main"><strong>${direction==='sent'?'给 '+esc(m.recipient_name):esc(m.sender_name)} · ${esc(m.subject)}</strong><small>${m.payload.day?m.payload.day+' · '+scopeName[m.payload.scope]+' · ':''}${time(m.created)}</small></span><span class="mail-state">${statusName[m.status]}${m.share_revoked?' · 分享已撤回':''}</span></button>`).join('')||'<p class="subtext">信箱空空，今天也轻轻松松。</p>'}${inbox.next?'<button class="text-btn full-width mt" data-action="mail-more">再看更早的信</button>':''}</section>`}`;}
+  function auditDetail(l){
+    const d=l.detail,lines=[];
+    if(d.tasks)lines.push(...d.tasks.map(t=>`${t.title} · 每次 ${t.points} 币 · ${t.recurrence==='daily'?'每天重复':'单次'} · ${t.start_date} 起`));
+    if(d.task)lines.push(`${d.task.done?'标记完成':'取消完成'} · 本次 ${d.task.points>0?'+':''}${d.task.points} 币`);
+    if(d.cards)lines.push(...d.cards);
+    if(d.added!==undefined)lines.push(`新增 ${d.added} 张商品，恢复 ${d.restored} 张`);
+    if(d.paid_cents!==undefined)lines.push(`实际报销 ¥${d.paid_cents/100}`);
+    if(d.tickets)lines.push(`免费机会 ${d.tickets>0?'+':''}${d.tickets} 次`);
+    if(d.bonus)lines.push(`全勤奖励 ${d.bonus.amount>0?'+':''}${d.bonus.amount} ${d.bonus.kind==='ticket'?'次机会':'币'}`);
+    if(l.action==='/api/admin/odds'&&d.after)for(const item of d.after){const old=d.before?.find(x=>x.id===item.id);if(old?.bps!==item.bps)lines.push(`${item.title||'心愿卡'}：${(old?.bps||0)/100}% → ${item.bps/100}%`);}
+    if(d.after&&!Array.isArray(d.after)){
+      const fields={title:'名称',cost:'学习币价格',stock:'库存',active:'是否上架',face_cents:'报销额度',wait_days:'等待天数',spaceName:'空间名称',coinName:'积分名称',dailyCap:'每日赚币上限',drawCost:'每次抽奖花费',drawLimit:'每天付费抽奖次数',dailyBonusKind:'全勤奖励',dailyBonusAmount:'全勤数量',marketThreshold:'市场解锁门槛'};
+      const display=(k,v)=>v===undefined?'未设置':k==='cost'?v/1_000_000+' 币':k==='face_cents'?'¥'+v/100:k==='active'?v?'上架':'下架':k==='dailyBonusKind'?({ticket:'免费机会',coins:'学习币',none:'关闭'}[v]):v;
+      for(const [k,label] of Object.entries(fields))if(d.after[k]!==undefined&&d.before?.[k]!==d.after[k])lines.push(`${label}：${display(k,d.before?.[k])} → ${display(k,d.after[k])}`);
+      if(d.after.rates)for(const c of state().categories)if(d.before?.rates?.[c.id]!==d.after.rates[c.id])lines.push(`${c.name}每元建议价：${d.before?.rates?.[c.id]??'未设置'} → ${d.after.rates[c.id]} 币`);
+    }
+    return lines.length?`<details><summary>操作详情</summary><ul class="audit-detail">${lines.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></details>`:'';
+  }
+  function logsPage(){return `<div class="compact-heading"><div><h1>${state().family?'家庭':'小屋'}日志</h1><p class="subtext">${state().family?'每位成员和奖品管家':'你们'}的操作都留一笔。记录不能修改或删除，撤销也会留下痕迹。</p></div><button class="text-btn" data-page="ledger">积分账本 →</button></div><section class="panel audit-list">${logs.entries.map(l=>`<article class="audit-row"><div class="audit-dot"></div><div><small>${time(l.created)} · ${esc(l.actor_name)}</small><p>${esc(l.summary)}</p>${auditDetail(l)}</div></article>`).join('')||'<p class="subtext">新的操作会从这里开始记录，升级前的积分仍在账本里。</p>'}${logs.next?'<button class="text-btn full-width mt" data-action="logs-more">看更早的记录</button>':''}</section>`;}
+  async function diaryOpen(day=state().day){const d=await api('community/diary?day='+encodeURIComponent(day));diaryOriginal=d.content;diaryDay=d.day;openDialog('📖 留一点今天的心情',`<form id="diary-form">${field('想记哪一天？','diary_day','date',d.day,`required max="${state().day}" min="2000-01-01"`)}<button type="button" class="text-btn" data-action="diary-load">打开这一天</button>${textarea('只给自己看的小日记','content',d.content,'maxlength="8000" rows="10" placeholder="今天有什么想记下来的？"')}<p class="subtext">家庭成员和好友都不能直接看。朋友按日期申请后，只有你同意才会分享；清空后保存可删除原日记。</p>${actions('把这一天存好')}</form>`);}
+  async function click(action,el){
+    switch(action){
+      case 'room-settings':roomInfo();return;
+      case 'family-create':openDialog('🏡 成立一个小家庭',`<form id="family-create-form">${field('给家庭起个名字','name','text','','required maxlength="24" placeholder="例如：元气充电站"')}<p>最多六位伙伴，彼此能看计划和进度，各自攒币领奖。</p><p class="subtext">你先担任奖品管家，之后可从成员中安排 1–2 位。家庭共享奖池与库存，个人日记仍是私密的。</p>${actions('建好这个家')}</form>`);return;
+      case 'family-invite':{const r=await api('family/invite',{}),url=location.origin+location.pathname+'#join='+r.code;await refresh();openDialog('💌 邀请一位家人',`<p>来「${esc(r.name)}」一起种计划。邀请码 7 天有效，只能被一位新成员使用。</p><div id="invite-code" class="code-display">${esc(r.code.match(/.{1,6}/g).join('-'))}</div><button class="btn full-width" data-action="copy-invite">复制邀请码</button><input id="invite-link" class="sr-only" value="${esc(url)}" readonly aria-label="邀请链接"><button class="btn secondary full-width mt" data-action="copy-invite-link">复制邀请链接</button><p class="subtext">加入后，TA 与家人互相看见计划。币和卡包仍各自计算。</p>`);return;}
+      case 'close-request':openDialog(el.dataset.mode==='deleted'?'商量一下，删除这间小屋？':'商量一下，解除这段关系？',`<form id="room-close-form" data-mode="${el.dataset.mode}"><p>给${state().family?'其余家人':'另一位伙伴'}发一封确认信，全部同意后才生效。等待期间仍可正常打卡，家庭暂时不加入新成员。</p><p class="subtext">${el.dataset.mode==='deleted'?'删除后从当前小屋列表移除，放进“历史小屋”。':'解除后停止这间小屋的新打卡和兑换，放进“历史小屋”。'}已有卡仍可兑现，记录保留。</p>${actions('寄出这份申请')}</form>`);return;
+      case 'close-cancel':await api('rooms/close/cancel',{request_id:el.dataset.id});dialog.close();await refresh();toast('申请已撤回，小屋继续亮着灯');return;
+      case 'mail-tab':tab=el.dataset.value==='friends'?'friends':'letters';if(tab==='letters'){direction=el.dataset.value;await load('inbox');}render();return;
+      case 'mail-more':await load('inbox',true);render();return;
+      case 'logs-more':await load('logs',true);render();return;
+      case 'mail-open':await mailDialog(inbox.entries.find(m=>m.id===el.dataset.id));return;
+      case 'pending-mail':{const m=state().community.pending.find(m=>m.id===el.dataset.id);if(m)await mailDialog({...m,status:'pending'});return;}
+      case 'friend-add':openDialog('🌱 认识一位新伙伴',`<form id="friend-add-form">${field('朋友的登录账号','username','text','','required minlength="3" maxlength="32" pattern="[a-zA-Z0-9_]+" placeholder="例如：xiaoya_01"','填写账号，不是昵称。朋友可以在头像菜单里找到 @ 后面的账号。')}<p class="subtext">对方同意后成为好友。这里不聊天，也不会自动开放彼此的日记。</p>${actions('寄出好友申请')}</form>`);return;
+      case 'friend-view':{const f=state().community.friends.find(f=>f.id===el.dataset.id);openDialog('📖 申请看看 '+esc(f.name)+' 的一天',`<form id="friend-view-form" data-id="${f.id}">${field('想看哪一天？','day','date',state().day,`required min="2000-01-01" max="${state().day}"`)}<label class="field">想看哪些内容？<select name="scope"><option value="both">任务动态和日记</option><option value="activity">只看任务动态</option><option value="diary">只看日记</option></select></label><p class="subtext">对方会先预览将要分享的内容，再决定是否同意。只开放这一天，也可以之后撤回。</p>${actions('寄出查看申请')}</form>`);return;}
+      case 'friend-remove':openDialog('把这位好友先移出名单？',`<form id="friend-remove-form" data-id="${el.dataset.id}"><p>你们互相开放的日记和动态会停止访问，待处理的查看申请也会取消。</p><p class="subtext">共同加入的小屋和家庭不会解散。</p>${actions('确认移除好友')}</form>`);return;
+      case 'day-share':{const r=await api('community/day-share?id='+encodeURIComponent(el.dataset.id));openDialog('朋友分享的一天',`<p class="subtext">分享于 ${time(r.created)} · 是当时同意的快照</p>${snapshotHTML(r.snapshot)}`);return;}
+      case 'share-revoke':openDialog('收回这份查看权限？',`<form id="share-revoke-form" data-id="${el.dataset.id}"><p>朋友将不能再从信箱打开这份内容。已经看到的内容无法从对方记忆或截图中收回。</p>${actions('确认收回')}</form>`);return;
+      case 'diary-open':await diaryOpen();return;
+      case 'diary-load':{const content=document.querySelector('#f-content');if(content.value!==diaryOriginal){toast('先保存当前日记，再打开另一天吧');return;}await diaryOpen(document.querySelector('#f-diary_day').value);return;}
+    }
+  }
+  async function submit(form,data,formData,key,submitter){
+    let route,body,message;
+    switch(form.id){
+      case 'family-create-form':route='family/create';body={name:data.name};message='小家庭建好啦，邀请伙伴回家吧';break;
+      case 'family-admins-form':route='family/admins';body={user_ids:formData.getAll('admins'),expected_admins:state().family.members.filter(m=>m.is_admin).map(m=>m.user_id)};message='奖品管家安排好啦';break;
+      case 'room-close-form':route='rooms/close';body={mode:form.dataset.mode};message='申请已经放进伙伴的信箱';break;
+      case 'mail-response-form':route='community/respond';body={id:form.dataset.id,accept:submitter?.value==='yes',snapshotHash:sharePreview?.snapshotHash};message=body.accept?'同意的心意已寄出':'已回复，按自己的心意决定就好';break;
+      case 'friend-add-form':route='friends/request';body={username:data.username};message='好友申请寄出啦';break;
+      case 'friend-view-form':route='friends/view-request';body={user_id:form.dataset.id,day:data.day,scope:data.scope};message='查看申请寄出啦，等朋友点头';break;
+      case 'friend-remove-form':route='friends/remove';body={user_id:form.dataset.id};message='已移除好友，并收回互相查看的权限';break;
+      case 'share-revoke-form':route='community/revoke';body={id:form.dataset.id};message='这份查看权限已经收回';break;
+      case 'diary-form':if(data.diary_day!==diaryDay)throw new Error('先点“打开这一天”，再写下那天的日记吧');route='community/diary';body={day:diaryDay,content:data.content,expectedContent:diaryOriginal};message=data.content.trim()?'这一天，替你认真收好啦':'日记已清空，已分享的快照可在信箱撤回';break;
+      default:return;
+    }
+    const r=await api(route,body,{key});dialog.close();if(form.id==='family-create-form')await navigate('today',r.space_id);else await refresh();toast(message);
+  }
+  return {load,badge,familyStrip,roomInfo,notify,inboxPage,logsPage,click,submit};
+}

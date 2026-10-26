@@ -1,0 +1,8 @@
+[Unit]
+Description=Consistent backup of Starlight learning rewards
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker exec starlight-checkin node scripts/backup.mjs
+UMask=0077

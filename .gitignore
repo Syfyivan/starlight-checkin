@@ -1,0 +1,30 @@
+data/
+.env
+.env.*
+!.env.example
+*.sqlite*
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.tar.gz
+output/
+node_modules/
+
+# Local credentials and Android signing material
+.ssh/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.dpapi
+id_rsa
+id_ed25519
+
+# Machine-specific Android configuration and generated intermediates
+android/local.properties
+android/.gradle/
+android/build/
+android/**/build/

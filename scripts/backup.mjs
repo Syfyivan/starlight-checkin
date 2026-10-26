@@ -1,0 +1,13 @@
+import {DatabaseSync} from 'node:sqlite';
+import {mkdirSync,chmodSync} from 'node:fs';
+import {resolve,dirname} from 'node:path';
+import {randomUUID} from 'node:crypto';
+const source=process.env.DB_PATH||resolve('data/starlight.sqlite');
+const targetDir=process.env.BACKUP_DIR||resolve(dirname(source),'backups');
+mkdirSync(targetDir,{recursive:true,mode:0o700});
+const target=resolve(targetDir,`starlight-${new Date().toISOString().replace(/[:.]/g,'-')}-${randomUUID().slice(0,8)}.sqlite`);
+const db=new DatabaseSync(source,{readOnly:true});
+db.exec('PRAGMA busy_timeout=5000');
+db.prepare('VACUUM INTO ?').run(target);
+db.close();chmodSync(target,0o600);
+console.log('Consistent SQLite backup created:',target);

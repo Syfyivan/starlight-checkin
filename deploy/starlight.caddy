@@ -1,0 +1,5 @@
+# Import inside the existing HTTPS site block only.
+redir /starlight /starlight/ 308
+handle_path /starlight/* {
+    reverse_proxy 127.0.0.1:8801
+}
