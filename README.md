@@ -1,4 +1,6 @@
-# 小小成就 3.0
+# 小小成就 3.0.1
+
+3.0.1 修正了领奖小窝的默认入口并记住上次选择，个人计划会引导进入伙伴准备奖品的小窝；合并关闭操作。详见 [V3.0.1-HANDOFF.md](V3.0.1-HANDOFF.md)。
 
 新增最多六人的家庭、双方同意的解散流程、不可删除的操作日志和个人信箱。家庭共用奖池，每个人单独攒币领奖；好友按日期申请查看动态或私密日记，获准后可查看快照，分享可撤回。入口与权限说明见 [V3-HANDOFF.md](V3-HANDOFF.md)。
 
@@ -55,8 +57,8 @@ CSV 格式：`任务名称,奖励,重复方式,分类,开始日期`。重复方�
 可复用现有 Docker 和 Caddy。只发布一个独立容器，监听 `127.0.0.1:8801`，经现有 HTTPS 的 `/starlight/` 子路径访问。
 
 ```sh
-docker build --pull=false -t starlight-checkin:3.0.0 .
-sudo PUBLIC_ORIGIN=https://your-domain.example IMAGE=starlight-checkin:3.0.0 sh deploy/run-container.sh
+docker build --pull=false -t starlight-checkin:3.0.1 .
+sudo PUBLIC_ORIGIN=https://your-domain.example IMAGE=starlight-checkin:3.0.1 sh deploy/run-container.sh
 ```
 
 将 `deploy/starlight.caddy` 导入已有的 HTTPS 站点块。修改前备份 Caddyfile；先 `caddy validate --config /etc/caddy/Caddyfile` 再 reload。不要覆盖其他站点。默认 URL 的端口必须和 `PUBLIC_ORIGIN` 完全一致。
