@@ -261,7 +261,7 @@ dialog{width:calc(100vw - 24px);max-width:540px;max-height:calc(100dvh - 24px);b
 .drop-list{max-height:36vh;overflow:auto;margin:16px 0}
 .lottery-row-controls{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .lottery-row-controls .odds-input input{width:76px;min-height:38px}
-@media(max-width:600px){.lottery-row-controls{display:grid;gap:6px;justify-items:end}.lottery-row-controls .reward-row-actions{gap:6px}.lottery-editor .record-row{gap:10px}.lottery-editor .record-icon{display:none}.lottery-editor .record-main strong{font-size:13px}.lottery-editor .record-main small{font-size:11px}}
+@media(max-width:600px){.lottery-row-controls{display:grid;gap:6px;justify-items:end}.lottery-row-controls .reward-row-actions{gap:6px;flex-direction:row}.lottery-editor .record-row{gap:10px;padding:10px 0}.lottery-editor .record-icon{display:none}.lottery-editor .record-main strong{font-size:13px}.lottery-editor .record-main small{font-size:11px}}
 body[data-experience="cream"] .main{background:#fbf4e5}
 body[data-experience="berry"] .main{background:#fbf0f4}
 body[data-experience="sky"] .main{background:#edf5fb}
