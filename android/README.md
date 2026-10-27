@@ -1,12 +1,16 @@
-# 小小成就 Android 3.2.0
+# 小小成就 Android 3.7.0
 
-版本号 320，沿用原签名，可覆盖安装。删除重复的原生标题与菜单栏，网站顶栏和底部导航负责日常操作；账号页的“安卓工具箱”保留刷新、浏览器打开与帮助。只处理可信站点主框架的用户点击，不新增 JavaScript 原生桥。
+版本号 370，自动接收安装包更新，沿用原签名和包名。打开 App 自动检查、后台下载并核对摘要与签名；符合安卓条件时自动更新，否则请用户在系统确认。操作中的页面不会被自动安装打断。旧 APK 必须先覆盖安装一次本版；详见 [V3.7-HANDOFF.md](../V3.7-HANDOFF.md)。自动检查不等于服务器能唤醒关闭中的应用。
+
+通过 `pwsh -NoProfile -File android/test.ps1` 运行独立下载规则检查。原生安装授权与厂商兼容性需要真机进一步验证。
+
+3.2.0 曾删除重复的原生标题与菜单栏，网站顶栏和底部导航负责日常操作；账号页的“安卓工具箱”保留刷新、浏览器打开与帮助，本版追加自动更新设置。只处理可信站点主框架的用户点击，不新增 JavaScript 原生桥。
 
 Android 11 及以上由容器统一处理系统栏、屏幕开孔与键盘占用区域，并消费 Insets，避免网页重复留白；较旧版本沿用系统布局与 adjustResize。WebView 启用 viewport 适配。实现参考 [Edge-to-edge](https://developer.android.com/develop/ui/views/layout/edge-to-edge) 与 [WebSettings](https://developer.android.com/reference/android/webkit/WebSettings)。
 
 独立 Android 安装包，包名 `app.starlight.checkin`，支持 Android 8.0（API 26）及以上。使用 Android 平台 WebView 打开正式 HTTPS 网站，账号、计划和奖励与网页同步；需要联网。未引入 AndroidX、第三方框架或 npm 依赖。
 
-实现了文件选择（计划导入、凭证图片）、登录 Cookie 保存、原生返回/刷新菜单、网络与证书错误提示、邀请/核销 HTTPS 链接入口。仅声明联网权限，无存储权限或 JavaScript 原生桥接，不允许明文或混合内容，不跳过证书校验。深链接提供 Android 的应用选择入口，未声明系统验证过的 App Links。
+实现了文件选择（计划导入、凭证图片）、登录 Cookie 保存、原生返回/刷新菜单、网络与证书错误提示、邀请/核销 HTTPS 链接入口。声明联网及安装请求权限，无存储权限或 JavaScript 原生桥接，不允许明文或混合内容，不跳过证书校验。深链接提供 Android 的应用选择入口，未声明系统验证过的 App Links。
 
 ## 构建
 
@@ -26,6 +30,6 @@ pwsh -NoProfile -File android/build.ps1
 
 平台实现依据：[WebView](https://developer.android.com/develop/ui/views/layout/webapps/webview)、[D8](https://developer.android.com/tools/d8)、[AAPT2](https://developer.android.com/tools/aapt2)、[APK 签名](https://developer.android.com/tools/apksigner)。
 
-网站 3.2.1 增加在线检查更新入口，网站与 APK 版本分别显示。当前 APK 仍为 3.2.0；未来构建会一并生成 public/downloads/starlight.json。页面无需重装，APK 升级由浏览器下载、用户在安卓系统确认覆盖安装。
+历史：网站 3.2.1 增加手动检查更新入口，网站与 APK 版本分别显示。构建会一并生成 public/downloads/starlight.json。3.7.0 起，由新版 APK 处理检查、下载和安装；旧包仍需经浏览器下载后覆盖安装一次。
 
 已核对用户提供的 APK 2.1.0：同样在线加载网页并支持把下载交给浏览器，不必先换包才能看到更新入口。该包没有上报自身版本号，因此网站无法准确判断当前是 2.1.0；新版网页会说明这一点。可在旧版原生“菜单 → 刷新页面”后，进入头像菜单的“检查更新”，下载新版并按安卓提示安装。页面刷新不能删除旧包的原生标题栏，原生布局改进仍需升级到 APK 3.2.0。签名一致已验证，真机覆盖安装尚未实测。

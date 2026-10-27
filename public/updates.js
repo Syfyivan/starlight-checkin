@@ -13,3 +13,9 @@ export function appUpdateState(userAgent,release){
   let comparison=0;for(let i=0;i<3;i++){if(a[i]!==b[i]){comparison=a[i]<b[i]?-1:1;break;}}
   return {kind:comparison<0?'update':comparison>0?'newer':'current',current,latest};
 }
+export function nativeAutoUpdate(userAgent){return /(?:^|\s)StarlightAutoUpdate\/1(?:\s|$)/.test(String(userAgent||''));}
+export function needsUpdateBootstrap(userAgent,release){
+  const s=appUpdateState(userAgent,release);
+  // Stock WebView UAs can also belong to another app; only auto-prompt our identified APKs.
+  return !nativeAutoUpdate(userAgent)&&Number(release?.versionCode)>=370&&s.kind==='update';
+}

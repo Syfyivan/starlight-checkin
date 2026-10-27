@@ -3,7 +3,7 @@ set -eu
 # Intentionally does not replace an existing container or alter the proxy.
 # Update/rollback should preserve /var/lib/starlight and use a new image tag.
 : "${PUBLIC_ORIGIN:?Set the final HTTPS origin without a trailing slash}"
-IMAGE="${IMAGE:-starlight-checkin:3.6.0}"
+IMAGE="${IMAGE:-starlight-checkin:3.7.0}"
 set --
 if [ -n "${ENV_FILE:-}" ]; then
   test -f "$ENV_FILE" || { echo 'Configured environment file is missing.'; exit 1; }

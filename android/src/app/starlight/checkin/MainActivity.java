@@ -33,6 +33,10 @@ public final class MainActivity extends Activity {
     private ProgressBar progress;
     private ValueCallback<Uri[]> upload;
     private String retryUrl = HOME;
+    private LinearLayout updateBar;
+    private TextView updateText;
+    private Button updateAction;
+    private boolean interacted;
 
     private static boolean trusted(Uri uri) {
         return uri != null && "https".equals(uri.getScheme())
@@ -60,13 +64,23 @@ public final class MainActivity extends Activity {
         progress = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
         progress.setVisibility(View.GONE);
         root.addView(progress, new LinearLayout.LayoutParams(-1, Math.round(2 * getResources().getDisplayMetrics().density)));
+        interacted = state != null; // A restored page may contain an unfinished form.
+        updateBar = new LinearLayout(this); updateBar.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        updateBar.setPadding(16, 4, 8, 4); updateBar.setBackgroundColor(Color.rgb(239, 242, 229)); updateBar.setVisibility(View.GONE);
+        updateText = new TextView(this); updateText.setTextColor(Color.rgb(52, 78, 61)); updateText.setTextSize(12);
+        updateBar.addView(updateText, new LinearLayout.LayoutParams(0, -2, 1));
+        updateAction = new Button(this); updateAction.setTextSize(12); updateAction.setMinWidth(0); updateBar.addView(updateAction);
+        Button dismissUpdate = new Button(this); dismissUpdate.setText("稍后"); dismissUpdate.setTextSize(12); dismissUpdate.setMinWidth(0);
+        dismissUpdate.setOnClickListener(v -> AppUpdater.get(this).later()); updateBar.addView(dismissUpdate);
+        root.addView(updateBar, new LinearLayout.LayoutParams(-1, -2));
         web = new WebView(this);
         web.setBackgroundColor(Color.rgb(246, 247, 242));
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setDomStorageEnabled(true);
         web.getSettings().setUseWideViewPort(true);
         web.getSettings().setLoadWithOverviewMode(true);
-        web.getSettings().setUserAgentString(web.getSettings().getUserAgentString() + " StarlightAndroid/3.2.0");
+        try { web.getSettings().setUserAgentString(web.getSettings().getUserAgentString() + " StarlightAndroid/" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName + " StarlightAutoUpdate/1"); }
+        catch (android.content.pm.PackageManager.NameNotFoundException impossible) { throw new IllegalStateException(impossible); }
         web.getSettings().setAllowFileAccess(false);
         web.getSettings().setAllowContentAccess(true);
         web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
@@ -80,6 +94,14 @@ public final class MainActivity extends Activity {
                 Uri uri = request.getUrl();
                 if ("starlight://tools".equals(uri.toString())) {
                     if (request.hasGesture() && view.getUrl() != null && trusted(Uri.parse(view.getUrl()))) showMenu();
+                    return true;
+                }
+                if ("starlight://updates".equals(uri.toString())) {
+                    if (request.hasGesture() && view.getUrl() != null && trusted(Uri.parse(view.getUrl()))) AppUpdater.get(MainActivity.this).preferences();
+                    return true;
+                }
+                if (trusted(uri) && UpdatePolicy.APK_PATH.equals(uri.getPath())) {
+                    if (request.hasGesture()) AppUpdater.get(MainActivity.this).check(true);
                     return true;
                 }
                 if (trusted(uri) && !uri.getPath().contains("/downloads/")) return false;
@@ -119,6 +141,7 @@ public final class MainActivity extends Activity {
         });
         web.setDownloadListener((url, agent, disposition, mime, length) -> {
             Uri uri = Uri.parse(url);
+            if (trusted(uri) && UpdatePolicy.APK_PATH.equals(uri.getPath())) { AppUpdater.get(this).check(true); return; }
             if (trusted(uri)) new AlertDialog.Builder(this).setMessage("在浏览器里继续下载；个人账本需要在浏览器登录后导出。").setPositiveButton("去浏览器", (d, w) -> external(uri)).setNegativeButton("留在这里", null).show();
         });
         root.addView(web, new LinearLayout.LayoutParams(-1, 0, 1));
@@ -151,11 +174,19 @@ public final class MainActivity extends Activity {
         } catch (android.content.ActivityNotFoundException ignored) { }
     }
     private void showMenu() {
-        new AlertDialog.Builder(this).setTitle("小屋工具箱").setItems(new String[]{"刷新页面", "用浏览器打开", "使用小提示"}, (d, which) -> {
+        new AlertDialog.Builder(this).setTitle("小屋工具箱").setItems(new String[]{"刷新页面", "用浏览器打开", "使用小提示", "安装包自动更新"}, (d, which) -> {
             if (which == 0) new AlertDialog.Builder(this).setMessage("刷新会清空还没提交的内容，继续吗？").setPositiveButton("刷新", (x, y) -> web.reload()).setNegativeButton("继续填写", null).show();
             if (which == 1) { String current = web.getUrl() == null ? HOME : web.getUrl();external(Uri.parse(trusted(Uri.parse(current)) ? current : HOME)); }
             if (which == 2) new AlertDialog.Builder(this).setMessage("注册后就能记计划。在“我的小屋与伙伴”里邀请朋友，或输入邀请码。每间小屋的计划、学习币和卡片各自保存。网站首页和账号页都有完整玩法说明。").setPositiveButton("知道啦", null).show();
+            if (which == 3) AppUpdater.get(this).preferences();
         }).show();
+    }
+    boolean hasInteracted() { return interacted; }
+    @Override public void onUserInteraction() { super.onUserInteraction(); interacted = true; }
+    void updateBanner(String message, String label, Runnable action) {
+        updateBar.setVisibility(message.isEmpty() ? View.GONE : View.VISIBLE); updateText.setText(message);
+        updateAction.setVisibility(action == null ? View.GONE : View.VISIBLE); updateAction.setText(label);
+        updateAction.setOnClickListener(v -> { if (action != null) action.run(); });
     }
     private void openIntent(Intent intent) { Uri uri = intent.getData();web.loadUrl(trusted(uri) ? uri.toString() : HOME); }
     @Override protected void onNewIntent(Intent intent) { super.onNewIntent(intent);setIntent(intent);openIntent(intent); }
@@ -174,7 +205,7 @@ public final class MainActivity extends Activity {
         });
     }
     @Override protected void onSaveInstanceState(Bundle state) { web.saveState(state);super.onSaveInstanceState(state); }
-    @Override protected void onPause() { CookieManager.getInstance().flush();web.onPause();super.onPause(); }
-    @Override protected void onResume() { super.onResume();if (web != null) web.onResume(); }
+    @Override protected void onPause() { AppUpdater.get(this).pause(this);CookieManager.getInstance().flush();web.onPause();super.onPause(); }
+    @Override protected void onResume() { super.onResume();if (web != null) web.onResume();AppUpdater.get(this).resume(this); }
     @Override protected void onDestroy() { if (upload != null) upload.onReceiveValue(null);web.destroy();super.onDestroy(); }
 }

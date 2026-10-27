@@ -34,7 +34,8 @@ try {
     Copy-Item -LiteralPath "$taskProject/public/icon-192.png" -Destination "$taskBuild/res/drawable/icon.png" -Force
     Run-Tool "$taskTools/aapt2.exe" @('compile', '--dir', "$taskBuild/res", '-o', "$taskBuild/resources.zip")
     Run-Tool "$taskTools/aapt2.exe" @('link', '-o', "$taskBuild/resources.apk", '-I', $taskPlatform, '--manifest', "$PSScriptRoot/AndroidManifest.xml", '--auto-add-overlay', "$taskBuild/resources.zip")
-    Run-Tool "$JavaRoot/bin/javac.exe" @('--release', '8', '-encoding', 'UTF-8', '-classpath', $taskPlatform, '-d', "$taskBuild/classes", "$PSScriptRoot/src/app/starlight/checkin/MainActivity.java")
+    $taskSources = @(Get-ChildItem -LiteralPath "$PSScriptRoot/src/app/starlight/checkin" -Filter '*.java' | ForEach-Object FullName)
+    Run-Tool "$JavaRoot/bin/javac.exe" (@('--release', '8', '-encoding', 'UTF-8', '-classpath', $taskPlatform, '-d', "$taskBuild/classes") + $taskSources)
     Run-Tool "$JavaRoot/bin/jar.exe" @('cf', "$taskBuild/classes.jar", '-C', "$taskBuild/classes", '.')
     Run-Tool "$taskTools/d8.bat" @('--release', '--min-api', '26', '--lib', $taskPlatform, '--output', "$taskBuild/dex", "$taskBuild/classes.jar")
     Copy-Item -LiteralPath "$taskBuild/resources.apk" -Destination "$taskBuild/unsigned.apk" -Force
