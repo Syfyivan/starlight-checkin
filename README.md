@@ -1,4 +1,8 @@
-# 小小成就 3.7.0
+# 小小成就 3.9.0
+
+3.9 完善宠物衣橱、等级解锁、旅行手账和插画心愿卡；网站 3.9.0，安卓壳仍为 3.7.0。发布记录见 [V3.9-HANDOFF.md](V3.9-HANDOFF.md)。当前宠物有等级与外形切换，尚无蛋与进化流程。
+
+接手开发请先读 [zcode 交接说明](docs/ZCODE-HANDOFF.md) 和 [可复制的接手 prompt](docs/ZCODE-PROMPT.md)，其中区分现有实现、验证证据与待定进化设计。下方各版本介绍保留历史背景。
 
 3.7 的安卓 App 支持自动检查、下载和校验安装包，按系统条件自动安装或显示系统确认。旧 APK 需先覆盖安装一次；网页和账户数据沿用。说明与验证边界见 [V3.7-HANDOFF.md](V3.7-HANDOFF.md)。
 
@@ -28,7 +32,7 @@
 
 给朋友、家人和自己用的任务与奖励空间。Node.js 原生 HTTP + SQLite + 原生前端，无第三方 npm 依赖。
 
-**六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。网站和 APK 已更新至 3.7.0，发布与验证状态见 [V3.7-HANDOFF.md](V3.7-HANDOFF.md)，[下载安装包](https://github.com/Syfyivan/starlight-checkin/releases/tag/android-v3.7.0)。35 种默认心愿卡与百分比抽奖的规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
+**六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。网站已更新至 3.9.0，发布与验证状态见 [V3.9-HANDOFF.md](V3.9-HANDOFF.md)；安卓壳保持 3.7.0，[下载安装包](https://github.com/Syfyivan/starlight-checkin/releases/tag/android-v3.7.0)。35 种默认心愿卡与百分比抽奖的历史规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
 
 ## 本期功能
 
