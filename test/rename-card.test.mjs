@@ -84,13 +84,13 @@ test('日志写入失败时改名和卡片消耗一起回滚',t=>{
 
 test('改名卡可进入抽奖，固定概率池新增卡为零概率，重复添加不补库存',t=>{
   const {s,a,g,room,p,op}=fixture(t);
-  s.saveOdds(g,{space_id:room,version:s.oddsConfig(room).version,entries:[{id:p.id,bps:10000}]});
+  const lp=s.lottery.copy(g,{space_id:room,prize_id:p.id,stock:3});s.saveOdds(g,{space_id:room,version:s.oddsConfig(room).version,entries:[{id:lp.id,bps:10000}]});
   const result=op(a,'/api/draw',{space_id:room,mode:'coins'},(u,b)=>s.draw(u,b,()=>0));
   assert.equal(result.card.effect,'room_rename');assert.equal(result.card.source,'draw');
-  s.addTemplates(g,{space_id:room,templates:['room-rename']});assert.equal(s.get('SELECT stock FROM prizes WHERE id=?',p.id).stock,2);
+  s.addTemplates(g,{space_id:room,templates:['room-rename']});assert.equal(s.get('SELECT stock FROM prizes WHERE id=?',lp.id).stock,2);assert.equal(s.get('SELECT stock FROM prizes WHERE id=?',p.id).stock,3);
   const family=s.community.createFamily(g,{name:'概率测试'}).space_id;
   s.addTemplates(g,{space_id:family,templates:['wish-18']});const ordinary=s.get('SELECT * FROM prizes WHERE room_id=?',family);
-  s.saveOdds(g,{space_id:family,version:s.oddsConfig(family).version,entries:[{id:ordinary.id,bps:10000}]});
+  const ol=s.lottery.copy(g,{space_id:family,prize_id:ordinary.id,stock:1});s.saveOdds(g,{space_id:family,version:s.oddsConfig(family).version,entries:[{id:ol.id,bps:10000}]});
   s.addTemplates(g,{space_id:family,templates:['room-rename']});assert.equal(s.get("SELECT weight FROM prizes WHERE room_id=? AND effect='room_rename'",family).weight,0);
 });
 
@@ -98,7 +98,7 @@ test('v7 迁移只增加空用途字段，不把同名旧卡变为功能卡，�
   const {s,g,room,p}=fixture(t);s.run('UPDATE prizes SET effect=? WHERE id=?','',p.id);
   const before=s.all('SELECT id,cost,stock,weight,face_cents FROM prizes');
   s.db.exec('ALTER TABLE spaces DROP COLUMN room_name;ALTER TABLE prizes DROP COLUMN effect;ALTER TABLE cards DROP COLUMN effect;PRAGMA user_version=7');
-  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,9);assert.deepEqual(s.all('SELECT id,cost,stock,weight,face_cents FROM prizes'),before);
+  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,10);assert.deepEqual(s.all('SELECT id,cost,stock,weight,face_cents FROM prizes'),before);
   assert.equal(s.get('SELECT effect FROM prizes WHERE id=?',p.id).effect,'');assert.equal(s.state(g,room).space.roomName,'');assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
 

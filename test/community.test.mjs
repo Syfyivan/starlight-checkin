@@ -61,7 +61,7 @@ test('家庭两位成员购买同一张仅剩一张的奖品，不会超卖或�
 
 test('家庭设置和概率共享，免费抽奖及每日上限仍按成员分别计算',t=>{
   const {s,users:[a,b],makeFamily,join,call,task}=setup(t),ra=makeFamily(),rb=join(b,ra);
-  call(a,'/api/admin/templates',{space_id:ra,templates:['wish-18']});const p=s.get('SELECT * FROM prizes');call(a,'/api/admin/odds',{space_id:ra,version:s.oddsConfig(ra).version,entries:[{id:p.id,bps:10000}]});
+  call(a,'/api/admin/templates',{space_id:ra,templates:['wish-18']});const original=s.get('SELECT * FROM prizes'),p=s.lottery.copy(a,{space_id:ra,prize_id:original.id,stock:3});call(a,'/api/admin/odds',{space_id:ra,version:s.oddsConfig(ra).version,entries:[{id:p.id,bps:10000}]});
   call(a,'/api/admin/settings',{...s.settings(ra),space_id:ra,dailyCap:20,drawLimit:1});assert.equal(s.settings(rb).dailyCap,20);assert.equal(s.settings(rb).fixedOdds,true);assert.equal(s.pool(rb)[1].probability,1);
   for(const [u,room] of [[a,ra],[b,rb]]){const tid=task(u,room);call(u,'/api/complete',{space_id:room,task_id:tid,done:true});call(u,'/api/draw',{space_id:room,mode:'ticket'});assert.equal(s.ticketBalance(room),0);assert.equal(s.balance(room),20*COIN);}
   assert.equal(s.state(a,ra).cards.length,1);assert.equal(s.state(b,rb).cards.length,1);

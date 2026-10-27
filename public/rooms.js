@@ -45,9 +45,9 @@ export function roomNavigation(state, perspective) {
 }
 
 export function renameCardOffer(admin) {
-  const prize = admin.prizes.find(p=>p.effect==='room_rename'&&p.active&&p.stock>0)
-    || admin.prizes.find(p=>p.effect==='room_rename');
+  const prize = admin.prizes.find(p=>(!p.channel||p.channel==='shop')&&p.effect==='room_rename'&&p.active&&p.stock>0)
+    || admin.prizes.find(p=>(!p.channel||p.channel==='shop')&&p.effect==='room_rename');
   if (prize) return {kind:!prize.active?'inactive':prize.stock>0?'active':'empty',prize};
-  const removed = admin.removedPrizes.find(p=>p.effect==='room_rename');
+  const removed = admin.removedPrizes.find(p=>(!p.channel||p.channel==='shop')&&p.effect==='room_rename');
   return removed ? {kind:'removed',prize:removed} : {kind:'missing'};
 }

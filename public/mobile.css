@@ -253,3 +253,19 @@ dialog{width:calc(100vw - 24px);max-width:540px;max-height:calc(100dvh - 24px);b
 .auth-form-wrap{padding:25px}
 .dialog-body{padding-top:15px}
 }
+.lottery-editor{margin-bottom:18px}
+.lottery-costs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.lottery-costs>div{padding:14px;background:#f7f7f2;border:1px solid #e8e9df;border-radius:12px;min-width:0}
+.lottery-costs small{display:block;color:#73786e;font-size:11px;line-height:1.5}
+.lottery-costs strong{display:block;font-size:23px;margin-top:5px;overflow-wrap:anywhere}
+.drop-list{max-height:36vh;overflow:auto;margin:16px 0}
+.lottery-row-controls{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.lottery-row-controls .odds-input input{width:76px;min-height:38px}
+@media(max-width:600px){.lottery-row-controls{display:grid;gap:6px;justify-items:end}.lottery-row-controls .reward-row-actions{gap:6px}.lottery-editor .record-row{gap:10px}.lottery-editor .record-icon{display:none}.lottery-editor .record-main strong{font-size:13px}.lottery-editor .record-main small{font-size:11px}}
+body[data-experience="cream"] .main{background:#fbf4e5}
+body[data-experience="berry"] .main{background:#fbf0f4}
+body[data-experience="sky"] .main{background:#edf5fb}
+body[data-experience="cream"] .lucky-machine{background:#fff4d6}
+body[data-experience="berry"] .lucky-machine{background:#f9e4ee}
+body[data-experience="sky"] .lucky-machine{background:#e0effc}
+@media(max-width:600px){.lottery-costs{gap:6px}.lottery-costs>div{padding:10px 8px}.lottery-costs strong{font-size:19px}.lottery-editor .panel-heading{flex-wrap:wrap;gap:10px}.lottery-editor .reward-tools{gap:8px}.lottery-editor .reward-tools .btn{flex:1;white-space:normal}.compact-heading{flex-wrap:wrap;gap:8px}}
