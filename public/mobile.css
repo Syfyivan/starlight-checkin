@@ -1,4 +1,25 @@
 @media(max-width:760px),(max-width:960px) and (max-height:500px){
+body[data-perspective="manage"] .nav button.active{background:transparent;color:#775a2d}
+body[data-perspective="manage"] .space-bar{grid-template-columns:minmax(0,1fr) 36px}
+body[data-perspective="preview"] .space-bar{grid-template-columns:minmax(0,1fr) 36px}
+.perspective-bar{gap:10px;padding:11px 12px;margin:-8px 0 22px;align-items:flex-start}
+.perspective-bar>div:first-child{display:block}
+.perspective-bar strong{display:block;font-size:12px}
+.perspective-bar span{display:block;font-size:11px;margin-top:3px;line-height:1.7}
+.perspective-bar .btn.sm{font-size:11px;min-height:38px;padding:7px 9px}
+.perspective-actions{flex-direction:column;align-items:flex-end;gap:0}
+.perspective-actions .text-btn{font-size:11px;min-height:32px}
+.preview-bar{flex-wrap:wrap}
+.preview-bar>div:first-child{flex:1;min-width:150px}
+.rename-offer{display:grid;grid-template-columns:30px minmax(0,1fr);gap:11px;padding:14px;margin-bottom:16px}
+.feature-icon{width:30px;height:34px;border-radius:8px}
+.feature-icon .icon{width:17px;height:17px}
+.feature-title h3{font-size:14px}
+.rename-offer p{font-size:11px;line-height:1.7}
+.rename-offer small{font-size:10px}
+.rename-offer>.btn{grid-column:2;justify-self:start;min-height:38px}
+.progress-tools{gap:14px;margin:-8px 0 12px}
+.progress-tools .text-btn{font-size:11px}
 body{font-size:14px}
 .layout{margin-left:0;padding-bottom:calc(68px + env(safe-area-inset-bottom))}
 .sidebar{inset:auto 0 0;width:auto;height:calc(62px + env(safe-area-inset-bottom));padding:0 5px env(safe-area-inset-bottom);border:0;border-top:1px solid var(--line);background:#fcfdf9f5;backdrop-filter:blur(10px);display:block}
@@ -27,7 +48,7 @@ body{font-size:14px}
 .space-bar select{font-size:13px;width:100%;max-width:none;min-height:40px;padding:8px 0}
 .space-bar>.text-btn{min-height:40px;font-size:11px;padding:4px}
 .space-bar>.text-btn:last-child{margin:0}
-.space-bar>.text-btn:last-child .icon{display:none}
+.space-bar>.text-btn:last-child:not(.room-settings-btn) .icon{display:none}
 .space-bar>.room-settings-btn{padding:8px;min-width:36px}
 .space-bar>.room-settings-btn .icon{width:15px;height:15px}
 .demo-banner{font-size:11px;margin-bottom:16px;padding:7px 10px}
@@ -37,6 +58,7 @@ h1,.page-heading h1,.compact-heading h1,.plan-heading h1{font-size:24px;letter-s
 .page-heading>.btn{min-height:38px;font-size:11px;padding:8px 11px}
 .panel{padding:18px;border-radius:13px}
 .panel-heading{gap:12px}
+.panel-heading>.btn{flex-shrink:0;white-space:nowrap}
 .panel-heading h2{font-size:17px}
 .panel-heading p{font-size:11px}
 .btn{min-height:42px;font-size:13px;padding:10px 14px}

@@ -8,6 +8,7 @@ import {createApp} from '../server.mjs';
 test('安装包版本按数字逐段比较，兼容早期两段版本，避免误降级',()=>{
   for(const [current,latest,kind] of [['1.0','3.2.0','update'],['3.1.0','3.2.0','update'],['3.2','3.2.0','current'],['3.2.0','3.2.0','current'],['3.10.0','3.2.0','newer'],['3.2.9','3.2.10','update']])assert.equal(appUpdateState('Mozilla/5.0 StarlightAndroid/'+current,{version:latest}).kind,kind);
   assert.equal(appUpdateState('Mozilla/5.0 Android',{version:'3.2.0'}).kind,'web');
+  assert.equal(appUpdateState('Mozilla/5.0 (Linux; Android 14; Phone Build/A; wv) AppleWebKit/537.36 Version/4.0 Chrome/120.0 Mobile Safari/537.36',{version:'3.2.0'}).kind,'unknown');
   assert.equal(appUpdateState('StarlightAndroid/bad',{version:'3.2.0'}).kind,'unknown');
   assert.equal(appUpdateState('StarlightAndroid/3.0',null).kind,'unavailable');
   for(const invalid of ['3','3.2.bad','3.2.0-beta','3.2.0.1','9999999.0','<script>',null])assert.equal(versionParts(invalid),null);

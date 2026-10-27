@@ -408,3 +408,36 @@ dialog::backdrop{background:#1e30275e;backdrop-filter:blur(3px)}
 .welcome-steps small{display:block;color:var(--muted);font-size:13px;line-height:1.8;margin-top:4px}
 
 .auth-switch{font-size:13px;color:var(--muted);text-align:center;margin:18px 0}.auth-switch button{color:var(--green);font-weight:600;padding:5px 8px}.auth-footnote{font-size:12px;line-height:1.9;color:var(--muted);margin-top:24px}.auth-footnote button{padding:4px 0;color:var(--green)}
+
+/* The room role is a visible mode, not a second account or a second reward pool. */
+body[data-perspective="manage"]{--ink:#3b352a;--muted:#786e5b;--paper:#faf8f2;--green:#775a2d;--lime:#f4ead4;--line:#e9e2d4}
+body[data-perspective="manage"] .sidebar,body[data-perspective="manage"] .topbar{background:#fcfaf4}
+body[data-perspective="manage"] .brand-symbol{background:#f0e3c6;color:#7a5c2e}
+body[data-perspective="manage"] .nav button{color:#81735c}
+body[data-perspective="manage"] .nav button.active{background:#f1e6d0;color:#6e5127}
+body[data-perspective="manage"] .nav button:hover{background:#f6eddb}
+body[data-perspective="manage"] .btn.secondary{color:#745b32;border-color:#e4d7bd;background:#fffdfa}
+body[data-perspective="manage"] .text-btn,body[data-perspective="manage"] .field label{color:#7d6440}
+body[data-perspective="manage"] .field input,body[data-perspective="manage"] .field select,body[data-perspective="manage"] .field textarea,body[data-perspective="manage"] .odds-input input{border-color:#e5dccb;background:#fffefa}
+body[data-perspective="manage"] .chip.active{background:#f3e7cf;color:#72552c;border-color:#e8d6b2}
+body[data-perspective="manage"] .record-row{border-color:#efe9de}
+.perspective-bar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:-7px 0 28px;padding:13px 17px;border:1px solid var(--line);border-radius:10px;background:#fffdfa}
+.perspective-bar>div:first-child{min-width:0;display:flex;align-items:center;gap:13px}
+.perspective-bar strong{font-size:13px;font-weight:650;white-space:nowrap}
+.perspective-bar span{font-size:12px;color:var(--muted)}
+.perspective-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.preview-bar{background:#edf3e8;border-color:#dce7d4}
+.progress-tools{display:flex;justify-content:flex-end;gap:18px;margin:-12px 0 14px}
+.admin-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start}
+.admin-heading>div{min-width:0}
+.admin-heading>.text-btn{white-space:nowrap;align-self:start}
+.rename-offer{display:flex;align-items:center;gap:16px;padding:18px 22px;border:1px solid var(--line);background:#fffdf7;border-radius:12px;margin-bottom:20px}
+.feature-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#f4ebd8;color:#8a6a36;flex-shrink:0}
+.feature-icon .icon{width:21px;height:21px}
+.rename-offer>div{flex:1;min-width:0}
+.feature-title{display:flex;align-items:center;gap:9px}
+.feature-title h3{font-size:15px;font-weight:650}
+.feature-tag{font-size:10px;line-height:1.6;padding:1px 6px;background:#f1ebdf;border-radius:4px;color:#82704c;white-space:nowrap}
+.rename-offer p{font-size:12px;color:var(--muted);margin:3px 0}
+.rename-offer small{font-size:11px;color:#8e7b58}
+.rename-offer>.btn{flex-shrink:0}
