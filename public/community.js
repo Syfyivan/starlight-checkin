@@ -40,13 +40,14 @@ export function communityUI({getState,api,refresh,render,navigate,openDialog,dia
     if(d.task)lines.push(`${d.task.rescore?'修改得分':d.task.done?'标记完成':'取消完成'} · 本次 ${d.task.points>0?'+':''}${d.task.points} 币`);
     if(d.cards)lines.push(...d.cards);
     if(d.added!==undefined)lines.push(`新增 ${d.added} 张商品，恢复 ${d.restored} 张`);
+    if(d.cardMove)lines.push(`原额度 ¥${d.cardMove.input_cents/100} → 新卡合计 ¥${d.cardMove.output_cents/100}${d.cardMove.bonus_cents?' · 合成加成 ¥'+d.cardMove.bonus_cents/100:' · 等额转换'}`);
     if(d.paid_cents!==undefined)lines.push(`实际报销 ¥${d.paid_cents/100}`);
     if(d.tickets)lines.push(`免费机会 ${d.tickets>0?'+':''}${d.tickets} 次`);
     if(d.bonus)lines.push(`全勤奖励 ${d.bonus.amount>0?'+':''}${d.bonus.amount} ${d.bonus.kind==='ticket'?'次机会':'币'}`);
     if(l.action==='/api/admin/odds'&&d.after)for(const item of d.after){const old=d.before?.find(x=>x.id===item.id);if(old?.bps!==item.bps)lines.push(`${item.title||'心愿卡'}：${(old?.bps||0)/100}% → ${item.bps/100}%`);}
     if(d.after&&!Array.isArray(d.after)){
-      const fields={effect:'卡片用途',taskScoreMode:'任务计分方式',defaultDifficulty:'默认难度',defaultPoints:'默认分数',title:'名称',cost:'学习币价格',stock:'库存',active:'是否上架',face_cents:'报销额度',wait_days:'等待天数',spaceName:'空间名称',coinName:'积分名称',dailyCap:'每日赚币上限',drawCost:'每次抽奖花费',drawLimit:'每天付费抽奖次数',dailyBonusKind:'全勤奖励',dailyBonusAmount:'全勤数量',marketThreshold:'市场解锁门槛'};
-      const display=(k,v)=>v===undefined?'未设置':k==='taskScoreMode'?(v==='difficulty'?'按难度':'自由填写'):k==='defaultDifficulty'?({easy:'轻松',standard:'标准',hard:'进阶',challenge:'挑战'}[v]||v):k==='effect'?(v==='room_rename'?'小屋改名':'报销 / 约定奖励'):k==='cost'?v/1_000_000+' 币':k==='face_cents'?'¥'+v/100:k==='active'?v?'上架':'下架':k==='dailyBonusKind'?({ticket:'免费机会',coins:'学习币',none:'关闭'}[v]):v;
+      const fields={effect:'卡片用途',taskScoreMode:'任务计分方式',defaultDifficulty:'默认投入等级',defaultPoints:'默认分数',title:'名称',cost:'学习币价格',stock:'库存',active:'是否上架',face_cents:'报销额度',wait_days:'等待天数',spaceName:'空间名称',coinName:'积分名称',dailyCap:'每日赚币上限',drawCost:'每次抽奖花费',drawLimit:'每天付费抽奖次数',dailyBonusKind:'全勤奖励',dailyBonusAmount:'全勤数量',marketThreshold:'市场解锁门槛'};
+      const display=(k,v)=>v===undefined?'未设置':k==='taskScoreMode'?(v==='difficulty'?'按投入等级':'自由填写'):k==='defaultDifficulty'?(state().difficulties.find(d=>d.id===v)?.name||v):k==='effect'?(v==='room_rename'?'小屋改名':'报销 / 约定奖励'):k==='cost'?v/1_000_000+' 币':k==='face_cents'?'¥'+v/100:k==='active'?v?'上架':'下架':k==='dailyBonusKind'?({ticket:'免费机会',coins:'学习币',none:'关闭'}[v]):v;
       for(const [k,label] of Object.entries(fields))if(d.after[k]!==undefined&&d.before?.[k]!==d.after[k])lines.push(`${label}：${display(k,d.before?.[k])} → ${display(k,d.after[k])}`);
       if(d.after.difficultyPoints)for(const level of state().difficulties)if(d.before?.difficultyPoints?.[level.id]!==d.after.difficultyPoints[level.id])lines.push(level.name+'：'+d.before?.difficultyPoints?.[level.id]+' → '+d.after.difficultyPoints[level.id]+' 币');
       if(d.after.rates)for(const c of state().categories)if(d.before?.rates?.[c.id]!==d.after.rates[c.id])lines.push(`${c.name}每元建议价：${d.before?.rates?.[c.id]??'未设置'} → ${d.after.rates[c.id]} 币`);
