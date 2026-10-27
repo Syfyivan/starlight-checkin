@@ -1,8 +1,8 @@
-# 小小成就 3.2.0
+# 小小成就 3.2.1
 
 3.2 重做桌面与手机布局，新增健康饮食、游戏玩具两类奖励。新奖励小屋默认按难度计分：轻松 10、标准 20、进阶 30、挑战 50 币，由发奖人设定；也可启用自由填写模式。完成时选分、当天改分按差额入账，全程留日志。旧小屋维持原规则，可在“小屋规则”切换。详见 [V3.2-HANDOFF.md](V3.2-HANDOFF.md)。
 
-**交付状态：3.2 本地验证完成；腾讯云发布因 1Password CLI 授权超时待继续，线上尚未更新到本版。**
+**交付状态：网站 3.2.1 已于 2026-10-27 发布到腾讯云，APK 3.2.0 已可下载。** 新增“检查更新”入口；网站功能在线更新，APK 下载后由用户确认覆盖安装。121 项本机及发布镜像测试通过，公网和旧数据验收通过。见 [V3.2.1-HANDOFF.md](V3.2.1-HANDOFF.md)。
 
 3.1 新增小屋改名卡：发奖人可一键添加，领奖人兑换后在卡包里使用，给双人小屋或家庭换名字。手机端改用紧凑卡片，Android 3.1.0 移除了重复标题栏。使用与验证说明见 [V3.1-HANDOFF.md](V3.1-HANDOFF.md)。
 
@@ -12,7 +12,7 @@
 
 给朋友、家人和自己用的任务与奖励空间。Node.js 原生 HTTP + SQLite + 原生前端，无第三方 npm 依赖。
 
-**3.0 版：六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。本版部署与验证状态见 [V3.2-HANDOFF.md](V3.2-HANDOFF.md)，35 种默认心愿卡与百分比抽奖的规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
+**六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。本版部署与验证状态见 [V3.2.1-HANDOFF.md](V3.2.1-HANDOFF.md)，35 种默认心愿卡与百分比抽奖的规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
 
 ## 本期功能
 
@@ -63,8 +63,8 @@ CSV 格式：`任务名称,奖励,重复方式,分类,开始日期`。重复方�
 可复用现有 Docker 和 Caddy。只发布一个独立容器，监听 `127.0.0.1:8801`，经现有 HTTPS 的 `/starlight/` 子路径访问。
 
 ```sh
-docker build --pull=false -t starlight-checkin:3.2.0 .
-sudo PUBLIC_ORIGIN=https://your-domain.example IMAGE=starlight-checkin:3.2.0 sh deploy/run-container.sh
+docker build --pull=false -t starlight-checkin:3.2.1 .
+sudo PUBLIC_ORIGIN=https://your-domain.example IMAGE=starlight-checkin:3.2.1 sh deploy/run-container.sh
 ```
 
 将 `deploy/starlight.caddy` 导入已有的 HTTPS 站点块。修改前备份 Caddyfile；先 `caddy validate --config /etc/caddy/Caddyfile` 再 reload。不要覆盖其他站点。默认 URL 的端口必须和 `PUBLIC_ORIGIN` 完全一致。
