@@ -281,3 +281,15 @@ body[data-experience="sky"] .lucky-machine{background:#e0effc}
 #startup-actions details{margin-top:20px;font-size:13px;color:var(--muted)}
 #startup-url{width:100%;box-sizing:border-box;margin:8px 0;font-size:12px}
 #startup-detail{font-size:12px}
+.balance-status{display:grid;justify-items:end;gap:2px}
+.balance-rule-link{padding:0 4px;border:0;background:none;color:var(--muted);font-size:11px;line-height:1.5;cursor:pointer}
+.balance-rule-link:hover{color:var(--green)}
+.task-kind-bar{display:flex;align-items:center;gap:12px;margin:16px 0 0;min-width:0}
+.task-kind-bar .chips{flex:1;min-width:0;margin:0;padding:0 0 4px}
+.task-category-filter{flex:none}
+.task-category-filter select{font-size:12px;min-height:34px;padding:6px 22px 6px 9px;border-radius:8px}
+.task-options{margin:12px 0}
+.task-options [data-task-long]{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.task-options [hidden]{display:none!important}
+.task-options .field-help{margin:6px 0 12px;line-height:1.6}
+@media(max-width:600px){.balance-status .coin-pill{padding:5px 9px}.balance-rule-link{font-size:10px}.task-kind-bar{align-items:stretch;gap:7px;flex-wrap:wrap}.task-kind-bar .chips{flex-basis:100%}.task-category-filter{margin:2px 0 4px}.task-kind-bar .chip{padding:6px 10px;font-size:12px}.task-options .form-row{grid-template-columns:1fr 1fr}}

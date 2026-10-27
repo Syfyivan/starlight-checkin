@@ -1,3 +1,4 @@
+import {taskTypeLabel} from './task-types.js';
 export function communityUI({getState,api,refresh,render,navigate,openDialog,dialog,esc,time,field,textarea,actions,toast,roomLabel}){
   let inbox={entries:[],next:null},logs={entries:[],next:null},direction='received',tab='letters',diaryOriginal='',diaryDay='',sharePreview=null;
   const shown=new Set(),state=()=>getState(),closed=()=>state().space.status!=='active';
@@ -35,7 +36,8 @@ export function communityUI({getState,api,refresh,render,navigate,openDialog,dia
   function auditDetail(l){
     const d=l.detail,lines=[];
     if(l.action==='/api/cards/rename-room')lines.push(`小屋名字：${d.oldName} → ${d.name}`);
-    if(d.tasks)lines.push(...d.tasks.map(t=>`${t.title} · 每次 ${t.points} 币 · ${t.recurrence==='daily'?'每天重复':'单次'} · ${t.start_date} 起`));
+    if(l.action==='task.daily.settlement')lines.push('当日获得 '+d.gross+' 币 · 未完成 '+d.missed.length+' 项 · 扣 '+d.percent+'%（'+d.deducted+' 币）',...d.missed.map(t=>'未完成：'+t.title));
+    if(d.tasks)lines.push(...d.tasks.map(t=>`${t.title} · 每次 ${t.points} 币 · ${taskTypeLabel(t)} · ${t.start_date} 起`));
     if(d.task?.nominal!==undefined)lines.push('应得 '+d.task.nominal+' 币，实际 '+d.task.awarded+' 币'+(d.task.capped?'（每日额度限制）':''));
     if(d.task?.rescore&&d.task.previous)lines.push('修改前 '+d.task.previous.points+' 币 → 修改后 '+d.task.awarded+' 币');
     if(d.task)lines.push(`${d.task.rescore?'修改得分':d.task.done?'标记完成':'取消完成'} · 本次 ${d.task.points>0?'+':''}${d.task.points} 币`);

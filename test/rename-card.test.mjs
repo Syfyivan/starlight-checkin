@@ -98,7 +98,7 @@ test('v7 迁移只增加空用途字段，不把同名旧卡变为功能卡，�
   const {s,g,room,p}=fixture(t);s.run('UPDATE prizes SET effect=? WHERE id=?','',p.id);
   const before=s.all('SELECT id,cost,stock,weight,face_cents FROM prizes');
   s.db.exec('ALTER TABLE spaces DROP COLUMN room_name;ALTER TABLE prizes DROP COLUMN effect;ALTER TABLE cards DROP COLUMN effect;PRAGMA user_version=7');
-  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,12);assert.deepEqual(s.all('SELECT id,cost,stock,weight,face_cents FROM prizes'),before);
+  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,13);assert.deepEqual(s.all('SELECT id,cost,stock,weight,face_cents FROM prizes'),before);
   assert.equal(s.get('SELECT effect FROM prizes WHERE id=?',p.id).effect,'');assert.equal(s.state(g,room).space.roomName,'');assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
 
