@@ -24,7 +24,7 @@
 
 给朋友、家人和自己用的任务与奖励空间。Node.js 原生 HTTP + SQLite + 原生前端，无第三方 npm 依赖。
 
-**六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。3.5 发布进度与验证状态见 [V3.5-HANDOFF.md](V3.5-HANDOFF.md)，35 种默认心愿卡与百分比抽奖的规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
+**六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。正式网站已更新至 3.5.0，发布与验证状态见 [V3.5-HANDOFF.md](V3.5-HANDOFF.md)，35 种默认心愿卡与百分比抽奖的规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
 
 ## 本期功能
 
