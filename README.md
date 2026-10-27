@@ -2,7 +2,7 @@
 
 3.7 的安卓 App 支持自动检查、下载和校验安装包，按系统条件自动安装或显示系统确认。旧 APK 需先覆盖安装一次；网页和账户数据沿用。说明与验证边界见 [V3.7-HANDOFF.md](V3.7-HANDOFF.md)。
 
-3.6 增加 10 种精细庆祝动画、96 条本地轮换文案与一言在线诗句，头像中可预览效果和设置偏好；详见 [V3.6-HANDOFF.md](V3.6-HANDOFF.md)。安卓安装包与校验文件已放入 [GitHub Releases](https://github.com/Syfyivan/starlight-checkin/releases/tag/android-v3.2.0)（私有仓库需要访问权限）。
+3.6 增加 10 种精细庆祝动画、96 条本地轮换文案与一言在线诗句，头像中可预览效果和设置偏好；详见 [V3.6-HANDOFF.md](V3.6-HANDOFF.md)。安卓安装包与校验文件已放入 [GitHub Releases](https://github.com/Syfyivan/starlight-checkin/releases)。仓库现已公开，无需仓库权限即可查看源码和下载安装包。
 
 3.5 新增完成庆祝、真实用时计时、发奖人单任务定分、次日学习日报、经验来信礼物和宠物旅行。万能卡可以参与跨品类合成，大小卡混合只为最小卡增加 25%。入口与规则见 [V3.5-HANDOFF.md](V3.5-HANDOFF.md)。
 
