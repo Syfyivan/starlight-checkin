@@ -1,6 +1,6 @@
 export const TASK_TYPES=[['normal','普通任务'],['repeat','重复任务'],['long','长期任务']];
 export const REPEAT_OPTIONS=[[1,'每天'],[2,'每两天'],[7,'每周']];
-export const LONG_POINTS_MAX=10000;
+export const LONG_POINTS_MAX=1000000;
 export function taskKind(task){return task.task_kind||(task.recurrence==='daily'?'repeat':'normal');}
 export function scheduledOn(task,day){
   if(task.start_date>day)return false;

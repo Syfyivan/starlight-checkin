@@ -26,7 +26,7 @@ test('长期保留且只奖励一次；跨日已完成目标可查看但不能�
 });
 test('普通任务不能伪装为长期高分，长奖励整数和日期边界受校验',t=>{
  const {s,task,complete,day}=setup(t),normal=task();assert.equal(complete(normal,{task_kind:'long',points:1000}).awarded,20*COIN);
- for(const points of [0,-1,1.2,10001,Infinity])assert.throws(()=>task({task_kind:'long',points}));
+ for(const points of [0,-1,1.2,1000001,Infinity])assert.throws(()=>task({task_kind:'long',points}));
  for(const repeat_days of [0,3,'2',99])assert.throws(()=>task({task_kind:'repeat',repeat_days}));
  assert.throws(()=>task({task_kind:'long',deadline:plus(day,-1)}));assert.throws(()=>task({task_kind:'long',deadline:'2027-02-30'}));
  assert.equal(s.all('SELECT * FROM tasks').length,1);
@@ -92,5 +92,5 @@ test('v12旧库迁移保留任务、分数、账本与完成记录，旧每日�
  const {s,task,complete,room}=setup(t),daily=task({task_kind:'repeat'}),normal=task();complete(daily);
  const ledger=s.all('SELECT * FROM ledger'),completions=s.all('SELECT * FROM completions');
  s.db.exec("DROP TABLE task_settlements; ALTER TABLE tasks DROP COLUMN task_kind; ALTER TABLE tasks DROP COLUMN repeat_days; ALTER TABLE tasks DROP COLUMN deadline; ALTER TABLE tasks DROP COLUMN archived_at; DELETE FROM settings WHERE key='task_settlement_start'; PRAGMA user_version=12;");
- migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,13);assert.equal(s.get('SELECT task_kind FROM tasks WHERE id=?',daily).task_kind,'repeat');assert.equal(s.get('SELECT task_kind FROM tasks WHERE id=?',normal).task_kind,'normal');assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.deepEqual(s.all('SELECT * FROM completions'),completions);assert.equal(s.get('SELECT COUNT(*) n FROM task_settlements').n,0);assert.equal(s.balance(room),20*COIN);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
+ migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,14);assert.equal(s.get('SELECT task_kind FROM tasks WHERE id=?',daily).task_kind,'repeat');assert.equal(s.get('SELECT task_kind FROM tasks WHERE id=?',normal).task_kind,'normal');assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.deepEqual(s.all('SELECT * FROM completions'),completions);assert.equal(s.get('SELECT COUNT(*) n FROM task_settlements').n,0);assert.equal(s.balance(room),20*COIN);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });

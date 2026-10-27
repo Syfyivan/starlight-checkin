@@ -1,34 +1,41 @@
-export const petEffectLabel=effect=>({pet_pack:'行囊 · 旅行 +15 经验',pet_tent:'行囊 · 旅行 +40 经验',pet_companion:'小伙伴 / 重复 +60 经验',pet_snack:'口粮 · +5 经验',pet_feast:'野餐 · +20 经验',pet_bow:'装扮 · 首次 +30 经验',pet_star:'装扮 · 首次 +50 经验'}[effect]||'');
+import {PET_ITEMS,petItemLock,petEffectLabel} from './pet-catalog.js';
+import {artwork,ornament,silhouette} from './illustrations.js';
+export {petEffectLabel};
 export function petPurchaseHint(state,prize){
-  const item=state.pet.items[prize.effect];if(!item)return '';
-  if(!state.pet.owned)return '先领宠物';
-  if(item.kind==='outfit'&&(state.pet.outfits.includes(prize.effect)||state.cards.some(c=>c.status==='ready'&&c.effect===prize.effect)))return '已拥有';
-  return '';
+ const item=PET_ITEMS[prize.effect];if(!item)return '';
+ const lock=petItemLock(state.pet,prize.effect);if(lock)return lock;
+ if(item.kind==='outfit'&&(state.pet.outfits.includes(prize.effect)||state.cards.some(c=>c.status==='ready'&&c.effect===prize.effect)))return '已拥有';
+ return '';
 }
-export function petUI({getState,esc,canAct,openDialog,actions,select,mutation}){
-  function picture(p,form=p.form,small=false){const file=p.owned?p.stage:'young';return `<div class="pet-portrait ${small?'pet-small':''}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="pets/${form}/${file}.png"><img src="pets/${form}/${file}${small||!p.owned?'':'-idle-animated'}.png" alt="${esc(p.forms.find(f=>f.id===form)?.name)}" width="512" height="512" loading="lazy"></picture>${p.owned&&p.outfit&&!small?`<span class="pet-accessory ${p.outfit}" aria-label="${esc(p.items[p.outfit].name)}">${p.items[p.outfit].emoji}</span>`:''}</div>`;}
-  function panel(){
-    const s=getState(),p=s.pet,form=p.forms.find(f=>f.id===p.form),supplies=s.cards.filter(c=>c.status==='ready'&&c.effect.startsWith('pet_'));
-    return `<section class="panel pet-home"><div class="pet-heading"><div><span class="pet-eyebrow">和小伙伴一起长大</span><h2>${p.owned?esc(form.name):'有只小可爱，正在等你'}</h2></div>${p.owned?`<span class="pet-level">Lv.${p.level}</span>`:'<span class="pet-level">抽奖限定</span>'}</div><div class="pet-main">${picture(p)}<div class="pet-progress"><p>${p.owned?esc(form.hint):'在抽奖里遇见「小伙伴敲敲门」，再到卡包迎接糯糯海豹。'}</p><strong>${p.xp.toLocaleString()} <small>累计经验</small></strong><progress class="progress" max="${p.nextXp?p.nextXp-p.levelStart:1}" value="${p.nextXp?p.xp-p.levelStart:1}" aria-label="宠物等级进度"></progress><small>${p.owned?(p.nextXp?'距离下一级还差 '+(p.nextXp-p.xp)+' 经验':'已到最高等级，经验继续积攒'): '已经赚到的经验会保留，遇见它就能用上'}</small><div class="pet-buttons">${p.owned?`<button class="btn sm" data-action="pet-dress" ${canAct()?'':'disabled'}>换个模样</button><button class="btn secondary sm" data-action="pet-shop">买点小礼物</button>`:'<button class="btn sm" data-page="lucky">去看看奖池</button>'}</div></div></div>${supplies.length?`<div class="pet-supplies"><h3>口粮与小礼物 <small>${supplies.length} 件待使用</small></h3>${supplies.slice(0,6).map(c=>`<div class="record-row"><span class="record-icon">${esc(c.emoji)}</span><div class="record-main"><strong>${esc(c.title)}</strong><small>${petEffectLabel(c.effect)}</small></div><button class="btn secondary sm" data-action="pet-use" data-id="${c.id}" ${!canAct()||Date.parse(c.available)>Date.now()||s.balance<0?'disabled':''}>使用</button></div>`).join('')}${supplies.length>6?'<button class="text-btn" data-page="cards">去卡包查看全部 →</button>':''}</div>`:''}<details class="pet-rules"><summary>经验与成长规则</summary><p>本屋任务实际赚到 1 学习币，就记 1 经验；全勤奖励发学习币也计入。消费不扣经验，撤销或改分同步修正经验与等级，不能靠反复勾选刷分。</p><p>食物使用后加经验；装扮首次解锁加经验，反复穿戴不再加。第一次的小伙伴只能抽到，之后再用小伙伴卡增加 60 经验。不同小屋分别成长。</p><p>Lv.3 解锁兜兜鼯鼠，Lv.4 长成进阶模样，Lv.5 解锁棉桃寄居蟹。升级自动进行，不扣累计经验；若撤销任务导致等级下降，高等级形象暂时换回糯糯。</p></details></section>`;
-  }
-  async function click(action,el){
-    const s=getState(),p=s.pet;
-    if(action==='pet-dress'){
-      openDialog('今天想变成哪一种可爱？',`<form id="pet-dress-form"><div class="pet-form-grid">${p.forms.map(f=>`<label class="pet-form-option ${p.level<f.level?'locked':''}"><input type="radio" name="form" value="${f.id}" ${p.form===f.id?'checked':''} ${p.level<f.level?'disabled':''}>${picture({...p,outfit:''},f.id,true)}<strong>${esc(f.name)}</strong><small>${p.level<f.level?'Lv.'+f.level+' 解锁':'已解锁'}</small></label>`).join('')}</div>${select('穿戴小配饰','outfit',[['','先不戴'],...p.outfits.map(e=>[e,p.items[e].name])],p.outfit)}<p class="field-help">已解锁的模样随时切换，不再花币或经验。</p>${actions('就用这个模样')}</form>`);return true;
-    }
-    if(action==='pet-use'||action==='use-effect'&&s.cards.find(c=>c.id===el.dataset.id)?.effect.startsWith('pet_')){
-      const card=s.cards.find(c=>c.id===el.dataset.id);if(!card)return false;
-      const item=p.items[card.effect],duplicate=item?.kind==='outfit'&&p.outfits.includes(card.effect);
-      if(item?.kind==='gear'){openDialog(esc(card.title),'<p>把这件行囊装进背包，等小伙伴旅行回来，就能收获经验。</p><button class="btn" data-action="travel-pack">准备旅行</button>');return true;}
-      const text=card.effect==='pet_companion'?(p.owned?'这次小伙伴会带回 60 经验。':'使用后，糯糯海豹就会住进这间小屋。已有经验直接计入成长。'):duplicate?'你已经拥有这件装扮。使用只会消耗此卡并重新穿戴，不重复增加经验。':item?.kind==='food'?`给小伙伴吃一份，增加 ${item.xp} 经验。`:`解锁并穿戴装扮，增加 ${item.xp} 经验；以后可以免费换装。`;
-      openDialog(esc(card.title),`<form id="pet-use-form" data-id="${card.id}"><p>${text}</p><p class="field-help">${p.owned||card.effect==='pet_companion'?'只消耗这张卡，不再扣学习币。':'先抽到小伙伴，这张卡会替你留好。'}</p>${p.owned||card.effect==='pet_companion'?actions('确认使用'):'<button class="btn" type="button" data-action="close">先收好</button>'}</form>`);return true;
-    }
-    return false;
-  }
-  async function submit(form,data,key){
-    if(form.id==='pet-dress-form'){await mutation('pets/dress',data,'已换上新模样',key);return true;}
-    if(form.id==='pet-use-form'){const result=await mutation('pets/use',{card_id:form.dataset.id},'',key);openDialog(result.note,`${picture(result.pet)}<p class="pet-result">${result.petXp?'+'+result.petXp+' 经验 · ':''}Lv.${result.pet.level} · ${result.pet.xp} 经验</p><button class="btn full-width" data-page="growth">看看小伙伴</button>`);return true;}
-    return false;
-  }
-  return {panel,click,submit};
+const FIT={
+ 'nuonuo-seal':{young:{head:[290,163,70],neck:[326,310,88],chest:[270,331,50],satchel:[306,335,65]},winged:{head:[254,122,70],neck:[255,260,90],chest:[319,322,48],bow:[321,154,68],satchel:[321,327,65]}},
+ 'pocket-glider':{young:{head:[278,133,64],neck:[237,299,90],chest:[164,310,42],satchel:[315,358,65]},winged:{head:[282,117,65],neck:[234,293,90],chest:[160,303,42],satchel:[319,370,67]}},
+ 'cottonpod-hermit':{young:{head:[249,80,70],neck:[276,424,100],chest:[160,275,65],bow:[345,265,80],satchel:[366,352,80]},winged:{head:[256,64,70],neck:[277,440,100],chest:[160,275,65],bow:[345,280,80],satchel:[370,367,80]}}
+};
+export function petPortrait(p,{form=p.form,small=false,locked=false,staticPose=false}={}){
+ if(locked||!p.owned)return '<div class="pet-portrait pet-hidden '+(small?'pet-small':'')+'">'+silhouette('pet')+'</div>';
+ const stage=p.stage||'young',item=PET_ITEMS[p.outfit],equipped=item?.kind==='outfit'&&item.ready!==false,fit=(FIT[form]||FIT['nuonuo-seal'])[stage],a=equipped?(fit[item.art]||fit[item.slot]):null;
+ // The upright seal holds a snack: its scarf follows the shoulders and falls beside the paws.
+ const sealScarf=form==='nuonuo-seal'&&stage==='winged'&&item?.art==='scarf';
+ const overlay=a?'<svg class="fitted-outfit" viewBox="0 0 512 512" aria-hidden="true">'+(sealScarf?'<g transform="translate(0 0)" stroke="#a28158" stroke-width="2" stroke-linejoin="round"><path d="M167 239q27 13 48 12v16q-27 1-49-11Zm126 12q29 1 52-12l-2 20q-23 11-48 9Z" fill="#d7ae77"/><path d="m312 259-3 63 24 4 2-68Z" fill="#dfbb88"/><path d="m175 243v17m18-11v15m112-11v14m18-19v18m-11 10 21 3m-22 15 20 3m-20 14 20 3" stroke="#f4dfb9" stroke-width="4"/><path d="m311 324-1 7m10-5v7m10-5v7"/></g>':'<g transform="translate('+(a[0]-a[2]/2)+' '+(a[1]-a[2]/2)+') scale('+a[2]/100+')">'+ornament(item.art)+'</g>')+'</svg>':'';
+ const safe=Object.hasOwn(FIT,form)?form:'nuonuo-seal';
+ return '<div class="pet-portrait '+(small?'pet-small':'')+'"><div class="pet-assembly '+(!small&&!staticPose?'pet-breathe':'')+'"><img src="pets/'+safe+'/'+stage+'.png" alt="成长小伙伴'+(equipped?'，已穿戴配饰':'')+'" width="512" height="512" loading="lazy">'+overlay+'</div></div>';
+}
+export function petUI({getState,esc,canAct,openDialog,actions,mutation}){
+ function panel(){const s=getState(),p=s.pet,form=p.forms.find(f=>f.id===p.form),away=s.travel.away,supplies=s.cards.filter(c=>c.status==='ready'&&c.effect.startsWith('pet_'));
+ return `<section class="panel pet-home"><div class="pet-heading"><div><span class="pet-eyebrow">一间属于小伙伴的房间</span><h2>${p.owned?esc(form.name):'等待一次小小相遇'}</h2></div><span class="pet-level">${p.owned?'Lv.'+p.level:'抽奖限定'}</span></div><div class="pet-main"><div class="pet-room-scene ${away?'pet-is-away':''}"><span class="pet-window" aria-hidden="true"></span>${away?'<div class="empty-cushion"><span>小伙伴出门啦</span><small>行程在下面，回家会写信</small></div>':petPortrait(p)}<span class="pet-room-floor" aria-hidden="true"></span></div><div class="pet-progress"><p>${p.owned?away?'留一盏小灯，等它带着故事回来。':esc(form.hint):'先在抽奖中遇见「小伙伴敲敲门」，再到卡包迎接它入住。'}</p><strong>${p.xp.toLocaleString()} <small>累计经验</small></strong><progress class="progress" max="${p.nextXp?p.nextXp-p.levelStart:1}" value="${p.nextXp?p.xp-p.levelStart:1}" aria-label="宠物等级进度"></progress><small>${p.nextXp?'再积攒 '+(p.nextXp-p.xp)+' 经验，解锁下一段成长':'已经长得很棒啦，经验继续记录'}</small><div class="pet-buttons">${p.owned?`<button class="btn sm" data-action="pet-dress" ${canAct()&&!away?'':'disabled'}>${away?'旅行中，回来再换装':'打开小衣橱'}</button><button class="btn secondary sm" data-action="pet-shop">逛宠物小铺</button>`:'<button class="btn sm" data-page="lucky">去看看奖池</button>'}</div></div></div>${supplies.length?`<details class="pet-supplies"><summary>小伙伴的储物篮 · ${supplies.length} 件</summary>${supplies.slice(0,6).map(c=>{const item=PET_ITEMS[c.effect],locked=petItemLock(p,c.effect);return `<div class="record-row"><span class="supply-thumb">${locked?silhouette(item?.kind):artwork(item?.art||'pet_companion')}</span><div class="record-main"><strong>${locked?'神秘小礼物':esc(c.title)}</strong><small>${locked||petEffectLabel(c.effect)}</small></div><button class="btn secondary sm" data-action="pet-use" data-id="${c.id}" ${!canAct()||away||locked||Date.parse(c.available)>Date.now()||s.balance<0?'disabled':''}>${item?.kind==='gear'?'装进背包':'使用'}</button></div>`;}).join('')}${supplies.length>6?'<button class="text-btn" data-page="cards">查看全部 →</button>':''}</details>`:''}<details class="pet-rules"><summary>经验与成长规则</summary><p>本屋任务实际赚到 1 币，就记 1 经验；学习币全勤奖也计入。花币不扣经验，撤销或改分同步修正。</p><p>口粮可喂食，也可带去旅行，同一张只使用一次；装扮首次解锁加经验，反复穿戴不加。只有抽奖能获得第一只宠物。</p><p>形象、口粮、装扮按等级逐步解锁。出门时暂不能喂食或换装；已有用品会替你留好。等级回退时，高等级物品暂时锁定，不会丢失。</p></details></section>`;}
+ function wardrobe(){const s=getState(),p=s.pet;openDialog('小衣橱 · 今天也要可爱',`<form id="pet-dress-form"><h3 class="wardrobe-title">换个模样</h3><div class="pet-form-grid">${p.forms.map(f=>{const locked=p.level<f.level;return `<label class="pet-form-option ${locked?'locked':''}"><input type="radio" name="form" value="${f.id}" ${p.form===f.id?'checked':''} ${locked?'disabled':''}>${petPortrait({...p,outfit:''},{form:f.id,small:true,locked})}<strong>${locked?'神秘小伙伴':esc(f.name)}</strong><small>${locked?'Lv.'+f.level+' 解锁':'已解锁'}</small></label>`;}).join('')}</div><h3 class="wardrobe-title">挑一件配饰</h3><div class="outfit-grid"><label class="outfit-choice"><input type="radio" name="outfit" value="" ${!p.outfit?'checked':''}>${artwork('pet_companion')}<strong>原来的可爱</strong><small>不戴配饰</small></label>${Object.entries(PET_ITEMS).filter(([,i])=>i.kind==='outfit').map(([effect,i])=>{const locked=petItemLock(p,effect),owned=p.outfits.includes(effect);return `<label class="outfit-choice ${locked?'locked':''}"><input type="radio" name="outfit" value="${effect}" ${p.outfit===effect?'checked':''} ${locked||!owned?'disabled':''}>${locked?silhouette('outfit'):artwork(i.art)}<strong>${locked?'神秘装扮':esc(i.name)}</strong><small>${locked||(owned?'已收进衣橱':'可到小铺兑换')}</small></label>`;}).join('')}</div><p class="field-help">已拥有的装扮随时换，不重复花币或经验。每次佩戴一件。</p>${actions('穿好啦')}</form>`);}
+ async function click(action,el){const s=getState(),p=s.pet;
+  if(action==='pet-dress'){wardrobe();return true;}
+  if(action==='pet-stock'){openDialog('补齐宠物小铺',`<form id="pet-stock-form"><p>加入 ${Object.values(PET_ITEMS).filter(i=>i.ready!==false).length} 款已准备好的口粮、配饰与行囊。已上架的同款保留原价和库存；曾移除的模板会恢复，稍后可以逐项调整。</p><p class="field-help">等级不够时，领奖人只看到灰色轮廓。还在准备的两套装扮暂不出售。</p>${actions('补齐宠物用品')}</form>`);return true;}
+  if(action==='pet-use'||action==='use-effect'&&s.cards.find(c=>c.id===el.dataset.id)?.effect.startsWith('pet_')){const card=s.cards.find(c=>c.id===el.dataset.id);if(!card)return false;const item=PET_ITEMS[card.effect],lock=petItemLock(p,card.effect),duplicate=item?.kind==='outfit'&&p.outfits.includes(card.effect);
+   if(s.travel.away){openDialog('等小伙伴回家',`<p>小伙伴还在旅行。口粮和装扮已经替你收好，回来再一起挑。</p><button class="btn" data-page="growth">看看它走到哪了</button>`);return true;}
+   if(lock){openDialog('一份还没揭晓的小礼物',`${silhouette(item?.kind)}<p>${esc(lock)}。这张卡会替你留好。</p>`);return true;}
+   if(item?.kind==='gear'){openDialog(esc(card.title),artwork(item.art)+'<p>出发时消耗这件行囊，回来获得 '+item.xp+' 经验。</p><button class="btn" data-action="travel-pack">准备旅行</button>');return true;}
+   const text=card.effect==='pet_companion'?(p.owned?'这次小伙伴会带回 60 经验。':'使用后小伙伴就住进来啦，已有经验直接计入成长。'):duplicate?'已拥有这件装扮，使用会消耗此卡并穿戴，不重复增加经验。':item?.kind==='food'?`吃掉这份口粮，增加 ${item.xp} 经验；也可以先留着，下次旅行再带。`:`解锁并穿戴，增加 ${item.xp} 经验，以后免费换装。`;
+   openDialog(esc(card.title),`<form id="pet-use-form">${artwork(item?.art||'pet_companion')}<p>${text}</p><p class="field-help">只消耗这张卡，不再扣学习币。</p>${actions('确认使用')}</form>`);document.querySelector('#pet-use-form').dataset.id=card.id;return true;
+  }return false;
+ }
+ async function submit(form,data,key){if(form.id==='pet-stock-form'){await mutation('admin/templates',{templates:Object.entries(PET_ITEMS).filter(([,i])=>i.ready!==false).map(([id])=>id)},'宠物小铺准备好啦',key);return true;}if(form.id==='pet-dress-form'){await mutation('pets/dress',data,'已换上新模样',key);return true;}if(form.id==='pet-use-form'){const r=await mutation('pets/use',{card_id:form.dataset.id},'',key);openDialog(r.note,petPortrait(r.pet)+`<p class="pet-result">${r.petXp?'+'+r.petXp+' 经验 · ':''}Lv.${r.pet.level}</p><button class="btn full-width" data-page="growth">看看小伙伴</button>`);return true;}return false;}
+ return {panel,click,submit};
 }

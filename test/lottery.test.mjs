@@ -136,7 +136,7 @@ test('v9 迁移不增库存、不改卡片或概率字段，抽奖需单独布�
   const {s,a,prize}=setup(t),p=prize(),card=s.issue(a,p,'test');
   const before=s.all('SELECT id,cost,stock,weight FROM prizes');
   s.db.exec('ALTER TABLE prizes DROP COLUMN channel;ALTER TABLE cards DROP COLUMN lottery_funded;PRAGMA user_version=9');
-  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,13);
+  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,14);
   assert.deepEqual(s.all('SELECT id,cost,stock,weight FROM prizes'),before);
   assert.equal(s.get('SELECT status FROM cards WHERE id=?',card.id).status,'ready');
   assert.equal(s.pool(a.space_id).length,1);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
