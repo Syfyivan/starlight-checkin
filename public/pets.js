@@ -1,4 +1,4 @@
-export const petEffectLabel=effect=>({pet_companion:'小伙伴 / 重复 +60 经验',pet_snack:'口粮 · +5 经验',pet_feast:'野餐 · +20 经验',pet_bow:'装扮 · 首次 +30 经验',pet_star:'装扮 · 首次 +50 经验'}[effect]||'');
+export const petEffectLabel=effect=>({pet_pack:'行囊 · 旅行 +15 经验',pet_tent:'行囊 · 旅行 +40 经验',pet_companion:'小伙伴 / 重复 +60 经验',pet_snack:'口粮 · +5 经验',pet_feast:'野餐 · +20 经验',pet_bow:'装扮 · 首次 +30 经验',pet_star:'装扮 · 首次 +50 经验'}[effect]||'');
 export function petPurchaseHint(state,prize){
   const item=state.pet.items[prize.effect];if(!item)return '';
   if(!state.pet.owned)return '先领宠物';
@@ -19,6 +19,7 @@ export function petUI({getState,esc,canAct,openDialog,actions,select,mutation}){
     if(action==='pet-use'||action==='use-effect'&&s.cards.find(c=>c.id===el.dataset.id)?.effect.startsWith('pet_')){
       const card=s.cards.find(c=>c.id===el.dataset.id);if(!card)return false;
       const item=p.items[card.effect],duplicate=item?.kind==='outfit'&&p.outfits.includes(card.effect);
+      if(item?.kind==='gear'){openDialog(esc(card.title),'<p>把这件行囊装进背包，等小伙伴旅行回来，就能收获经验。</p><button class="btn" data-action="travel-pack">准备旅行</button>');return true;}
       const text=card.effect==='pet_companion'?(p.owned?'这次小伙伴会带回 60 经验。':'使用后，糯糯海豹就会住进这间小屋。已有经验直接计入成长。'):duplicate?'你已经拥有这件装扮。使用只会消耗此卡并重新穿戴，不重复增加经验。':item?.kind==='food'?`给小伙伴吃一份，增加 ${item.xp} 经验。`:`解锁并穿戴装扮，增加 ${item.xp} 经验；以后可以免费换装。`;
       openDialog(esc(card.title),`<form id="pet-use-form" data-id="${card.id}"><p>${text}</p><p class="field-help">${p.owned||card.effect==='pet_companion'?'只消耗这张卡，不再扣学习币。':'先抽到小伙伴，这张卡会替你留好。'}</p>${p.owned||card.effect==='pet_companion'?actions('确认使用'):'<button class="btn" type="button" data-action="close">先收好</button>'}</form>`);return true;
     }

@@ -12,9 +12,9 @@ function setup(t){
   return {s,learner,giver,room,card,move};
 }
 
-test('合成按合计额度乘 1.25，向上取整到元，而非逐卡取整',t=>{
+test('等额按总和加成；不等额仅给最小卡加成，最后向上取整到元',t=>{
   const {s,learner,room,card,move}=setup(t);
-  for(const [inputs,expected] of [[[200,200],500],[[200,300],700],[[101,100],300],[[400,400],1000],[[100,100,100],400]]){
+  for(const [inputs,expected] of [[[200,200],500],[[200,300],600],[[101,100],300],[[400,400],1000],[[100,100,100],400]]){
     const ids=inputs.map(cents=>card(cents)),total=inputs.reduce((a,b)=>a+b,0),r=move('merge',{card_ids:ids});
     assert.equal(r.card.face_cents,expected);
     assert.deepEqual(r.move,{input_cents:total,output_cents:expected,bonus_cents:expected-total});
@@ -30,23 +30,23 @@ test('合成请求重放不增发，已合成卡不能复用，新卡可按当�
   assert.equal(s.all('SELECT * FROM room_audit WHERE action=?','/api/cards/merge').length,1);
   assert.throws(()=>move('merge',{card_ids:ids}),/只能使用/);
   const second=move('merge',{card_ids:[first.card.id,card(100)]});
-  assert.equal(second.card.face_cents,800);
+  assert.equal(second.card.face_cents,700);
   assert.equal(s.balance(room),0);
   assert.equal(s.get('SELECT stock FROM prizes').stock,97);
   const log=JSON.parse(s.get("SELECT detail FROM room_audit WHERE action='/api/cards/merge' ORDER BY seq DESC LIMIT 1").detail);
-  assert.deepEqual(log.cardMove,{input_cents:600,output_cents:800,bonus_cents:200});
+  assert.deepEqual(log.cardMove,{input_cents:600,output_cents:700,bonus_cents:100});
 });
 
 test('合成后的万能卡转换仍按 1:1 找零，不重复加成',t=>{
   const {card,move}=setup(t),merged=move('merge',{card_ids:[card(200,'universal'),card(300,'universal')]});
-  assert.equal(merged.card.face_cents,700);
+  assert.equal(merged.card.face_cents,600);
   const converted=move('convert',{card_ids:[merged.card.id],category:'study',face_cents:251});
-  assert.equal(converted.card.face_cents,251);assert.equal(converted.outputs[1].face_cents,449);
-  assert.deepEqual(converted.move,{input_cents:700,output_cents:700,bonus_cents:0});
+  assert.equal(converted.card.face_cents,251);assert.equal(converted.outputs[1].face_cents,349);
+  assert.deepEqual(converted.move,{input_cents:600,output_cents:600,bonus_cents:0});
 });
 
 test('加成后超过额度上限时整笔拒绝，卡片、余额和日志不变',t=>{
-  const {s,room,card,move}=setup(t),ids=[card(40_000_000),card(40_000_001)],logCount=s.all('SELECT * FROM room_audit').length;
+  const {s,room,card,move}=setup(t),ids=[card(48_000_000),card(48_000_001)],logCount=s.all('SELECT * FROM room_audit').length;
   assert.throws(()=>move('merge',{card_ids:ids}),/合成后额度/);
   assert.equal(s.all("SELECT id FROM cards WHERE status='ready'").length,2);
   assert.equal(s.all('SELECT * FROM card_moves').length,0);

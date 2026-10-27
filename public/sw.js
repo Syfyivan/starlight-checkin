@@ -1,4 +1,4 @@
-const CACHE='starlight-public-v3.4.1',scope=new URL('./',self.location.href),files=['offline.html','style.css','mobile.css','icon-192.png','icon-512.png'];
+const CACHE='starlight-public-v3.5.0',scope=new URL('./',self.location.href),files=['offline.html','style.css','mobile.css','progress.css','celebrations.css','icon-192.png','icon-512.png'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(files.map(p=>new URL(p,scope).href))).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('starlight-public-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',event=>{
