@@ -25,3 +25,5 @@ pwsh -NoProfile -File android/build.ps1
 验证边界：编译、DEX、Manifest、v2/v3 签名、ZIP 对齐已检查；网页已做浏览器手机视口测试。未连接真实安卓手机，也未做设备上的安装、文件选择、WebView 兼容性实测。
 
 平台实现依据：[WebView](https://developer.android.com/develop/ui/views/layout/webapps/webview)、[D8](https://developer.android.com/tools/d8)、[AAPT2](https://developer.android.com/tools/aapt2)、[APK 签名](https://developer.android.com/tools/apksigner)。
+
+网站 3.2.1 增加在线检查更新入口，网站与 APK 版本分别显示。当前 APK 仍为 3.2.0；未来构建会一并生成 public/downloads/starlight.json。页面无需重装，APK 升级由浏览器下载、用户在安卓系统确认覆盖安装。

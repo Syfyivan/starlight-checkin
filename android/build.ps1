@@ -46,6 +46,9 @@ try {
     Run-Tool "$taskTools/zipalign.exe" @('-c', '4', $taskApk)
     $taskHash = (Get-FileHash -LiteralPath $taskApk -Algorithm SHA256).Hash.ToLowerInvariant()
     "$taskHash  starlight.apk" | Set-Content -LiteralPath "$taskProject/public/downloads/starlight.apk.sha256" -Encoding ascii
+    [xml]$taskManifest = Get-Content -LiteralPath "$PSScriptRoot/AndroidManifest.xml"
+    $taskRelease = @{version=$taskManifest.manifest.GetAttribute('versionName','http://schemas.android.com/apk/res/android');versionCode=[int]$taskManifest.manifest.GetAttribute('versionCode','http://schemas.android.com/apk/res/android');sha256=$taskHash;bytes=(Get-Item -LiteralPath $taskApk).Length}
+    $taskRelease | ConvertTo-Json | Set-Content -LiteralPath "$taskProject/public/downloads/starlight.json" -Encoding utf8
     Write-Output "APK_READY $taskApk"
     Write-Output "SHA256 $taskHash"
 } finally {
