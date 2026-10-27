@@ -35,15 +35,15 @@ test('商城与抽奖分别编辑库存，抽奖专属不能绕过 API 购买',t
   assert.deepEqual(s.state(a,room).prizes.map(p=>p.id),[shop.id]);
 });
 
-test('默认只有六种奖品，大额低概率，切换默认不重置商城或已发卡',t=>{
+test('默认七种奖品，大额低概率，切换默认不重置商城或已发卡',t=>{
   const {s,a,g,room,prize,op}=setup(t),shop=prize(),card=s.issue(a,shop,'test');
   const body={version:s.oddsConfig(room).version},key=randomUUID(),fn=(u,b)=>s.lottery.defaults(u,b);
   op(g,'/api/admin/lottery/defaults',body,fn,key);op(g,'/api/admin/lottery/defaults',body,fn,key);
-  const pool=s.pool(room);assert.equal(pool.length,7);assert.equal(pool[0].probability,.309);
+  const pool=s.pool(room);assert.equal(pool.length,8);assert.equal(pool[0].probability,.159);
   assert.equal(pool.find(p=>p.face_cents===50000).probability,.001);
   assert.equal(s.get('SELECT stock FROM prizes WHERE id=?',shop.id).stock,9);
   assert.equal(s.get('SELECT status FROM cards WHERE id=?',card.id).status,'ready');
-  assert.equal(s.all("SELECT * FROM prizes WHERE channel='lottery' AND removed=0").length,6);
+  assert.equal(s.all("SELECT * FROM prizes WHERE channel='lottery' AND removed=0").length,7);
   const report=s.lottery.report(room);assert.equal(report.maximum_cents,50000);assert.equal(report.blocked,'');
   assert.ok(Math.abs(report.chain_cents-(.08*500+.02*500+.001*50000)/.8)<1e-9);
   const jackpot=pool.find(p=>p.face_cents===50000);
@@ -136,7 +136,7 @@ test('v9 迁移不增库存、不改卡片或概率字段，抽奖需单独布�
   const {s,a,prize}=setup(t),p=prize(),card=s.issue(a,p,'test');
   const before=s.all('SELECT id,cost,stock,weight FROM prizes');
   s.db.exec('ALTER TABLE prizes DROP COLUMN channel;ALTER TABLE cards DROP COLUMN lottery_funded;PRAGMA user_version=9');
-  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,10);
+  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,11);
   assert.deepEqual(s.all('SELECT id,cost,stock,weight FROM prizes'),before);
   assert.equal(s.get('SELECT status FROM cards WHERE id=?',card.id).status,'ready');
   assert.equal(s.pool(a.space_id).length,1);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);

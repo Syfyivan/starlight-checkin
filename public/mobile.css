@@ -269,3 +269,6 @@ body[data-experience="cream"] .lucky-machine{background:#fff4d6}
 body[data-experience="berry"] .lucky-machine{background:#f9e4ee}
 body[data-experience="sky"] .lucky-machine{background:#e0effc}
 @media(max-width:600px){.lottery-costs{gap:6px}.lottery-costs>div{padding:10px 8px}.lottery-costs strong{font-size:19px}.lottery-editor .panel-heading{flex-wrap:wrap;gap:10px}.lottery-editor .reward-tools{gap:8px}.lottery-editor .reward-tools .btn{flex:1;white-space:normal}.compact-heading{flex-wrap:wrap;gap:8px}}
+@media(max-width:600px){
+ .pet-home{padding:16px;margin-bottom:14px}.pet-heading h2{font-size:18px}.pet-main{grid-template-columns:1fr;gap:0}.pet-main>.pet-portrait{width:190px;margin:0 auto}.pet-progress>p{margin-bottom:12px}.pet-progress>strong{font-size:24px}.pet-buttons{margin-top:14px}.pet-accessory{font-size:28px}.pet-accessory.pet_star{font-size:23px}.pet-rules{margin-top:18px}.pet-form-grid{gap:6px}.pet-form-option strong{font-size:11px}.plan-time-summary{line-height:1.7}.pet-supplies .record-row{gap:8px}
+}
