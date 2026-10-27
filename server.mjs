@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {Store,Fault,requireThat,passwordHash,passwordMatches,hash} from './lib/store.mjs';
 import {Identity} from './lib/identity.mjs';
 import {PET_FORMS} from './lib/pets.mjs';
+import {Encouragement} from './lib/encouragement.mjs';
 const root=dirname(fileURLToPath(import.meta.url));
 export async function createApp(options={}) {
   const demo=options.demo??process.argv.includes('--demo'),publicOrigin=options.origin??process.env.PUBLIC_ORIGIN??'';
@@ -16,6 +17,7 @@ export async function createApp(options={}) {
   const metadata=existsSync(metadataFile)?JSON.parse(readFileSync(metadataFile,'utf8')):null;
   const apk=existsSync(apkFile)&&metadata?{version:metadata.version,versionCode:metadata.versionCode,sha256:metadata.sha256,bytes:metadata.bytes,url:basePath+'downloads/starlight.apk'}:null;
   if(apk)requireThat(/^\d{1,6}\.\d{1,6}\.\d{1,6}$/.test(apk.version)&&Number.isSafeInteger(apk.versionCode)&&apk.versionCode>0&&/^[a-f0-9]{64}$/.test(apk.sha256)&&Number.isSafeInteger(apk.bytes)&&apk.bytes>0,'Android release metadata is invalid');
+  const encouragement=new Encouragement({fetcher:options.quoteFetcher});
   const identity=new Identity(store,{origin:publicOrigin,basePath,config:options.identityConfig,fetcher:options.fetcher,mailer:options.mailer});
   requireThat(/^\/(?:[a-zA-Z0-9_-]+\/)*$/.test(basePath),'BASE_PATH 必须以 / 开始和结尾');
   if(demo)await store.seedDemo();
@@ -40,7 +42,7 @@ export async function createApp(options={}) {
         requireThat(method==='GET'||method==='HEAD','不支持的请求方式',405);
         if(path==='/manifest.webmanifest')return send(200,{id:basePath,name:'小小成就 · 心愿花园',short_name:'小小成就',lang:'zh-CN',start_url:basePath,scope:basePath,display:'standalone',background_color:'#f6f7f2',theme_color:'#284e3b',icons:[{src:basePath+'icon-192.png',sizes:'192x192',type:'image/png',purpose:'any'},{src:basePath+'icon-512.png',sizes:'512x512',type:'image/png',purpose:'any maskable'}]},{'Content-Type':'application/manifest+json; charset=utf-8'});
         const petFiles=Object.fromEntries(PET_FORMS.flatMap(f=>['young.png','winged.png','young-idle-animated.png','winged-idle-animated.png'].map(name=>['/pets/'+f.id+'/'+name,['pets/'+f.id+'/'+name,'image/png']])));
-        const extraFiles=Object.fromEntries(['progress.js','merge.js','celebrations.js','vendor/canvas-confetti-1.9.4.js'].map(f=>['/'+f,[f,'text/javascript; charset=utf-8']]));extraFiles['/celebrations.css']=['celebrations.css','text/css; charset=utf-8'];extraFiles['/progress.css']=['progress.css','text/css; charset=utf-8'];
+        const extraFiles=Object.fromEntries(['celebration-content.js','celebration-art.js','progress.js','merge.js','celebrations.js','vendor/canvas-confetti-1.9.4.js'].map(f=>['/'+f,[f,'text/javascript; charset=utf-8']]));extraFiles['/celebrations.css']=['celebrations.css','text/css; charset=utf-8'];extraFiles['/progress.css']=['progress.css','text/css; charset=utf-8'];
         const files={...extraFiles,...petFiles,...{'/':['index.html','text/html; charset=utf-8'],'/index.html':['index.html','text/html; charset=utf-8'],'/app.js':['app.js','text/javascript; charset=utf-8'],'/lottery.js':['lottery.js','text/javascript; charset=utf-8'],'/pets.js':['pets.js','text/javascript; charset=utf-8'],'/updates.js':['updates.js','text/javascript; charset=utf-8'],'/plans.js':['plans.js','text/javascript; charset=utf-8'],'/rooms.js':['rooms.js','text/javascript; charset=utf-8'],'/invitations.js':['invitations.js','text/javascript; charset=utf-8'],'/community.js':['community.js','text/javascript; charset=utf-8'],'/sw.js':['sw.js','text/javascript; charset=utf-8'],'/offline.html':['offline.html','text/html; charset=utf-8'],'/icon-192.png':['icon-192.png','image/png'],'/icon-512.png':['icon-512.png','image/png'],'/mobile.css':['mobile.css','text/css; charset=utf-8'],'/style.css':['style.css','text/css; charset=utf-8'],'/favicon.svg':['favicon.svg','image/svg+xml']}};
         files['/downloads/starlight.apk']=['downloads/starlight.apk','application/vnd.android.package-archive'];
         files['/downloads/starlight.apk.sha256']=['downloads/starlight.apk.sha256','text/plain; charset=utf-8'];
@@ -81,6 +83,7 @@ export async function createApp(options={}) {
       }
       requireThat(user,'请先登录',401);
       if(method==='GET') {
+        if(path==='/api/celebration/quote'){limit(`quote:${user.id}`,40);return send(200,await encouragement.get());}
         const query=Object.fromEntries(url.searchParams),community=store.community;
         if(path==='/api/community/inbox')return send(200,community.inbox(user,query));
         if(path==='/api/community/logs')return send(200,community.logs(user,query));
