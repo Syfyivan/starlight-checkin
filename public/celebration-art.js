@@ -14,7 +14,7 @@ export const EFFECTS=[
 ];
 const PALETTE=['#dba5ac','#dfbc70','#8fb9a9','#a6a7cf','#8fbccf'];
 const customShapes={};
-function shape(name,path){return customShapes[name]??=confetti.shapeFromPath({path});}
+function shape(name,path){if(!customShapes[name])customShapes[name]=confetti.shapeFromPath({path});return customShapes[name];}
 const heart=()=>shape('heart','M 0 5 C -13 -5 -9 -15 0 -8 C 9 -15 13 -5 0 5 Z');
 const petal=()=>shape('petal','M 0 -10 C 11 -8 13 0 3 10 C -10 9 -12 -2 0 -10 Z');
 const ribbon=()=>shape('ribbon','M -2 -10 L 2 -10 L 2 10 L -2 10 Z');

@@ -273,3 +273,11 @@ body[data-experience="sky"] .lucky-machine{background:#e0effc}
  .pet-home{padding:16px;margin-bottom:14px}.pet-heading h2{font-size:18px}.pet-main{grid-template-columns:1fr;gap:0}.pet-main>.pet-portrait{width:190px;margin:0 auto}.pet-progress>p{margin-bottom:12px}.pet-progress>strong{font-size:24px}.pet-buttons{margin-top:14px}.pet-accessory{font-size:28px}.pet-accessory.pet_star{font-size:23px}.pet-rules{margin-top:18px}.pet-form-grid{gap:6px}.pet-form-option strong{font-size:11px}.plan-time-summary{line-height:1.7}.pet-supplies .record-row{gap:8px}
 }
 @media(max-width:600px){.pet-shop-guide{gap:8px;padding:10px 12px;flex-wrap:wrap}.pet-shop-guide>span{align-self:flex-start}.pet-shop-guide p{min-width:190px}.pet-shop-guide button{margin-left:auto;padding:0;min-height:30px}.prize-use-hint{width:260px}.reel-heading>div>span{font-size:10px}}
+/* Startup recovery also needs to fit narrow Android screens. */
+#startup-loading{padding:24px;box-sizing:border-box}
+#startup-loading>.brand-symbol{justify-self:center}
+#startup-loading>p,#startup-actions{max-width:360px;margin:0 auto;line-height:1.7}
+#startup-hint:empty{display:none}
+#startup-actions details{margin-top:20px;font-size:13px;color:var(--muted)}
+#startup-url{width:100%;box-sizing:border-box;margin:8px 0;font-size:12px}
+#startup-detail{font-size:12px}

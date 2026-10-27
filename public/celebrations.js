@@ -1,5 +1,6 @@
 import {LOCAL_MESSAGES,ShuffleBag} from './celebration-content.js';
 import {EFFECTS,playCelebration} from './celebration-art.js';
+import {fetchJSON} from './compat.js';
 export {EFFECTS};
 const PREF_KEY='starlight.celebration.preferences.v1',SEEN_KEY='starlight.celebration.online-seen.v1';
 let messageBag,effectBag,layer,card,disposeMotion,motionQuery,motionListener,timers=[],lastTaskId,lastTaskAt=0,turn=0;
@@ -10,14 +11,14 @@ function seen(){if(recent)return recent;try{const saved=JSON.parse(localStorage.
 export function warmMessages(){
   if(!celebrationPreferences().online||typeof location==='undefined'||loading||Date.now()-lastFetch<30000)return loading;
   lastFetch=Date.now();
-  loading=fetch(new URL('api/celebration/quote',location.href.split(/[?#]/)[0]),{credentials:'same-origin',signal:AbortSignal.timeout(3500)}).then(async r=>{
-    if(!r.ok)return;const {quote:q}=await r.json();
+  loading=fetchJSON(new URL('api/celebration/quote',location.href.split(/[?#]/)[0]),{credentials:'same-origin'},3500).then(({response:r,data})=>{
+    if(!r.ok)return;const {quote:q}=data;
     if(celebrationPreferences().online&&q&&typeof q.text==='string'&&q.text.length<=30&&typeof q.attribution==='string'&&q.attribution.length<=100&&/^https:\/\/hitokoto\.cn\/\?uuid=[\da-f-]{36}$/i.test(q.url)&&!seen().includes(q.text)&&!LOCAL_MESSAGES.some(m=>m[0]===q.text))onlineQuote=q;
   }).catch(()=>{}).finally(()=>{loading=null;});return loading;
 }
 function nextMessage(){
   turn++;if(celebrationPreferences().online&&onlineQuote&&turn%3===0){const q=onlineQuote;onlineQuote=null;seen().push(q.text);recent=recent.slice(-40);try{localStorage.setItem(SEEN_KEY,JSON.stringify(recent));}catch{}return {...q,online:true};}
-  messageBag??=new ShuffleBag(LOCAL_MESSAGES.length,'starlight.task-celebration-bag.v2');const [text,attribution]=LOCAL_MESSAGES[messageBag.next()];return {text,attribution};
+  if(!messageBag)messageBag=new ShuffleBag(LOCAL_MESSAGES.length,'starlight.task-celebration-bag.v2');const [text,attribution]=LOCAL_MESSAGES[messageBag.next()];return {text,attribution};
 }
 function later(fn,ms){timers.push(setTimeout(fn,ms));}
 function stopMotion(){disposeMotion?.();disposeMotion=null;layer?.remove();layer=null;}
@@ -26,7 +27,7 @@ export function celebrateTask({taskId,title='',coins=0,effect,preview=false}={})
   if(typeof document==='undefined'||!document.body||document.hidden)return;
   const now=Date.now();if(!preview&&taskId!=null&&taskId===lastTaskId&&now-lastTaskAt<800)return;
   lastTaskId=taskId;lastTaskAt=now;cleanup();
-  effectBag??=new ShuffleBag(EFFECTS.length,'starlight.task-celebration-effects.v1');
+  if(!effectBag)effectBag=new ShuffleBag(EFFECTS.length,'starlight.task-celebration-effects.v1');
   const design=EFFECTS.find(e=>e.id===effect)||EFFECTS[effectBag.next()];
   const message=preview?{text:'认真完成的一小步，值得好好庆祝。',attribution:design.name+' · 效果预览，不影响积分'}:nextMessage();
   card=document.createElement('div');card.className='task-celebration-note tone-'+design.color;card.setAttribute('role','status');card.setAttribute('aria-live','polite');card.setAttribute('aria-atomic','true');
