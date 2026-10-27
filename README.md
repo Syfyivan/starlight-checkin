@@ -14,7 +14,7 @@
 
 给朋友、家人和自己用的任务与奖励空间。Node.js 原生 HTTP + SQLite + 原生前端，无第三方 npm 依赖。
 
-**六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。本版部署与验证状态见 [V3.2.1-HANDOFF.md](V3.2.1-HANDOFF.md)，35 种默认心愿卡与百分比抽奖的规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
+**六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。正式网站已更新至 3.2.2，部署与验证状态见 [V3.2.2-HANDOFF.md](V3.2.2-HANDOFF.md)，35 种默认心愿卡与百分比抽奖的规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
 
 ## 本期功能
 
@@ -64,9 +64,19 @@ CSV 格式：`任务名称,奖励,重复方式,分类,开始日期`。重复方�
 
 可复用现有 Docker 和 Caddy。只发布一个独立容器，监听 `127.0.0.1:8801`，经现有 HTTPS 的 `/starlight/` 子路径访问。
 
+Windows 发布使用 `deploy/ssh-session.ps1`，由 Microsoft OpenSSH 调用本机 1Password SSH Agent。脚本只使用本机 `.ssh/tencent-booking.pub` 选择公钥，不读取 1Password CLI、不导出私钥。可通过 `-PublicKey` 和 `-Destination` 指定其他公钥文件与目标。
+
+在 1Password 的“设置 → 开发者 → SSH Agent 高级设置”中，把批准范围设为“每个新应用”，记住批准设为“24 小时”。首次连接由本人批准；锁定后仍需本人解锁，退出 1Password 会结束代理会话。不要勾选“批准所有应用”。[官方授权说明](https://www.1password.dev/ssh/agent/authorization)。
+
+```powershell
+pwsh -NoProfile -File deploy/ssh-session.ps1
+```
+
+脚本输出 `CLOUD_SESSION_READY` 后，每行输入一个 JSON 请求，例如 `{"action":"ssh","command":"true"}`。上传使用 `{"action":"upload","source":"C:/path/release.tar.gz","target":"/tmp/release.tar.gz"}`；退出使用 `{"action":"stop"}`。检查每条请求的 `SSH_EXIT` 或 `UPLOAD_EXIT`，只有 `0` 表示成功。它只提供连接，不会自动部署或修改服务器。
+
 ```sh
-docker build --pull=false -t starlight-checkin:3.2.1 .
-sudo PUBLIC_ORIGIN=https://your-domain.example IMAGE=starlight-checkin:3.2.1 sh deploy/run-container.sh
+docker build --pull=false -t starlight-checkin:3.2.2 .
+sudo PUBLIC_ORIGIN=https://your-domain.example IMAGE=starlight-checkin:3.2.2 sh deploy/run-container.sh
 ```
 
 将 `deploy/starlight.caddy` 导入已有的 HTTPS 站点块。修改前备份 Caddyfile；先 `caddy validate --config /etc/caddy/Caddyfile` 再 reload。不要覆盖其他站点。默认 URL 的端口必须和 `PUBLIC_ORIGIN` 完全一致。
