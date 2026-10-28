@@ -293,3 +293,5 @@ body[data-experience="sky"] .lucky-machine{background:#e0effc}
 .task-options [hidden]{display:none!important}
 .task-options .field-help{margin:6px 0 12px;line-height:1.6}
 @media(max-width:600px){.balance-status .coin-pill{padding:5px 9px}.balance-rule-link{font-size:10px}.task-kind-bar{align-items:stretch;gap:7px;flex-wrap:wrap}.task-kind-bar .chips{flex-basis:100%}.task-category-filter{margin:2px 0 4px}.task-kind-bar .chip{padding:6px 10px;font-size:12px}.task-options .form-row{grid-template-columns:1fr 1fr}}
+
+.task-edit-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:5px 0;margin-top:4px}.task-edit-link svg{width:13px;height:13px}.task-edit-link:focus-visible{outline:2px solid currentColor;outline-offset:3px}
