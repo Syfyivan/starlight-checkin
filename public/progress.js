@@ -1,3 +1,5 @@
+import {passport,postcardContents} from './travel-journal.js';
+import {packingHint} from './travel-notes.js';
 import {travelPanel,packingForm,travelScene} from './travel-view.js';
 import {artwork} from './illustrations.js';
 import {PET_ITEMS} from './pet-catalog.js';
@@ -5,8 +7,8 @@ import {petMoment} from './pet-care.js';
 import {petPortrait} from './pets.js';
 import {scheduledOn,LONG_POINTS_MAX} from './task-types.js';
 export const elapsedLabel=ms=>{const seconds=Math.max(0,Math.floor(ms/1000));return `${String(Math.floor(seconds/3600)).padStart(2,'0')}:${String(Math.floor(seconds/60)%60).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;};
-export function progressUI({getState,canAct,getPerspective,esc,field,actions,openDialog,mutation}){
-  let receivedAt=Date.now();
+export function progressUI({getState,canAct,getPerspective,esc,field,actions,openDialog,mutation,api}){
+  let receivedAt=Date.now(),openedPostcard=null;
   const state=()=>getState(),task=id=>[...state().tasks,...state().futureTasks].find(t=>t.id===id);
   function sync(){receivedAt=Date.now();}
   function taskTools(t){const time=t.timing||{},running=time.running_since!=null;return `<div class="task-time-tools">${canAct()&&!t.done&&scheduledOn(t,state().day)?`<button class="text-btn timer-toggle ${running?'running':''}" data-action="task-timer" data-id="${t.id}" data-mode="${running?'pause':'start'}">${running?'Ⅱ 暂停':'▷ 开始计时'}</button>`:''}${time.elapsed_ms||running?`<span class="task-clock ${running?'running':''}" data-task-clock="${t.id}">${elapsedLabel(time.elapsed_ms||0)}</span>`:''}${state().space.canManage&&getPerspective()!=='preview'?`<button class="text-btn" data-action="giver-task-score" data-id="${t.id}">调整分数</button>`:''}${t.score_override!=null?'<span class="fixed-score">发奖人定分</span>':''}</div>`;}
@@ -19,17 +21,27 @@ export function progressUI({getState,canAct,getPerspective,esc,field,actions,ope
     if(action==='giver-task-score'){
       const t=task(el.dataset.id);openDialog('给这个任务定个分',`<form id="giver-score-form" data-id="${t.id}" data-revision="${t.score_revision}"><h3>${esc(t.title)}</h3>${field('完成后获得的学习币','points','number',t.score_override==null?'':t.score_override/1000000,'min="1" max="'+(t.task_kind==='long'?LONG_POINTS_MAX:100)+'" placeholder="留空恢复小屋计分规则"')}<p class="field-help">定分后，领奖人不能自行改高。今天若已完成，会补发或扣回差额；以前的记录保持原样。留空可恢复自由分数或投入等级。</p>${actions('保存分数')}</form>`);return true;
     }
-    if(action==='trip-letter'){const h=state().travel.history.find(x=>x.id===el.dataset.id);if(!h)return true;openDialog('来自 '+esc(h.destination)+' 的明信片','<div class="letter-landscape">'+travelScene()+'</div><p class="mail-letter">'+esc(h.story)+'</p><p class="field-help">这是一封虚构旅行故事。本次旅行已获得 '+h.xp+' 经验。</p>'+(h.source.startsWith('https://whc.unesco.org/en/list/')?'<p><a href="'+esc(h.source)+'" target="_blank" rel="noopener">小知识来源：UNESCO ↗</a></p>':'')+(h.hasGift&&!h.claimed?'<button class="btn" data-page="inbox">去信箱收下礼物</button>':''));return true;}
+    if(action==='travel-passport'){openDialog('慢慢盖满的旅行护照',passport(state().travel,esc));return true;}
+    if(action==='trip-letter'){await openPostcard(el.dataset.id);return true;}
+    if(action==='trip-quiz'&&openedPostcard?.knowledge){const k=openedPostcard.knowledge,right=Number(el.dataset.index)===k.answer;document.querySelector('#travel-quiz-feedback').textContent=right?'记住啦！'+k.fact:'再看看这条小线索：'+k.fact;return true;}
+    if(action==='trip-gift'&&canAct()){const r=await mutation('mail/claim',{mail_id:el.dataset.mail},'',undefined);await openPostcard(el.dataset.id);return true;}
+    if(action==='trip-practice'&&canAct()&&openedPostcard?.id===el.dataset.id){const h=openedPostcard,k=h.knowledge,settings=state().settings,points=settings.taskScoreMode==='difficulty'?settings.difficultyPoints[settings.defaultDifficulty]:settings.defaultPoints;openDialog('把好奇心安排进生活',`<form id="travel-practice-form" data-id="${h.id}"><h3>${esc(k.practice)}</h3><p class="subtext">预计 ${k.minutes} 分钟 · 完成后预计 +${points} 学习币，以完成时的小屋规则和每日上限为准。</p>${field('从哪天开始','start_date','date',state().day,'required min="'+state().day+'"')}<p class="field-help">只添加待办，不会直接发币。会和普通计划一起参与当天的完成与扣分规则，每趟最多添加一次。</p>${actions('加入我的计划')}</form>`);return true;}
     if(action==='travel-pack'){
-      const t=state().travel;openDialog('给小伙伴准备行囊',packingForm(t,esc,actions));packPreview();return true;
+      const t=state().travel;openDialog('给小伙伴准备行囊',packingForm(t,esc,actions));restorePack();packPreview();return true;
     }return false;
   }
-  function packPreview(){const f=document.querySelector('#travel-pack-form');if(!f)return;const selected=[...f.querySelectorAll('[name="supplies"]:checked')].map(e=>state().travel.supplies.find(c=>c.id===e.value)),valid=selected.length>0&&selected.length<=2&&new Set(selected.map(c=>c.kind)).size===selected.length;document.querySelector('#travel-xp-preview').textContent=valid?'归来获得 '+selected.reduce((n,c)=>n+c.xp,0)+' 经验':'选一份口粮或一件装备，最多各一件';for(const input of f.querySelectorAll('[name="supplies"]'))input.disabled=!input.checked&&selected.some(c=>c.kind===input.dataset.kind);for(const slot of f.querySelectorAll('[data-bag-slot]')){const c=selected.find(c=>c.kind===slot.dataset.bagSlot);slot.innerHTML=c?artwork(PET_ITEMS[c.effect]?.art)+'<strong>'+esc(c.title)+'</strong><small>+'+c.xp+' 经验</small>':'<span>＋</span><strong>'+ (slot.dataset.bagSlot==='food'?'口粮袋':'旅行用品')+'</strong><small>也可以只带另一种</small>';}const submit=f.querySelector('[type="submit"]');if(submit)submit.disabled=!valid;}
-  document.addEventListener('change',e=>{if(e.target.closest('#travel-pack-form'))packPreview();});
+  async function openPostcard(id){const h=await api('pets/postcard?space_id='+encodeURIComponent(state().space.id)+'&trip_id='+encodeURIComponent(id));openedPostcard=h;openDialog('来自 '+esc(h.destination)+' 的明信片',postcardContents(h,state(),canAct(),esc,actions));}
+  const packKey=()=> 'starlight.travel-pack.'+state().user.id+'.'+state().space.id;
+  function restorePack(){try{const saved=JSON.parse(localStorage.getItem(packKey())||'null'),f=document.querySelector('#travel-pack-form');if(!saved)return;for(const input of f.querySelectorAll('[name="supplies"]'))input.checked=saved.cards?.includes(input.value);for(const input of f.querySelectorAll('[name="route"]'))input.checked=input.value===(['auto','culture','nature'].includes(saved.route)?saved.route:'auto');}catch{}}
+  function savePack(){const f=document.querySelector('#travel-pack-form');if(!f)return;try{localStorage.setItem(packKey(),JSON.stringify({cards:[...f.querySelectorAll('[name="supplies"]:checked')].map(e=>e.value),route:f.elements.route.value}));}catch{}}
+  function packPreview(){const f=document.querySelector('#travel-pack-form');if(!f)return;const selected=[...f.querySelectorAll('[name="supplies"]:checked')].map(e=>state().travel.supplies.find(c=>c.id===e.value)),valid=selected.length>0&&selected.length<=2&&new Set(selected.map(c=>c.kind)).size===selected.length;document.querySelector('#travel-xp-preview').textContent=valid?'归来获得 '+selected.reduce((n,c)=>n+c.xp,0)+' 经验':'选一份口粮或一件装备，最多各一件';for(const input of f.querySelectorAll('[name="supplies"]'))input.disabled=!input.checked&&selected.some(c=>c.kind===input.dataset.kind);for(const slot of f.querySelectorAll('[data-bag-slot]')){const c=selected.find(c=>c.kind===slot.dataset.bagSlot);slot.innerHTML=c?artwork(PET_ITEMS[c.effect]?.art)+'<strong>'+esc(c.title)+'</strong><small>+'+c.xp+' 经验</small>':'<span>＋</span><strong>'+ (slot.dataset.bagSlot==='food'?'口粮袋':'旅行用品')+'</strong><small>也可以只带另一种</small>';}document.querySelector('#travel-route-preview').textContent=packingHint(f.elements.route.value,selected.map(c=>c.effect));const submit=f.querySelector('[type="submit"]');if(submit)submit.disabled=!valid;}
+  document.addEventListener('change',e=>{if(e.target.closest('#travel-pack-form')){packPreview();savePack();}});
   async function submit(form,data,formData,key){
+    if(form.id==='travel-memory-form'&&canAct()){await mutation('pets/travel/memory',{trip_id:form.dataset.id,memory:data.memory,expectedMemory:openedPostcard?.memory||''},'小发现记在明信片上啦',key);await openPostcard(form.dataset.id);return true;}
+    if(form.id==='travel-practice-form'&&canAct()){const r=await mutation('pets/travel/practice',{trip_id:form.dataset.id,start_date:data.start_date},'小计划已安排好',key);await openPostcard(form.dataset.id);return true;}
     if(form.id==='giver-score-form'){await mutation('admin/task-score',{task_id:form.dataset.id,expectedRevision:Number(form.dataset.revision),points:data.points===''?null:Number(data.points)},'任务分数已调整，也给伙伴寄了说明',key);return true;}
     if(form.id==='growth-rules-form'){await mutation('admin/growth-rules',{version:form.dataset.version,enabled:formData.has('enabled'),step:Number(data.step),ticket:Number(data.ticket),card2:Number(data.card2),card5:Number(data.card5)},'成长奖励规则已保存',key);return true;}
-    if(form.id==='travel-pack-form'){const before=state().pet;const r=await mutation('pets/travel',{card_ids:formData.getAll('supplies')},'',key);openDialog('小伙伴出发啦',petMoment(before,before,{kind:'depart',portrait:petPortrait})+`<p>这一趟预计 ${r.trip.durationHours/24} 天，回来增加 ${r.trip.xp} 经验。</p><p>旅途见闻会寄到信箱，安心做好自己的小计划吧。</p><button class="btn" data-action="close">一路平安</button>`);return true;}return false;
+    if(form.id==='travel-pack-form'){const before=state().pet;const r=await mutation('pets/travel',{card_ids:formData.getAll('supplies'),route:data.route||'auto'},'',key);try{localStorage.removeItem(packKey());}catch{}openDialog('小伙伴出发啦',petMoment(before,before,{kind:'depart',portrait:petPortrait})+`<p>这一趟预计 ${r.trip.durationHours/24} 天，回来增加 ${r.trip.xp} 经验。</p><p>旅途见闻会寄到信箱，安心做好自己的小计划吧。</p><button class="btn" data-action="close">一路平安</button>`);return true;}return false;
   }
   return {taskTools,rulesPanel,panel,click,submit,sync};
 }

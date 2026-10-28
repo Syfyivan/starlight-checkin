@@ -1,4 +1,52 @@
 /* Pet studio: fitted accessories, paper cards and a small travel journal. */
+/* Travel journal: compact home, collectible miniature scenes, optional learning. */
+.travel-stamp[data-action]{background:#faf8ed;cursor:pointer;min-height:36px;border-radius:3px}
+.travel-map-label{padding:8px 11px;border-radius:9px;background:#fffdf0e8;backdrop-filter:blur(3px)}
+.postcard-stage{position:relative;width:100%;overflow:hidden;border-radius:9px;background:#ecf0e4;isolation:isolate}
+.postcard-stage .travel-landscape{display:block;width:100%;height:auto}
+.postcard-companion{position:absolute;bottom:-4%;right:8%;width:26%;filter:drop-shadow(0 3px 2px #57644f22)}
+.postcard-companion .pet-portrait{width:100%;min-height:0;margin:0;padding:0;max-width:none;background:none;border:none;box-shadow:none}
+.postcard-companion .pet-small{min-height:0;max-width:none}
+.postcard .postcard-stage{margin:9px 0 12px;border-radius:3px;flex-shrink:0}
+.postcard .postcard-stage .postcard-companion{width:34%;right:2%;bottom:-5%}
+.postcard-landscape .postcard-cloud{animation:postcard-drift 16s ease-in-out infinite alternate}
+.travel-return,.travel-letter-gift{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid #e8e2d2}
+.travel-return strong,.travel-letter-gift strong{font-size:13px;line-height:1.6}
+.travel-return small,.travel-letter-gift small{display:block;font-size:11px;color:#7a826e;margin-top:3px;line-height:1.7}
+.travel-return .btn,.travel-letter-gift .btn{flex-shrink:0}
+.travel-pending{font-size:12px;color:#866d4f;background:#f5edda;border-radius:9px;padding:10px 12px;line-height:1.8}
+.road-letter{margin-top:16px;border:1px solid #ddd9c4;border-radius:3px;padding:14px;background:repeating-linear-gradient(#faf7e9,#faf7e9 29px,#e9e4d4 30px);transform:rotate(-.4deg)}
+.road-letter summary{font-size:12px;cursor:pointer;font-weight:600;line-height:1.8}
+.road-letter p{font-size:13px;white-space:pre-line;line-height:2.25;color:#63705a}
+.road-letter small{font-size:10px;color:#8c937e}
+.travel-passport{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.passport-place{display:flex;flex-direction:column;text-align:left;border:1px solid #dfdfcf;border-radius:8px;background:#faf8ed;padding:8px;color:#57644e;min-width:0;overflow:hidden}
+button.passport-place{cursor:pointer;transition:box-shadow .2s}
+button.passport-place:hover{box-shadow:0 3px 12px #425b3d1a}
+.passport-place .travel-landscape{border-radius:5px}
+.passport-place strong{font-size:12px;margin:11px 4px 4px;line-height:1.7}
+.passport-place small{font-size:10px;margin:0 4px 7px;color:#878e78;line-height:1.7}
+.passport-place.locked{background:#f0f0ea;border-color:#e3e4da;color:#979b8a}
+.travel-route-picker{display:flex;flex-wrap:wrap;gap:7px;border:0;padding:0;margin:0}
+.travel-route-picker legend{font-size:12px;font-weight:600;margin-bottom:10px;color:#68795c}
+.travel-route-picker label{position:relative;font-size:11px;display:flex;align-items:center;gap:5px;cursor:pointer;background:#f4f5eb;padding:9px;border:1px solid #dce1cd;border-radius:9px;min-height:40px}
+.travel-route-picker label:has(input:checked){background:#e8edde;border-color:#8ca37e;color:#405b36}
+.travel-route-picker input{accent-color:#6b825c;width:13px;height:13px;min-height:13px;margin:0}
+.travel-knowledge,.travel-practice,.travel-memory{margin:20px 0;padding:17px;border-radius:11px;background:#f4f4e8;border:1px solid #e4e5d4}
+.travel-knowledge h3{font-size:16px;margin:8px 0 12px;color:#4e6246}
+.travel-knowledge p,.travel-practice p,.travel-memory p{font-size:13px;line-height:1.9;margin:8px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.travel-practice small{font-size:11px;color:#7d866e;display:block;margin-bottom:12px}
+.travel-quiz{margin-top:14px;padding-top:12px;border-top:1px dashed #d6dbc6}
+.travel-quiz summary{font-size:12px;line-height:1.8;cursor:pointer}
+.travel-quiz-options{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.travel-quiz-options .btn{text-align:left;justify-content:flex-start;white-space:normal;min-height:40px}
+#travel-quiz-feedback{font-size:12px;color:#687a5a;min-height:22px}
+#travel-memory-form{margin-top:20px}
+#travel-memory-form textarea{width:100%;display:block;box-sizing:border-box;padding:12px;margin-top:9px;min-height:88px;resize:vertical;border:1px solid #d8ddcd;border-radius:9px;background:#fffefa;color:#4d5f46;font:inherit;font-size:13px;line-height:1.8}
+#travel-memory-form .field-label{font-size:13px;font-weight:600}
+@keyframes postcard-drift{from{transform:translateX(-6px)}to{transform:translateX(9px)}}
+@media(max-width:600px){.travel-passport{gap:9px}.passport-place{padding:6px}.passport-place strong{font-size:11px}.passport-place small{font-size:10px}.travel-return{gap:9px}.travel-return strong{font-size:12px}.travel-return small{font-size:10px}.travel-return .btn{font-size:11px;padding:8px 10px}.travel-route-picker{gap:6px}.travel-route-picker label{font-size:10px;padding:8px 6px}.travel-knowledge,.travel-practice,.travel-memory{padding:14px}.travel-knowledge h3{font-size:15px}.travel-letter-gift{align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.postcard-landscape .postcard-cloud{animation:none}.passport-place{transition:none}}
 .reward-illustration,.mystery-art{display:block;width:100%;height:auto;overflow:visible}
 .illustrated-card{position:relative;isolation:isolate;min-height:190px;overflow:hidden;display:flex;align-items:flex-end;padding:29px 24px 23px;background-color:#eaf0e2;background-image:radial-gradient(#fff8 1px,transparent 1px);background-size:11px 11px}
 .illustrated-card.peach{background-color:#f2e4db}.illustrated-card.sky{background-color:#e3ecee}.illustrated-card.lilac{background-color:#ece4ef}.illustrated-card.yellow{background-color:#f5edd4}.illustrated-card.rainbow{background-color:#f0e9dc;background-image:radial-gradient(ellipse at 90% 10%,#dce6d8,transparent 65%),radial-gradient(ellipse at 0 100%,#efdedb,transparent 60%)}

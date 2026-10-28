@@ -33,7 +33,7 @@ const brand=()=>`<span class="brand-symbol">✓</span><div>${esc(state?.settings
 
 const category=id=>state.categories.find(c=>c.id===id)||{name:'特别约定',emoji:'🎁'},qname=id=>QUADRANTS.find(q=>q[0]===id)?.[1]||'普通计划';
 const errorSlot='<div class="error-text" role="alert"></div>';
-const progress=progressUI({getState:()=>state,canAct,getPerspective:()=>perspective,esc,field,actions,openDialog,mutation});
+const progress=progressUI({getState:()=>state,canAct,getPerspective:()=>perspective,esc,field,actions,openDialog,mutation,api});
 const pets=petUI({getState:()=>state,esc,canAct,openDialog,actions,select,mutation});
 const familyPlay=familyPlayUI({getState:()=>state,getPerspective:()=>perspective,taskTools:progress.taskTools,esc,coins,yuan,field,textarea,select,actions,openDialog,mutation,api,refresh,render,navigate:async(room)=>{space=room;await refresh();},redeemDialog,shareDialog,taskOptions,readTaskOptions,updateTaskOptions,rewardArt});
 const lottery=lotteryUI({getState:()=>state,esc,yuan,coins,openDialog,actions,field,select,mutation,api,prizeDialog});
