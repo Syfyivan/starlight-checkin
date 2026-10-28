@@ -17,7 +17,7 @@ function fixture(t){
  const p=s.savePrize(giver,{space_id:room,title:'小伙伴敲敲门',description:'抽到后迎接入住',emoji:'🐾',category:'custom',face_cents:0,effect:'pet_companion',channel:'lottery',cost:100,stock:1,weight:100,wait_days:0,active:true});
  s.postTickets(room,1,'test_grant','测试抽奖机会','fixture');
  const hit=op('/api/draw',{mode:'ticket'},b=>s.draw(learner,b,()=>{let roll=0;for(const entry of s.pool(room)){if(entry.id===p.id)return roll;roll+=entry.weight;}throw Error('Missing pet prize');})).card;
- const use=(card,key)=>op('/api/pets/use',{card_id:card.id},b=>s.pets.use(learner,b),key);
+ const use=(card,key)=>{const r=op('/api/pets/use',{card_id:card.id},b=>s.pets.use(learner,b),key);if(s.pets.state(room).growth?.stage===0)op('/api/pets/evolve',{from:0},b=>s.pets.evolve(learner,b));return r;};
  const buy=effect=>op('/api/buy',{prize_id:s.get("SELECT id FROM prizes WHERE room_id=? AND effect=? AND channel='shop' AND removed=0",room,effect).id},b=>s.buy(learner,b)).card;
  const dress=(form,outfit='')=>op('/api/pets/dress',{form,outfit},b=>s.pets.dress(learner,b));
  const earn=points=>{const id=op('/api/tasks',{tasks:[{title:'体验成长',task_kind:'long',points}]},b=>s.createTasks(learner,b)).ids[0];op('/api/complete',{task_id:id,done:true},b=>s.complete(learner,b));return id;};

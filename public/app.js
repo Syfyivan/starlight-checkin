@@ -18,7 +18,7 @@ let petShelf='all';
 let taskTypeFilter='all',taskCategoryFilter='all';
 let perspective='receive',perspectiveScope='';
 const canAct=()=>canUseRewards(state,perspective);
-const recipientActions=['task-timer','travel-pack','task-estimate','pet-use','pet-dress','complete','score-task','task','import','note','archive','buy','draw','merge','convert','claim-bonus','rename-room','use-effect','redeem','share','cancel-redeem'];
+const recipientActions=['pet-evolve','task-timer','travel-pack','task-estimate','pet-use','pet-dress','complete','score-task','task','import','note','archive','buy','draw','merge','convert','claim-bonus','rename-room','use-effect','redeem','share','cancel-redeem'];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const coins=n=>new Intl.NumberFormat('zh-CN',{maximumFractionDigits:2}).format((n||0)/UNIT),yuan=n=>new Intl.NumberFormat('zh-CN',{maximumFractionDigits:2}).format((n||0)/100);
 const date=s=>new Date(s).toLocaleDateString('zh-CN',{month:'numeric',day:'numeric',timeZone:'Asia/Shanghai'}),time=s=>new Date(s).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Shanghai'});

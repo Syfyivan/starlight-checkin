@@ -14,7 +14,7 @@ function setup(t){
  const room=s.pair(a.id,g.id).space_id;a.space_id=room;
  const op=(u,route,body,fn,key=randomUUID())=>s.operation(u,key,route,{space_id:room,...body},()=>fn(u,{space_id:room,...body}));
  const prize=(effect,extra={})=>{const r=s.savePrize(g,{space_id:room,title:'测试小礼物',description:'测试用途',emoji:'🐾',category:'custom',face_cents:0,effect,channel:effect==='pet_companion'?'lottery':'shop',cost:10,stock:30,weight:100,wait_days:0,active:true,...extra});return s.get('SELECT * FROM prizes WHERE id=?',r.id);};
- const use=(card,key=randomUUID(),u=a)=>op(u,'/api/pets/use',{card_id:card.id},s.pets.use.bind(s.pets),key);
+ const use=(card,key=randomUUID(),u=a)=>{const r=op(u,'/api/pets/use',{card_id:card.id},s.pets.use.bind(s.pets),key);if(s.pets.state(room).growth?.stage===0)op(u,'/api/pets/evolve',{from:0},s.pets.evolve.bind(s.pets));return r;};
  const task=(extra={})=>op(a,'/api/tasks',{tasks:[{title:'认真学习',recurrence:'daily',...extra}]},s.createTasks.bind(s)).ids[0];
  const complete=(tid,extra={})=>op(a,'/api/complete',{task_id:tid,done:true,...extra},s.complete.bind(s));
  const hit=p=>{s.postTickets(room,1,'test','fixture','x');return op(a,'/api/draw',{mode:'ticket'},(u,b)=>s.draw(u,b,()=>{let n=0;for(const x of s.pool(room)){if(x.id===p.id)return n;n+=x.weight;}throw Error('missing');})).card;};
@@ -111,7 +111,7 @@ test('v10升级只替换未自定义大奖，保留旧卡与库存价格，旧�
  s.db.exec('PRAGMA user_version=10');migrate(s.db);migrate(s.db);
  const updated=s.get('SELECT * FROM prizes WHERE id=?',standard.id);assert.equal(updated.title,'500 元自选心愿卡');assert.equal(updated.category,'universal');assert.equal(updated.cost,7000*COIN);assert.equal(updated.stock,1);assert.equal(updated.face_cents,50000);
  assert.equal(s.get('SELECT title FROM prizes WHERE id=?',custom.id).title,'自己选的大奖');assert.equal(s.get('SELECT category FROM cards WHERE id=?',card.id).category,'play');assert.equal(s.get('SELECT estimated_minutes FROM tasks WHERE id=?',tid).estimated_minutes,0);
- assert.equal(s.get('PRAGMA user_version').user_version,14);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
+ assert.equal(s.get('PRAGMA user_version').user_version,15);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
 
 test('HTTP宠物操作鉴权和幂等，预估时间可修改，所有宠物静态图片可以加载',async t=>{
@@ -120,6 +120,8 @@ test('HTTP宠物操作鉴权和幂等，预估时间可修改，所有宠物静�
  const as=s.session(a.id),gs=s.session(g.id),base='http://127.0.0.1:'+server.address().port;
  const call=(session,path,body,key=randomUUID())=>fetch(base+'/api/'+path,{method:'POST',headers:{Origin:base,'Content-Type':'application/json',Cookie:'starlight_session='+session.token,'X-CSRF-Token':session.csrf,'Idempotency-Key':key},body:JSON.stringify({space_id:room,...body})});
  assert.equal((await fetch(base+'/pets.js')).status,200);
+ assert.equal((await fetch(base+'/pet-growth.js')).status,200);
+ for(const file of ['moon.png','star.png']){const r=await fetch(base+'/pets/nuonuo-seal/'+file);assert.equal(r.status,200);assert.match(r.headers.get('content-type'),/image\/png/);assert.ok((await r.arrayBuffer()).byteLength>1000);}
  for(const f of s.pets.state(room).forms)for(const file of ['young.png','winged.png','young-idle-animated.png','winged-idle-animated.png']){const r=await fetch(base+'/pets/'+f.id+'/'+file);assert.equal(r.status,200);assert.match(r.headers.get('content-type'),/image\/png/);assert.ok((await r.arrayBuffer()).byteLength>1000);}
  assert.equal((await fetch(base+'/pets/ASSET-SOURCE.md')).status,404);
  const created=await (await call(as,'tasks',{tasks:[{title:'读书',recurrence:'daily',estimated_minutes:10}]})).json();
@@ -129,4 +131,7 @@ test('HTTP宠物操作鉴权和幂等，预估时间可修改，所有宠物静�
  assert.equal((await call(gs,'pets/use',{card_id:card.id})).status,403);
  const rs=await Promise.all(Array.from({length:3},()=>call(as,'pets/use',{card_id:card.id},key)));assert.ok(rs.every(r=>r.status===200));assert.equal(s.get('SELECT COUNT(*) n FROM pets').n,1);
  assert.equal(s.get("SELECT COUNT(*) n FROM room_audit WHERE action='/api/pets/use'").n,1);
+ assert.equal((await call(gs,'pets/evolve',{from:0})).status,403);
+ const hatchKey=randomUUID();const hatched=await Promise.all(Array.from({length:3},()=>call(as,'pets/evolve',{from:0},hatchKey)));assert.ok(hatched.every(r=>r.status===200));assert.equal(s.pets.state(room).growth.stage,1);
+ assert.equal((await call(as,'pets/evolve',{from:0})).status,409);
 });
