@@ -3,7 +3,7 @@ export const PET_ITEMS={
  pet_pack:{name:'轻巧远行袋',xp:15,cost:20,emoji:'🎒',kind:'gear',level:1,art:'pack'},
  pet_tent:{name:'星光露营包',xp:40,cost:60,emoji:'⛺',kind:'gear',level:1,art:'tent'},
  pet_snack:{name:'一口云朵粮',xp:5,cost:10,emoji:'🥣',kind:'food',level:1,art:'bowl'},
- pet_feast:{name:'元气野餐盒',xp:20,cost:30,emoji:'🧺',kind:'food',level:1,art:'bento'},
+ pet_feast:{name:'元气野餐盒',xp:20,cost:30,emoji:'🧺',kind:'food',level:1,art:'picnic'},
  pet_bow:{name:'莓莓蝴蝶结',xp:30,cost:50,emoji:'🎀',kind:'outfit',level:1,art:'bow',slot:'neck'},
  pet_star:{name:'星星小徽章',xp:50,cost:80,emoji:'⭐',kind:'outfit',level:1,art:'star',slot:'chest'},
  pet_berry:{name:'莓果小点心',xp:12,cost:20,emoji:'🫐',kind:'food',level:2,art:'berry'},

@@ -121,6 +121,7 @@ test('HTTP宠物操作鉴权和幂等，预估时间可修改，所有宠物静�
  const call=(session,path,body,key=randomUUID())=>fetch(base+'/api/'+path,{method:'POST',headers:{Origin:base,'Content-Type':'application/json',Cookie:'starlight_session='+session.token,'X-CSRF-Token':session.csrf,'Idempotency-Key':key},body:JSON.stringify({space_id:room,...body})});
  assert.equal((await fetch(base+'/pets.js')).status,200);
  assert.equal((await fetch(base+'/pet-growth.js')).status,200);
+ for(const [file,type] of [['pet-care.js','javascript'],['pet-care.css','text/css']]){const r=await fetch(base+'/'+file);assert.equal(r.status,200);assert.ok(r.headers.get('content-type').includes(type));assert.ok((await r.text()).length>100);}
  for(const file of ['moon.png','star.png']){const r=await fetch(base+'/pets/nuonuo-seal/'+file);assert.equal(r.status,200);assert.match(r.headers.get('content-type'),/image\/png/);assert.ok((await r.arrayBuffer()).byteLength>1000);}
  for(const f of s.pets.state(room).forms)for(const file of ['young.png','winged.png','young-idle-animated.png','winged-idle-animated.png']){const r=await fetch(base+'/pets/'+f.id+'/'+file);assert.equal(r.status,200);assert.match(r.headers.get('content-type'),/image\/png/);assert.ok((await r.arrayBuffer()).byteLength>1000);}
  assert.equal((await fetch(base+'/pets/ASSET-SOURCE.md')).status,404);

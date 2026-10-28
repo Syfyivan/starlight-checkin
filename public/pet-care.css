@@ -1,0 +1,59 @@
+/* Care actions animate the same assembly as the fitted outfit. No timers or canvas loop. */
+.pet-food-shelf{display:grid;gap:10px;margin:18px 0;max-height:390px;overflow:auto}
+.food-choice{display:flex;align-items:center;gap:14px;text-align:left;border:1px solid #e3e5d7;border-radius:15px;padding:10px 14px;background:#fffef8;color:#354d3d;cursor:pointer;transition:background .2s,transform .2s}
+.food-choice:hover:not(:disabled){background:#f0f3e7;transform:translateY(-1px)}
+.food-choice:focus-visible{outline:2px solid #6e8c70;outline-offset:2px}
+.food-choice:disabled{cursor:default;background:#f1f2ed;color:#8a9284}
+.food-choice>span:nth-child(2){flex:1;min-width:0}.food-choice strong,.food-choice small{display:block}.food-choice strong{font-size:14px}.food-choice small{font-size:11px;margin-top:6px;color:#7f8974}.food-choice b{font-weight:500;font-size:13px}
+.food-choice-art{width:66px;flex-shrink:0}.pet-food-empty{text-align:center;font-size:13px;color:#7a866f;padding:16px}.pet-food-empty>svg{height:100px}
+.pet-use-illustration{width:155px;margin:10px auto 18px}.pet-purchase-art{display:block;width:78px;flex-shrink:0}
+.wardrobe-preview{display:flex;align-items:center;gap:12px;background:#f4f1e6;border:1px solid #e8e2ce;border-radius:18px;margin:0 0 20px;padding:8px 20px;min-height:155px}
+.wardrobe-preview>.pet-portrait{width:160px;min-height:0;max-width:45%;flex-shrink:0;margin:0}.wardrobe-preview strong,.wardrobe-preview small{display:block}.wardrobe-preview strong{font-size:15px;margin:9px 0}.wardrobe-preview small{font-size:11px;color:#858675;line-height:1.7}
+.pet-moment{width:min(100%,310px);position:relative;margin:0 auto;isolation:isolate}
+.pet-moment::before{content:"";display:block;padding-top:100%}
+.pet-moment .pet-portrait{width:100%;max-width:none;min-height:0;margin:0}.pet-moment .pet-assembly{width:100%;margin:0}
+.moment-before,.moment-after,.moment-bites,.moment-crack,.moment-shells,.moment-sparks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.moment-after{z-index:2}.moment-before{z-index:3}.moment-bites,.moment-crack,.moment-shells,.moment-sparks{z-index:4;overflow:visible}
+.moment-halo{position:absolute;inset:14%;border-radius:50%;background:radial-gradient(ellipse,#eee7c8a6,transparent 70%);z-index:0}
+.moment-spark{opacity:0;transform-box:fill-box;transform-origin:center;animation:care-spark 1.5s ease-out var(--spark-delay) 1 both}
+.moment-spark>path{stroke:none}.moment-heart{position:absolute;width:25px;height:25px;right:22%;top:33%;z-index:5;opacity:0;animation:care-heart 1.9s ease-out 1.3s 1 both}
+.moment-dish{position:absolute;width:30%;right:4%;bottom:7%;z-index:3;animation:care-dish 2s ease-out 1 both}
+.moment-bite{opacity:0;animation:care-bite 1.2s cubic-bezier(.28,.14,.36,1) var(--bite-delay) 1 both}
+.moment-feed .moment-after{transform-origin:50% 79%;animation:care-chew .44s ease-in-out .72s 3}
+.moment-warm .moment-after{animation:care-warm 2.4s ease-in-out 1}.moment-warm .moment-halo{animation:care-glow 2s ease-in-out 1}
+.moment-dress .moment-after{transform-origin:50% 80%;animation:care-dress 1.8s ease-in-out 1}
+.moment-welcome .moment-after{animation:care-arrive 1.5s cubic-bezier(.2,.7,.3,1) 1}
+.moment-hatch .moment-before{animation:care-egg-out 1.55s ease-in-out 1 both;transform-origin:50% 78%}
+.moment-hatch .moment-after{animation:care-hatch-in 2.5s cubic-bezier(.18,.67,.25,1) 1 both}
+.moment-hatch .moment-crack{animation:care-crack 1.65s ease-out 1 both}.moment-crack path{stroke-dasharray:330;stroke-dashoffset:330;animation:care-draw-crack 1.1s ease-out .25s 1 both}
+.moment-shells .shell-left{transform-origin:43% 70%;animation:care-shell-left 2.4s ease-out 1 both}.moment-shells .shell-right{transform-origin:57% 70%;animation:care-shell-right 2.4s ease-out 1 both}
+.moment-hatch .moment-spark{animation-delay:calc(1.2s + var(--spark-delay))}
+.moment-cocoon .moment-before,.moment-grow .moment-before{animation:care-old-form 1.4s ease-in-out 1 both}
+.moment-cocoon .moment-after,.moment-grow .moment-after{animation:care-new-form 1.8s ease-out 1 both}
+.moment-cocoon .moment-halo,.moment-grow .moment-halo{animation:care-glow 1.8s ease-in-out 1}
+.moment-depart{background:linear-gradient(transparent 68%,#e8ecdd 68%,#f4f2e8 80%,transparent 80%);border-radius:30px}
+.moment-depart .moment-after{animation:care-depart 2.8s ease-in-out 1 both}
+.care-outcome{text-align:center;margin:8px 0 20px}.care-outcome strong{font-size:21px;letter-spacing:.02em;color:#45664e}.care-outcome p{font-size:12px;color:#7e8875;margin:8px 0 0}
+.care-unlocks{background:#f4f5ec;border-radius:14px;padding:13px 15px;margin-bottom:18px}.care-unlocks h3{font-size:12px;margin:0 0 10px;color:#748565}.care-unlocks>div{display:flex;gap:12px;overflow:auto}.care-unlocks span{flex:0 0 78px;text-align:center}.care-unlocks svg{width:62px;margin:auto}.care-unlocks small{display:block;font-size:10px;line-height:1.5;color:#68765e}
+.travel-pet-marker{position:absolute;bottom:6px;right:16px;width:85px;pointer-events:none}.travel-pet-marker .pet-portrait{min-height:0;margin:0}.travel-pet-marker small{display:block;text-align:center;font-size:9px;background:#fffaf0d9;color:#7d896d;border-radius:12px;margin-top:-10px;position:relative}.travel-pet-marker .pet-assembly{animation:care-travel-bob 2.7s ease-in-out 3}
+@keyframes care-spark{0%,12%{opacity:0;scale:.5}40%{opacity:.8;scale:1}100%{opacity:0;scale:1.2}}
+@keyframes care-heart{0%{opacity:0;transform:translateY(8px) scale(.7)}35%{opacity:.8}100%{opacity:0;transform:translateY(-16px) scale(1)}}
+@keyframes care-dish{0%{opacity:0;transform:translateY(12px)}20%,80%{opacity:1;transform:none}100%{opacity:.8;transform:none}}
+@keyframes care-bite{0%,10%{opacity:0;transform:translate(409px,386px) scale(.8)}25%{opacity:1}70%{opacity:1;transform:translate(var(--to-x),var(--to-y)) scale(.75)}90%,100%{opacity:0;transform:translate(var(--to-x),var(--to-y)) scale(.2)}}
+@keyframes care-chew{0%,100%{transform:none}50%{transform:translateY(2px) scale(1.012,.988)}}
+@keyframes care-warm{0%,100%{transform:none}35%{transform:rotate(-2deg)}65%{transform:rotate(2deg)}}
+@keyframes care-dress{0%{transform:translateY(3px) scale(.97)}25%{transform:rotate(-3deg)}55%{transform:rotate(3deg)}80%,100%{transform:none}}
+@keyframes care-arrive{from{opacity:0;transform:translateY(15px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes care-egg-out{0%,20%{opacity:1;transform:none}35%,55%{transform:rotate(-4deg)}45%,65%{transform:rotate(4deg)}80%{opacity:1;transform:scale(1.02)}100%{opacity:0;transform:scale(1.08)}}
+@keyframes care-hatch-in{0%,48%{opacity:0;transform:translateY(18px) scale(.75)}75%{opacity:1;transform:translateY(-3px) scale(1.02)}100%{opacity:1;transform:none}}
+@keyframes care-crack{0%,70%{opacity:1}100%{opacity:0}}
+@keyframes care-draw-crack{to{stroke-dashoffset:0}}
+@keyframes care-shell-left{0%,50%{opacity:0;transform:none}60%{opacity:1}100%{opacity:0;transform:translate(-55px,25px) rotate(-30deg)}}
+@keyframes care-shell-right{0%,50%{opacity:0;transform:none}60%{opacity:1}100%{opacity:0;transform:translate(55px,25px) rotate(30deg)}}
+@keyframes care-old-form{0%,30%{opacity:1;transform:none}100%{opacity:0;transform:scale(.85)}}
+@keyframes care-new-form{0%,30%{opacity:0;transform:scale(.84)}70%{opacity:1;transform:scale(1.035)}100%{opacity:1;transform:none}}
+@keyframes care-glow{0%,100%{opacity:.5;transform:scale(.9)}50%{opacity:1;transform:scale(1.3)}}
+@keyframes care-depart{0%,20%{opacity:1;transform:none}30%{transform:translate(12px,-3px) rotate(2deg)}45%{transform:translate(32px,0) rotate(-2deg)}60%{transform:translate(56px,-3px) rotate(2deg)}85%{opacity:.2}100%{opacity:0;transform:translateX(100px) scale(.8)}}
+@keyframes care-travel-bob{0%,100%{transform:none}50%{transform:translateY(-4px) rotate(2deg)}}
+@media(max-width:600px){.pet-moment{width:245px;max-width:100%}.pet-food-shelf{max-height:330px;gap:8px}.food-choice{padding:8px 10px;gap:9px}.food-choice-art{width:55px}.food-choice strong{font-size:12px}.food-choice small{font-size:10px}.wardrobe-preview{padding:5px 12px;min-height:120px;gap:8px}.wardrobe-preview>.pet-portrait{width:125px}.wardrobe-preview strong{font-size:12px}.wardrobe-preview small{font-size:10px}.care-outcome strong{font-size:18px}.care-unlocks{padding:10px 12px}.pet-use-illustration{width:125px}.travel-pet-marker{width:68px;right:10px}.pet-home .pet-buttons{gap:7px;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.pet-moment *,.travel-pet-marker .pet-assembly{animation:none!important;transition:none!important}.moment-before,.moment-crack,.moment-shells,.moment-bites,.moment-sparks,.moment-heart{display:none}.moment-after{opacity:1!important;transform:none!important}.food-choice{transition:none}.food-choice:hover:not(:disabled){transform:none}}

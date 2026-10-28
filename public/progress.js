@@ -1,6 +1,8 @@
 import {travelPanel,packingForm,travelScene} from './travel-view.js';
 import {artwork} from './illustrations.js';
 import {PET_ITEMS} from './pet-catalog.js';
+import {petMoment} from './pet-care.js';
+import {petPortrait} from './pets.js';
 import {scheduledOn,LONG_POINTS_MAX} from './task-types.js';
 export const elapsedLabel=ms=>{const seconds=Math.max(0,Math.floor(ms/1000));return `${String(Math.floor(seconds/3600)).padStart(2,'0')}:${String(Math.floor(seconds/60)%60).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;};
 export function progressUI({getState,canAct,getPerspective,esc,field,actions,openDialog,mutation}){
@@ -27,7 +29,7 @@ export function progressUI({getState,canAct,getPerspective,esc,field,actions,ope
   async function submit(form,data,formData,key){
     if(form.id==='giver-score-form'){await mutation('admin/task-score',{task_id:form.dataset.id,expectedRevision:Number(form.dataset.revision),points:data.points===''?null:Number(data.points)},'任务分数已调整，也给伙伴寄了说明',key);return true;}
     if(form.id==='growth-rules-form'){await mutation('admin/growth-rules',{version:form.dataset.version,enabled:formData.has('enabled'),step:Number(data.step),ticket:Number(data.ticket),card2:Number(data.card2),card5:Number(data.card5)},'成长奖励规则已保存',key);return true;}
-    if(form.id==='travel-pack-form'){const r=await mutation('pets/travel',{card_ids:formData.getAll('supplies')},'',key);openDialog('小伙伴出发啦',`<p>这一趟预计 ${r.trip.durationHours/24} 天，回来增加 ${r.trip.xp} 经验。</p><p>旅途见闻会寄到信箱，安心做好自己的小计划吧。</p><button class="btn" data-action="close">一路平安</button>`);return true;}return false;
+    if(form.id==='travel-pack-form'){const before=state().pet;const r=await mutation('pets/travel',{card_ids:formData.getAll('supplies')},'',key);openDialog('小伙伴出发啦',petMoment(before,before,{kind:'depart',portrait:petPortrait})+`<p>这一趟预计 ${r.trip.durationHours/24} 天，回来增加 ${r.trip.xp} 经验。</p><p>旅途见闻会寄到信箱，安心做好自己的小计划吧。</p><button class="btn" data-action="close">一路平安</button>`);return true;}return false;
   }
   return {taskTools,rulesPanel,panel,click,submit,sync};
 }
