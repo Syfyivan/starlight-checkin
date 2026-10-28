@@ -17,11 +17,11 @@ export function roomPerspective(state, requested = '') {
   const manages = !!state.admin && !!state.space.canFulfill;
   if (!manages) return 'receive';
   if (requested === 'preview' || requested === 'manage') return requested;
-  return !state.family && !state.space.isSelf ? 'manage' : 'receive';
+  return (state.family?.mode==='guardian'||(!state.family&&!state.space.isSelf))?'manage':'receive';
 }
 
 export function canUseRewards(state, perspective) {
-  return perspective === 'receive' && state.space.isSelf && state.space.status === 'active';
+  return perspective === 'receive' && state.space.canParticipate!==false && state.space.isSelf && state.space.status === 'active';
 }
 
 export function roomNavigation(state, perspective) {

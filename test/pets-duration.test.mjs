@@ -111,7 +111,7 @@ test('v10升级只替换未自定义大奖，保留旧卡与库存价格，旧�
  s.db.exec('PRAGMA user_version=10');migrate(s.db);migrate(s.db);
  const updated=s.get('SELECT * FROM prizes WHERE id=?',standard.id);assert.equal(updated.title,'500 元自选心愿卡');assert.equal(updated.category,'universal');assert.equal(updated.cost,7000*COIN);assert.equal(updated.stock,1);assert.equal(updated.face_cents,50000);
  assert.equal(s.get('SELECT title FROM prizes WHERE id=?',custom.id).title,'自己选的大奖');assert.equal(s.get('SELECT category FROM cards WHERE id=?',card.id).category,'play');assert.equal(s.get('SELECT estimated_minutes FROM tasks WHERE id=?',tid).estimated_minutes,0);
- assert.equal(s.get('PRAGMA user_version').user_version,17);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
+ assert.equal(s.get('PRAGMA user_version').user_version,18);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
 
 test('HTTP宠物操作鉴权和幂等，预估时间可修改，所有宠物静态图片可以加载',async t=>{

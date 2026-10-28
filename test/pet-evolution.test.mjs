@@ -73,7 +73,7 @@ test('schema 14 升级保留旧宠物姿态、财产和旅行，重启保持已�
  const gear=s.issue(u,create('pet_pack'),'shop'),rolls=[0,0,0],trip=s.travel.depart(u,{card_ids:[gear.id]},()=>rolls.shift()).trip;
  const before={pets:s.all('SELECT * FROM pets'),ledger:s.all('SELECT * FROM ledger'),cards:s.all('SELECT * FROM cards'),trips:s.all('SELECT * FROM pet_trips')};
  s.db.exec('DROP TABLE pet_growth; PRAGMA user_version=14');migrate(s.db);migrate(s.db);
- assert.equal(s.get('PRAGMA user_version').user_version,17);assert.equal(s.pets.state(room).growth.stage,2);
+ assert.equal(s.get('PRAGMA user_version').user_version,18);assert.equal(s.pets.state(room).growth.stage,2);
  assert.equal(s.pets.state(low).growth.stage,1);assert.deepEqual(s.all('SELECT * FROM pets'),before.pets);assert.deepEqual(s.all('SELECT * FROM cards'),before.cards);assert.deepEqual(s.all('SELECT * FROM ledger'),before.ledger);assert.deepEqual(s.all('SELECT * FROM pet_trips'),before.trips);
  s.travel.maintain(trip.returnAt);
  evolve(2);const reopened=new Store(join(dir,'test.sqlite'));assert.equal(reopened.pets.state(room).growth.stage,3);assert.deepEqual(reopened.all('PRAGMA foreign_key_check'),[]);reopened.db.close();
