@@ -5,12 +5,9 @@ export function csvRows(text){const rows=[];let row=[],cell='',quote=false;for(l
 const csv=process.argv[2]?readFileSync(process.argv[2],'utf8'):await (await fetch('https://gutenberg.pglaf.org/cache/epub/feeds/pg_catalog.csv',{signal:AbortSignal.timeout(60000)})).text();
 const [head,...rows]=csvRows(csv);
 const books=rows.map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]]))).filter(r=>{
- if(r.Type!=='Text'||!['zh','en'].includes(r.Language)||/Erotic|Pornograph|Sexual|金瓶|肉蒲|春宮|春宫|肉禪|肉禅/i.test(r.Title+' '+r.Subjects))return false;
- // Verified Gutenberg English edition requested as 小海蒂. Its translator's
- // dates are absent from the CSV; the per-book rights check still applies.
- if(Number(r['Text#'])===1448)return true;
+ if(r.Type!=='Text'||r.Language!=='zh'||/Erotic|Pornograph|Sexual|金瓶|肉蒲|春宮|春宫|肉禪|肉禅/i.test(r.Title+' '+r.Subjects))return false;
  // Conservative author-date filter; the provider's rights record is checked again before importing.
  return r.Authors.split('; ').every(a=>/BCE|B\.C\./.test(a)||/active [1-9](?:th|st|nd|rd) century/.test(a)||/active 1[0-8]\d\d/.test(a)||(/-(\d{3,4})\??(?:\s*\[.*\])?$/.test(a)&&Number(a.match(/-(\d{3,4})\??(?:\s*\[.*\])?$/)[1])<=1950)||/^(Anonymous|Unknown)$/.test(a)&&/三字|千字|詩經|诗经|孝經|孝经/.test(r.Title));
- }).map(r=>({id:Number(r['Text#']),title:r.Title,author:r.Authors,language:r.Language==='zh'?'中文':'英文'}));
+ }).map(r=>({id:Number(r['Text#']),title:r.Title,author:r.Authors,language:'中文'}));
 writeFileSync(new URL('../lib/book-catalog.json',import.meta.url),JSON.stringify({updated:new Date().toISOString().slice(0,10),source:'https://www.gutenberg.org/ebooks/offline_catalogs.html'}).slice(0,-1)+',"books":[\n'+books.map(b=>JSON.stringify(b)).join(',\n')+'\n]}\n');
 console.log('Catalog:',books.length,'books;',books.filter(b=>b.language==='中文').length,'Chinese');

@@ -60,7 +60,7 @@ test('家庭阅读规则共享，个人进度和币分开，管家看见记录',
 });
 test('公开书源只取白名单书目、核实许可、限流和体积；正文缓存复用',async t=>{
  const {s}=fixture(t);let requests=[];const source=new BookSource(s,{fetcher:async url=>{requests.push(url);return new Response(url.endsWith('.rdf')?'<dcterms:rights>Public domain in the USA.</dcterms:rights>':'Project Gutenberg\n'+longText);}});
- assert.ok(source.search('论语').books.some(b=>b.id===23839));assert.ok(source.search('爱丽丝').books.some(b=>b.id===11));assert.ok(source.search('Alice').books.length);assert.ok(source.search('').books.length<=30);
+ assert.ok(source.search('论语').books.some(b=>b.id===23839));assert.ok(source.search('').books.every(b=>b.language==='中文'));assert.ok(source.search('').books.length<=30);
  const r=await source.download(23839);assert.ok(r.book.chapters.length);await source.download(23839);assert.equal(requests.length,2);assert.ok(requests.every(u=>u.startsWith('https://gutenberg.pglaf.org/cache/epub/23839/')));
  await assert.rejects(source.download('https://127.0.0.1'),/书目编号/);await assert.rejects(source.download(999999),/搜索结果/);
  s.run('DELETE FROM book_catalog_cache');source.fetcher=async()=>new Response('<dcterms:rights>Copyrighted.</dcterms:rights>');await assert.rejects(source.download(23839),/许可/);
@@ -90,12 +90,17 @@ test('HTTP 阅读路径需要登录与 CSRF，新增静态资源能访问且服�
  const app=await createApp({dbPath:':memory:'}),s=app.store;await new Promise(r=>app.server.listen(0,'127.0.0.1',r));t.after(async()=>{await new Promise(r=>app.server.close(r));s.db.close();});const origin='http://127.0.0.1:'+app.server.address().port;
  assert.equal((await fetch(origin+'/api/reading/library')).status,401);for(const path of ['reading.js','reading.css','book-text.js','ebook-worker.js','vendor/ebook-parser.js','vendor/book-display.js','vendor/OPENCC-LICENSES.txt'])assert.equal((await fetch(origin+'/'+path)).status,200);assert.equal((await fetch(origin+'/lib/book-catalog.json')).status,404);
  const u=s.newUser({username:'httpreader',name:'小芽',password:''}),session=s.session(u.id),cookie='starlight_session='+session.token;
+ for(const q of ['','论语','小海蒂','Heidi','Alice']){const r=await fetch(origin+'/api/reading/search?q='+encodeURIComponent(q),{headers:{Cookie:cookie}});assert.equal(r.status,200);const data=await r.json();assert.ok(data.books.every(b=>b.language==='中文'));if(q==='论语')assert.ok(data.books.some(b=>b.id==='ws:6'));}
  const r=await fetch(origin+'/api/reading/import',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json',Cookie:cookie},body:JSON.stringify({})});assert.equal(r.status,403);
 });
 
-test('多书源本地搜索不依赖外部网络，简繁兼容且清楚标记英文版本',async t=>{
+test('多书源仅返回中文，简繁兼容，旧英文编号及缓存也不能用于取书',async t=>{
  const {s}=fixture(t);let requests=0;const source=new BookSource(s,{fetcher:async()=>{requests++;throw new Error('Search must not use network');}});
- const first=await source.searchAll('小海蒂');assert.equal(first.books.length,1);assert.equal(first.books[0].id,1448);assert.equal(first.books[0].language,'英文');assert.match(first.message,/尚未找到中文/);
+ for(const q of ['小海蒂','Heidi','Alice','Pride and Prejudice']){const r=await source.searchAll(q);assert.ok(r.books.every(b=>b.language==='中文'));assert.ok(!r.books.some(b=>[1448,46409,11,1342].includes(b.id)));}
+ const first=await source.searchAll('小海蒂');assert.equal(first.books.length,0);assert.match(first.message,/暂未找到.*中文/);
+ const catalog=JSON.parse(readFileSync(new URL('../lib/book-catalog.json',import.meta.url),'utf8'));assert.ok(catalog.books.length>0);assert.ok(catalog.books.every(b=>b.language==='中文'));
+ s.run('INSERT INTO book_catalog_cache(key,value,updated) VALUES(?,?,?)','pg:1448',JSON.stringify({book:{title:'Heidi'}}),Date.now());
+ await assert.rejects(source.download(1448),/中文书/);await assert.rejects(source.download(11),/中文书/);
  for(const name of ['论语','論語']){const results=await source.searchAll(name);assert.equal(results.books[0].id,'ws:6');assert.ok(results.books.some(b=>b.id===23839));assert.ok(!results.books.some(b=>/判决|裁定/.test(b.title)));}
  assert.ok(!(await source.searchAll('朝花夕拾')).books.some(b=>b.id==='ws:13866'));
  assert.equal(requests,0);await assert.rejects(source.searchAll('x'.repeat(101)),/100/);
