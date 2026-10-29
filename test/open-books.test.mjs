@@ -49,7 +49,7 @@ test('reviewed catalog contains only size-bounded Chinese EPUBs with unique edit
 
 test('mixed search is local, supports catalog aliases and never invents modern Chinese full texts',async t=>{
  const source=new BookSource(store(t),{fetcher:()=>{throw Error('search must not fetch');}});
- for(const q of ['论语','論語'])assert.ok((await source.searchAll(q)).books.some(b=>b.id===directId));
+ for(const q of ['论语','論語'])assert.equal((await source.searchAll(q)).books[0].id,directId);
  for(const q of ['历史不止一种写法','歷史不止一種寫法'])assert.ok((await source.searchAll(q)).books.some(b=>b.id===archiveId));
  assert.ok((await source.searchAll('戰國策')).books.some(b=>b.id==='oa:dc-zhanguoce'));
  for(const q of ['三体','算法导论','小海蒂'])assert.equal((await source.searchAll(q)).books.some(b=>String(b.id).startsWith('oa:')),false);
