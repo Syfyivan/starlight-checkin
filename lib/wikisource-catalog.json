@@ -1,0 +1,474 @@
+{
+ "updated": "2026-10-29",
+ "source": "https://zh.wikisource.org/",
+ "books": [
+  {
+   "id": 6,
+   "title": "論語",
+   "aliases": "论语",
+   "exportTitle": "論語/全覽"
+  },
+  {
+   "id": 8,
+   "title": "大學",
+   "aliases": "大学",
+   "exportTitle": "大學"
+  },
+  {
+   "id": 200,
+   "title": "周易",
+   "aliases": "周易",
+   "exportTitle": "周易"
+  },
+  {
+   "id": 305,
+   "title": "西遊記",
+   "aliases": "西游记",
+   "exportTitle": "西遊記"
+  },
+  {
+   "id": 7013,
+   "title": "尚書",
+   "aliases": "尚书",
+   "exportTitle": "尚書"
+  },
+  {
+   "id": 7223,
+   "title": "三國演義",
+   "aliases": "三国演义",
+   "exportTitle": "三國演義"
+  },
+  {
+   "id": 7496,
+   "title": "詩經",
+   "aliases": "诗经",
+   "exportTitle": "詩經"
+  },
+  {
+   "id": 7534,
+   "title": "史記",
+   "aliases": "史记",
+   "exportTitle": "史記"
+  },
+  {
+   "id": 7572,
+   "title": "莊子",
+   "aliases": "庄子",
+   "exportTitle": "莊子"
+  },
+  {
+   "id": 7683,
+   "title": "紅樓夢",
+   "aliases": "红楼梦",
+   "exportTitle": "紅樓夢"
+  },
+  {
+   "id": 7931,
+   "title": "吶喊",
+   "aliases": "呐喊",
+   "exportTitle": "吶喊"
+  },
+  {
+   "id": 9547,
+   "title": "玉臺新詠",
+   "aliases": "玉台新咏",
+   "exportTitle": "玉臺新詠"
+  },
+  {
+   "id": 9616,
+   "title": "爾雅",
+   "aliases": "尔雅",
+   "exportTitle": "爾雅"
+  },
+  {
+   "id": 9673,
+   "title": "春秋左氏傳",
+   "aliases": "春秋左氏传",
+   "exportTitle": "春秋左氏傳/全覽"
+  },
+  {
+   "id": 10328,
+   "title": "春秋公羊傳",
+   "aliases": "春秋公羊传",
+   "exportTitle": "春秋公羊傳/全覽"
+  },
+  {
+   "id": 10329,
+   "title": "春秋穀梁傳",
+   "aliases": "春秋谷梁传",
+   "exportTitle": "春秋穀梁傳"
+  },
+  {
+   "id": 10330,
+   "title": "禮記",
+   "aliases": "礼记",
+   "exportTitle": "禮記"
+  },
+  {
+   "id": 10608,
+   "title": "孟子",
+   "aliases": "孟子",
+   "exportTitle": "孟子/全覽"
+  },
+  {
+   "id": 11666,
+   "title": "全唐詩",
+   "aliases": "全唐诗",
+   "exportTitle": "全唐詩"
+  },
+  {
+   "id": 11670,
+   "title": "周禮",
+   "aliases": "周礼",
+   "exportTitle": "周禮"
+  },
+  {
+   "id": 11834,
+   "title": "今文孝經",
+   "aliases": "今文孝经",
+   "exportTitle": "今文孝經"
+  },
+  {
+   "id": 12793,
+   "title": "儀禮",
+   "aliases": "仪礼",
+   "exportTitle": "儀禮"
+  },
+  {
+   "id": 13892,
+   "title": "而已集",
+   "aliases": "而已集",
+   "exportTitle": "而已集"
+  },
+  {
+   "id": 16029,
+   "title": "中庸",
+   "aliases": "中庸",
+   "exportTitle": "中庸"
+  },
+  {
+   "id": 18811,
+   "title": "唐詩三百首",
+   "aliases": "唐诗三百首",
+   "exportTitle": "唐詩三百首"
+  },
+  {
+   "id": 20088,
+   "title": "聊齋志異",
+   "aliases": "聊斋志异",
+   "exportTitle": "聊齋志異"
+  },
+  {
+   "id": 22359,
+   "title": "樂府詩集",
+   "aliases": "乐府诗集",
+   "exportTitle": "樂府詩集"
+  },
+  {
+   "id": 26530,
+   "title": "野艸",
+   "aliases": "野艸",
+   "exportTitle": "野艸"
+  },
+  {
+   "id": 26820,
+   "title": "故事新編",
+   "aliases": "故事新编",
+   "exportTitle": "故事新編"
+  },
+  {
+   "id": 30300,
+   "title": "儒林外史",
+   "aliases": "儒林外史",
+   "exportTitle": "儒林外史"
+  },
+  {
+   "id": 32025,
+   "title": "墳",
+   "aliases": "坟",
+   "exportTitle": "墳"
+  },
+  {
+   "id": 32470,
+   "title": "彷徨",
+   "aliases": "彷徨",
+   "exportTitle": "彷徨"
+  },
+  {
+   "id": 42672,
+   "title": "華蓋集",
+   "aliases": "华盖集",
+   "exportTitle": "華蓋集"
+  },
+  {
+   "id": 53312,
+   "title": "大戴禮記",
+   "aliases": "大戴礼记",
+   "exportTitle": "大戴禮記"
+  },
+  {
+   "id": 61376,
+   "title": "春秋公羊傳註疏",
+   "aliases": "春秋公羊传注疏",
+   "exportTitle": "春秋公羊傳註疏"
+  },
+  {
+   "id": 61900,
+   "title": "二心集",
+   "aliases": "二心集",
+   "exportTitle": "二心集"
+  },
+  {
+   "id": 88903,
+   "title": "背影",
+   "aliases": "背影",
+   "exportTitle": "背影"
+  },
+  {
+   "id": 88904,
+   "title": "歐遊雜記",
+   "aliases": "欧游杂记",
+   "exportTitle": "歐遊雜記"
+  },
+  {
+   "id": 101364,
+   "title": "水滸傳",
+   "aliases": "水浒传",
+   "exportTitle": "水滸傳"
+  },
+  {
+   "id": 111199,
+   "title": "熱風",
+   "aliases": "热风",
+   "exportTitle": "熱風"
+  },
+  {
+   "id": 111208,
+   "title": "華蓋集續編",
+   "aliases": "华盖集续编",
+   "exportTitle": "華蓋集續編"
+  },
+  {
+   "id": 112522,
+   "title": "列朝詩集",
+   "aliases": "列朝诗集",
+   "exportTitle": "列朝詩集"
+  },
+  {
+   "id": 114317,
+   "title": "三閒集",
+   "aliases": "三闲集",
+   "exportTitle": "三閒集"
+  },
+  {
+   "id": 114434,
+   "title": "薩都剌集",
+   "aliases": "萨都剌集",
+   "exportTitle": "薩都剌集"
+  },
+  {
+   "id": 114522,
+   "title": "古微堂詩集",
+   "aliases": "古微堂诗集",
+   "exportTitle": "古微堂詩集"
+  },
+  {
+   "id": 114525,
+   "title": "人境廬詩草",
+   "aliases": "人境庐诗草",
+   "exportTitle": "人境廬詩草"
+  },
+  {
+   "id": 136276,
+   "title": "千家詩",
+   "aliases": "千家诗",
+   "exportTitle": "千家詩"
+  },
+  {
+   "id": 143445,
+   "title": "俄羅斯的童話",
+   "aliases": "俄罗斯的童话",
+   "exportTitle": "俄羅斯的童話"
+  },
+  {
+   "id": 151220,
+   "title": "御製恭和避暑山莊詩",
+   "aliases": "御制恭和避暑山庄诗",
+   "exportTitle": "御製恭和避暑山莊詩"
+  },
+  {
+   "id": 163572,
+   "title": "偽自由書",
+   "aliases": "伪自由书",
+   "exportTitle": "偽自由書"
+  },
+  {
+   "id": 183157,
+   "title": "兩地書",
+   "aliases": "两地书",
+   "exportTitle": "兩地書"
+  },
+  {
+   "id": 189296,
+   "title": "唐女郎魚玄機詩",
+   "aliases": "唐女郎鱼玄机诗",
+   "exportTitle": "唐女郎魚玄機詩"
+  },
+  {
+   "id": 192339,
+   "title": "續古文觀止",
+   "aliases": "续古文观止",
+   "exportTitle": "續古文觀止"
+  },
+  {
+   "id": 322416,
+   "title": "吟嘯集",
+   "aliases": "吟啸集",
+   "exportTitle": "吟嘯集"
+  },
+  {
+   "id": 1002242,
+   "title": "金粟山房詩鈔",
+   "aliases": "金粟山房诗钞",
+   "exportTitle": "金粟山房詩鈔"
+  },
+  {
+   "id": 1002773,
+   "title": "李于田詩集",
+   "aliases": "李于田诗集",
+   "exportTitle": "李于田詩集"
+  },
+  {
+   "id": 1003586,
+   "title": "宣宗皇帝御製詩",
+   "aliases": "宣宗皇帝御制诗",
+   "exportTitle": "宣宗皇帝御製詩"
+  },
+  {
+   "id": 1019501,
+   "title": "黃山詩留",
+   "aliases": "黄山诗留",
+   "exportTitle": "黃山詩留"
+  },
+  {
+   "id": 1048383,
+   "title": "達夫遊記",
+   "aliases": "达夫游记",
+   "exportTitle": "達夫遊記"
+  },
+  {
+   "id": 1048440,
+   "title": "屐痕處處",
+   "aliases": "屐痕处处",
+   "exportTitle": "屐痕處處"
+  },
+  {
+   "id": 1102749,
+   "title": "小木頭人",
+   "aliases": "小木头人",
+   "exportTitle": "小木頭人"
+  },
+  {
+   "id": 1111368,
+   "title": "伊索寓言",
+   "aliases": "伊索寓言",
+   "exportTitle": "伊索寓言"
+  },
+  {
+   "id": 1142736,
+   "title": "狂雲集",
+   "aliases": "狂云集",
+   "exportTitle": "狂雲集"
+  },
+  {
+   "id": 1146881,
+   "title": "胡适文集（十一）",
+   "aliases": "胡适文集（十一）",
+   "exportTitle": "胡适文集（十一）"
+  },
+  {
+   "id": 1152922,
+   "title": "焦循的《〈論語〉通釋》（與馬幼漁先生書）",
+   "aliases": "焦循的《〈论语〉通释》（与马幼渔先生书）",
+   "exportTitle": "焦循的《〈論語〉通釋》（與馬幼漁先生書）"
+  },
+  {
+   "id": 1209889,
+   "title": "倫敦雜記",
+   "aliases": "伦敦杂记",
+   "exportTitle": "倫敦雜記"
+  },
+  {
+   "id": 1211905,
+   "title": "你我 (散文集)",
+   "aliases": "你我 (散文集)",
+   "exportTitle": "你我 (散文集)"
+  },
+  {
+   "id": 1211906,
+   "title": "語文影及其他",
+   "aliases": "语文影及其他",
+   "exportTitle": "語文影及其他"
+  },
+  {
+   "id": 1212115,
+   "title": "語文零拾",
+   "aliases": "语文零拾",
+   "exportTitle": "語文零拾"
+  },
+  {
+   "id": 1212278,
+   "title": "背影 (散文集)",
+   "aliases": "背影 (散文集)",
+   "exportTitle": "背影 (散文集)"
+  },
+  {
+   "id": 1213415,
+   "title": "標准與尺度",
+   "aliases": "标准与尺度",
+   "exportTitle": "標准與尺度"
+  },
+  {
+   "id": 1213623,
+   "title": "老牛破车",
+   "aliases": "老牛破车",
+   "exportTitle": "老牛破车"
+  },
+  {
+   "id": 1214618,
+   "title": "看云集",
+   "aliases": "看云集",
+   "exportTitle": "看云集"
+  },
+  {
+   "id": 1215276,
+   "title": "《朝鲜童话集》序",
+   "aliases": "《朝鲜童话集》序",
+   "exportTitle": "《朝鲜童话集》序"
+  },
+  {
+   "id": 1215533,
+   "title": "《杨柳风》",
+   "aliases": "《杨柳风》",
+   "exportTitle": "《杨柳风》"
+  },
+  {
+   "id": 5677432,
+   "title": "知堂回想录",
+   "aliases": "知堂回想录",
+   "exportTitle": "知堂回想录"
+  },
+  {
+   "id": 5797246,
+   "title": "瓜豆集",
+   "aliases": "瓜豆集",
+   "exportTitle": "瓜豆集"
+  },
+  {
+   "id": 6592929,
+   "title": "觀堂先生別傳",
+   "aliases": "观堂先生别传",
+   "exportTitle": "觀堂先生別傳"
+  }
+ ]
+}
