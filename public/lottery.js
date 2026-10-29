@@ -1,6 +1,6 @@
 import {petEffectLabel} from './pets.js';
 import {petItemLock} from './pet-catalog.js';
-export const effectLabel=p=>({room_rename:'改名 1 次',day_theme:'配色体验 24 小时',extra_draw:'免费机会 +1',shop_drop:'商城随机掉落 1 张'}[p.effect]||petEffectLabel(p.effect));
+export const effectLabel=p=>({room_rename:'改名体验 7 天',day_theme:'配色体验 24 小时',extra_draw:'免费机会 +1',shop_drop:'商城随机掉落 1 张'}[p.effect]||petEffectLabel(p.effect));
 
 export function lotteryUI({getState,esc,yuan,coins,openDialog,actions,field,select,mutation,api,prizeDialog}){
   const state=()=>getState();
@@ -11,7 +11,7 @@ export function lotteryUI({getState,esc,yuan,coins,openDialog,actions,field,sele
     if(!hint){hint=document.createElement('div');hint.id='prize-use-hint';hint.className='prize-use-hint';hint.setAttribute('role','tooltip');document.body.append(hint);}
     if(anchor!==button)closeHint();anchor=button;pinned=pin;
     const lock=petItemLock(state().pet,prize.effect),description=lock?lock+'。抽到后先存入卡包，解锁后再揭晓。':prize.description||(prize.id?'抽中后放入卡包，按卡片约定使用。':'这次没有获得奖品；消耗所选的学习币或免费机会。');
-    hint.innerHTML=`<strong>${esc(lock?'神秘小礼物':prize.title)}</strong><p>${esc(description)}</p>${prize.wait_days?'<small>获得后等待 '+prize.wait_days+' 天可使用</small>':''}`;
+    hint.innerHTML=`<strong>${esc(lock?'神秘小礼物':prize.title)}</strong><p>${esc(description)}</p>${prize.effect==='room_rename'?'<small>使用后生效 7 天，到期恢复原名；放在卡包里不计时。</small>':''}${prize.wait_days?'<small>获得后等待 '+prize.wait_days+' 天可使用</small>':''}`;
     hint.hidden=false;button.setAttribute('aria-describedby',hint.id);
     const box=button.getBoundingClientRect(),width=hint.offsetWidth,height=hint.offsetHeight;
     hint.style.left=Math.max(12,Math.min(innerWidth-width-12,box.left+(box.width-width)/2))+'px';

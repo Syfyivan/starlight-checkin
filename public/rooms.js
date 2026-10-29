@@ -12,6 +12,11 @@ export function initialRoom(state, remembered = '') {
 
 export const roomMemoryKey = userId => `starlight:last-room:${userId}`;
 
+export function renameNotice(state,esc,time){
+  const r=state.space.rename;
+  return r?`<p class="room-rename-note">招牌有效至 ${esc(time(r.expires))} · 到期恢复${r.defaultName?'「'+esc(r.defaultName)+'」':'默认小屋名'}</p>`:'';
+}
+
 // A perspective changes presentation only; the server still authorizes every action.
 export function roomPerspective(state, requested = '') {
   const manages = !!state.admin && !!state.space.canFulfill;

@@ -5,6 +5,9 @@ import {Store} from '../lib/store.mjs';
 import {COIN} from '../lib/common.mjs';
 import {migrate} from '../lib/migrate.mjs';
 import {createApp} from '../server.mjs';
+import {mkdtempSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join,resolve,sep} from 'node:path';
 
 function fixture(t){
   const s=new Store(':memory:');t.after(()=>s.db.close());
@@ -28,6 +31,57 @@ test('兑换改名卡只扣币和库存；使用一次后双方看见新名，�
   assert.equal(s.get('SELECT status FROM cards WHERE id=?',card.id).status,'used');assert.equal(s.balance(room),80*COIN);
   assert.throws(()=>rename(a,{...body,name:'再用一次',expected_name:'星星补给站'}),/已经用过/);
   const logs=s.all("SELECT * FROM room_audit WHERE action='/api/cards/rename-room'");assert.equal(logs.length,1);assert.equal(JSON.parse(logs[0].detail).name,r.name);assert.equal(JSON.parse(logs[0].detail).oldName,'默认小屋名');
+});
+
+test('改名自使用起七天有效，到期恢复默认名且只记一次日志，不影响资产',t=>{
+  const {s,a,g,room,other,buy,rename}=fixture(t),card=buy(),at=Date.now(),realNow=Date.now;
+  Date.now=()=>at;t.after(()=>{Date.now=realNow;});
+  const r=rename(a,{card_id:card.id,name:'七日小星球',expected_name:''});assert.equal(r.expires,at+7*86400000);
+  assert.equal(s.state(g,room).space.rename.expires,r.expires);assert.equal(s.state(a,room).space.rename.defaultName,'');
+  const coins=s.balance(room);s.expireRoomNames(r.expires-1);assert.equal(s.get('SELECT room_name FROM spaces WHERE id=?',room).room_name,r.name);
+  Date.now=()=>r.expires;assert.equal(s.state(g,room).space.roomName,'');assert.equal(s.state(a,room).space.rename,null);s.progress.maintain(r.expires);
+  assert.equal(s.state(a,other).space.roomName,'');assert.equal(s.balance(room),coins);assert.equal(s.get('SELECT status FROM cards WHERE id=?',card.id).status,'used');assert.equal(s.get("SELECT COUNT(*) n FROM room_audit WHERE action='room.rename.expired'").n,1);
+});
+
+test('换第二块招牌重新计时，仍恢复最初名字；相同请求不能延长到期时间',t=>{
+  const {s,a,room,buy,rename}=fixture(t),first=buy(),second=buy(),at=Date.now(),realNow=Date.now;s.run('UPDATE spaces SET room_name=? WHERE id=?','老朋友小窝',room);
+  Date.now=()=>at;t.after(()=>{Date.now=realNow;});const key=randomUUID(),body={card_id:first.id,name:'第一块',expected_name:'老朋友小窝'},one=rename(a,body,key);
+  Date.now=()=>at+86400000;assert.deepEqual(rename(a,body,key),one);
+  const two=rename(a,{card_id:second.id,name:'第二块',expected_name:'第一块'});assert.equal(two.expires,at+8*86400000);assert.equal(s.state(a,room).space.rename.defaultName,'老朋友小窝');
+  s.expireRoomNames(one.expires);assert.equal(s.get('SELECT room_name FROM spaces WHERE id=?',room).room_name,'第二块');s.expireRoomNames(two.expires);assert.equal(s.get('SELECT room_name FROM spaces WHERE id=?',room).room_name,'老朋友小窝');
+});
+
+test('家庭期限共用一份；新成员也看到期限，到期所有成员恢复创建时名字',t=>{
+  const {s,a,g,b,op}=fixture(t),fa=s.community.createFamily(g,{name:'一起进步'}).space_id,invite=s.community.familyInvite(g,{space_id:fa}),fb=s.tx(()=>s.acceptInvite(a,invite.code)).space_id;
+  s.addTemplates(g,{space_id:fa,templates:['room-rename']});const card=s.issue(a,s.get('SELECT * FROM prizes WHERE room_id=?',fa),'test',{space_id:fb});
+  const r=op(a,'/api/cards/rename-room',{space_id:fb,card_id:card.id,name:'周末游乐园',expected_name:'一起进步'},s.renameRoom.bind(s));
+  const next=s.community.familyInvite(g,{space_id:fa}),fc=s.tx(()=>s.acceptInvite(b,next.code)).space_id;
+  assert.equal(s.state(b,fc).space.rename.expires,r.expires);assert.equal(s.all('SELECT * FROM room_renames').length,1);
+  s.expireRoomNames(r.expires);for(const [u,sid] of [[a,fb],[g,fa],[b,fc]]){assert.equal(s.state(u,sid).space.roomName,'一起进步');assert.equal(s.state(u,sid).space.rename,null);}
+});
+
+test('过期旧表单不能消耗新卡；到期日志写入失败时恢复与期限记录一起回滚',t=>{
+  const {s,a,room,buy,rename}=fixture(t),card=buy(),second=buy(),r=rename(a,{card_id:card.id,name:'小彗星',expected_name:''}),realNow=Date.now;
+  s.db.exec("CREATE TRIGGER fail_expiry BEFORE INSERT ON room_audit WHEN NEW.action='room.rename.expired' BEGIN SELECT RAISE(ABORT,'expiry audit unavailable'); END");
+  assert.throws(()=>s.expireRoomNames(r.expires),/unavailable/);assert.equal(s.get('SELECT room_name FROM spaces WHERE id=?',room).room_name,'小彗星');assert.equal(s.all('SELECT * FROM room_renames').length,1);s.db.exec('DROP TRIGGER fail_expiry');
+  Date.now=()=>r.expires;t.after(()=>{Date.now=realNow;});s.state(a,room);assert.throws(()=>rename(a,{card_id:second.id,name:'旧表单',expected_name:'小彗星'}),/刚换了/);assert.equal(s.get('SELECT status FROM cards WHERE id=?',second.id).status,'ready');
+});
+
+test('v18 升级保留已有招牌和卡片，不给历史改名倒计时；迁移可重放',t=>{
+  const {s,a,room,buy}=fixture(t);buy();s.run('UPDATE spaces SET room_name=? WHERE id=?','已有招牌',room);const cards=s.all('SELECT * FROM cards');
+  s.db.exec('DROP TABLE room_renames; PRAGMA user_version=18');migrate(s.db);migrate(s.db);
+  assert.equal(s.get('PRAGMA user_version').user_version,19);assert.equal(s.state(a,room).space.roomName,'已有招牌');assert.equal(s.state(a,room).space.rename,null);assert.deepEqual(s.all('SELECT * FROM cards'),cards);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
+});
+
+test('离线跨过一周后重启仍恢复原名；不覆盖期限外被改动的名字',t=>{
+  const directory=mkdtempSync(join(tmpdir(),'starlight-rename-')),file=join(directory,'db.sqlite');let s=new Store(file);
+  t.after(()=>{s.db.close();assert.ok(resolve(directory).startsWith(resolve(tmpdir())+sep));rmSync(directory,{recursive:true,force:true});});
+  const a=s.newUser({username:'rename_restart',name:'小芽',password:''}),g=s.newUser({username:'rename_partner',name:'晴天',password:''}),room=s.pair(a.id,g.id).space_id;
+  s.addTemplates(g,{space_id:room,templates:['room-rename']});const card=s.issue(a,s.get('SELECT * FROM prizes'),'test');
+  const r=s.operation(a,randomUUID(),'/api/cards/rename-room',{space_id:room},()=>s.renameRoom(a,{space_id:room,card_id:card.id,name:'短暂的小确幸',expected_name:''}));s.db.close();s=new Store(file);
+  assert.equal(s.state(a,room).space.rename.expires,r.expires);s.expireRoomNames(r.expires+86400000);assert.equal(s.state(a,room).space.roomName,'');
+  const next=s.issue(a,s.get('SELECT * FROM prizes'),'test'),later=s.operation(a,randomUUID(),'/api/cards/rename-room',{space_id:room},()=>s.renameRoom(a,{space_id:room,card_id:next.id,name:'第二次旅行',expected_name:''}));
+  s.run('UPDATE spaces SET room_name=? WHERE id=?','外部修正的名字',room);s.expireRoomNames(later.expires);assert.equal(s.state(a,room).space.roomName,'外部修正的名字');assert.equal(s.state(a,room).space.rename,null);
 });
 
 test('改名权限只属于持卡领奖人和对应小屋；普通卡不能冒充，功能卡不能报销或合成',t=>{
@@ -98,7 +152,7 @@ test('v7 迁移只增加空用途字段，不把同名旧卡变为功能卡，�
   const {s,g,room,p}=fixture(t);s.run('UPDATE prizes SET effect=? WHERE id=?','',p.id);
   const before=s.all('SELECT id,cost,stock,weight,face_cents FROM prizes');
   s.db.exec('ALTER TABLE spaces DROP COLUMN room_name;ALTER TABLE prizes DROP COLUMN effect;ALTER TABLE cards DROP COLUMN effect;PRAGMA user_version=7');
-  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,18);assert.deepEqual(s.all('SELECT id,cost,stock,weight,face_cents FROM prizes'),before);
+  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,19);assert.deepEqual(s.all('SELECT id,cost,stock,weight,face_cents FROM prizes'),before);
   assert.equal(s.get('SELECT effect FROM prizes WHERE id=?',p.id).effect,'');assert.equal(s.state(g,room).space.roomName,'');assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
 
