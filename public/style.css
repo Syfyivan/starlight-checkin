@@ -536,3 +536,18 @@ body[data-perspective="manage"] .record-row{border-color:#efe9de}
 .wish-detail-title:focus-visible{outline:2px solid #78906c;outline-offset:3px}
 .wish-information>small{font-size:12px;color:#7a866e}.wish-information>h3{margin:8px 0 14px}.wish-information>p{line-height:1.9;margin:12px 0;color:#63715c}
 .reward-card .reward-bottom .btn:disabled{color:#737e6c;background:#f5f6f1;border-color:#e2e7dc;opacity:1}
+
+/* Learning-coin credit keeps disclosure and repayment ahead of borrowing. */
+.credit-ledger-entry{display:flex;justify-content:flex-end;margin-bottom:12px}
+.credit-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+.credit-overview>div{background:#f0f3ea;border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
+.credit-overview small{font-size:12px;color:#6d7a64;display:block;margin-bottom:8px}
+.credit-overview strong{font-size:23px;font-weight:600;overflow-wrap:anywhere}.credit-overview em,.credit-quote em{font-style:normal;font-size:12px;font-weight:400}
+.credit-intro,.credit-admin{display:flex;gap:18px;justify-content:space-between;align-items:center}.credit-intro h2{margin:14px 0 8px}.credit-intro p,.credit-admin p{margin:8px 0;line-height:1.7}.credit-intro small,.credit-admin small{color:var(--muted);font-size:12px}
+.credit-contract-totals{display:flex;gap:20px;flex-wrap:wrap;margin:18px 0;font-size:13px}.credit-contract-totals strong{display:block;font-size:19px;margin-top:7px;overflow-wrap:anywhere}
+.credit-schedule{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:16px 0}.credit-payment{display:grid;grid-template-columns:minmax(70px,.65fr) minmax(100px,1fr) minmax(70px,.8fr);align-items:center;gap:12px;padding:14px;border-bottom:1px solid var(--line);font-size:12px}.credit-payment:last-child{border-bottom:0}.credit-payment small{display:block;font-size:11px;color:var(--muted);line-height:1.8;margin-top:4px}.credit-payment b{text-align:right;font-size:12px;font-weight:600;overflow-wrap:anywhere}
+.credit-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}.credit-help{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:12px;background:#fafbf7;font-size:13px}.credit-help summary{cursor:pointer;font-weight:600}.credit-help p{line-height:1.9;margin:12px 0 0;color:#63715c}.credit-help a{text-decoration:underline}
+.credit-reminder{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:11px 15px;background:#f5eee1;border-radius:10px;font-size:12px;margin-bottom:12px}.credit-reminder .text-btn{white-space:nowrap}
+.credit-quote{padding:20px;background:#f1f4eb;border-radius:12px}.credit-quote>small{display:block;font-size:12px}.credit-quote>strong{display:block;font-size:26px;margin:14px 0}.credit-quote p{line-height:1.8;margin:8px 0}
+.reward-content .credit-installment{font-size:11px;min-height:32px;display:block;padding-top:6px}
+@media(max-width:600px){.credit-overview{gap:7px}.credit-overview>div{padding:13px 10px}.credit-overview strong{font-size:17px}.credit-overview small{font-size:11px}.credit-intro,.credit-admin{align-items:flex-start;flex-direction:column}.credit-payment{gap:6px;padding:12px 9px;grid-template-columns:65px minmax(90px,1fr) minmax(65px,.8fr)}.credit-payment,.credit-payment b{font-size:11px}.credit-payment small{font-size:10px}.credit-help{padding:15px}.credit-contract-totals strong{font-size:16px}}

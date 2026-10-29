@@ -81,7 +81,7 @@ test('v15升级保留旧奖励、卡与任务，给历史完成补齐任务类�
  const {s,g,room,task,complete}=setup(t),id=task({task_kind:'long',points:5000});s.progress.taskScore(g,{space_id:room,task_id:id,points:4000,expectedRevision:0});complete(id);
  s.db.exec('ALTER TABLE tasks DROP COLUMN once_since; ALTER TABLE completions DROP COLUMN task_kind; PRAGMA user_version=15');
  const oldTasks=s.all('SELECT * FROM tasks').map(r=>({...r})),oldCompleted=s.all('SELECT * FROM completions').map(r=>({...r})),ledger=s.all('SELECT * FROM ledger');migrate(s.db);migrate(s.db);
- assert.equal(s.get('PRAGMA user_version').user_version,21);assert.deepEqual(s.all('SELECT * FROM tasks').map(({once_since,...r})=>r),oldTasks);assert.deepEqual(s.all('SELECT * FROM completions').map(({task_kind,...r})=>r),oldCompleted);assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.equal(s.get('SELECT task_kind FROM completions').task_kind,'long');assert.equal(s.plans.dailyEarned(room,dayAt()),0);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
+ assert.equal(s.get('PRAGMA user_version').user_version,22);assert.deepEqual(s.all('SELECT * FROM tasks').map(({once_since,...r})=>r),oldTasks);assert.deepEqual(s.all('SELECT * FROM completions').map(({task_kind,...r})=>r),oldCompleted);assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.equal(s.get('SELECT task_kind FROM completions').task_kind,'long');assert.equal(s.plans.dailyEarned(room,dayAt()),0);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
 
 test('HTTP编辑须登录和CSRF，状态返回版本，重复请求只生效一次且不新增任务',async t=>{
