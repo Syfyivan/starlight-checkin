@@ -118,7 +118,7 @@ test('v20 升级只创建目标表，重启保留已选心愿且不改账本或�
   const dir=mkdtempSync(join(tmpdir(),'starlight-wish-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));const path=join(dir,'db.sqlite');
   let s=new Store(path);const a=s.newUser({username:'persistent',name:'小芽',password:''}),g=s.newUser({username:'persistgiver',name:'晴天',password:''}),room=s.pair(a.id,g.id).space_id;a.space_id=room;
   s.addTemplates(g,{space_id:room,templates:['wish-18']});const p=s.get('SELECT * FROM prizes');s.post(room,20*COIN,'test','测试','fixture');const ledger=s.all('SELECT * FROM ledger');
-  s.db.exec('DROP TABLE wish_goals;PRAGMA user_version=20');s.db.close();s=new Store(path);assert.equal(s.get('PRAGMA user_version').user_version,22);assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.deepEqual(s.get('SELECT * FROM prizes'),p);
+  s.db.exec('DROP TABLE wish_goals;PRAGMA user_version=20');s.db.close();s=new Store(path);assert.equal(s.get('PRAGMA user_version').user_version,23);assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.deepEqual(s.get('SELECT * FROM prizes'),p);
   s.setWishGoal(a,{space_id:room,prize_id:p.id});s.db.close();s=new Store(path);try{migrate(s.db);assert.equal(s.state(a,room).wishGoal.prize_id,p.id);assert.equal(s.state(a,room).wishGoal.remaining,5*COIN);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);}finally{s.db.close();}
 });
 

@@ -10,8 +10,11 @@ import {creditInterest} from '../lib/credit.mjs';
 import {createApp} from '../server.mjs';
 
 const DAY=86400000;
+// These legacy accounting tests isolate the agreed contract math from the new income assessment.
+// Real assessment records and approval integration are exercised in credit-approval.test.mjs.
+function stableReadiness(s){s.readiness.profile=()=>({tierName:'稳定样本',stableDailyIncome:1000*COIN});s.readiness.capacity=(_space,options)=>({maxPrincipalCoins:options.limitCoins,periodBudget:1000*COIN});}
 function setup(t,{store=new Store(':memory:'),close=true}={}){
-  const s=store;if(close)t.after(()=>s.db.close());
+  const s=store;stableReadiness(s);if(close)t.after(()=>s.db.close());
   const a=s.newUser({username:'credit_a',name:'小芽',password:''}),g=s.newUser({username:'credit_g',name:'晴天',password:''}),other=s.newUser({username:'credit_o',name:'其他伙伴',password:''});
   const room=s.pair(a.id,g.id).space_id;a.space_id=room;let at=Date.parse('2026-10-30T10:00:00+08:00');s.credit.clock=()=>at;
   const setDay=(days,hour=10)=>{at=Date.parse('2026-10-30T00:00:00+08:00')+days*DAY+hour*3600000;};
@@ -143,8 +146,8 @@ test('朋友家庭共用规则但个人负债隔离，普通家人看不到别�
 test('v21升级不增发币和债务、不改旧数据，重启保存合同且迁移幂等',t=>{
   const dir=mkdtempSync(join(tmpdir(),'starlight-credit-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));const path=join(dir,'db.sqlite');let s=new Store(path);
   const a=s.newUser({username:'oldcredit',name:'原领奖人',password:''}),g=s.newUser({username:'oldgiver',name:'原发奖人',password:''}),room=s.pair(a.id,g.id).space_id;a.space_id=room;s.post(room,123*COIN,'test','原有余额','fixture');const users=s.all('SELECT * FROM users'),ledger=s.all('SELECT * FROM ledger');
-  s.db.exec('DROP TABLE credit_payments;DROP TABLE credit_installments;DROP TABLE credit_contracts;DROP TABLE credit_quotes;DROP TABLE credit_rules;PRAGMA user_version=21');s.db.close();s=new Store(path);
-  assert.equal(s.get('PRAGMA user_version').user_version,22);assert.deepEqual(s.all('SELECT * FROM users'),users);assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.equal(s.all('SELECT * FROM credit_contracts').length,0);assert.equal(s.credit.state(a,room).rules.enabled,false);
+  s.db.exec('DROP TABLE credit_requests;DROP TABLE credit_days;DROP TABLE credit_payments;DROP TABLE credit_installments;DROP TABLE credit_contracts;DROP TABLE credit_quotes;DROP TABLE credit_rules;PRAGMA user_version=21');s.db.close();s=new Store(path);stableReadiness(s);
+  assert.equal(s.get('PRAGMA user_version').user_version,23);assert.deepEqual(s.all('SELECT * FROM users'),users);assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.equal(s.all('SELECT * FROM credit_contracts').length,0);assert.equal(s.credit.state(a,room).rules.enabled,false);
   s.tx(()=>s.credit.saveRules(g,{space_id:room,enabled:true,limitCoins:300,annualBps:600,expectedVersion:s.credit.rules(room).version}));const q=s.tx(()=>s.credit.preview(a,{space_id:room,kind:'loan',amountCoins:20,termDays:14})).quote;s.tx(()=>s.credit.accept(a,{space_id:room,quote_id:q.id}));s.db.close();s=new Store(path);
   try{assert.equal(s.balance(room),143*COIN);assert.equal(s.credit.state(a,room).contract.principal,20*COIN);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);assert.equal(s.get('PRAGMA integrity_check').integrity_check,'ok');}finally{s.db.close();}
 });

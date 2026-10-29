@@ -8,6 +8,8 @@ import {COIN} from '../lib/common.mjs';
 // not calculated by creditInterest or the production schedule helper.
 function fixture(t,{annualBps=600}={}){
   const s=new Store(':memory:');t.after(()=>s.db.close());
+  // Preserve independent literal-value accounting fixtures; approval integration has real day records.
+  s.readiness.profile=()=>({tierName:'稳定算例',stableDailyIncome:1000*COIN});s.readiness.capacity=(_space,options)=>({maxPrincipalCoins:options.limitCoins,periodBudget:1000*COIN});
   const learner=s.newUser({username:'math_learner',name:'算例领奖人',password:''});
   const giver=s.newUser({username:'math_giver',name:'算例发奖人',password:''});
   const space=s.pair(learner.id,giver.id).space_id;learner.space_id=space;
@@ -17,14 +19,19 @@ function fixture(t,{annualBps=600}={}){
   call('saveRules',{enabled:true,limitCoins:10000,annualBps,expectedVersion:s.credit.rules(space).version},giver);
   const current=()=>s.credit.state(learner,space).contract;
   const fund=units=>s.post(space,units,'review_funding','独立算例资金',randomUUID());
+  const sign=quote=>{
+    let result=call('accept',{quote_id:quote.id});
+    if(result.approvalPending){const request=result.request;call('respond',{request_id:request.id,approve:true,expectedVersion:request.version},giver);quote=call('preview',{request_id:request.id}).quote;result=call('accept',{quote_id:quote.id});}
+    return {quote,...result};
+  };
   const borrow=(coins=1000,termDays=14)=>{
     const quote=call('preview',{kind:'loan',amountCoins:coins,termDays}).quote;
-    return {quote,...call('accept',{quote_id:quote.id})};
+    return sign(quote);
   };
   const finance=(cost=1200,periods=3)=>{
     const prize=s.savePrize(giver,{space_id:space,title:'独立算例体验',description:'数学验证用',emoji:'券',category:'experience',face_cents:0,cost,stock:3,wait_days:0,active:true}).id;
     const quote=call('preview',{kind:'installment',prize_id:prize,periods}).quote;
-    return {quote,...call('accept',{quote_id:quote.id})};
+    return sign(quote);
   };
   const repay=(mode='due')=>{const c=current();return call('repay',{contract_id:c.id,expectedVersion:c.version,mode});};
   const ledgerBalance=()=>s.all('SELECT amount FROM ledger WHERE space_id=?',space).reduce((sum,r)=>sum+r.amount,0);

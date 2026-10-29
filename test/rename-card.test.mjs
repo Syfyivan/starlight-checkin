@@ -70,7 +70,7 @@ test('过期旧表单不能消耗新卡；到期日志写入失败时恢复与�
 test('v18 升级保留没有改名卡历史的招牌和卡片；迁移可重放',t=>{
   const {s,a,room,buy}=fixture(t);buy();s.run('UPDATE spaces SET room_name=? WHERE id=?','已有招牌',room);const cards=s.all('SELECT * FROM cards');
   s.db.exec('DROP TABLE room_renames; PRAGMA user_version=18');migrate(s.db);migrate(s.db);
-  assert.equal(s.get('PRAGMA user_version').user_version,22);assert.equal(s.state(a,room).space.roomName,'已有招牌');assert.equal(s.state(a,room).space.rename,null);assert.deepEqual(s.all('SELECT * FROM cards'),cards);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
+  assert.equal(s.get('PRAGMA user_version').user_version,23);assert.equal(s.state(a,room).space.roomName,'已有招牌');assert.equal(s.state(a,room).space.rename,null);assert.deepEqual(s.all('SELECT * FROM cards'),cards);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
 
 test('离线跨过一周后重启仍恢复原名；不覆盖期限外被改动的名字',t=>{
@@ -152,7 +152,7 @@ test('v7 迁移只增加空用途字段，不把同名旧卡变为功能卡，�
   const {s,g,room,p}=fixture(t);s.run('UPDATE prizes SET effect=? WHERE id=?','',p.id);
   const before=s.all('SELECT id,cost,stock,weight,face_cents FROM prizes');
   s.db.exec('ALTER TABLE spaces DROP COLUMN room_name;ALTER TABLE prizes DROP COLUMN effect;ALTER TABLE cards DROP COLUMN effect;PRAGMA user_version=7');
-  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,22);assert.deepEqual(s.all('SELECT id,cost,stock,weight,face_cents FROM prizes'),before);
+  migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,23);assert.deepEqual(s.all('SELECT id,cost,stock,weight,face_cents FROM prizes'),before);
   assert.equal(s.get('SELECT effect FROM prizes WHERE id=?',p.id).effect,'');assert.equal(s.state(g,room).space.roomName,'');assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
 

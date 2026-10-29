@@ -71,5 +71,5 @@ test('经验投递失败完整回滚游标与邮件，重试后仍只发一批',
 });
 test('v13迁移保留已有宠物、卡片和余额，不替换自定义奖品',t=>{
  const {s,room,card}=fixture(t);card('pet_bow');const before={pets:s.all('SELECT * FROM pets'),cards:s.all('SELECT * FROM cards'),prizes:s.all('SELECT * FROM prizes'),balance:s.balance(room)};
- s.db.exec('DROP TABLE growth_deliveries; PRAGMA user_version=13;');migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,22);assert.deepEqual(s.all('SELECT * FROM pets'),before.pets);assert.deepEqual(s.all('SELECT * FROM cards'),before.cards);assert.deepEqual(s.all('SELECT * FROM prizes'),before.prizes);assert.equal(s.balance(room),before.balance);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
+ s.db.exec('DROP TABLE growth_deliveries; PRAGMA user_version=13;');migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,23);assert.deepEqual(s.all('SELECT * FROM pets'),before.pets);assert.deepEqual(s.all('SELECT * FROM cards'),before.cards);assert.deepEqual(s.all('SELECT * FROM prizes'),before.prizes);assert.equal(s.balance(room),before.balance);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
