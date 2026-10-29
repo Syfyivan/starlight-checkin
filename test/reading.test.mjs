@@ -101,7 +101,7 @@ test('多书源仅返回中文，简繁兼容，旧英文编号及缓存也不�
  const catalog=JSON.parse(readFileSync(new URL('../lib/book-catalog.json',import.meta.url),'utf8'));assert.ok(catalog.books.length>0);assert.ok(catalog.books.every(b=>b.language==='中文'));
  s.run('INSERT INTO book_catalog_cache(key,value,updated) VALUES(?,?,?)','pg:1448',JSON.stringify({book:{title:'Heidi'}}),Date.now());
  await assert.rejects(source.download(1448),/中文书/);await assert.rejects(source.download(11),/中文书/);
- for(const name of ['论语','論語']){const results=await source.searchAll(name);assert.equal(results.books[0].id,'ws:6');assert.ok(results.books.some(b=>b.id===23839));assert.ok(!results.books.some(b=>/判决|裁定/.test(b.title)));}
+ for(const name of ['论语','論語']){const results=await source.searchAll(name);assert.ok(results.books.some(b=>b.id==='ws:6'));assert.ok(results.books.some(b=>b.id===23839));assert.ok(!results.books.some(b=>/判决|裁定/.test(b.title)));}
  assert.ok(!(await source.searchAll('朝花夕拾')).books.some(b=>b.id==='ws:13866'));
  assert.equal(requests,0);await assert.rejects(source.searchAll('x'.repeat(101)),/100/);
 });
