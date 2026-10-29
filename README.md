@@ -50,7 +50,7 @@
 
 给朋友、家人和自己用的任务与奖励空间。Node.js 原生 HTTP + SQLite + 原生前端，无第三方 npm 依赖。
 
-**六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。网站 3.16.0 已上线，发布与验证状态见 [V3.16-HANDOFF.md](V3.16-HANDOFF.md)；安卓壳保持 3.7.0，[下载安装包](https://github.com/Syfyivan/starlight-checkin/releases/tag/android-v3.7.0)。35 种默认心愿卡与百分比抽奖的历史规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
+**六人家庭、个人信箱与可追溯的奖励小屋。** [正式入口](https://124-221-36-36.anyip.dev:8443/starlight/)。网站 3.16.1 已上线，发布与验证状态见 [V3.16.1-HANDOFF.md](V3.16.1-HANDOFF.md)；安卓壳保持 3.7.0，[下载安装包](https://github.com/Syfyivan/starlight-checkin/releases/tag/android-v3.7.0)。35 种默认心愿卡与百分比抽奖的历史规则见 [V2.3-HANDOFF.md](V2.3-HANDOFF.md)。当前使用账号密码，GitHub 和邮箱登录后续配置。
 
 ## 本期功能
 
