@@ -1,0 +1,6990 @@
+{
+ "updated": "2026-10-29",
+ "source": "https://www.gutenberg.org/ebooks/offline_catalogs.html",
+ "books": [
+  {
+   "id": 11,
+   "title": "Alice's Adventures in Wonderland",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 12,
+   "title": "Through the Looking-Glass",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 13,
+   "title": "The Hunting of the Snark: An Agony in Eight Fits",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 35,
+   "title": "The Time Machine",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 36,
+   "title": "The war of the worlds",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 42,
+   "title": "The strange case of Dr. Jekyll and Mr. Hyde",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 43,
+   "title": "The strange case of Dr. Jekyll and Mr. Hyde",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 45,
+   "title": "Anne of Green Gables",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 46,
+   "title": "A Christmas Carol in Prose; Being a Ghost Story of Christmas",
+   "author": "Dickens, Charles, 1812-1870; Leech, John, 1817-1864 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 47,
+   "title": "Anne of Avonlea",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 51,
+   "title": "Anne of the Island",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 54,
+   "title": "The Marvelous Land of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 55,
+   "title": "The Wonderful Wizard of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 70,
+   "title": "What Is Man? and Other Essays",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 74,
+   "title": "The Adventures of Tom Sawyer, Complete",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 76,
+   "title": "Adventures of Huckleberry Finn",
+   "author": "Twain, Mark, 1835-1910; Kemble, E. W. (Edward Windsor), 1861-1933 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 83,
+   "title": "From the Earth to the moon; and, round the moon",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 84,
+   "title": "Frankenstein; or, The modern Prometheus",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 86,
+   "title": "A Connecticut Yankee in King Arthur's Court",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 91,
+   "title": "Tom Sawyer Abroad",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 93,
+   "title": "Tom Sawyer, Detective",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 98,
+   "title": "A Tale of Two Cities",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 102,
+   "title": "The Tragedy of Pudd'nhead Wilson",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 103,
+   "title": "Around the World in Eighty Days",
+   "author": "Verne, Jules, 1828-1905; Towle, George M. (George Makepeace), 1841-1893 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 105,
+   "title": "Persuasion",
+   "author": "Austen, Jane, 1775-1817",
+   "language": "英文"
+  },
+  {
+   "id": 108,
+   "title": "The Return of Sherlock Holmes",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 113,
+   "title": "The Secret Garden",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 119,
+   "title": "A Tramp Abroad",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 120,
+   "title": "Treasure Island",
+   "author": "Stevenson, Robert Louis, 1850-1894; Rhead, Louis, 1857-1926 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 121,
+   "title": "Northanger Abbey",
+   "author": "Austen, Jane, 1775-1817",
+   "language": "英文"
+  },
+  {
+   "id": 126,
+   "title": "The Poison Belt",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 136,
+   "title": "A Child's Garden of Verses",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 137,
+   "title": "Sara Crewe; Or, What Happened at Miss Minchin's Boarding School",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 139,
+   "title": "The Lost World",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 141,
+   "title": "Mansfield Park",
+   "author": "Austen, Jane, 1775-1817",
+   "language": "英文"
+  },
+  {
+   "id": 142,
+   "title": "The $30,000 Bequest, and Other Stories",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 146,
+   "title": "A Little Princess\r\nBeing the whole story of Sara Crewe now told for the first time",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 158,
+   "title": "Emma",
+   "author": "Austen, Jane, 1775-1817",
+   "language": "英文"
+  },
+  {
+   "id": 159,
+   "title": "The island of Doctor Moreau",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 161,
+   "title": "Sense and Sensibility",
+   "author": "Austen, Jane, 1775-1817",
+   "language": "英文"
+  },
+  {
+   "id": 163,
+   "title": "Flower Fables",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 164,
+   "title": "Twenty Thousand Leagues under the Sea",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 221,
+   "title": "The Return of Sherlock Holmes",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 244,
+   "title": "A Study in Scarlet",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 245,
+   "title": "Life on the Mississippi",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 270,
+   "title": "Dream Days",
+   "author": "Grahame, Kenneth, 1859-1932",
+   "language": "英文"
+  },
+  {
+   "id": 280,
+   "title": "Records of a Family of Engineers",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 281,
+   "title": "Father Damien: An Open Letter to the Reverend Dr. Hyde of Honolulu",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 289,
+   "title": "The Wind in the Willows",
+   "author": "Grahame, Kenneth, 1859-1932",
+   "language": "英文"
+  },
+  {
+   "id": 290,
+   "title": "The Stark Munro Letters\r\nBeing series of twelve letters written by J. Stark Munro, M.B., to his friend and former fellow-student, Herbert Swanborough, of Lowell, Massachusetts, during the years 1881-1884",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 291,
+   "title": "The Golden Age",
+   "author": "Grahame, Kenneth, 1859-1932",
+   "language": "英文"
+  },
+  {
+   "id": 294,
+   "title": "The Captain of the Polestar, and Other Tales",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 316,
+   "title": "The Golden Road",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 322,
+   "title": "St. Ives: Being the Adventures of a French Prisoner in England",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 329,
+   "title": "Island Nights' Entertainments",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 343,
+   "title": "Fables",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 344,
+   "title": "The Merry Men, and Other Tales and Fables",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 355,
+   "title": "The Parasite: A Story",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 356,
+   "title": "Beyond the City",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 370,
+   "title": "The Fortunes and Misfortunes of the Famous Moll Flanders",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 372,
+   "title": "Prince Otto, a Romance",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 373,
+   "title": "Lay Morals, and Other Papers",
+   "author": "Stevenson, Robert Louis, 1850-1894; Stevenson, Fanny Van de Grift, 1840-1914 [Author of introduction, etc.]",
+   "language": "英文"
+  },
+  {
+   "id": 376,
+   "title": "A Journal of the Plague Year\r\nBeing Observations or Memorials of the Most Remarkable Occurrences, as Well Public as Private, Which Happened in London During the Last Great Visitation in 1665. Written by a Citizen Who Continued All the While in London",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 380,
+   "title": "Weir of Hermiston: An Unfinished Romance",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 381,
+   "title": "Memories and Portraits",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 382,
+   "title": "Edinburgh: Picturesque Notes",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 384,
+   "title": "The Lost Prince",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 386,
+   "title": "Virginibus Puerisque, and Other Papers",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 387,
+   "title": "Vailima Letters\r\nBeing Correspondence Addressed by Robert Louis Stevenson to Sidney Colvin, November 1890-October 1894",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 413,
+   "title": "Ballads",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 419,
+   "title": "The Magic of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 420,
+   "title": "Dorothy and the Wizard in Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 421,
+   "title": "Kidnapped",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 423,
+   "title": "Round the Red Lamp: Being Facts and Fancies of Medical Life",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 425,
+   "title": "Familiar Studies of Men and Books",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 426,
+   "title": "Tales and Fantasies",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 436,
+   "title": "The Master Key\r\nAn Electrical Fairy Tale Founded Upon the Mysteries of Electricity",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 438,
+   "title": "Underwoods",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 439,
+   "title": "The Vital Message",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 441,
+   "title": "New Poems, and Variant Readings",
+   "author": "Stevenson, Robert Louis, 1850-1894; Osbourne, Lloyd, 1868-1947 [Author of introduction, etc.]",
+   "language": "英文"
+  },
+  {
+   "id": 456,
+   "title": "The Door in the Wall, and Other Stories",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 459,
+   "title": "The White People",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 460,
+   "title": "The Dawn of a To-morrow",
+   "author": "Burnett, Frances Hodgson, 1849-1924; Yohn, F. C. (Frederick Coffay), 1875-1933 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 464,
+   "title": "In the South Seas\r\nBeing an Account of Experiences and Observations in the Marquesas, Paumotus and Gilbert Islands in the Course of Two Cruises on the Yacht \"Casco\" (1888) and the Schooner \"Equator\" (1889)",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 479,
+   "title": "Little Lord Fauntleroy",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 485,
+   "title": "The Road to Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 486,
+   "title": "Ozma of Oz\r\nA Record of Her Adventures with Dorothy Gale of Kansas, the Yellow Hen, the Scarecrow, the Tin Woodman, Tiktok, the Cowardly Lion, and the Hungry Tiger; Besides Other Good People too Numerous to Mention Faithfully Recorded Herein",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 487,
+   "title": "Songs of Travel, and Other Verses",
+   "author": "Stevenson, Robert Louis, 1850-1894; Colvin, Sidney, 1845-1927 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 492,
+   "title": "Essays in the Art of Writing",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 506,
+   "title": "The Shuttle",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 514,
+   "title": "Little Women",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 516,
+   "title": "The Silverado Squatters",
+   "author": "Stevenson, Robert Louis, 1850-1894; Strong, J. D. (Joseph Dwight), 1853-1899 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 517,
+   "title": "The Emerald City of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 518,
+   "title": "The Enchanted Island of Yew\r\nWhereon Prince Marvel Encountered the High Ki of Twi and Other Surprising People",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 519,
+   "title": "A Kidnapped Santa Claus",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 520,
+   "title": "The Life and Adventures of Santa Claus",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 521,
+   "title": "The Life and Adventures of Robinson Crusoe",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 524,
+   "title": "Ann Veronica: A Modern Love Story",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 534,
+   "title": "An inland voyage",
+   "author": "Stevenson, Robert Louis, 1850-1894; Crane, Walter, 1845-1915 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 535,
+   "title": "Travels with a donkey in the Cevennes",
+   "author": "Stevenson, Robert Louis, 1850-1894; Crane, Walter, 1845-1915 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 536,
+   "title": "A Footnote to History: Eight Years of Trouble in Samoa",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 537,
+   "title": "Tales of Terror and Mystery",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 544,
+   "title": "Anne's House of Dreams",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 561,
+   "title": "The Further Adventures of Robinson Crusoe",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 564,
+   "title": "The Mystery of Edwin Drood",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 572,
+   "title": "The Great Big Treasury of Beatrix Potter",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 580,
+   "title": "The Pickwick Papers",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 582,
+   "title": "A Collection of Beatrix Potter Stories",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 588,
+   "title": "Master Humphrey's Clock",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 589,
+   "title": "Catriona",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 614,
+   "title": "Across the Plains, with Other Memories and Essays",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 616,
+   "title": "Prayers Written At Vailima, and A Lowden Sabbath Morn",
+   "author": "Stevenson, Robert Louis, 1850-1894; Stevenson, Fanny Van de Grift, 1840-1914 [Author of introduction, etc.]",
+   "language": "英文"
+  },
+  {
+   "id": 620,
+   "title": "Sylvie and Bruno",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 622,
+   "title": "The Letters of Robert Louis Stevenson — Volume 1",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 627,
+   "title": "Essays of Travel",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 637,
+   "title": "The Letters of Robert Louis Stevenson — Volume 2",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 644,
+   "title": "The Haunted Man and the Ghost's Bargain",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 647,
+   "title": "The Dynamiter",
+   "author": "Stevenson, Robert Louis, 1850-1894; Stevenson, Fanny Van de Grift, 1840-1914",
+   "language": "英文"
+  },
+  {
+   "id": 650,
+   "title": "Pictures from Italy",
+   "author": "Dickens, Charles, 1812-1870; Stone, Marcus, 1840-1921 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 651,
+   "title": "Phantasmagoria and Other Poems",
+   "author": "Carroll, Lewis, 1832-1898; Frost, A. B. (Arthur Burdett), 1851-1928 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 653,
+   "title": "The Chimes\r\nA Goblin Story of Some Bells That Rang an Old Year out and a New Year In",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 675,
+   "title": "American Notes",
+   "author": "Dickens, Charles, 1812-1870; Stone, Marcus, 1840-1921 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 676,
+   "title": "The Battle of Life",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 678,
+   "title": "The Cricket on the Hearth: A Fairy Tale of Home",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 698,
+   "title": "Memoir of Fleeming Jenkin",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 699,
+   "title": "A Child's History of England",
+   "author": "Dickens, Charles, 1812-1870; Townsend, F. H. (Frederick Henry), 1868-1920 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 700,
+   "title": "The Old Curiosity Shop",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 718,
+   "title": "Tono-Bungay",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 730,
+   "title": "Oliver Twist",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 766,
+   "title": "David Copperfield",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 772,
+   "title": "Moral Emblems",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 775,
+   "title": "When the Sleeper Wakes",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 780,
+   "title": "The War in the Air",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 786,
+   "title": "Hard Times",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 807,
+   "title": "Hunted Down: The Detective Stories of Charles Dickens",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 809,
+   "title": "Holiday Romance",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 810,
+   "title": "George Silverman's Explanation",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 821,
+   "title": "Dombey and Son",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 824,
+   "title": "Speeches: Literary and Social",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 834,
+   "title": "The Memoirs of Sherlock Holmes",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 839,
+   "title": "New Arabian Nights",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 848,
+   "title": "The Black Arrow: A Tale of the Two Roses",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 864,
+   "title": "The Master of Ballantrae: A Winter's Tale",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 872,
+   "title": "Reprinted Pieces",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 882,
+   "title": "Sketches by Boz, Illustrative of Every-Day Life and Every-Day People",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 883,
+   "title": "Our Mutual Friend",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 888,
+   "title": "The Lazy Tour of Two Idle Apprentices",
+   "author": "Dickens, Charles, 1812-1870; Collins, Wilkie, 1824-1889",
+   "language": "英文"
+  },
+  {
+   "id": 903,
+   "title": "The White Company",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 912,
+   "title": "Mudfog and Other Sketches",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 914,
+   "title": "The Uncommercial Traveller",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 916,
+   "title": "Sketches of Young Couples",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 917,
+   "title": "Barnaby Rudge: A Tale of the Riots of 'Eighty",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 918,
+   "title": "Sketches of Young Gentlemen",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 922,
+   "title": "Sunday Under Three Heads",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 924,
+   "title": "To Be Read at Dusk",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 927,
+   "title": "The Lamplighter",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 928,
+   "title": "Alice's Adventures in Wonderland\nHTML Edition",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 944,
+   "title": "The Voyage of the Beagle",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 946,
+   "title": "Lady Susan",
+   "author": "Austen, Jane, 1775-1817",
+   "language": "英文"
+  },
+  {
+   "id": 955,
+   "title": "The Patchwork Girl of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 956,
+   "title": "Tik-Tok of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 957,
+   "title": "The Scarecrow of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 958,
+   "title": "Rinkitink in Oz\r\nWherein Is Recorded the Perilous Quest of Prince Inga of Pingaree and King Rinkitink in the Magical Isles That Lie Beyond the Borderland of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 959,
+   "title": "The Lost Princess of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 960,
+   "title": "The Tin Woodman of Oz\r\nA Faithful Story of the Astonishing Adventure Undertaken by the Tin Woodman, Assisted by Woot the Wanderer, the Scarecrow of Oz, and Polychrome, the Rainbow's Daughter",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 961,
+   "title": "Glinda of Oz\r\nIn Which Are Related the Exciting Experiences of Princess Ozma of Oz, and Dorothy, in Their Hazardous Journey to the Home of the Flatheads, and to the Magic Isle of the Skeezers, and How They Were Rescued from Dire Peril by the Sorcery of Glinda the Good",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 963,
+   "title": "Little Dorrit",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 967,
+   "title": "Nicholas Nickleby",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 968,
+   "title": "Martin Chuzzlewit",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 983,
+   "title": "Tour through the Eastern Counties of England, 1722",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 1013,
+   "title": "The First Men in the Moon",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1023,
+   "title": "Bleak House",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1024,
+   "title": "The Wrecker",
+   "author": "Stevenson, Robert Louis, 1850-1894; Osbourne, Lloyd, 1868-1947",
+   "language": "英文"
+  },
+  {
+   "id": 1044,
+   "title": "Extract from Captain Stormfield's Visit to Heaven",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 1046,
+   "title": "God, the Invisible King",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1047,
+   "title": "The New Machiavelli",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1059,
+   "title": "The World Set Free",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1086,
+   "title": "A Horse's Tale",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 1138,
+   "title": "The Research Magnificent",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1149,
+   "title": "From London to Land's End\r\nand Two Letters from the \"Journey through England by a Gentleman\"",
+   "author": "Defoe, Daniel, 1661?-1731; Morley, Henry, 1822-1894 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 1212,
+   "title": "Love and Freindship [sic]",
+   "author": "Austen, Jane, 1775-1817",
+   "language": "英文"
+  },
+  {
+   "id": 1213,
+   "title": "The Man That Corrupted Hadleyburg",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 1227,
+   "title": "The Expression of the Emotions in Man and Animals",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 1228,
+   "title": "On the Origin of Species By Means of Natural Selection\r\nOr, the Preservation of Favoured Races in the Struggle for Life",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 1264,
+   "title": "The Wheels of Chance: A Bicycling Idyll",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1268,
+   "title": "The Mysterious Island",
+   "author": "Verne, Jules, 1828-1905; Kingston, Agnes Kinloch, 1823-1913 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 1269,
+   "title": "The soul of a bishop",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1288,
+   "title": "Dream Days",
+   "author": "Grahame, Kenneth, 1859-1932",
+   "language": "英文"
+  },
+  {
+   "id": 1289,
+   "title": "Three Ghost Stories",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1342,
+   "title": "Pride and Prejudice",
+   "author": "Austen, Jane, 1775-1817",
+   "language": "英文"
+  },
+  {
+   "id": 1353,
+   "title": "Off on a Comet! a Journey through Planetary Space",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 1354,
+   "title": "Chronicles of Avonlea",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 1355,
+   "title": "The Underground City; Or, The Black Indies\r\n(Sometimes Called The Child of the Cavern)",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 1392,
+   "title": "The Seven Poor Travellers",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1394,
+   "title": "The Holly-Tree",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1400,
+   "title": "Great Expectations",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1406,
+   "title": "The Perils of Certain English Prisoners",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1407,
+   "title": "A Message from the Sea",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1413,
+   "title": "Tom Tiddler's Ground",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1414,
+   "title": "Somebody's Luggage",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1415,
+   "title": "Doctor Marigold",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1416,
+   "title": "Mrs. Lirriper's Lodgings",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1419,
+   "title": "Mugby Junction",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1421,
+   "title": "Mrs. Lirriper's Legacy",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1422,
+   "title": "Going into Society",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1423,
+   "title": "No Thoroughfare",
+   "author": "Dickens, Charles, 1812-1870; Collins, Wilkie, 1824-1889",
+   "language": "英文"
+  },
+  {
+   "id": 1435,
+   "title": "Miscellaneous Papers",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1464,
+   "title": "Contributions to All The Year Round",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 1465,
+   "title": "The Wreck of the Golden Mary",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1467,
+   "title": "Some Christmas Stories",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 1550,
+   "title": "A Lady of Quality\r\nBeing a Most Curious, Hitherto Unknown History, as Related by Mr. Isaac Bickerstaff but Not Presented to the World of Fashion Through the Pages of The Tatler, and Now for the First Time Written Down",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 1585,
+   "title": "The Wrong Box",
+   "author": "Stevenson, Robert Louis, 1850-1894; Osbourne, Lloyd, 1868-1947",
+   "language": "英文"
+  },
+  {
+   "id": 1597,
+   "title": "Andersen's Fairy Tales",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875",
+   "language": "英文"
+  },
+  {
+   "id": 1604,
+   "title": "The Ebb-Tide: A Trio And Quartette",
+   "author": "Stevenson, Robert Louis, 1850-1894; Osbourne, Lloyd, 1868-1947",
+   "language": "英文"
+  },
+  {
+   "id": 1638,
+   "title": "The New Revelation",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 1644,
+   "title": "The Adventures of Gerard",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 1652,
+   "title": "The Survivors of the Chancellor: Diary of J.R. Kazallon, Passenger",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 1661,
+   "title": "The Adventures of Sherlock Holmes",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 1698,
+   "title": "The Survivors of the Chancellor",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 1734,
+   "title": "The Secret Places of the Heart",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1743,
+   "title": "Twelve Stories and a Dream",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1804,
+   "title": "War and the Future: Italy, France and Britain at War",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 1837,
+   "title": "The Prince and the Pauper",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 1842,
+   "title": "Michael Strogoff; Or, The Courier of the Czar",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 1892,
+   "title": "Extracts from Adam's Diary, translated from the original ms.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 2009,
+   "title": "The Origin of Species by Means of Natural Selection\r\nOr, the Preservation of Favoured Races in the Struggle for Life, 6th Edition",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 2010,
+   "title": "The Autobiography of Charles Darwin",
+   "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 2051,
+   "title": "Dickory Cronke: The Dumb Philosopher, or, Great Britain's Wonder",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 2052,
+   "title": "Everybody's Business Is Nobody's Business\r\nOr, Private Abuses, Public Grievances; Exemplified in the Pride, Insolence, and Exorbitant Wages of Our Women, Servants, Footmen, &c.",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 2083,
+   "title": "In Search of the Castaways; Or, The Children of Captain Grant",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 2087,
+   "title": "Life and Letters of Charles Darwin — Volume 1",
+   "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 2088,
+   "title": "Life and Letters of Charles Darwin — Volume 2",
+   "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 2097,
+   "title": "The Sign of the Four",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2154,
+   "title": "Around the World in Eighty Days. Junior Deluxe Edition",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 2324,
+   "title": "A House to Let",
+   "author": "Dickens, Charles, 1812-1870; Collins, Wilkie, 1824-1889; Gaskell, Elizabeth Cleghorn, 1810-1865; Procter, Adelaide Anne, 1825-1864",
+   "language": "英文"
+  },
+  {
+   "id": 2343,
+   "title": "The Adventure of Wisteria Lodge",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2344,
+   "title": "The Adventure of the Cardboard Box",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2345,
+   "title": "The Adventure of the Red Circle",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2346,
+   "title": "The Adventure of the Bruce-Partington Plans",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2347,
+   "title": "The Adventure of the Dying Detective",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2348,
+   "title": "The Disappearance of Lady Frances Carfax",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2349,
+   "title": "The Adventure of the Devil's Foot",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2350,
+   "title": "His last bow",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2355,
+   "title": "The Formation of Vegetable Mould Through the Action of Worms\r\nWith Observations on Their Habits",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 2359,
+   "title": "Stories By English Authors: France (Selected by Scribners)",
+   "author": "Stevenson, Robert Louis, 1850-1894 [Contributor]; Collins, Wilkie, 1824-1889 [Contributor]; Ouida, 1839-1908 [Contributor]; Stretton, Hesba, 1832-1911 [Contributor]; Weyman, Stanley John, 1855-1928 [Contributor]",
+   "language": "英文"
+  },
+  {
+   "id": 2431,
+   "title": "Is Shakespeare Dead?\r\nFrom My Autobiography",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 2485,
+   "title": "The Movements and Habits of Climbing Plants",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 2514,
+   "title": "T. Tembarom",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 2537,
+   "title": "The Pocket R.L.S.: Being Favourite Passages from the Works of Stevenson",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 2572,
+   "title": "On the Decay of the Art of Lying",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 2591,
+   "title": "Grimms' Fairy Tales",
+   "author": "Grimm, Jacob, 1785-1863; Grimm, Wilhelm, 1786-1859",
+   "language": "英文"
+  },
+  {
+   "id": 2678,
+   "title": "Poems by Emily Dickinson, Series One",
+   "author": "Dickinson, Emily, 1830-1886; Higginson, Thomas Wentworth, 1823-1911 [Editor]; Todd, Mabel Loomis, 1856-1932 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 2679,
+   "title": "Poems by Emily Dickinson, Series Two",
+   "author": "Dickinson, Emily, 1830-1886; Higginson, Thomas Wentworth, 1823-1911 [Editor]; Todd, Mabel Loomis, 1856-1932 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 2690,
+   "title": "Coral Reefs",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 2726,
+   "title": "Eight Cousins",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 2739,
+   "title": "More Letters of Charles Darwin — Volume 1\r\nA Record of His Work in a Series of Hitherto Unpublished Letters",
+   "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925 [Editor]; Seward, A. C. (Albert Charles), 1863-1941 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 2740,
+   "title": "More Letters of Charles Darwin — Volume 2\r\nA Record of His Work in a Series of Hitherto Unpublished Letters",
+   "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925 [Editor]; Seward, A. C. (Albert Charles), 1863-1941 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 2786,
+   "title": "Jack and Jill",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 2787,
+   "title": "An Old-Fashioned Girl",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 2788,
+   "title": "Little Men: Life at Plumfield With Jo's Boys",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 2804,
+   "title": "Rose in Bloom\r\nA Sequel to \"Eight Cousins\"",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 2845,
+   "title": "Sir Nigel",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2852,
+   "title": "The Hound of the Baskervilles",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 2871,
+   "title": "The Variation of Animals and Plants under Domestication — Volume 1",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 2872,
+   "title": "The Variation of Animals and Plants under Domestication — Volume 2",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 2874,
+   "title": "Personal Recollections of Joan of Arc — Volume 1",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 2875,
+   "title": "Personal Recollections of Joan of Arc — Volume 2",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 2895,
+   "title": "Following the Equator: A Journey Around the World",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3054,
+   "title": "Volcanic Islands",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 3069,
+   "title": "The Great Boer War",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 3070,
+   "title": "The Hound of the Baskervilles",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 3091,
+   "title": "The Giant Raft",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 3171,
+   "title": "In Defence of Harriet Shelley",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3172,
+   "title": "Fenimore Cooper's Literary Offences",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3173,
+   "title": "Essays on Paul Bourget",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3174,
+   "title": "A Dog's Tale",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3175,
+   "title": "Mark Twain's Burlesque Autobiography",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3176,
+   "title": "The Innocents Abroad",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3177,
+   "title": "Roughing It",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3178,
+   "title": "The Gilded Age: A Tale of Today",
+   "author": "Twain, Mark, 1835-1910; Warner, Charles Dudley, 1829-1900",
+   "language": "英文"
+  },
+  {
+   "id": 3179,
+   "title": "The American Claimant",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3180,
+   "title": "A Double Barrelled Detective Story",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3181,
+   "title": "The Stolen White Elephant",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3182,
+   "title": "Some Rambling Notes of an Idle Excursion",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3183,
+   "title": "The Facts Concerning the Recent Carnival of Crime in Connecticut",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3184,
+   "title": "Alonzo Fitz, and Other Stories",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3185,
+   "title": "Those Extraordinary Twins",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3186,
+   "title": "The Mysterious Stranger, and Other Stories",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3187,
+   "title": "Christian Science",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3188,
+   "title": "Mark Twain's Speeches",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3189,
+   "title": "Sketches New and Old",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3190,
+   "title": "1601: Conversation as it was by the Social Fireside in the Time of the Tudors",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3191,
+   "title": "Goldsmith's Friend Abroad Again",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3192,
+   "title": "The Curious Republic of Gondour, and Other Whimsical Sketches",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3193,
+   "title": "Mark Twain's Letters — Volume 1 (1853-1866)",
+   "author": "Twain, Mark, 1835-1910; Paine, Albert Bigelow, 1861-1937 [Compiler]",
+   "language": "英文"
+  },
+  {
+   "id": 3194,
+   "title": "Mark Twain's Letters — Volume 2 (1867-1875)",
+   "author": "Twain, Mark, 1835-1910; Paine, Albert Bigelow, 1861-1937 [Compiler]",
+   "language": "英文"
+  },
+  {
+   "id": 3195,
+   "title": "Mark Twain's Letters — Volume 3 (1876-1885)",
+   "author": "Twain, Mark, 1835-1910; Paine, Albert Bigelow, 1861-1937 [Compiler]",
+   "language": "英文"
+  },
+  {
+   "id": 3196,
+   "title": "Mark Twain's Letters — Volume 4 (1886-1900)",
+   "author": "Twain, Mark, 1835-1910; Paine, Albert Bigelow, 1861-1937 [Compiler]",
+   "language": "英文"
+  },
+  {
+   "id": 3197,
+   "title": "Mark Twain's Letters — Volume 5 (1901-1906)",
+   "author": "Twain, Mark, 1835-1910; Paine, Albert Bigelow, 1861-1937 [Compiler]",
+   "language": "英文"
+  },
+  {
+   "id": 3198,
+   "title": "Mark Twain's Letters — Volume 6 (1907-1910)",
+   "author": "Twain, Mark, 1835-1910; Paine, Albert Bigelow, 1861-1937 [Compiler]",
+   "language": "英文"
+  },
+  {
+   "id": 3199,
+   "title": "Mark Twain's Letters — Complete (1853-1910)",
+   "author": "Twain, Mark, 1835-1910; Paine, Albert Bigelow, 1861-1937 [Compiler]",
+   "language": "英文"
+  },
+  {
+   "id": 3200,
+   "title": "The Entire Project Gutenberg Works of Mark Twain",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3250,
+   "title": "How to Tell a Story, and Other Essays",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3251,
+   "title": "The Man That Corrupted Hadleyburg, and Other Stories",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 3289,
+   "title": "The Valley of Fear",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 3332,
+   "title": "The Variation of Animals and Plants under Domestication",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 3499,
+   "title": "Jo's Boys",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 3526,
+   "title": "Five Weeks in a Balloon\r\nOr, Journeys and Discoveries in Africa by Three Englishmen",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 3620,
+   "title": "Geological Observations on South America",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 3690,
+   "title": "Floor Games; a companion volume to \"Little Wars\"",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 3691,
+   "title": "Little Wars; a game for boys from twelve years of age to one hundred and fifty and for that more intelligent sort of girl who likes boys' games and books.",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 3704,
+   "title": "Journal of Researches into the Natural History and Geology of the Countries Visited During the Voyage Round the World of H.M.S. Beagle Under the Command of Captain Fitz Roy, R.N.",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 3748,
+   "title": "A Journey into the Interior of the Earth",
+   "author": "Verne, Jules, 1828-1905; Malleson, F. A. (Frederick Amadeus), 1819-1897 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 3776,
+   "title": "The Valley of Fear",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 3795,
+   "title": "Under the Lilacs",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 3796,
+   "title": "Rilla of Ingleside",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 3797,
+   "title": "In the Days of the Comet",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 3806,
+   "title": "A Modern Cinderella; Or, The Little Old Shoe, and Other Stories",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 3807,
+   "title": "The Different Forms of Flowers on Plants of the Same Species",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 3808,
+   "title": "Robur the Conqueror",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 3809,
+   "title": "The Master of the World",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 3837,
+   "title": "Hospital Sketches",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 4022,
+   "title": "Coral Reefs; Volcanic Islands; South American Geology — Complete",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 4087,
+   "title": "An Essay Upon Projects",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 4225,
+   "title": "First and Last Things: A Confession of Faith and Rule of Life",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 4295,
+   "title": "Songs of Action",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 4346,
+   "title": "The Effects of Cross & Self-Fertilisation in the Vegetable Kingdom",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 4356,
+   "title": "Sky Island\r\nBeing the further exciting adventures of Trot and Cap'n Bill after their visit to the sea fairies",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 4357,
+   "title": "American Fairy Tales",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 4358,
+   "title": "The Sea Fairies",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 4572,
+   "title": "粉妝樓1-10回",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 4573,
+   "title": "粉妝樓11-20回",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 4574,
+   "title": "粉妝樓21-30回",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 4575,
+   "title": "粉妝樓31-40回",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 4576,
+   "title": "粉妝樓41-50回",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 4577,
+   "title": "粉妝樓51-60回",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 4578,
+   "title": "粉妝樓61-70回",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 4579,
+   "title": "粉妝樓71-80回",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 4580,
+   "title": "粉妝樓",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 4695,
+   "title": "Notes to the Complete Poetical Works of Percy Bysshe Shelley",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 4763,
+   "title": "The Game of Logic",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 4770,
+   "title": "Work: A Story of Experience",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 4960,
+   "title": "On Picket Duty, and Other Tales",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 5148,
+   "title": "Rodney Stone",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 5230,
+   "title": "The Invisible Man: A Grotesque Romance",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 5260,
+   "title": "A Duet, with an Occasional Chorus",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 5272,
+   "title": "The Sea Fogs",
+   "author": "Stevenson, Robert Louis, 1850-1894; Bacon, Thomas Rutherford, 1850-1913 [Author of introduction, etc.]",
+   "language": "英文"
+  },
+  {
+   "id": 5302,
+   "title": "The Land of the Blue Flower",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 5303,
+   "title": "The Little Hunchback Zia",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 5304,
+   "title": "My Robin",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 5314,
+   "title": "Household Tales by Brothers Grimm",
+   "author": "Grimm, Jacob, 1785-1863; Grimm, Wilhelm, 1786-1859; Hunt, Alfred William, Mrs., 1831-1912 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 5317,
+   "title": "Through the Magic Door",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 5319,
+   "title": "Pagan Papers",
+   "author": "Grahame, Kenneth, 1859-1932",
+   "language": "英文"
+  },
+  {
+   "id": 5340,
+   "title": "Further Chronicles of Avonlea",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 5341,
+   "title": "Kilmeny of the Orchard",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 5342,
+   "title": "The Story Girl",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 5343,
+   "title": "Rainbow Valley",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 5352,
+   "title": "Marjorie's Three Gifts",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 5605,
+   "title": "The Power of Movement in Plants",
+   "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925",
+   "language": "英文"
+  },
+  {
+   "id": 5660,
+   "title": "Mary Louise",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 5688,
+   "title": "The Innocents Abroad — Volume 01",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5689,
+   "title": "The Innocents Abroad — Volume 02",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5690,
+   "title": "The Innocents Abroad — Volume 03",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5691,
+   "title": "The Innocents Abroad — Volume 04",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5692,
+   "title": "The Innocents Abroad — Volume 05",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5693,
+   "title": "The Innocents Abroad — Volume 06",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5765,
+   "title": "Insectivorous Plants",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 5782,
+   "title": "A Tramp Abroad — Volume 01",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5783,
+   "title": "A Tramp Abroad — Volume 02",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5784,
+   "title": "A Tramp Abroad — Volume 03",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5785,
+   "title": "A Tramp Abroad — Volume 04",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5786,
+   "title": "A Tramp Abroad — Volume 05",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5787,
+   "title": "A Tramp Abroad — Volume 06",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5788,
+   "title": "A Tramp Abroad — Volume 07",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5808,
+   "title": "Following the Equator: A Journey Around the World. Part 1",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5809,
+   "title": "Following the Equator: A Journey Around the World. Part 2",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5810,
+   "title": "Following the Equator: A Journey Around the World. Part 3",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5811,
+   "title": "Following the Equator: A Journey Around the World. Part 4",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5812,
+   "title": "Following the Equator: A Journey Around the World. Part 5",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5813,
+   "title": "Following the Equator: A Journey Around the World. Part 6",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5814,
+   "title": "Following the Equator: A Journey Around the World. Part 7",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5818,
+   "title": "The Gilded Age, Part 1.",
+   "author": "Twain, Mark, 1835-1910; Warner, Charles Dudley, 1829-1900",
+   "language": "英文"
+  },
+  {
+   "id": 5819,
+   "title": "The Gilded Age, Part 2.",
+   "author": "Twain, Mark, 1835-1910; Warner, Charles Dudley, 1829-1900",
+   "language": "英文"
+  },
+  {
+   "id": 5820,
+   "title": "The Gilded Age, Part 3.",
+   "author": "Twain, Mark, 1835-1910; Warner, Charles Dudley, 1829-1900",
+   "language": "英文"
+  },
+  {
+   "id": 5821,
+   "title": "The Gilded Age, Part 4.",
+   "author": "Twain, Mark, 1835-1910; Warner, Charles Dudley, 1829-1900",
+   "language": "英文"
+  },
+  {
+   "id": 5822,
+   "title": "The Gilded Age, Part 5.",
+   "author": "Twain, Mark, 1835-1910; Warner, Charles Dudley, 1829-1900",
+   "language": "英文"
+  },
+  {
+   "id": 5823,
+   "title": "The Gilded Age, Part 6.",
+   "author": "Twain, Mark, 1835-1910; Warner, Charles Dudley, 1829-1900",
+   "language": "英文"
+  },
+  {
+   "id": 5824,
+   "title": "The Gilded Age, Part 7.",
+   "author": "Twain, Mark, 1835-1910; Warner, Charles Dudley, 1829-1900",
+   "language": "英文"
+  },
+  {
+   "id": 5830,
+   "title": "A Garland for Girls",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 5836,
+   "title": "Sketches New and Old, Part 1.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5837,
+   "title": "Sketches New and Old, Part 2.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5838,
+   "title": "Sketches New and Old, Part 3.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5839,
+   "title": "Sketches New and Old, Part 4.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5840,
+   "title": "Sketches New and Old, Part 5.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5841,
+   "title": "Sketches New and Old, Part 6.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 5842,
+   "title": "Sketches New and Old, Part 7.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 6027,
+   "title": "In the Closed Room",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 6422,
+   "title": "The Life, Adventures & Piracies of the Famous Captain Singleton",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 6424,
+   "title": "A Modern Utopia",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 6447,
+   "title": "Proserpine and Midas",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 6491,
+   "title": "The Head of the House of Coombe",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 6936,
+   "title": "Robinson Crusoe — in Words of One Syllable",
+   "author": "Defoe, Daniel, 1661?-1731; Aikin, Lucy, 1781-1864",
+   "language": "英文"
+  },
+  {
+   "id": 7007,
+   "title": "The True Story of My Life: A Sketch",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875; Howitt, Mary (Mary Botham), 1799-1888 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 7058,
+   "title": "Mankind in the Making",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 7089,
+   "title": "The Consolidator; or, Memoirs of Sundry Transactions from the World in the Moon",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 7100,
+   "title": "Adventures of Huckleberry Finn, Chapters 01 to 05",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7101,
+   "title": "Adventures of Huckleberry Finn, Chapters 06 to 10",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7102,
+   "title": "Adventures of Huckleberry Finn, Chapters 11 to 15",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7103,
+   "title": "Adventures of Huckleberry Finn, Chapters 16 to 20",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7104,
+   "title": "Adventures of Huckleberry Finn, Chapters 21 to 25",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7105,
+   "title": "Adventures of Huckleberry Finn, Chapters 26 to 30",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7106,
+   "title": "Adventures of Huckleberry Finn, Chapters 31 to 35",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7107,
+   "title": "Adventures of Huckleberry Finn, Chapters 36 to the Last",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7154,
+   "title": "The Prince and the Pauper, Part 1.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7155,
+   "title": "The Prince and the Pauper, Part 2.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7156,
+   "title": "The Prince and the Pauper, Part 3.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7157,
+   "title": "The Prince and the Pauper, Part 4.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7158,
+   "title": "The Prince and the Pauper, Part 5.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7159,
+   "title": "The Prince and the Pauper, Part 6.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7160,
+   "title": "The Prince and the Pauper, Part 7.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7161,
+   "title": "The Prince and the Pauper, Part 8.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7162,
+   "title": "The Prince and the Pauper, Part 9.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7193,
+   "title": "The Adventures of Tom Sawyer, Part 1.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7194,
+   "title": "The Adventures of Tom Sawyer, Part 2.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7195,
+   "title": "The Adventures of Tom Sawyer, Part 3.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7196,
+   "title": "The Adventures of Tom Sawyer, Part 4.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7197,
+   "title": "The Adventures of Tom Sawyer, Part 5.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7198,
+   "title": "The Adventures of Tom Sawyer, Part 6.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7199,
+   "title": "The Adventures of Tom Sawyer, Part 7.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7200,
+   "title": "The Adventures of Tom Sawyer, Part 8.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7209,
+   "title": "鬼谷子",
+   "author": "Guiguzi, active 4th century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7215,
+   "title": "鄧析子",
+   "author": "Deng, Xi, 546 BCE-502 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7216,
+   "title": "公孫龍子",
+   "author": "Gongsun, Long, active 3rd century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7217,
+   "title": "人物志",
+   "author": "Liu, Shao, active 3rd century",
+   "language": "中文"
+  },
+  {
+   "id": 7218,
+   "title": "三略",
+   "author": "Huang, Shigong, active 3rd century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7219,
+   "title": "尉繚子",
+   "author": "Wei, Liao, active 4th century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7220,
+   "title": "竹齋集",
+   "author": "Wang, Mian, 1287-1359",
+   "language": "中文"
+  },
+  {
+   "id": 7242,
+   "title": "A Connecticut Yankee in King Arthur's Court, Part 1.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7243,
+   "title": "A Connecticut Yankee in King Arthur's Court, Part 2.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7244,
+   "title": "A Connecticut Yankee in King Arthur's Court, Part 3.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7245,
+   "title": "A Connecticut Yankee in King Arthur's Court, Part 4.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7246,
+   "title": "A Connecticut Yankee in King Arthur's Court, Part 5.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7247,
+   "title": "A Connecticut Yankee in King Arthur's Court, Part 6.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7248,
+   "title": "A Connecticut Yankee in King Arthur's Court, Part 7.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7249,
+   "title": "A Connecticut Yankee in King Arthur's Court, Part 8.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7250,
+   "title": "A Connecticut Yankee in King Arthur's Court, Part 9.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 7260,
+   "title": "搜神記 volume 1-3",
+   "author": "Gan, Bao, active 317-322",
+   "language": "中文"
+  },
+  {
+   "id": 7266,
+   "title": "搜神後記",
+   "author": "Tao, Qian, 372?-427",
+   "language": "中文"
+  },
+  {
+   "id": 7270,
+   "title": "搜神記 volume 4-10",
+   "author": "Gan, Bao, active 317-322",
+   "language": "中文"
+  },
+  {
+   "id": 7271,
+   "title": "搜神記 volume 11-14",
+   "author": "Gan, Bao, active 317-322",
+   "language": "中文"
+  },
+  {
+   "id": 7272,
+   "title": "搜神記 volume 15-17",
+   "author": "Gan, Bao, active 317-322",
+   "language": "中文"
+  },
+  {
+   "id": 7273,
+   "title": "搜神記 volume 18-20",
+   "author": "Gan, Bao, active 317-322",
+   "language": "中文"
+  },
+  {
+   "id": 7285,
+   "title": "韓詩外傳, Vol. 1-2",
+   "author": "Han, Ying, active 150 B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7286,
+   "title": "韓詩外傳, Vol. 3-4",
+   "author": "Han, Ying, active 150 B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7287,
+   "title": "韓詩外傳, Vol. 5-6",
+   "author": "Han, Ying, active 150 B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7288,
+   "title": "韓詩外傳, Vol. 7-8",
+   "author": "Han, Ying, active 150 B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7289,
+   "title": "韓詩外傳, Vol. 9-10",
+   "author": "Han, Ying, active 150 B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7290,
+   "title": "韓詩外傳, Complete",
+   "author": "Han, Ying, active 150 B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7308,
+   "title": "The History of Mr. Polly",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 7312,
+   "title": "夢溪筆談, Volume 01-06",
+   "author": "Shen, Kuo, 1031-1095",
+   "language": "中文"
+  },
+  {
+   "id": 7313,
+   "title": "夢溪筆談, Volume 07-10",
+   "author": "Shen, Kuo, 1031-1095",
+   "language": "中文"
+  },
+  {
+   "id": 7314,
+   "title": "夢溪筆談, Volume 11-16",
+   "author": "Shen, Kuo, 1031-1095",
+   "language": "中文"
+  },
+  {
+   "id": 7315,
+   "title": "夢溪筆談, Volume 17-21",
+   "author": "Shen, Kuo, 1031-1095",
+   "language": "中文"
+  },
+  {
+   "id": 7316,
+   "title": "夢溪筆談, Volume 22-26",
+   "author": "Shen, Kuo, 1031-1095",
+   "language": "中文"
+  },
+  {
+   "id": 7317,
+   "title": "夢溪筆談, Volume 01-26",
+   "author": "Shen, Kuo, 1031-1095",
+   "language": "中文"
+  },
+  {
+   "id": 7327,
+   "title": "說苑, Volume 1-4",
+   "author": "Liu, Xiang, 78? BCE-7? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7328,
+   "title": "說苑, Volume 5-8",
+   "author": "Liu, Xiang, 78? BCE-7? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7329,
+   "title": "說苑, Volume 9-12",
+   "author": "Liu, Xiang, 78? BCE-7? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7330,
+   "title": "說苑, Volume 13-16",
+   "author": "Liu, Xiang, 78? BCE-7? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7331,
+   "title": "說苑, Volume 17-20",
+   "author": "Liu, Xiang, 78? BCE-7? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7332,
+   "title": "說苑",
+   "author": "Liu, Xiang, 78? BCE-7? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7341,
+   "title": "列子",
+   "author": "Liezi, active 4th century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 7342,
+   "title": "詩品",
+   "author": "Zhong, Rong, active 502-519",
+   "language": "中文"
+  },
+  {
+   "id": 7367,
+   "title": "管子",
+   "author": "Guan, Zhong, -646 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7375,
+   "title": "大學 章句",
+   "author": "Zhu, Xi, 1130-1200",
+   "language": "中文"
+  },
+  {
+   "id": 7376,
+   "title": "中庸 章句",
+   "author": "Zhu, Xi, 1130-1200",
+   "language": "中文"
+  },
+  {
+   "id": 7383,
+   "title": "商子",
+   "author": "Shang, Yang, -339 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7406,
+   "title": "茶經",
+   "author": "Lu, Yu, 733-804",
+   "language": "中文"
+  },
+  {
+   "id": 7408,
+   "title": "申鑒",
+   "author": "Xun, Yue, 148-209",
+   "language": "中文"
+  },
+  {
+   "id": 7425,
+   "title": "The Louisa Alcott Reader: a Supplementary Reader for the Fourth Year of School",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 7454,
+   "title": "顔氏家訓 — Volume 01 and 02",
+   "author": "Yan, Zhitui, 531-591",
+   "language": "中文"
+  },
+  {
+   "id": 7455,
+   "title": "顔氏家訓 — Volume 03 and 04",
+   "author": "Yan, Zhitui, 531-591",
+   "language": "中文"
+  },
+  {
+   "id": 7456,
+   "title": "顔氏家訓 — Volume 05 and 06",
+   "author": "Yan, Zhitui, 531-591",
+   "language": "中文"
+  },
+  {
+   "id": 7457,
+   "title": "顔氏家訓 — Volume 07",
+   "author": "Yan, Zhitui, 531-591",
+   "language": "中文"
+  },
+  {
+   "id": 7458,
+   "title": "顔氏家訓",
+   "author": "Yan, Zhitui, 531-591",
+   "language": "中文"
+  },
+  {
+   "id": 7468,
+   "title": "搜神後記. Selections. 1985",
+   "author": "Tao, Qian, 372?-427",
+   "language": "中文"
+  },
+  {
+   "id": 7483,
+   "title": "管子 — Volume 01 : Chapters 1-5",
+   "author": "Guan, Zhong, -646 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7484,
+   "title": "管子 — Volume 02 : Chapters 6-10",
+   "author": "Guan, Zhong, -646 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 7513,
+   "title": "O. T., A Danish Romance",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875",
+   "language": "英文"
+  },
+  {
+   "id": 7779,
+   "title": "Of Captain Mission",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 7964,
+   "title": "The mystery of Cloomber",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 8188,
+   "title": "The Mysterious Key and What It Opened",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 8384,
+   "title": "Pauline's Passion and Punishment",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 8394,
+   "title": "The doings of Raffles Haw",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 8471,
+   "title": "Life on the Mississippi, Part 1.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8472,
+   "title": "Life on the Mississippi, Part 2.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8473,
+   "title": "Life on the Mississippi, Part 3.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8474,
+   "title": "Life on the Mississippi, Part 4.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8475,
+   "title": "Life on the Mississippi, Part 5.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8476,
+   "title": "Life on the Mississippi, Part 6.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8477,
+   "title": "Life on the Mississippi, Part 7.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8478,
+   "title": "Life on the Mississippi, Part 8.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8479,
+   "title": "Life on the Mississippi, Part 9.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8480,
+   "title": "Life on the Mississippi, Part 10.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8481,
+   "title": "Life on the Mississippi, Part 11.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8482,
+   "title": "Life on the Mississippi, Part 12.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8582,
+   "title": "Roughing It, Part 1.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8583,
+   "title": "Roughing It, Part 2.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8584,
+   "title": "Roughing It, Part 3.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8585,
+   "title": "Roughing It, Part 4.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8586,
+   "title": "Roughing It, Part 5.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8587,
+   "title": "Roughing It, Part 6.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8588,
+   "title": "Roughing It, Part 7.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8589,
+   "title": "Roughing It, Part 8.",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 8677,
+   "title": "Behind a Mask; or, a Woman's Power",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 8694,
+   "title": "The Abbot's Ghost, or Maurice Treherne's Temptation: A Christmas Story",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 8727,
+   "title": "The Last Galley; Impressions and Tales",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 8991,
+   "title": "The Fur Country: Or, Seventy Degrees North Latitude",
+   "author": "Verne, Jules, 1828-1905; D'Anvers, N., 1844-1933 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 8992,
+   "title": "The Blockade Runners",
+   "author": "Verne, Jules, 1828-1905; D'Anvers, N., 1844-1933 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 8993,
+   "title": "The Mysterious Island",
+   "author": "Verne, Jules, 1828-1905; White, Stephen W. (Stephen William), 1840-1914 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 9150,
+   "title": "Dick Sands, the Boy Captain",
+   "author": "Verne, Jules, 1828-1905; Frewer, Ellen E. (Ellen Elizabeth), 1848-1940 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 9487,
+   "title": "A Fair Barbarian",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 9504,
+   "title": "Micah Clarke\r\nHis Statement as made to his three grandchildren Joseph, Gervas and Reuben During the Hard Winter of 1734",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 9618,
+   "title": "The Field of Ice\nPart II of the Adventures of Captain Hatteras",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 9874,
+   "title": "A Visit to Three Fronts: June 1916",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 10059,
+   "title": "Aunt Jane's Nieces on Vacation",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 10123,
+   "title": "Aunt Jane's Nieces",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 10124,
+   "title": "Aunt Jane's Nieces and Uncle John",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 10291,
+   "title": "In the Fourth Year: Anticipations of a World Peace",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 10339,
+   "title": "An Antarctic Mystery",
+   "author": "Verne, Jules, 1828-1905; Hoey, Frances Cashel, 1830-1908 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 10359,
+   "title": "Aunt Jane's Nieces at Millville",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 10360,
+   "title": "Kitty's Class Day and Other Stories",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 10432,
+   "title": "Aunt Jane's Nieces out West",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 10446,
+   "title": "The Green Flag, and Other Stories of War and Sport",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 10466,
+   "title": "Little Saint Elizabeth and Other Stories",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 10468,
+   "title": "Aunt Jane's Nieces in Society",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 10547,
+   "title": "Topsy-Turvy",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 10581,
+   "title": "Uncle Bernac: A Memory of the Empire",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 10761,
+   "title": "Essays of Robert Louis Stevenson\r\nSelected and Edited With an Introduction and Notes by William Lyon Phelps",
+   "author": "Stevenson, Robert Louis, 1850-1894; Phelps, William Lyon, 1865-1943 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 11239,
+   "title": "The Life and Adventures of Robinson Crusoe of York, Mariner, Volume 1\nWith an Account of His Travels Round Three Parts of the Globe,\nWritten By Himself, in Two Volumes",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 11247,
+   "title": "The Exploits of Brigadier Gerard",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 11263,
+   "title": "The Adventures of a Special Correspondent Among the Various Races and Countries of Central Asia\r\nBeing the Exploits and Experiences of Claudius Bombarnac of \"The Twentieth Century\"",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 11289,
+   "title": "What is Coming? A Forecast of Things after the War",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 11413,
+   "title": "The Refugees\r\nA Tale of Two Continents",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 11502,
+   "title": "An Englishman Looks at the World\r\nBeing a Series of Unrestrained Remarks upon Contemporary Matters",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 11556,
+   "title": "Facing the Flag",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 11640,
+   "title": "Love and Mr. Lewisham",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 11656,
+   "title": "The Great Shadow and Other Napoleonic Tales",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 11696,
+   "title": "The Food of the Gods and How It Came to Earth",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 11866,
+   "title": "The Life and Most Surprising Adventures of Robinson Crusoe, of York, Mariner (1801)",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 11870,
+   "title": "The Country of the Blind, and Other Stories",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 12051,
+   "title": "Dick Sand: A Captain at Fifteen",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 12103,
+   "title": "The Tale of Mrs. Tiggy-Winkle",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 12163,
+   "title": "The Sleeper Awakes\nA Revised Edition of When the Sleeper Wakes",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 12241,
+   "title": "Poems by Emily Dickinson, Third Series",
+   "author": "Dickinson, Emily, 1830-1886; Todd, Mabel Loomis, 1856-1932 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 12242,
+   "title": "Poems by Emily Dickinson, Three Series, Complete",
+   "author": "Dickinson, Emily, 1830-1886",
+   "language": "英文"
+  },
+  {
+   "id": 12259,
+   "title": "Memoirs of a Cavalier\nA Military Journal of the Wars in Germany, and the Wars in England.\nFrom the Year 1632 to the Year 1648.",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 12313,
+   "title": "Pictures of Sweden",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875",
+   "language": "英文"
+  },
+  {
+   "id": 12407,
+   "title": "兵法 (Bīng Fǎ)",
+   "author": "Sunzi, active 6th century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 12479,
+   "title": "三字經",
+   "author": "Anonymous",
+   "language": "中文"
+  },
+  {
+   "id": 12555,
+   "title": "The Tragedy of the Korosko",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 12623,
+   "title": "The Life and Adventures of Robinson Crusoe (1808)",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 12750,
+   "title": "The Stolen Bacillus and Other Incidents",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 12901,
+   "title": "The Moon-Voyage",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 13110,
+   "title": "Aunt Jane's Nieces at Work",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 13152,
+   "title": "The Firm of Girdlestone",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 14060,
+   "title": "Mr. Britling Sees It Through",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 14065,
+   "title": "The History of the Remarkable Life of John Sheppard\r\nContaining a Particular Account of His Many Robberies and Escapes",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 14133,
+   "title": "David Balfour\r\nBeing Memoirs Of His Adventures At Home And Abroad, The Second Part: In Which Are Set Forth His Misfortunes Anent The Appin Murder; His Troubles With Lord Advocate Grant; Captivity On The Bass Rock; Journey Into Holland And France; And Singular Relations With James More Drummond Or Macgregor, A Son Of The Notorious Rob Roy, And His Daughter Catriona",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 14220,
+   "title": "The Tale of the Flopsy Bunnies",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 14407,
+   "title": "The Tale of Benjamin Bunny",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 14436,
+   "title": "Military Memoirs of Capt. George Carleton",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 14442,
+   "title": "Memoirs of Major Alexander Ramkins (1718)",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 14444,
+   "title": "The Complete English Tradesman (1839 ed.)",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 14535,
+   "title": "A Christmas Sermon",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 14797,
+   "title": "The Tale of Timmy Tiptoes",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 14814,
+   "title": "The Tale of Jemima Puddle-Duck",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 14837,
+   "title": "The Tale of Tom Kitten",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 14838,
+   "title": "The Tale of Peter Rabbit",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 14848,
+   "title": "The Story of Miss Moppet",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 14868,
+   "title": "The Tailor of Gloucester",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 14872,
+   "title": "The Tale of Squirrel Nutkin",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 14877,
+   "title": "The Tale of Ginger and Pickles",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 15077,
+   "title": "The Tale of Mr. Jeremy Fisher",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 15137,
+   "title": "The Tale of Mrs. Tiggy-Winkle",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 15234,
+   "title": "The Tale of the Pie and the Patty Pan",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 15238,
+   "title": "Mathilda",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 15284,
+   "title": "The Tale of Johnny Town-Mouse",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 15575,
+   "title": "The Tale of Samuel Whiskers; Or, The Roly-Poly Pudding",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 15618,
+   "title": "The Loving Ballad of Lord Bateman",
+   "author": "Dickens, Charles, 1812-1870; Thackeray, William Makepeace, 1811-1863; Cruikshank, George, 1792-1878 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 15651,
+   "title": "His Grace of Osmonde\r\nBeing the Portions of That Nobleman's Life Omitted in the Relation of His Lady's Story Presented to the World of Fashion under the Title of A Lady of Quality",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 16085,
+   "title": "A Voyage in a Balloon (1852)",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 16259,
+   "title": "The Surprising Adventures of the Magical Monarch of Mo and His People",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Ver Beck, Frank, 1858-1933 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 16344,
+   "title": "The Waif of the \"Cynthia\"",
+   "author": "Verne, Jules, 1828-1905; Grousset, Paschal, 1844-1909",
+   "language": "英文"
+  },
+  {
+   "id": 16457,
+   "title": "All Around the Moon",
+   "author": "Verne, Jules, 1828-1905; Roth, Edward, 1826-1911 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 16566,
+   "title": "Aunt Jane's Nieces Abroad",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 17089,
+   "title": "The Tale of Mrs. Tittlemouse",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 17221,
+   "title": "History of the Plague in London",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 17396,
+   "title": "The Secret Garden",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 17398,
+   "title": "The Cabman's Story\nThe Mysteries of a London 'Growler'",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 17508,
+   "title": "Certain Personal Matters",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 18247,
+   "title": "The Last Man",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 18857,
+   "title": "A Journey to the Centre of the Earth",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 18945,
+   "title": "Robin",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 19002,
+   "title": "Alice's Adventures Under Ground\r\nBeing a facsimile of the original Ms. book afterwards developed into \"Alice's Adventures in Wonderland\"",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 19068,
+   "title": "Household Stories by the Brothers Grimm",
+   "author": "Grimm, Jacob, 1785-1863; Grimm, Wilhelm, 1786-1859; Crane, Walter, 1845-1915 [Illustrator]; Crane, Lucy, 1842-1882 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 19229,
+   "title": "Anticipations of the reaction of mechanical and scientific progress upon human life and thought",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 19337,
+   "title": "A Christmas Carol",
+   "author": "Dickens, Charles, 1812-1870; Williams, George Alfred, 1875-1932 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 19484,
+   "title": "Editorial Wild Oats",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 19750,
+   "title": "The Waif Woman",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 19805,
+   "title": "The Tale of Mr. Tod",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 19987,
+   "title": "Chapters from My Autobiography",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 20795,
+   "title": "The Cricket on the Hearth",
+   "author": "Dickens, Charles, 1812-1870; Williams, George Alfred, 1875-1932 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 21489,
+   "title": "The secret of the island",
+   "author": "Verne, Jules, 1828-1905; Kingston, Agnes Kinloch, 1823-1913 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 21686,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 01",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Commentator]",
+   "language": "英文"
+  },
+  {
+   "id": 21768,
+   "title": "A desert drama",
+   "author": "Doyle, Arthur Conan, 1859-1930; Paget, Sidney, 1860-1908 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 21769,
+   "title": "Songs Of The Road",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 21781,
+   "title": "Text Book of Biology, Part 1: Vertebrata",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 21839,
+   "title": "Sense and Sensibility",
+   "author": "Austen, Jane, 1775-1817; Dobson, Austin, 1840-1921 [Commentator]; Thomson, Hugh, 1860-1920 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 22022,
+   "title": "Aunt Jo's scrap bag, Volume 2",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 22234,
+   "title": "Aunt Jo's scrap-bag, Volume 5",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 22357,
+   "title": "Danger! and Other Stories",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 22566,
+   "title": "Dorothy and the Wizard in Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 22728,
+   "title": "The Foundations of the Origin of Species\nTwo Essays written in 1842 and 1844",
+   "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 22759,
+   "title": "The English at the North Pole\nPart I of the Adventures of Captain Hatteras",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 22764,
+   "title": "On the Origin of Species by Means of Natural Selection\r\nor the Preservation of Favoured Races in the Struggle for Life. (2nd edition)",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 23059,
+   "title": "My friend the murderer",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 23218,
+   "title": "The Red Room",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 23324,
+   "title": "\"Surly Tim\": A Lancashire Story",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 23325,
+   "title": "\"Seth\"",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 23326,
+   "title": "Mère Giraud's Little Daughter",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 23327,
+   "title": "Lodusky",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 23328,
+   "title": "Esmeralda",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 23329,
+   "title": "\"Le Monsieur de la Petite Dame\"",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 23330,
+   "title": "One Day At Arle",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 23344,
+   "title": "The Magic Fishbone\nA Holiday Romance from the Pen of Miss Alice Rainbird, Aged 7",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 23350,
+   "title": "Cecily Parsley's Nursery Rhymes",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 23489,
+   "title": "Godfrey Morgan: A Californian Mystery",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 23814,
+   "title": "賈誼新書",
+   "author": "Jia, Yi, 201 BCE-169 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 23816,
+   "title": "朱子治家格言",
+   "author": "Zhu, Yongchun, 1617-1689",
+   "language": "中文"
+  },
+  {
+   "id": 23817,
+   "title": "閱微草堂筆記",
+   "author": "Ji, Yun, 1724-1805",
+   "language": "中文"
+  },
+  {
+   "id": 23818,
+   "title": "鏡花緣",
+   "author": "Li, Ruzhen, 1763?-1830?",
+   "language": "中文"
+  },
+  {
+   "id": 23824,
+   "title": "說唐",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 23827,
+   "title": "胡涂世界",
+   "author": "Wu, Jianren, 1866-1910",
+   "language": "中文"
+  },
+  {
+   "id": 23833,
+   "title": "商君書",
+   "author": "Shang, Yang, -339 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 23835,
+   "title": "隋唐演義",
+   "author": "Chu, Renhu, active 1675-1695",
+   "language": "中文"
+  },
+  {
+   "id": 23839,
+   "title": "論語",
+   "author": "Confucius, 552 BCE-480 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 23840,
+   "title": "近思錄",
+   "author": "Zhu, Xi, 1130-1200",
+   "language": "中文"
+  },
+  {
+   "id": 23849,
+   "title": "牡丹亭",
+   "author": "Tang, Xianzu, 1550-1616",
+   "language": "中文"
+  },
+  {
+   "id": 23850,
+   "title": "老殘遊記",
+   "author": "Liu, E, 1857-1909",
+   "language": "中文"
+  },
+  {
+   "id": 23855,
+   "title": "明夷待訪錄",
+   "author": "Huang, Zongxi, 1610-1695",
+   "language": "中文"
+  },
+  {
+   "id": 23863,
+   "title": "水滸傳",
+   "author": "Shi, Nai'an, 1290?-1365?",
+   "language": "中文"
+  },
+  {
+   "id": 23864,
+   "title": "孫子兵法",
+   "author": "Sunzi, active 6th century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 23865,
+   "title": "恨海",
+   "author": "Wu, Jianren, 1866-1910",
+   "language": "中文"
+  },
+  {
+   "id": 23873,
+   "title": "詩經",
+   "author": "Anonymous",
+   "language": "中文"
+  },
+  {
+   "id": 23876,
+   "title": "徐霞客遊記",
+   "author": "Xu, Hongzu, 1586-1641",
+   "language": "中文"
+  },
+  {
+   "id": 23906,
+   "title": "西廂記",
+   "author": "Wang, Shifu, 1260-1316",
+   "language": "中文"
+  },
+  {
+   "id": 23907,
+   "title": "無聲戲",
+   "author": "Li, Yu, 1611-1680?",
+   "language": "中文"
+  },
+  {
+   "id": 23909,
+   "title": "韓詩外傳",
+   "author": "Han, Ying, active 150 B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 23910,
+   "title": "封神演義",
+   "author": "Lu, Xixing, 1520-1606",
+   "language": "中文"
+  },
+  {
+   "id": 23912,
+   "title": "千字文",
+   "author": "Zhou, Xingsi, -521",
+   "language": "中文"
+  },
+  {
+   "id": 23914,
+   "title": "山水小牘",
+   "author": "Huangfu, Mei, active 873-910",
+   "language": "中文"
+  },
+  {
+   "id": 23915,
+   "title": "虬髯客傳",
+   "author": "Du, Guangting, 850-933",
+   "language": "中文"
+  },
+  {
+   "id": 23945,
+   "title": "新序",
+   "author": "Liu, Xiang, 78? BCE-7? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 23948,
+   "title": "高士傳",
+   "author": "Huangfu, Mi, 215-282",
+   "language": "中文"
+  },
+  {
+   "id": 23949,
+   "title": "茶經",
+   "author": "Lu, Yu, 733-804",
+   "language": "中文"
+  },
+  {
+   "id": 23950,
+   "title": "三國志演義",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 23962,
+   "title": "西遊記",
+   "author": "Wu, Cheng'en, 1500?-1582?",
+   "language": "中文"
+  },
+  {
+   "id": 23981,
+   "title": "瀛涯勝覽",
+   "author": "Ma, Huan, active 1414-1451",
+   "language": "中文"
+  },
+  {
+   "id": 23982,
+   "title": "星槎勝覽",
+   "author": "Fei, Xin, 1388-1436?",
+   "language": "中文"
+  },
+  {
+   "id": 23983,
+   "title": "斷鴻零雁記",
+   "author": "Su, Manshu, 1884-1918",
+   "language": "中文"
+  },
+  {
+   "id": 24004,
+   "title": "竇娥寃",
+   "author": "Guan, Hanqing, 1210?-1298?",
+   "language": "中文"
+  },
+  {
+   "id": 24022,
+   "title": "A Christmas Carol",
+   "author": "Dickens, Charles, 1812-1870; Rackham, Arthur, 1867-1939 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 24028,
+   "title": "東坡樂府",
+   "author": "Su, Shi, 1037-1101",
+   "language": "中文"
+  },
+  {
+   "id": 24032,
+   "title": "儒林外史",
+   "author": "Wu, Jingzi, 1701-1754",
+   "language": "中文"
+  },
+  {
+   "id": 24037,
+   "title": "顔氏家訓",
+   "author": "Yan, Zhitui, 531-591",
+   "language": "中文"
+  },
+  {
+   "id": 24040,
+   "title": "菜根譚前後集",
+   "author": "Hong, Zicheng, active 1596",
+   "language": "中文"
+  },
+  {
+   "id": 24041,
+   "title": "洛神賦",
+   "author": "Cao, Zhi, 192-232",
+   "language": "中文"
+  },
+  {
+   "id": 24042,
+   "title": "徬徨",
+   "author": "Lu, Xun, 1881-1936",
+   "language": "中文"
+  },
+  {
+   "id": 24047,
+   "title": "世說新語",
+   "author": "Liu, Yiqing, 403-444",
+   "language": "中文"
+  },
+  {
+   "id": 24049,
+   "title": "韩非子",
+   "author": "Han, Fei, -234 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 24050,
+   "title": "菜根譚",
+   "author": "Hong, Zicheng, active 1596",
+   "language": "中文"
+  },
+  {
+   "id": 24051,
+   "title": "李娃傳",
+   "author": "Bai, Xingjian, 776-826",
+   "language": "中文"
+  },
+  {
+   "id": 24058,
+   "title": "穆天子传",
+   "author": "Guo, Pu, 276-324",
+   "language": "中文"
+  },
+  {
+   "id": 24059,
+   "title": "淮南子",
+   "author": "Liu, An, 180 BCE-123 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 24075,
+   "title": "千字文",
+   "author": "Zhou, Xingsi, -521",
+   "language": "中文"
+  },
+  {
+   "id": 24099,
+   "title": "二十年目睹之怪現狀",
+   "author": "Wu, Jianren, 1866-1910",
+   "language": "中文"
+  },
+  {
+   "id": 24106,
+   "title": "安樂集",
+   "author": "Daochuo, 562-645",
+   "language": "中文"
+  },
+  {
+   "id": 24110,
+   "title": "歐遊雜記",
+   "author": "Zhu, Ziqing, 1898-1948",
+   "language": "中文"
+  },
+  {
+   "id": 24112,
+   "title": "人間詞話",
+   "author": "Wang, Guowei, 1877-1927",
+   "language": "中文"
+  },
+  {
+   "id": 24113,
+   "title": "九命奇冤",
+   "author": "Wu, Jianren, 1866-1910",
+   "language": "中文"
+  },
+  {
+   "id": 24114,
+   "title": "東坡志林",
+   "author": "Su, Shi, 1037-1101",
+   "language": "中文"
+  },
+  {
+   "id": 24137,
+   "title": "東京夢華錄",
+   "author": "Meng, Yuanlao, active 1126-1147",
+   "language": "中文"
+  },
+  {
+   "id": 24138,
+   "title": "官場現形記",
+   "author": "Li, Boyuan, 1867-1906",
+   "language": "中文"
+  },
+  {
+   "id": 24139,
+   "title": "官場現形記",
+   "author": "Li, Boyuan, 1867-1906",
+   "language": "中文"
+  },
+  {
+   "id": 24141,
+   "title": "警世通言",
+   "author": "Feng, Menglong, 1574-1646",
+   "language": "中文"
+  },
+  {
+   "id": 24142,
+   "title": "轟天雷",
+   "author": "Tenggu, Guxiang, 1880-1919",
+   "language": "中文"
+  },
+  {
+   "id": 24143,
+   "title": "星槎勝覽",
+   "author": "Fei, Xin, 1388-1436?",
+   "language": "中文"
+  },
+  {
+   "id": 24144,
+   "title": "瀛涯勝覽",
+   "author": "Ma, Huan, active 1414-1451",
+   "language": "中文"
+  },
+  {
+   "id": 24162,
+   "title": "二刻拍案惊奇",
+   "author": "Ling, Mengchu, 1580-1644",
+   "language": "中文"
+  },
+  {
+   "id": 24178,
+   "title": "孟子",
+   "author": "Mencius, 373? BCE-290? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 24183,
+   "title": "宋史",
+   "author": "Tuotuo, 1313-1355",
+   "language": "中文"
+  },
+  {
+   "id": 24184,
+   "title": "千字文",
+   "author": "Zhou, Xingsi, -521",
+   "language": "中文"
+  },
+  {
+   "id": 24193,
+   "title": "燕子箋",
+   "author": "Ruan, Dacheng, 1587-1646",
+   "language": "中文"
+  },
+  {
+   "id": 24223,
+   "title": "小爾雅",
+   "author": "Kong, Fu, 265? BCE-209 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 24226,
+   "title": "史記",
+   "author": "Sima, Qian, 146? BCE-87? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 24227,
+   "title": "情變",
+   "author": "Wu, Jianren, 1866-1910",
+   "language": "中文"
+  },
+  {
+   "id": 24228,
+   "title": "列女傳",
+   "author": "Liu, Xiang, 78? BCE-7? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 24229,
+   "title": "舊唐書",
+   "author": "Liu, Xu, 887-946",
+   "language": "中文"
+  },
+  {
+   "id": 24232,
+   "title": "孝經",
+   "author": "Unknown",
+   "language": "中文"
+  },
+  {
+   "id": 24234,
+   "title": "桃花扇",
+   "author": "Kong, Shangren, 1648-1718",
+   "language": "中文"
+  },
+  {
+   "id": 24239,
+   "title": "醒世恆言",
+   "author": "Feng, Menglong, 1574-1646",
+   "language": "中文"
+  },
+  {
+   "id": 24240,
+   "title": "墨子",
+   "author": "Mo, Di, 471? BCE-392? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 24264,
+   "title": "紅樓夢",
+   "author": "Cao, Xueqin, 1717?-1763",
+   "language": "中文"
+  },
+  {
+   "id": 24272,
+   "title": "傷寒論",
+   "author": "Zhang, Zhongjing, active 168-196",
+   "language": "中文"
+  },
+  {
+   "id": 24295,
+   "title": "遊仙窟",
+   "author": "Zhang, Zhuo, 660?-740?",
+   "language": "中文"
+  },
+  {
+   "id": 24316,
+   "title": "花間集",
+   "author": "Zhao, Chongzuo, active 934-965",
+   "language": "中文"
+  },
+  {
+   "id": 24459,
+   "title": "The Lost Princess of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 24578,
+   "title": "Mary Louise Solves a Mystery",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 24733,
+   "title": "辛棄疾詞選",
+   "author": "Xin, Qiji, 1140-1207",
+   "language": "中文"
+  },
+  {
+   "id": 24772,
+   "title": "Sara Crewe; Or, What Happened at Miss Minchin's",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 24873,
+   "title": "Lucy Maud Montgomery Short Stories, 1896 to 1901",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 24874,
+   "title": "Lucy Maud Montgomery Short Stories, 1902 to 1903",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 24875,
+   "title": "Lucy Maud Montgomery Short Stories, 1904",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 24876,
+   "title": "Lucy Maud Montgomery Short Stories, 1905 to 1906",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 24877,
+   "title": "Lucy Maud Montgomery Short Stories, 1907 to 1908",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 24878,
+   "title": "Lucy Maud Montgomery Short Stories, 1909 to 1922",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 24923,
+   "title": "The Variation of Animals and Plants Under Domestication, Vol. I.",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 24951,
+   "title": "The War in South Africa, Its Cause and Conduct",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 25121,
+   "title": "花外集",
+   "author": "Wang, Yisun, -1290?",
+   "language": "中文"
+  },
+  {
+   "id": 25123,
+   "title": "脾胃論",
+   "author": "Li, Gao, 1180-1251",
+   "language": "中文"
+  },
+  {
+   "id": 25124,
+   "title": "老殘遊記",
+   "author": "Liu, E, 1857-1909",
+   "language": "中文"
+  },
+  {
+   "id": 25128,
+   "title": "孽海花",
+   "author": "Zeng, Pu, 1872-1935",
+   "language": "中文"
+  },
+  {
+   "id": 25130,
+   "title": "夜雨秋燈錄",
+   "author": "Xuan, Ding, 1832-1880?",
+   "language": "中文"
+  },
+  {
+   "id": 25142,
+   "title": "王陽明全集",
+   "author": "Wang, Yangming, 1472-1529",
+   "language": "中文"
+  },
+  {
+   "id": 25160,
+   "title": "三字經",
+   "author": "Wang, Yinglin, 1223-1296",
+   "language": "中文"
+  },
+  {
+   "id": 25161,
+   "title": "魏鄭公諫錄",
+   "author": "Wang, Fangqing, -702",
+   "language": "中文"
+  },
+  {
+   "id": 25162,
+   "title": "池北偶談",
+   "author": "Wang, Shizhen, 1634-1711",
+   "language": "中文"
+  },
+  {
+   "id": 25165,
+   "title": "The Candy Country",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 25167,
+   "title": "司馬法",
+   "author": "Sima, Rangju, active 4th century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 25168,
+   "title": "鬼谷子",
+   "author": "Guiguzi, active 4th century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 25169,
+   "title": "關尹子",
+   "author": "Yin, Xi, active 6th century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 25173,
+   "title": "北夢瑣言",
+   "author": "Sun, Guangxian, -968",
+   "language": "中文"
+  },
+  {
+   "id": 25187,
+   "title": "花月痕",
+   "author": "Wei, Zi'an, 1819-1874",
+   "language": "中文"
+  },
+  {
+   "id": 25192,
+   "title": "浮生六記",
+   "author": "Shen, Fu, 1763-1808?",
+   "language": "中文"
+  },
+  {
+   "id": 25194,
+   "title": "飲水詞集",
+   "author": "Nalan, Xingde, 1655-1685",
+   "language": "中文"
+  },
+  {
+   "id": 25214,
+   "title": "劍俠傳",
+   "author": "Wang, Shizhen, 1634-1711",
+   "language": "中文"
+  },
+  {
+   "id": 25218,
+   "title": "六一詞",
+   "author": "Ouyang, Xiu, 1007-1072",
+   "language": "中文"
+  },
+  {
+   "id": 25219,
+   "title": "花月痕",
+   "author": "Wei, Zi'an, 1819-1874",
+   "language": "中文"
+  },
+  {
+   "id": 25225,
+   "title": "古文觀止",
+   "author": "Wu, Chengquan, active 1695-1711; Wu, Dazhi, active 1678-1695",
+   "language": "中文"
+  },
+  {
+   "id": 25231,
+   "title": "遊仙窟",
+   "author": "Zhang, Zhuo, 660?-740?",
+   "language": "中文"
+  },
+  {
+   "id": 25236,
+   "title": "筠州黃檗山斷際禪師傳法心要",
+   "author": "Huangbo, -850",
+   "language": "中文"
+  },
+  {
+   "id": 25242,
+   "title": "野草",
+   "author": "Lu, Xun, 1881-1936",
+   "language": "中文"
+  },
+  {
+   "id": 25243,
+   "title": "海遊記",
+   "author": "Wugenzi, active 1573",
+   "language": "中文"
+  },
+  {
+   "id": 25245,
+   "title": "子不語",
+   "author": "Yuan, Mei, 1716-1798",
+   "language": "中文"
+  },
+  {
+   "id": 25246,
+   "title": "琵琶記",
+   "author": "Gao, Ming, 1306?-1359; Chen, Jiru, 1558-1639 [Commentator]",
+   "language": "中文"
+  },
+  {
+   "id": 25247,
+   "title": "李義山詩集",
+   "author": "Li, Shangyin, 813-858",
+   "language": "中文"
+  },
+  {
+   "id": 25248,
+   "title": "平妖傳",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 25249,
+   "title": "近思錄",
+   "author": "Zhu, Xi, 1130-1200; Lü, Zuqian, 1137-1181",
+   "language": "中文"
+  },
+  {
+   "id": 25252,
+   "title": "貞觀政要",
+   "author": "Wu, Jing, 670-749",
+   "language": "中文"
+  },
+  {
+   "id": 25260,
+   "title": "豐收",
+   "author": "Ye, Zi, 1912?-1939",
+   "language": "中文"
+  },
+  {
+   "id": 25262,
+   "title": "日知錄",
+   "author": "Gu, Yanwu, 1613-1682",
+   "language": "中文"
+  },
+  {
+   "id": 25263,
+   "title": "周禮",
+   "author": "Zhou, Gong, -1106 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 25271,
+   "title": "朝花夕拾",
+   "author": "Lu, Xun, 1881-1936",
+   "language": "中文"
+  },
+  {
+   "id": 25280,
+   "title": "大唐新語",
+   "author": "Liu, Su, active 806-820",
+   "language": "中文"
+  },
+  {
+   "id": 25287,
+   "title": "續世說",
+   "author": "Kong, Pingzhong, 1044-1111",
+   "language": "中文"
+  },
+  {
+   "id": 25297,
+   "title": "狂人日記",
+   "author": "Lu, Xun, 1881-1936",
+   "language": "中文"
+  },
+  {
+   "id": 25298,
+   "title": "郁離子",
+   "author": "Liu, Ji, 1311-1375",
+   "language": "中文"
+  },
+  {
+   "id": 25314,
+   "title": "荀子集解",
+   "author": "Wang, Xianqian, 1842-1918",
+   "language": "中文"
+  },
+  {
+   "id": 25315,
+   "title": "續子不語",
+   "author": "Yuan, Mei, 1716-1798",
+   "language": "中文"
+  },
+  {
+   "id": 25323,
+   "title": "狐狸緣全傳",
+   "author": "Zuiyueshanren, active 1804-1876",
+   "language": "中文"
+  },
+  {
+   "id": 25324,
+   "title": "玉台新詠",
+   "author": "Xu, Ling, 507-583 [Editor]",
+   "language": "中文"
+  },
+  {
+   "id": 25327,
+   "title": "兒女英雄傳",
+   "author": "Wenkang, active 1842-1851",
+   "language": "中文"
+  },
+  {
+   "id": 25332,
+   "title": "阿Ｑ正傳",
+   "author": "Lu, Xun, 1881-1936",
+   "language": "中文"
+  },
+  {
+   "id": 25346,
+   "title": "南腔北調集",
+   "author": "Lu, Xun, 1881-1936",
+   "language": "中文"
+  },
+  {
+   "id": 25347,
+   "title": "貞觀政要",
+   "author": "Wu, Jing, 670-749",
+   "language": "中文"
+  },
+  {
+   "id": 25349,
+   "title": "東周列國志",
+   "author": "Feng, Menglong, 1574-1646",
+   "language": "中文"
+  },
+  {
+   "id": 25350,
+   "title": "蕩寇志",
+   "author": "Yu, Wanchun, 1794-1849",
+   "language": "中文"
+  },
+  {
+   "id": 25352,
+   "title": "長恨歌",
+   "author": "Bai, Juyi, 772-846",
+   "language": "中文"
+  },
+  {
+   "id": 25360,
+   "title": "孟子字義疏證",
+   "author": "Dai, Zhen, 1724-1777",
+   "language": "中文"
+  },
+  {
+   "id": 25362,
+   "title": "搜神記",
+   "author": "Gan, Bao, active 317-322",
+   "language": "中文"
+  },
+  {
+   "id": 25365,
+   "title": "顔氏家訓",
+   "author": "Yan, Zhitui, 531-591",
+   "language": "中文"
+  },
+  {
+   "id": 25366,
+   "title": "慎子",
+   "author": "Shen, Dao, 351? BCE-276? BCE",
+   "language": "中文"
+  },
+  {
+   "id": 25367,
+   "title": "漱玉詞",
+   "author": "Li, Qingzhao, 1081-1141?",
+   "language": "中文"
+  },
+  {
+   "id": 25368,
+   "title": "西京雜記",
+   "author": "Ge, Hong, 284-364",
+   "language": "中文"
+  },
+  {
+   "id": 25374,
+   "title": "孔叢子",
+   "author": "Kong, Fu, 265? BCE-209 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 25377,
+   "title": "鏡花緣",
+   "author": "Li, Ruzhen, 1763?-1830?",
+   "language": "中文"
+  },
+  {
+   "id": 25379,
+   "title": "文明小史",
+   "author": "Li, Boyuan, 1867-1906",
+   "language": "中文"
+  },
+  {
+   "id": 25380,
+   "title": "閒情偶寄",
+   "author": "Li, Yu, 1611-1680?",
+   "language": "中文"
+  },
+  {
+   "id": 25385,
+   "title": "春秋繁露",
+   "author": "Dong, Zhongshu, active 2nd century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 25391,
+   "title": "甌北詩話",
+   "author": "Zhao, Yi, 1727-1814",
+   "language": "中文"
+  },
+  {
+   "id": 25401,
+   "title": "陶庵夢憶",
+   "author": "Zhang, Dai, 1597-1679",
+   "language": "中文"
+  },
+  {
+   "id": 25402,
+   "title": "九命奇冤",
+   "author": "Wu, Jianren, 1866-1910",
+   "language": "中文"
+  },
+  {
+   "id": 25417,
+   "title": "李賀詩選",
+   "author": "Li, He, 790-816",
+   "language": "中文"
+  },
+  {
+   "id": 25423,
+   "title": "狂人日記",
+   "author": "Lu, Xun, 1881-1936",
+   "language": "中文"
+  },
+  {
+   "id": 25431,
+   "title": "歸田錄",
+   "author": "Ouyang, Xiu, 1007-1072",
+   "language": "中文"
+  },
+  {
+   "id": 25460,
+   "title": "詩品",
+   "author": "Zhong, Rong, active 502-519",
+   "language": "中文"
+  },
+  {
+   "id": 25471,
+   "title": "闲情偶寄",
+   "author": "Li, Yu, 1611-1680?",
+   "language": "中文"
+  },
+  {
+   "id": 25498,
+   "title": "佛說無量壽經",
+   "author": "Sanghavarman, -520 [Translator]",
+   "language": "中文"
+  },
+  {
+   "id": 25517,
+   "title": "傳習錄",
+   "author": "Wang, Yangming, 1472-1529",
+   "language": "中文"
+  },
+  {
+   "id": 25519,
+   "title": "Little Wizard Stories of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 25521,
+   "title": "玉梨魂",
+   "author": "Xu, Zhenya, 1889-1937",
+   "language": "中文"
+  },
+  {
+   "id": 25557,
+   "title": "臺灣通史\r\n唐山過海的故事",
+   "author": "Lian, Heng, 1878-1936",
+   "language": "中文"
+  },
+  {
+   "id": 25558,
+   "title": "呻吟語",
+   "author": "Lü, Kun, 1536-1618",
+   "language": "中文"
+  },
+  {
+   "id": 25559,
+   "title": "中國小說史略",
+   "author": "Lu, Xun, 1881-1936",
+   "language": "中文"
+  },
+  {
+   "id": 25581,
+   "title": "Rinkitink in Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 25606,
+   "title": "三國志",
+   "author": "Chen, Shou, 233-297; Pei, Songzhi, 372-451 [Commentator]",
+   "language": "中文"
+  },
+  {
+   "id": 25609,
+   "title": "A Child's Garden of Verses",
+   "author": "Stevenson, Robert Louis, 1850-1894; Smith, Jessie Willcox, 1863-1935 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 25610,
+   "title": "A Child's Garden of Verses",
+   "author": "Stevenson, Robert Louis, 1850-1894; Robinson, Charles, 1870-1937 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 25696,
+   "title": "抱朴子",
+   "author": "Ge, Hong, 284-364",
+   "language": "中文"
+  },
+  {
+   "id": 25725,
+   "title": "That Lass O' Lowrie's\n1877",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 25726,
+   "title": "The pretty sister of José\r\n1889",
+   "author": "Burnett, Frances Hodgson, 1849-1924; Reinhart, Charles Stanley, 1844-1896 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 25727,
+   "title": "Vagabondia\n1884",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 25810,
+   "title": "In Connection with the De Willoughby Claim",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 25852,
+   "title": "The Letters of Charles Dickens. Vol. 1, 1833-1856",
+   "author": "Dickens, Charles, 1812-1870; Dickens, Mamie, 1838-1896 [Editor]; Hogarth, Georgina, 1827-1917 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 25853,
+   "title": "The Letters of Charles Dickens. Vol. 2, 1857-1870",
+   "author": "Dickens, Charles, 1812-1870; Dickens, Mamie, 1838-1896 [Editor]; Hogarth, Georgina, 1827-1917 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 25854,
+   "title": "The Letters of Charles Dickens. Vol. 3, 1836-1870",
+   "author": "Dickens, Charles, 1812-1870; Dickens, Mamie, 1838-1896 [Editor]; Hogarth, Georgina, 1827-1917 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 26041,
+   "title": "Aunt Jo's scrap bag, Volume 1",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 26153,
+   "title": "The Last of the Legions and Other Tales of Long Ago",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 26161,
+   "title": "醒世姻緣",
+   "author": "Pu, Songling, 1640-1715",
+   "language": "中文"
+  },
+  {
+   "id": 26491,
+   "title": "The Sand-Hills of Jutland",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875; Bushby, Mrs. (Anna S.), -1875 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 26624,
+   "title": "The Road to Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 26658,
+   "title": "Celebrated Travels and Travellers, Part 3.\r\nThe Great Explorers of the Nineteenth Century",
+   "author": "Verne, Jules, 1828-1905; Benett, Léon, 1838-1917 [Illustrator]; D'Anvers, N., 1844-1933 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 26729,
+   "title": "二刻拍案驚奇",
+   "author": "Ling, Mengchu, 1580-1644",
+   "language": "中文"
+  },
+  {
+   "id": 26746,
+   "title": "分甘余話",
+   "author": "Wang, Shizhen, 1634-1711",
+   "language": "中文"
+  },
+  {
+   "id": 26871,
+   "title": "粉妝樓全傳",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 26872,
+   "title": "海上花列傳",
+   "author": "Han, Bangqing, 1856-1894",
+   "language": "中文"
+  },
+  {
+   "id": 26873,
+   "title": "龍川詞",
+   "author": "Chen, Liang, 1143-1194",
+   "language": "中文"
+  },
+  {
+   "id": 26887,
+   "title": "桯史",
+   "author": "Yue, Ke, 1183-1234",
+   "language": "中文"
+  },
+  {
+   "id": 26920,
+   "title": "鹽鐵論",
+   "author": "Huan, Kuan, active 1st century B.C.",
+   "language": "中文"
+  },
+  {
+   "id": 26932,
+   "title": "治世餘聞",
+   "author": "Chen, Hongmo, 1474-1555",
+   "language": "中文"
+  },
+  {
+   "id": 26940,
+   "title": "Atalantis Major",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 26979,
+   "title": "海島算經",
+   "author": "Liu, Hui, active 3rd century-4th century",
+   "language": "中文"
+  },
+  {
+   "id": 26997,
+   "title": "朝野僉載",
+   "author": "Zhang, Zhuo, 660?-740?",
+   "language": "中文"
+  },
+  {
+   "id": 27000,
+   "title": "What the Moon Saw: and Other Tales",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875; Dalziel, Edward, 1817-1905 [Engraver]; Dalziel, George, 1815-1902 [Engraver]; Bayes, Alfred Walter, 1832-1909 [Illustrator]; Dulcken, H. W. (Henry William), 1832-1894 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 27017,
+   "title": "尹文子",
+   "author": "Yin, Wen, 351 BCE-285 BCE",
+   "language": "中文"
+  },
+  {
+   "id": 27026,
+   "title": "豔異編",
+   "author": "Wang, Shizhen, 1526-1590",
+   "language": "中文"
+  },
+  {
+   "id": 27122,
+   "title": "老學庵筆記",
+   "author": "Lu, You, 1125-1210",
+   "language": "中文"
+  },
+  {
+   "id": 27123,
+   "title": "水調歌頭",
+   "author": "Su, Shi, 1037-1101",
+   "language": "中文"
+  },
+  {
+   "id": 27145,
+   "title": "殘唐五代史演義傳",
+   "author": "Luo, Guanzhong, 1330?-1400?",
+   "language": "中文"
+  },
+  {
+   "id": 27165,
+   "title": "西湖夢尋",
+   "author": "Zhang, Dai, 1597-1679",
+   "language": "中文"
+  },
+  {
+   "id": 27166,
+   "title": "吶喊",
+   "author": "Lu, Xun, 1881-1936",
+   "language": "中文"
+  },
+  {
+   "id": 27172,
+   "title": "庚巳編",
+   "author": "Lu, Can, 1494-1551",
+   "language": "中文"
+  },
+  {
+   "id": 27200,
+   "title": "Fairy Tales of Hans Christian Andersen",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875",
+   "language": "英文"
+  },
+  {
+   "id": 27217,
+   "title": "牛郎織女傳",
+   "author": "Zhu, Mingshi, 1260-1340",
+   "language": "中文"
+  },
+  {
+   "id": 27218,
+   "title": "臺灣外紀",
+   "author": "Jiang, Risheng, active 1692",
+   "language": "中文"
+  },
+  {
+   "id": 27263,
+   "title": "張載集",
+   "author": "Zhang, Zai, 1020-1077",
+   "language": "中文"
+  },
+  {
+   "id": 27292,
+   "title": "夢溪筆談",
+   "author": "Shen, Kuo, 1031-1095",
+   "language": "中文"
+  },
+  {
+   "id": 27294,
+   "title": "方言",
+   "author": "Yang, Xiong, 54 BCE-18",
+   "language": "中文"
+  },
+  {
+   "id": 27365,
+   "title": "Tales of Space and Time",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 27403,
+   "title": "清代野记",
+   "author": "Zuoguanlaoren, 1849-1917",
+   "language": "中文"
+  },
+  {
+   "id": 27459,
+   "title": "耳食錄",
+   "author": "Yue, Jun, 1766-1814",
+   "language": "中文"
+  },
+  {
+   "id": 27567,
+   "title": "Aunt Jo's scrap-bag, Volume 6",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 27581,
+   "title": "吳船錄",
+   "author": "Fan, Chengda, 1126-1193",
+   "language": "中文"
+  },
+  {
+   "id": 27582,
+   "title": "喻世明言",
+   "author": "Feng, Menglong, 1574-1646",
+   "language": "中文"
+  },
+  {
+   "id": 27596,
+   "title": "隋唐嘉話",
+   "author": "Liu, Su, active 742-755",
+   "language": "中文"
+  },
+  {
+   "id": 27636,
+   "title": "沉沦",
+   "author": "Yu, Dafu, 1896-1945",
+   "language": "中文"
+  },
+  {
+   "id": 27753,
+   "title": "一枕奇",
+   "author": "Huayangsanren, 1610?-1675?",
+   "language": "中文"
+  },
+  {
+   "id": 27768,
+   "title": "瞎騙奇聞",
+   "author": "Wu, Jianren, 1866-1910",
+   "language": "中文"
+  },
+  {
+   "id": 27924,
+   "title": "Mugby Junction",
+   "author": "Dickens, Charles, 1812-1870; Collins, Charles Allston, 1828-1873 [Contributor]; Edwards, Amelia B., 1831-1892 [Contributor]; Halliday, Andrew, 1830-1877 [Contributor]; Stretton, Hesba, 1832-1911 [Contributor]; Goodman, Arthur Jule, 1870-1926 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 27990,
+   "title": "Theo: A Sprightly Love Story",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 28198,
+   "title": "A Budget of Christmas Tales by Charles Dickens and Others",
+   "author": "Dickens, Charles, 1812-1870 [Contributor]; Collingwood, Herbert W. (Herbert Winslow), 1857-1927 [Contributor]; Ewing, Juliana Horatia, 1841-1885 [Contributor]; Molesworth, Mrs., 1839-1921 [Contributor]; Schayer, Julia Thompson von Stosch, 1840-1928 [Contributor]; Stowe, Harriet Beecher, 1811-1896 [Contributor]; Wilcox, Ella Wheeler, 1850-1919 [Contributor]",
+   "language": "英文"
+  },
+  {
+   "id": 28203,
+   "title": "Moods",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 28657,
+   "title": "A Winter Amid the Ice, and Other Thrilling Stories",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 28696,
+   "title": "Symbolic Logic",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 28722,
+   "title": "A Child's Garden of Verses",
+   "author": "Stevenson, Robert Louis, 1850-1894; Kirk, Maria Louise, 1860-1938 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 28885,
+   "title": "Alice's Adventures in Wonderland\nIllustrated by Arthur Rackham. With a Proem by Austin Dobson",
+   "author": "Carroll, Lewis, 1832-1898; Dobson, Austin, 1840-1921 [Contributor]; Rackham, Arthur, 1867-1939 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 28897,
+   "title": "The Variation of Animals and Plants Under Domestication, Volume II (of 2)",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 29032,
+   "title": "海國春秋",
+   "author": "Wang, Ji, -1796?",
+   "language": "中文"
+  },
+  {
+   "id": 29042,
+   "title": "A Tangled Tale",
+   "author": "Carroll, Lewis, 1832-1898; Frost, A. B. (Arthur Burdett), 1851-1928 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 29413,
+   "title": "The Voyages and Adventures of Captain Hatteras",
+   "author": "Verne, Jules, 1828-1905; Riou, Edouard, 1833-1900 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 29472,
+   "title": "Select Conversations with an Uncle (Now Extinct) and Two Other Reminiscences",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 29888,
+   "title": "The Hunting of the Snark: An Agony, in Eight Fits",
+   "author": "Carroll, Lewis, 1832-1898; Holiday, Henry, 1839-1927 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 30159,
+   "title": "The True-Born Englishman: A Satire",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 30340,
+   "title": "The Passionate Friends",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 30344,
+   "title": "The Fortunate Mistress (Parts 1 and 2)\r\nor a History of the Life of Mademoiselle de Beleau Known by the Name of the Lady Roxana",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 30368,
+   "title": "A Christmas Carol\nThe original manuscript",
+   "author": "Dickens, Charles, 1812-1870; Leech, John, 1817-1864 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 30393,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 06",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 30460,
+   "title": "出師表",
+   "author": "Zhuge, Liang, 181-234",
+   "language": "中文"
+  },
+  {
+   "id": 30465,
+   "title": "御製廣寒殿記",
+   "author": "Ming Xuanzong, Emperor of China, 1399-1435 [Editor]; Wei, Jiao, 1483-1543 [Editor]",
+   "language": "中文"
+  },
+  {
+   "id": 30527,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 02",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Commentator]",
+   "language": "英文"
+  },
+  {
+   "id": 30538,
+   "title": "New worlds for old: A plain account of modern socialism",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 30544,
+   "title": "五孝傳",
+   "author": "Tao, Qian, 372?-427",
+   "language": "中文"
+  },
+  {
+   "id": 30598,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 09",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 30643,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 15",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 30650,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 21",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 30659,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 14",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 30700,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 04",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 30714,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 25",
+   "author": "Stevenson, Robert Louis, 1850-1894; Colvin, Sidney, 1845-1927 [Editor]; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 30729,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 03",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 30744,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 05",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 30807,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 07",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 30849,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 20",
+   "author": "Stevenson, Robert Louis, 1850-1894; Quiller-Couch, Arthur, 1863-1944 [Contributor]",
+   "language": "英文"
+  },
+  {
+   "id": 30852,
+   "title": "The Tin Woodman of Oz\nA Faithful Story of the Astonishing Adventure Undertaken\nby the Tin Woodman, assisted by Woot the Wanderer, the\nScarecrow of Oz, and Polychrome, the Rainbow's Daughter",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 30855,
+   "title": "The Wife of Sir Isaac Harman",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 30870,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 11",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 30894,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 23",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 30939,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 12",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 30954,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 13",
+   "author": "Stevenson, Robert Louis, 1850-1894; Osbourne, Lloyd, 1868-1947",
+   "language": "英文"
+  },
+  {
+   "id": 30990,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 16",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 31012,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 17",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 31037,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 19",
+   "author": "Stevenson, Robert Louis, 1850-1894; Osbourne, Lloyd, 1868-1947",
+   "language": "英文"
+  },
+  {
+   "id": 31053,
+   "title": "The History of the Devil, As Well Ancient as Modern: In Two Parts",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 31103,
+   "title": "A Christmas Greeting: A Series of Stories",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875",
+   "language": "英文"
+  },
+  {
+   "id": 31291,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 22\r\nJuvenilia and Other Papers",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 31484,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 08",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 31557,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 18",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 31558,
+   "title": "A Monograph on the Sub-class Cirripedia (Volume 1 of 2)\r\nThe Lepadidae; Or, Pedunculated Cirripedes",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 31809,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 24",
+   "author": "Stevenson, Robert Louis, 1850-1894; Colvin, Sidney, 1845-1927 [Editor]; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 31916,
+   "title": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 10",
+   "author": "Stevenson, Robert Louis, 1850-1894; Lang, Andrew, 1844-1912 [Other]",
+   "language": "英文"
+  },
+  {
+   "id": 32094,
+   "title": "The Patchwork Girl of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 32139,
+   "title": "An Appeal to Honour and Justice, Though It Be of His Worst Enemies.\nBeing A True Account of His Conduct in Public Affairs.",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 32241,
+   "title": "Dickens' Stories About Children Every Child Can Read",
+   "author": "Dickens, Charles, 1812-1870; Hurlbut, Jesse Lyman, 1843-1930 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 32325,
+   "title": "The Adventures of Huckleberry Finn (Tom Sawyer's Comrade)",
+   "author": "Twain, Mark, 1835-1910; Kemble, E. W. (Edward Windsor), 1861-1933 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 32357,
+   "title": "Lulu's Library, Volume 2 (of 3)",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 32384,
+   "title": "An Humble Proposal to the People of England, for the Increase of their Trade, and Encouragement of Their Manufactures\nWhether the Present Uncertainty of Affairs Issues in Peace or War",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 32404,
+   "title": "Second Thoughts are Best: Or a Further Improvement of a Late Scheme to Prevent Street Robberies",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 32405,
+   "title": "Augusta Triumphans\nOr, the Way to Make London the Most Flourishing City in the Universe",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 32777,
+   "title": "The Great Keinplatz Experiment and Other Tales of Twilight and the Unseen",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 32954,
+   "title": "The Black Arrow: A Tale of the Two Roses",
+   "author": "Stevenson, Robert Louis, 1850-1894; Wyeth, N. C. (Newell Convers), 1882-1945 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 33077,
+   "title": "The Treaty With China, its Provisions Explained\nNew York Tribune, Tuesday, August 28, 1868",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 33361,
+   "title": "Ozma of Oz\r\nA Record of Her Adventures with Dorothy Gale of Kansas, the Yellow Hen, the Scarecrow, the Tin Woodman, Tiktok, the Cowardly Lion, and the Hungry Tiger; Besides Other Good People too Numerous to Mention Faithfully Recorded Herein",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 33516,
+   "title": "Abandoned",
+   "author": "Verne, Jules, 1828-1905; Kingston, Agnes Kinloch, 1823-1913 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 33582,
+   "title": "Rhyme? and reason?",
+   "author": "Carroll, Lewis, 1832-1898; Frost, A. B. (Arthur Burdett), 1851-1928 [Illustrator]; Holiday, Henry, 1839-1927 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 33889,
+   "title": "The Salvaging of Civilization",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 33913,
+   "title": "The Wonderful Visit",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 33986,
+   "title": "Comic Tragedies\nWritten by 'Jo' and 'Meg' and Acted by The 'Little Women'",
+   "author": "Alcott, Louisa May, 1832-1888; Pratt, Anna Bronson Alcott, 1831-1893",
+   "language": "英文"
+  },
+  {
+   "id": 34627,
+   "title": "The Dealings of Captain Sharkey, and Other Tales of Pirates",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 34797,
+   "title": "The Man from Archangel, and Other Tales of Adventure",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 34920,
+   "title": "Silver Pitchers: and Independence, a Centennial Love Story",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 34962,
+   "title": "Boon, The Mind of the Race, The Wild Asses of the Devil, and The Last Trump;\r\nBeing a First Selection from the Literary Remains of George Boon, Appropriate to the Times",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 35300,
+   "title": "Louisiana",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 35338,
+   "title": "Marriage",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 35461,
+   "title": "A Short History of the World",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 35535,
+   "title": "Feeding the Mind",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 35536,
+   "title": "The Poems and Verses of Charles Dickens",
+   "author": "Dickens, Charles, 1812-1870; Kitton, Frederic George, 1856-1904 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 35546,
+   "title": "A Lowden Sabbath Morn",
+   "author": "Stevenson, Robert Louis, 1850-1894; Boyd, A. S. (Alexander Stuart), 1854-1930 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 35774,
+   "title": "A New Voyage Round the World by a Course Never Sailed Before",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 35859,
+   "title": "Aunt Jane's Nieces on the Ranch",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 36050,
+   "title": "Rodney Stone",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 36221,
+   "title": "Spinning-Wheel Stories",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 36587,
+   "title": "A True Relation of the Apparition of one Mrs. Veal\r\nThe Next Day after Her Death, to one Mrs. Bargrave, at Canterbury, the 8th of September, 1705; which Apparition Recommends the Perusal of Drelincourt's Book of Consolations against the Fears of Death",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 36628,
+   "title": "Reasons Against the Succession of the House of Hanover\r\nWith an Enquiry How Far the Abdication of King James, Supposing It to Be Legal, Ought to Affect the Person of the Pretender",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 36656,
+   "title": "A Seasonable Warning and Caution against the Insinuations of Papists and Jacobites in favour of the Pretender\nBeing a Letter from an Englishman at the Court of Hanover",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 36681,
+   "title": "An Answer to a Question that Nobody thinks of, viz., But what if the Queen should Die?",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 36694,
+   "title": "The Lay-Man's Sermon upon the Late Storm\nHeld forth at an Honest Coffee-House-Conventicle",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 36769,
+   "title": "And What if the Pretender should Come?\r\nOr Some Considerations of the Advantages and Real Consequences of the Pretender's Possessing the Crown of Great Britain",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 37047,
+   "title": "The history of the life and adventures of Mr. Duncan Campbell",
+   "author": "Defoe, Daniel, 1661?-1731 [Dubious author]; Bond, William, -1735 [Dubious author]",
+   "language": "英文"
+  },
+  {
+   "id": 37106,
+   "title": "Little Women; Or, Meg, Jo, Beth, and Amy",
+   "author": "Alcott, Louisa May, 1832-1888; Merrill, Frank T., 1848-1923 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 37121,
+   "title": "Charles Dickens' Children Stories",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 37354,
+   "title": "Condensation of Determinants\r\nBeing a New and Brief Method for Computing their Arithmetical Values",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 37381,
+   "title": "Snowdrop & Other Tales",
+   "author": "Grimm, Jacob, 1785-1863; Grimm, Wilhelm, 1786-1859; Rackham, Arthur, 1867-1939 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 37581,
+   "title": "The Cricket on the Hearth: A Fairy Tale of Home",
+   "author": "Dickens, Charles, 1812-1870; Doyle, Richard, 1824-1883 [Illustrator]; Landseer, Edwin Henry, Sir, 1802-1873 [Illustrator]; Leech, John, 1817-1864 [Illustrator]; Maclise, Daniel, 1806-1870 [Illustrator]; Stanfield, Clarkson, 1793-1867 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 37712,
+   "title": "The Crime of the Congo",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 37807,
+   "title": "Mountain-Laurel and Maidenhair",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 37976,
+   "title": "Dot and Tot of Merryland",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Denslow, W. W. (William Wallace), 1856-1915 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 37981,
+   "title": "May Flowers",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 37992,
+   "title": "The King of Pirates\r\nBeing an Account of the Famous Enterprises of Captain Avery, the Mock King of Madagascar",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 38049,
+   "title": "Louisa May Alcott : Her Life, Letters, and Journals",
+   "author": "Alcott, Louisa May, 1832-1888; Cheney, Ednah Dow, 1824-1904 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 38065,
+   "title": "Eight or Nine Wise Words about Letter-Writing",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 38071,
+   "title": "The Guards Came Through, and Other Poems",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 38443,
+   "title": "The Croxley Master: A Great Tale Of The Prize Ring",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 38567,
+   "title": "Eight Cousins; Or, The Aunt-Hill",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 38629,
+   "title": "Charles Darwin: His Life Told in an Autobiographical Chapter, and in a Selected Series of His Published Letters",
+   "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 39159,
+   "title": "Sky Island\r\nBeing the Further Exciting Adventures of Trot and Cap'n Bill After Their Visit to the Sea Fairies",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 39162,
+   "title": "Kipps: The Story of a Simple Soul",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 39718,
+   "title": "The Wanderings of a Spiritualist",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 39868,
+   "title": "Glinda of Oz\r\nIn Which Are Related the Exciting Experiences of Princess Ozma of Oz, and Dorothy, in Their Hazardous Journey to the Home of the Flatheads, and to the Magic Isle of the Skeezers, and How They Were Rescued from Dire Peril by the Sorcery of Glinda the Good",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 40682,
+   "title": "Lulu's Library, Volume 1 (of 3)",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 40683,
+   "title": "Lulu's Library, Volume 3 (of 3)",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 40723,
+   "title": "The Battle of Life: A Love Story",
+   "author": "Dickens, Charles, 1812-1870; Doyle, Richard, 1824-1883 [Illustrator]; Leech, John, 1817-1864 [Illustrator]; Maclise, Daniel, 1806-1870 [Illustrator]; Stanfield, Clarkson, 1793-1867 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 40764,
+   "title": "Barty Crusoe and His Man Saturday",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 40848,
+   "title": "The Gully of Bluemansdyke, and Other stories",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 41063,
+   "title": "The Storm. An Essay.",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 41127,
+   "title": "Rose in Bloom\nA Sequel to 'Eight Cousins'",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 41445,
+   "title": "Frankenstein; or, The modern Prometheus",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 41667,
+   "title": "The Emerald City of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 42078,
+   "title": "The Letters of Jane Austen\r\nSelected from the compilation of her great nephew, Edward, Lord Bradbourne",
+   "author": "Austen, Jane, 1775-1817; Coolidge, Susan, 1835-1905 [Compiler]",
+   "language": "英文"
+  },
+  {
+   "id": 42127,
+   "title": "The German War",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 42232,
+   "title": "A Child's Dream of a Star",
+   "author": "Dickens, Charles, 1812-1870; Billings, Hammatt, 1818-1874 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 42234,
+   "title": "The Storm\r\nor, a Collection of the most Remarkable Casualties and Disasters which Happen'd in the Late Dreadful Tempest, both by Sea and Land",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 42324,
+   "title": "Frankenstein; or, The modern Prometheus",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 42920,
+   "title": "The Good Wolf",
+   "author": "Burnett, Frances Hodgson, 1849-1924; Sichel, Harold, 1881-1948 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 42989,
+   "title": "The Plattner Story, and Others",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 43009,
+   "title": "古詩十九首",
+   "author": "Xiao, Tong, 501-531",
+   "language": "中文"
+  },
+  {
+   "id": 43010,
+   "title": "竹葉亭雜記",
+   "author": "Yao, Yuanzhi, 1773-1852",
+   "language": "中文"
+  },
+  {
+   "id": 43014,
+   "title": "晁氏儒言 一卷",
+   "author": "Chao, Yuezhi, 1059-1129",
+   "language": "中文"
+  },
+  {
+   "id": 43111,
+   "title": "The Personal History of David Copperfield",
+   "author": "Dickens, Charles, 1812-1870; Browne, Hablot Knight, 1815-1882 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 43600,
+   "title": "Wonderful Stories for Children",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875; Howitt, Mary (Mary Botham), 1799-1888 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 43936,
+   "title": "The Wonderful Wizard of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Denslow, W. W. (William Wallace), 1856-1915 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 44278,
+   "title": "From the Earth to the Moon, Direct in Ninety-Seven Hours and Twenty Minutes: and a Trip Round It",
+   "author": "Verne, Jules, 1828-1905; Hildibrand, Henri Théophile, 1824-1897 [Engraver]; Bayard, Émile Antoine, 1837-1891 [Illustrator]; Neuville, Alphonse Marie de, 1835-1885 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 44867,
+   "title": "The Discovery of the Future",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 45264,
+   "title": "The Tale of Two Bad Mice",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 45265,
+   "title": "The Story of a Fierce Bad Rabbit",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 46408,
+   "title": "A Monograph on the Sub-class Cirripedia (Volume 2 of 2)\nThe Balanidæ, (or Sessile Cirripedes); the Verrucidæ, etc., etc.",
+   "author": "Darwin, Charles, 1809-1882",
+   "language": "英文"
+  },
+  {
+   "id": 46597,
+   "title": "In Search of the Castaways\nA Romantic Narrative of the Loss of Captain Grant of the Brig Britannia and of the Adventures of His Children and Friends in His Discovery and Rescue",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 46675,
+   "title": "Oliver Twist; or, The Parish Boy's Progress. Illustrated",
+   "author": "Dickens, Charles, 1812-1870; Cruikshank, George, 1792-1878 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 47166,
+   "title": "John Dough and the Cherub",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 47506,
+   "title": "The Coming of the Fairies",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 47529,
+   "title": "Oliver Twist, Vol. 1 (of 3)",
+   "author": "Dickens, Charles, 1812-1870; Cruikshank, George, 1792-1878 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 47530,
+   "title": "Oliver Twist, Vol. 2 (of 3)",
+   "author": "Dickens, Charles, 1812-1870; Cruikshank, George, 1792-1878 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 47531,
+   "title": "Oliver Twist, Vol. 3 (of 3)",
+   "author": "Dickens, Charles, 1812-1870; Cruikshank, George, 1792-1878 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 47534,
+   "title": "The Posthumous Papers of the Pickwick Club, v. 1 (of 2)",
+   "author": "Dickens, Charles, 1812-1870; Aldin, Cecil, 1870-1935 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 47535,
+   "title": "The Posthumous Papers of the Pickwick Club, v. 2 (of 2)",
+   "author": "Dickens, Charles, 1812-1870; Aldin, Cecil, 1870-1935 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 48320,
+   "title": "Adventures of Sherlock Holmes\nIllustrated",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 48414,
+   "title": "An Account of the Bell Rock Light-House\nIncluding the Details of the Erection and Peculiar Structure of That Edifice; to Which Is Prefixed a Historical View of the Institution and Progress of the Northern Light-Houses",
+   "author": "Stevenson, Robert, 1772-1850",
+   "language": "英文"
+  },
+  {
+   "id": 48630,
+   "title": "Sylvie and Bruno (Illustrated)",
+   "author": "Carroll, Lewis, 1832-1898; Furniss, Harry, 1854-1925 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 48778,
+   "title": "The Sea Fairies",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 48795,
+   "title": "Sylvie and Bruno Concluded (Illustrated)",
+   "author": "Carroll, Lewis, 1832-1898; Furniss, Harry, 1854-1925 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 49731,
+   "title": "Tamawaca Folks: A Summer Comedy",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 49927,
+   "title": "Pearl-Fishing; Choice Stories from Dickens' Household Words; First Series",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 50109,
+   "title": "The Mysterious Stranger: A Romance",
+   "author": "Twain, Mark, 1835-1910; Wyeth, N. C. (Newell Convers), 1882-1945 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 50194,
+   "title": "The Magic of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 50334,
+   "title": "Pearl-Fishing; Choice Stories from Dickens' Household Words; Second Series",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 50471,
+   "title": "Two Little Pilgrims' Progress: A Story of the City Beautiful",
+   "author": "Burnett, Frances Hodgson, 1849-1924; Birch, Reginald B. (Reginald Bathurst), 1856-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 50994,
+   "title": "The Cambridge Book of Poetry for Children\nParts 1 and 2",
+   "author": "Grahame, Kenneth, 1859-1932 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 51263,
+   "title": "The Scarecrow of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 51828,
+   "title": "聊齋志異",
+   "author": "Pu, Songling, 1640-1715",
+   "language": "中文"
+  },
+  {
+   "id": 52176,
+   "title": "Tik-Tok of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 52199,
+   "title": "漢宮秋",
+   "author": "Ma, Zhiyuan, 1250?-1324?",
+   "language": "中文"
+  },
+  {
+   "id": 52206,
+   "title": "隨園詩話",
+   "author": "Yuan, Mei, 1716-1798",
+   "language": "中文"
+  },
+  {
+   "id": 52238,
+   "title": "枕中記",
+   "author": "Shen, Jiji, 740?-800?",
+   "language": "中文"
+  },
+  {
+   "id": 52267,
+   "title": "鶯鶯傳",
+   "author": "Yuan, Zhen, 779-831",
+   "language": "中文"
+  },
+  {
+   "id": 52270,
+   "title": "長生殿",
+   "author": "Hong, Sheng, 1645-1704",
+   "language": "中文"
+  },
+  {
+   "id": 52271,
+   "title": "漢武帝別國洞冥記",
+   "author": "Guo, Xian, active 1st century",
+   "language": "中文"
+  },
+  {
+   "id": 52276,
+   "title": "竇娥冤",
+   "author": "Guan, Hanqing, 1210?-1298?",
+   "language": "中文"
+  },
+  {
+   "id": 52323,
+   "title": "唐诗三百首",
+   "author": "Hengtangtuishi, 1711-1778 [Compiler]",
+   "language": "中文"
+  },
+  {
+   "id": 52501,
+   "title": "The First Men in the Moon",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 52603,
+   "title": "The History and Remarkable Life of the Truly Honourable Colonel Jacque, Commonly Called Colonel Jack",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 52790,
+   "title": "History of a Six Weeks' Tour Through a Part of France, Switzerland, Germany, and Holland:\r\nWith Letters Descriptive of a Sail Round the Lake of Geneva, and of the Glaciers of Chamouni.",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851; Shelley, Percy Bysshe, 1792-1822",
+   "language": "英文"
+  },
+  {
+   "id": 52900,
+   "title": "Little Men: Life at Plumfield with Jo's Boys",
+   "author": "Alcott, Louisa May, 1832-1888; Birch, Reginald B. (Reginald Bathurst), 1856-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 53516,
+   "title": "This Misery of Boots",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 53566,
+   "title": "The Fate of a Crown",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 53844,
+   "title": "The Land of Oz",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Neill, John R. (John Rea), 1877-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 53965,
+   "title": "The Book of the Hamburgs\r\nA Brief Treatise upon the Mating, Rearing and Management of the Different Varieties of Hamburgs",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 54109,
+   "title": "Round the Fire Stories",
+   "author": "Doyle, Arthur Conan, 1859-1930; Castaigne, J. André, 1861-1929 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 54212,
+   "title": "A Modern Mephistopheles, and A Whisper in the Dark",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 54540,
+   "title": "Daughters of Destiny",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 54567,
+   "title": "二十年目睹之怪現狀",
+   "author": "Wu, Jianren, 1866-1910",
+   "language": "中文"
+  },
+  {
+   "id": 54670,
+   "title": "裨海紀遊",
+   "author": "Yu, Yonghe, active 1691-1697",
+   "language": "中文"
+  },
+  {
+   "id": 54756,
+   "title": "官場現形記",
+   "author": "Li, Boyuan, 1867-1906",
+   "language": "中文"
+  },
+  {
+   "id": 54925,
+   "title": "The Friendly Daemon, or the Generous Apparition\r\nBeing a True Narrative of a Miraculous Cure, Newly Perform'd Upon That Famous Deaf and Dumb Gentleman, Dr. Duncan Campbel, by a Familiar Spirit That Appear'd to Him in a White Surplice, Like a Cathedral Singing Boy",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 55737,
+   "title": "Queen Zixi of Ix; Or, the Story of the Magic Cloak",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919; Richardson, Frederick, 1862-1937 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 56291,
+   "title": "老殘遊記續集",
+   "author": "Liu, E, 1857-1909",
+   "language": "中文"
+  },
+  {
+   "id": 56484,
+   "title": "The Future in America: A Search After Realities",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 56562,
+   "title": "Kidnapped (Illustrated)\r\nBeing Memoirs of the Adventures of David Balfour in the Year 1751",
+   "author": "Stevenson, Robert Louis, 1850-1894; Wyeth, N. C. (Newell Convers), 1882-1945 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 56665,
+   "title": "Tales and Stories\nNow First Collected",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851; Garnett, Richard, 1835-1906 [Author of introduction, etc.]",
+   "language": "英文"
+  },
+  {
+   "id": 56692,
+   "title": "Editha's Burglar: A Story for Children",
+   "author": "Burnett, Frances Hodgson, 1849-1924; Sandham, Henry, 1842-1910 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 57005,
+   "title": "The History of the Pyrates. Vol. II.\r\nContaining the lives of Captain Misson, Captain Bowen, Captain Kidd, Captain Tew, Captain Halsey, Captain White, Captain Condent, Captain Bellamy, Captain Fly, Captain Howard, Captain Lewis, Captain Cornelius, Captain Williams, Captain Burgess, Captain North, and their several crews",
+   "author": "Defoe, Daniel, 1661?-1731",
+   "language": "英文"
+  },
+  {
+   "id": 57099,
+   "title": "Miss Crespigny",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 57227,
+   "title": "平妖傳",
+   "author": "Luo, Guanzhong, 1330?-1400?; Feng, Menglong, 1574-1646",
+   "language": "中文"
+  },
+  {
+   "id": 57248,
+   "title": "初刻拍案驚奇",
+   "author": "Ling, Mengchu, 1580-1644",
+   "language": "中文"
+  },
+  {
+   "id": 57278,
+   "title": "青樓夢",
+   "author": "Yu, Da, -1884",
+   "language": "中文"
+  },
+  {
+   "id": 57309,
+   "title": "Aunt Jo's scrap-bag, Volume 3",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 57310,
+   "title": "Aunt Jo's scrap-bag, Volume 4",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 57321,
+   "title": "Proverb Stories",
+   "author": "Alcott, Louisa May, 1832-1888",
+   "language": "英文"
+  },
+  {
+   "id": 57481,
+   "title": "The War That Will End War",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 58183,
+   "title": "Haworth's",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 58325,
+   "title": "Through One Administration",
+   "author": "Burnett, Frances Hodgson, 1849-1924",
+   "language": "英文"
+  },
+  {
+   "id": 58877,
+   "title": "Washington and the Riddle of Peace",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 59650,
+   "title": "The New Teaching of History\r\nWith a reply to some recent criticisms of The Outline of History",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 59769,
+   "title": "Bealby; A Holiday",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 59774,
+   "title": "30 Strange Stories",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 60173,
+   "title": "Russia in the Shadows",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 60191,
+   "title": "The Boy Fortune Hunters in Panama",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 60242,
+   "title": "The Purchase of the North Pole\nA sequel to \"From the earth to the moon\"",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 60900,
+   "title": "Merry Tales",
+   "author": "Twain, Mark, 1835-1910; Stedman, Arthur Griffin, 1859-1908 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 61193,
+   "title": "Mr. Pickwick's Christmas\r\nBeing an Account of the Pickwickians' Christmas at the Manor Farm, of the Adventures There; the Tale of the Goblin Who Stole a Sexton, and of the Famous Sports on the Ice",
+   "author": "Dickens, Charles, 1812-1870; Williams, George Alfred, 1875-1932 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 61236,
+   "title": "Emily of New Moon",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942; Kirk, Maria Louise, 1860-1938 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 61338,
+   "title": "Moments with Mark Twain",
+   "author": "Twain, Mark, 1835-1910; Paine, Albert Bigelow, 1861-1937 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 61347,
+   "title": "Socialism and the family",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 61426,
+   "title": "Joan and Peter: The story of an education",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 61522,
+   "title": "The £1,000,000 bank-note, and other new stories",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 61547,
+   "title": "The Undying Fire: A contemporary novel",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 61600,
+   "title": "The castaways of the flag",
+   "author": "Verne, Jules, 1828-1905; Murphy, H. C. (Henry Cruse), 1886-1931 [Illustrator]; Wyss, Johann David, 1743-1818 [Other]; Metcalfe, Cranstoun, 1866-1939 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 62636,
+   "title": "To the Person Sitting in Darkness",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 62739,
+   "title": "King Leopold's Soliloquy: A Defense of His Congo Rule",
+   "author": "Twain, Mark, 1835-1910",
+   "language": "英文"
+  },
+  {
+   "id": 63337,
+   "title": "Valperga Volume 1 (of 3)\nor, The life and adventures of Castruccio, prince of Lucca",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 63338,
+   "title": "Valperga Volume 2 (of 3)\nor, The life and adventures of Castruccio, prince of Lucca",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 63339,
+   "title": "Valperga Volume 3 (of 3)\nor, The life and adventures of Castruccio, prince of Lucca",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 63650,
+   "title": "Meridiana: The Adventures of Three Englishmen and Three Russians\nIn  South Africa",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 64186,
+   "title": "Social Forces in England and America",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 64329,
+   "title": "Falkner: A Novel",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 64410,
+   "title": "The Story of a Great Schoolmaster",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 64555,
+   "title": "Lodore, Vol. 1 (of 3)",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 64556,
+   "title": "Lodore, Vol. 2 (of 3)",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 64557,
+   "title": "Lodore, Vol. 3 (of 3)",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 65042,
+   "title": "The British Campaign in France and Flanders, 1914",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 65043,
+   "title": "The British Campaign in France and Flanders, 1915",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 65044,
+   "title": "The British Campaign in France and Flanders, 1916",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 65045,
+   "title": "The British Campaign in France and Flanders, 1917",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 65046,
+   "title": "The British Campaign in France and Flanders—January to July, 1918",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 65047,
+   "title": "The British Campaign in France and Flanders—July to November, 1918",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 65317,
+   "title": "Lives of the most eminent literary and scientific men of France, Vol. 1 (of 2)",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851; Lardner, Dionysius, 1793-1859 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 65361,
+   "title": "Lives of the most eminent literary and scientific men of France, Vol. 2 (of 2)",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851; Lardner, Dionysius, 1793-1859 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 66088,
+   "title": "Recollections of Captain Wilkie: A Story of an Old Offender",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 66409,
+   "title": "Tales of the Unexpected",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 66545,
+   "title": "The Heir of Mondolfo",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 66688,
+   "title": "Hans Andersen's Fairy Tales",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875; Robinson, W. Heath (William Heath), 1872-1944 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 66749,
+   "title": "The Fortunes of Perkin Warbeck: a romance",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 66991,
+   "title": "Memories and Adventures",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 67071,
+   "title": "The Star",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 67072,
+   "title": "The Curse of Eve",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 67515,
+   "title": "The Glamour of the Arctic",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 67829,
+   "title": "A Floating City, and The Blockade Runners",
+   "author": "Verne, Jules, 1828-1905",
+   "language": "英文"
+  },
+  {
+   "id": 67979,
+   "title": "The Blue Castle: a novel",
+   "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+   "language": "英文"
+  },
+  {
+   "id": 68604,
+   "title": "Europe and elsewhere",
+   "author": "Twain, Mark, 1835-1910; Paine, Albert Bigelow, 1861-1937 [Author of introduction, etc.]; Matthews, Brander, 1852-1929 [Contributor]",
+   "language": "英文"
+  },
+  {
+   "id": 68903,
+   "title": "The land of mist",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 69147,
+   "title": "Darwinism stated by Darwin himself\r\nCharacteristic passages from the writings of Charles Darwin",
+   "author": "Darwin, Charles, 1809-1882; Sheppard, Nathan, 1834-1888 [Compiler]",
+   "language": "英文"
+  },
+  {
+   "id": 69260,
+   "title": "My friend the murderer, and other mysteries and adventures",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 69394,
+   "title": "The dream: A novel",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 69410,
+   "title": "Christina Alberta's father",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 69700,
+   "title": "The case-book of Sherlock Holmes",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 69704,
+   "title": "The case of Oscar Slater",
+   "author": "Doyle, Arthur Conan, 1859-1930",
+   "language": "英文"
+  },
+  {
+   "id": 69752,
+   "title": "A year of prophesying",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 69825,
+   "title": "An apology for idlers, and other essays",
+   "author": "Stevenson, Robert Louis, 1850-1894",
+   "language": "英文"
+  },
+  {
+   "id": 70523,
+   "title": "Remarks on the speeches of William Paul Clerk, and John Hall of Otterburn, Esq",
+   "author": "Defoe, Daniel, 1661?-1731; Hall, John, -1716 [Contributor]; Paul, William, 1678-1716 [Contributor]",
+   "language": "英文"
+  },
+  {
+   "id": 70841,
+   "title": "Robinson Crusoe",
+   "author": "Defoe, Daniel, 1661?-1731; Wyeth, N. C. (Newell Convers), 1882-1945 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 71096,
+   "title": "The nightingale",
+   "author": "Andersen, H. C. (Hans Christian), 1805-1875; Newill, Mary J., 1860-1947 [Illustrator]; Dulcken, H. W. (Henry William), 1832-1894 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 71858,
+   "title": "Holly berries from Dickens",
+   "author": "Dickens, Charles, 1812-1870",
+   "language": "英文"
+  },
+  {
+   "id": 72333,
+   "title": "Mr. Belloc objects to \"The outline of history\"",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 73606,
+   "title": "The art of decorating dry goods windows and interiors",
+   "author": "Baum, L. Frank (Lyman Frank), 1856-1919",
+   "language": "英文"
+  },
+  {
+   "id": 74280,
+   "title": "Rambles in Germany and Italy in 1840, 1842, and 1843, vol. 1 of 2",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 74301,
+   "title": "Rambles in Germany and Italy in 1840, 1842, and 1843, vol. 2 of 2",
+   "author": "Shelley, Mary Wollstonecraft, 1797-1851",
+   "language": "英文"
+  },
+  {
+   "id": 74418,
+   "title": "Their island home",
+   "author": "Verne, Jules, 1828-1905; Murphy, H. C. (Henry Cruse), 1886-1931 [Illustrator]; Wyss, Johann David, 1743-1818 [Other]; Metcalfe, Cranstoun, 1866-1939 [Translator]",
+   "language": "英文"
+  },
+  {
+   "id": 74938,
+   "title": "Household words, no. 304, January 19, 1856",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 75344,
+   "title": "Household words, no. 306, February 2, 1856",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 75786,
+   "title": "The open conspiracy",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 76009,
+   "title": "Piccino, and other child stories",
+   "author": "Burnett, Frances Hodgson, 1849-1924; Birch, Reginald B. (Reginald Bathurst), 1856-1943 [Illustrator]",
+   "language": "英文"
+  },
+  {
+   "id": 76386,
+   "title": "Household words, no. 307, February 9, 1856",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 77242,
+   "title": "The way the world is going",
+   "author": "Wells, H. G. (Herbert George), 1866-1946",
+   "language": "英文"
+  },
+  {
+   "id": 77354,
+   "title": "Household words, no. 330, July 19, 1856",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78061,
+   "title": "Household words, No. 26, September 21, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78099,
+   "title": "Household words, No. 2, April 6, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78155,
+   "title": "Household Words, No. 12, June 15, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78166,
+   "title": "Household words, No. 3, April 13, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78167,
+   "title": "Household words, No. 4, April 20, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78168,
+   "title": "Household words, No. 5, April 27, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78170,
+   "title": "Household words, No. 6, May 4, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78172,
+   "title": "Household words, No. 7, May 11, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78173,
+   "title": "Household words, No. 8, May 18, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78174,
+   "title": "Household words, no. 9, May 25, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78175,
+   "title": "Household Words, No. 10, June 1, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78176,
+   "title": "Household Words, No. 11, June 8, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78177,
+   "title": "Household Words, No. 13, June 22, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78178,
+   "title": "Household Words, No. 14, June 29, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78179,
+   "title": "Household Words, No. 15, July 6, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78181,
+   "title": "Household words, No. 16, July 13, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78182,
+   "title": "Household words, No. 17, July 20, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78183,
+   "title": "Household words, No. 18, July 27, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78184,
+   "title": "Household words, No. 19, August 3, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78185,
+   "title": "Household words, No. 20, August 10, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78191,
+   "title": "Household words, No. 21, August 17, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78192,
+   "title": "Household words, No. 22, August 24, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78193,
+   "title": "Household words, No. 23, August 31, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78194,
+   "title": "Household words, No. 24, September 7, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78195,
+   "title": "Household words, No. 25, September 14, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 78245,
+   "title": "The Mudfog papers, etc.",
+   "author": "Dickens, Charles, 1812-1870; Bentley, George, 1828-1895 [Author of introduction, etc.]",
+   "language": "英文"
+  },
+  {
+   "id": 78266,
+   "title": "It's time something happened",
+   "author": "Doyle, Arthur, 1898-1929",
+   "language": "英文"
+  },
+  {
+   "id": 78504,
+   "title": "The fairy caravan",
+   "author": "Potter, Beatrix, 1866-1943",
+   "language": "英文"
+  },
+  {
+   "id": 78586,
+   "title": "Curiosa mathematica, Part 1",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 79080,
+   "title": "Curiosa mathematica, part II",
+   "author": "Carroll, Lewis, 1832-1898",
+   "language": "英文"
+  },
+  {
+   "id": 79523,
+   "title": "Household words, No. 1, March 30, 1850",
+   "author": "Dickens, Charles, 1812-1870 [Editor]",
+   "language": "英文"
+  },
+  {
+   "id": 79628,
+   "title": "Narrative of the surveying voyages of His Majesty's Ships Adventure and Beagle, Vol. 3 [of 3]",
+   "author": "Darwin, Charles, 1809-1882; Fitzroy, Robert, 1805-1865 [Editor]",
+   "language": "英文"
+  }
+ ]
+}

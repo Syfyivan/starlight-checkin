@@ -1,3 +1,4 @@
+import {BookSource} from './lib/book-source.mjs';
 import {exportPlans,importPlans} from './lib/plan-transfer.mjs';
 import {plansMarkdown} from './public/plan-transfer.js';
 import http from 'node:http';
@@ -23,6 +24,7 @@ export async function createApp(options={}) {
   const identity=new Identity(store,{origin:publicOrigin,basePath,config:options.identityConfig,fetcher:options.fetcher,mailer:options.mailer});
   requireThat(/^\/(?:[a-zA-Z0-9_-]+\/)*$/.test(basePath),'BASE_PATH 必须以 / 开始和结尾');
   if(demo)await store.seedDemo();
+  const bookSource=new BookSource(store,{fetcher:options.bookFetcher});
   const limits=new Map();
   function limit(key,max=30){const t=Date.now(),old=limits.get(key);if(!old||t-old.start>900_000){if(limits.size>5000)limits.delete(limits.keys().next().value);limits.set(key,{start:t,n:1});return;}requireThat(++old.n<=max,'操作太频繁，请稍后再试',429);}
   const cookie=(token,clear=false)=>`starlight_session=${clear?'':token}; HttpOnly; SameSite=Strict; Path=${basePath}; Max-Age=${clear?0:14*86400}${publicOrigin.startsWith('https://')?'; Secure':''}`;
@@ -44,7 +46,7 @@ export async function createApp(options={}) {
         requireThat(method==='GET'||method==='HEAD','不支持的请求方式',405);
         if(path==='/manifest.webmanifest')return send(200,{id:basePath,name:'小小成就 · 心愿花园',short_name:'小小成就',lang:'zh-CN',start_url:basePath,scope:basePath,display:'standalone',background_color:'#f6f7f2',theme_color:'#284e3b',icons:[{src:basePath+'icon-192.png',sizes:'192x192',type:'image/png',purpose:'any'},{src:basePath+'icon-512.png',sizes:'512x512',type:'image/png',purpose:'any maskable'}]},{'Content-Type':'application/manifest+json; charset=utf-8'});
         const petFiles=Object.fromEntries(PET_FORMS.flatMap(f=>['young.png','winged.png','young-idle-animated.png','winged-idle-animated.png',...(f.id==='nuonuo-seal'?['moon.png','star.png']:[])].map(name=>['/pets/'+f.id+'/'+name,['pets/'+f.id+'/'+name,'image/png']])));
-        const extraFiles=Object.fromEntries(['travel-notes.js','travel-art.js','travel-journal.js','plan-transfer.js','family-play.js','chat.js','pet-care.js','pet-growth.js','illustrations.js','pet-catalog.js','travel-view.js','task-types.js','startup.js','compat.js','celebration-content.js','celebration-art.js','progress.js','merge.js','celebrations.js','vendor/canvas-confetti-1.9.4.js'].map(f=>['/'+f,[f,'text/javascript; charset=utf-8']]));extraFiles['/chat.css']=['chat.css','text/css; charset=utf-8'];extraFiles['/celebrations.css']=['celebrations.css','text/css; charset=utf-8'];extraFiles['/pet-care.css']=['pet-care.css','text/css; charset=utf-8'];extraFiles['/pet-studio.css']=['pet-studio.css','text/css; charset=utf-8'];extraFiles['/progress.css']=['progress.css','text/css; charset=utf-8'];
+        const extraFiles=Object.fromEntries(['reading.js','book-text.js','ebook-worker.js','vendor/ebook-parser.js','travel-notes.js','travel-art.js','travel-journal.js','plan-transfer.js','family-play.js','chat.js','pet-care.js','pet-growth.js','illustrations.js','pet-catalog.js','travel-view.js','task-types.js','startup.js','compat.js','celebration-content.js','celebration-art.js','progress.js','merge.js','celebrations.js','vendor/canvas-confetti-1.9.4.js'].map(f=>['/'+f,[f,'text/javascript; charset=utf-8']]));extraFiles['/vendor/EBOOK-LICENSES.txt']=['vendor/EBOOK-LICENSES.txt','text/plain; charset=utf-8'];extraFiles['/reading.css']=['reading.css','text/css; charset=utf-8'];extraFiles['/chat.css']=['chat.css','text/css; charset=utf-8'];extraFiles['/celebrations.css']=['celebrations.css','text/css; charset=utf-8'];extraFiles['/pet-care.css']=['pet-care.css','text/css; charset=utf-8'];extraFiles['/pet-studio.css']=['pet-studio.css','text/css; charset=utf-8'];extraFiles['/progress.css']=['progress.css','text/css; charset=utf-8'];
         const files={...extraFiles,...petFiles,...{'/':['index.html','text/html; charset=utf-8'],'/index.html':['index.html','text/html; charset=utf-8'],'/app.js':['app.js','text/javascript; charset=utf-8'],'/lottery.js':['lottery.js','text/javascript; charset=utf-8'],'/pets.js':['pets.js','text/javascript; charset=utf-8'],'/updates.js':['updates.js','text/javascript; charset=utf-8'],'/plans.js':['plans.js','text/javascript; charset=utf-8'],'/rooms.js':['rooms.js','text/javascript; charset=utf-8'],'/invitations.js':['invitations.js','text/javascript; charset=utf-8'],'/community.js':['community.js','text/javascript; charset=utf-8'],'/sw.js':['sw.js','text/javascript; charset=utf-8'],'/offline.html':['offline.html','text/html; charset=utf-8'],'/icon-192.png':['icon-192.png','image/png'],'/icon-512.png':['icon-512.png','image/png'],'/mobile.css':['mobile.css','text/css; charset=utf-8'],'/style.css':['style.css','text/css; charset=utf-8'],'/favicon.svg':['favicon.svg','image/svg+xml']}};
         files['/downloads/starlight.apk']=['downloads/starlight.apk','application/vnd.android.package-archive'];
         files['/downloads/starlight.apk.sha256']=['downloads/starlight.apk.sha256','text/plain; charset=utf-8'];
@@ -56,7 +58,8 @@ export async function createApp(options={}) {
         const origin=publicOrigin||`http://${req.headers.host}`;
         requireThat(req.headers.origin===origin,'请求来源校验失败，请从网站页面操作',403);
         requireThat((req.headers['content-type']||'').startsWith('application/json'),'请使用 JSON 请求',415);
-        let size=0,chunks=[];for await(const chunk of req){size+=chunk.length;requireThat(size<=(path==='/api/redeem'?4.3*1024*1024:256*1024),'上传内容太大',413);chunks.push(chunk);}
+        if(path==='/api/reading/import')requireThat(user,'请先登录',401);
+        let size=0,chunks=[];for await(const chunk of req){size+=chunk.length;requireThat(size<=(path==='/api/reading/import'?3*1024*1024:path==='/api/redeem'?4.3*1024*1024:256*1024),'上传内容太大',413);chunks.push(chunk);}
         try{body=JSON.parse(Buffer.concat(chunks).toString('utf8')||'{}');}catch{throw new Fault('无法读取提交内容');}requireThat(body&&typeof body==='object'&&!Array.isArray(body),'提交内容无效');
       }
       const remote=process.env.TRUST_PROXY==='1'?(req.headers['x-forwarded-for']||req.socket.remoteAddress):req.socket.remoteAddress;
@@ -87,6 +90,9 @@ export async function createApp(options={}) {
       if(method==='GET') {
         if(path==='/api/celebration/quote'){limit(`quote:${user.id}`,40);return send(200,await encouragement.get());}
         const query=Object.fromEntries(url.searchParams),community=store.community;
+        if(path==='/api/reading/library')return send(200,store.reading.list(user,query));
+        if(path==='/api/reading/book')return send(200,store.reading.detail(user,query));
+        if(path==='/api/reading/search'){limit('booksearch:'+user.id,80);return send(200,bookSource.search(query.q));}
         if(path==='/api/pets/postcard')return send(200,store.travel.readPostcard(user,query));
         if(path==='/api/friends/chat')return send(200,store.friends.messages(user,query));
         if(path==='/api/friends/threads')return send(200,{friends:store.friends.list(user)});
@@ -119,7 +125,14 @@ export async function createApp(options={}) {
       if(path==='/api/share/inspect')return send(200,store.shareCard(user,body.token));
       const key=req.headers['idempotency-key'];const old=store.replay(user,key,path,body);if(old)return send(200,old);
       let operation;
+      if(path==='/api/reading/import')limit('bookimport:'+user.id,15);
+      if(path==='/api/reading/download'){
+        store.ownSpace(user,body);limit('bookdownload:'+user.id,10);
+        const result=await bookSource.download(body.source_id);
+        return send(200,store.operation(user,key,path,body,()=>store.reading.import(user,{...body,book:result.book},result.source)));
+      }
       const actions={'/api/pets/travel/memory':()=>store.travel.remember(user,body),'/api/pets/travel/practice':()=>store.travel.practice(user,body),'/api/tasks/import':()=>importPlans(store,user,body),'/api/tasks/edit':()=>store.plans.edit(user,body),'/api/pets/evolve':()=>store.pets.evolve(user,body),'/api/tasks/timer':()=>store.progress.timer(user,body),'/api/admin/task-score':()=>store.progress.taskScore(user,body),'/api/admin/growth-rules':()=>store.progress.saveRules(user,body),'/api/mail/claim':()=>store.progress.claim(user,body),'/api/pets/travel':()=>store.travel.depart(user,body),'/api/tasks/estimate':()=>store.estimateTask(user,body),'/api/pets/use':()=>store.pets.use(user,body),'/api/pets/dress':()=>store.pets.dress(user,body),'/api/admin/lottery/defaults':()=>store.lottery.defaults(user,body),'/api/admin/lottery/copy':()=>store.lottery.copy(user,body),'/api/cards/use':()=>store.lottery.use(user,body),'/api/tasks':()=>store.createTasks(user,body),'/api/bonus/claim':()=>store.claimDailyBonus(user,body),'/api/complete':()=>store.complete(user,body),'/api/archive':()=>store.archive(user,body),'/api/buy':()=>store.buy(user,body),'/api/draw':()=>store.draw(user,body),'/api/redeem':()=>store.redeem(user,body),'/api/redeem/cancel':()=>store.cancelRedemption(user,body),'/api/share':()=>store.share(user,body),'/api/cards/rename-room':()=>store.renameRoom(user,body),'/api/cards/merge':()=>store.moveCards(user,body,'merge'),'/api/cards/convert':()=>store.moveCards(user,body,'convert'),'/api/pairs/accept':()=>store.acceptInvite(user,body.code),'/api/lesson':()=>store.lesson(user,body),'/api/admin/prize':()=>store.savePrize(user,body),'/api/admin/templates':()=>store.addTemplates(user,body),'/api/admin/prizes/remove':()=>store.removePrizes(user,body),'/api/admin/prizes/restore':()=>store.restorePrizes(user,body),'/api/admin/odds':()=>store.saveOdds(user,body),'/api/admin/settings':()=>store.saveSettings(user,body),'/api/admin/invite':()=>store.invite(user,body),'/api/admin/fulfill':()=>store.fulfill(user,body)};
+      Object.assign(actions,{'/api/reading/import':()=>store.reading.import(user,body),'/api/reading/position':()=>store.reading.position(user,body),'/api/reading/note':()=>store.reading.note(user,body),'/api/reading/finish':()=>store.reading.finish(user,body),'/api/reading/rules':()=>store.reading.saveRules(user,body)});
       const community=store.community;
       Object.assign(actions,{'/api/friends/message':()=>store.friends.send(user,body),'/api/friends/read':()=>store.friends.read(user,body),'/api/friends/invite':()=>store.friends.invite(user,body)});
       Object.assign(actions,{'/api/family/mode':()=>store.familyPlay.mode(user,body),'/api/family/plans':()=>store.familyPlay.create(user,body),'/api/family/plans/archive':()=>store.familyPlay.archive(user,body),'/api/family/buy':()=>store.familyPlay.buy(user,body),'/api/admin/penalty/refund':()=>store.plans.refund(user,body),'/api/family/create':()=>community.createFamily(user,body),'/api/family/invite':()=>community.familyInvite(user,body),'/api/family/admins':()=>community.setAdmins(user,body),'/api/rooms/close':()=>community.requestClose(user,body),'/api/rooms/close/cancel':()=>community.cancelClose(user,body),'/api/friends/request':()=>community.friendRequest(user,body),'/api/friends/remove':()=>community.removeFriend(user,body),'/api/friends/view-request':()=>community.viewRequest(user,body),'/api/community/respond':()=>community.respond(user,body),'/api/community/read':()=>community.readMail(user,body),'/api/community/revoke':()=>community.revokeShare(user,body),'/api/community/diary':()=>community.saveDiary(user,body)});

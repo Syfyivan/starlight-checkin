@@ -14,7 +14,7 @@ export const roomMemoryKey = userId => `starlight:last-room:${userId}`;
 
 export function renameNotice(state,esc,time){
   const r=state.space.rename;
-  return r?`<p class="room-rename-note">招牌有效至 ${esc(time(r.expires))} · 到期恢复${r.defaultName?'「'+esc(r.defaultName)+'」':'默认小屋名'}</p>`:'';
+  return r?`<p class="room-rename-note" role="status">名字有效至 ${esc(time(r.expires))} · 到期恢复${r.defaultName?'「'+esc(r.defaultName)+'」':'默认小屋名'}</p>`:state.space.roomName?'<p class="room-rename-note">小屋名字 · 长期有效</p>':'';
 }
 
 // A perspective changes presentation only; the server still authorizes every action.

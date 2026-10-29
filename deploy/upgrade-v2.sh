@@ -4,7 +4,7 @@ set -eu
 # Rollback plan: keep the stopped old container plus a consistent database snapshot.
 # Never start an older version against a newer database schema: restore its snapshot first.
 : "${PUBLIC_ORIGIN:?Set the exact existing HTTPS origin, including port 8443}"
-IMAGE="${IMAGE:-starlight-checkin:3.16.1}"
+IMAGE="${IMAGE:-starlight-checkin:3.17.0}"
 test -f server.mjs && test -f lib/migrate.mjs && test -f test/v2.test.mjs
 if [ -n "${ENV_FILE:-}" ]; then
   test -r "$ENV_FILE" || { echo 'Configured environment file is unreadable; application left running.'; exit 1; }
