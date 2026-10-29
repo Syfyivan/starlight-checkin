@@ -24,7 +24,7 @@ export async function createApp(options={}) {
   const identity=new Identity(store,{origin:publicOrigin,basePath,config:options.identityConfig,fetcher:options.fetcher,mailer:options.mailer});
   requireThat(/^\/(?:[a-zA-Z0-9_-]+\/)*$/.test(basePath),'BASE_PATH 必须以 / 开始和结尾');
   if(demo)await store.seedDemo();
-  const bookSource=new BookSource(store,{fetcher:options.bookFetcher});
+  const bookSource=new BookSource(store,{fetcher:options.bookFetcher,sourceCacheDir:options.bookSourceCacheDir??process.env.BOOK_SOURCE_CACHE_DIR});
   const limits=new Map();
   function limit(key,max=30){const t=Date.now(),old=limits.get(key);if(!old||t-old.start>900_000){if(limits.size>5000)limits.delete(limits.keys().next().value);limits.set(key,{start:t,n:1});return;}requireThat(++old.n<=max,'操作太频繁，请稍后再试',429);}
   const cookie=(token,clear=false)=>`starlight_session=${clear?'':token}; HttpOnly; SameSite=Strict; Path=${basePath}; Max-Age=${clear?0:14*86400}${publicOrigin.startsWith('https://')?'; Secure':''}`;

@@ -34,6 +34,14 @@ test('字体混淆不妨碍明文正文；正文加密和未知算法仍拒绝',
   await assert.rejects(parseSourceEpub(epub({'META-INF/encryption.xml':declaration('body.xhtml')}),{wikisource:false}),/加密正文/);
   await assert.rejects(parseSourceEpub(epub({'META-INF/encryption.xml':declaration('font.otf','unknown'),'font.otf':'x'},font),{wikisource:false}),/加密正文/);
 });
+test('混淆字体与正文使用不同manifest标识但指向同一路径时仍拒绝',async()=>{
+  const book=epub({
+    'META-INF/encryption.xml':'<encryption><EncryptedData><EncryptionMethod Algorithm="http://www.idpf.org/2008/embedding"/><CipherData><CipherReference URI="body.xhtml"/></CipherData></EncryptedData></encryption>',
+    // Put the font alias first so a first-match ID check would accept it.
+    'book.opf':'<package version="3.0"><metadata><title>同路径别名</title></metadata><manifest><item id="font" href="./body.xhtml" media-type="font/otf"/><item id="body" href="body.xhtml" media-type="application/xhtml+xml"/></manifest><spine><itemref idref="body"/></spine></package>'
+  });
+  await assert.rejects(parseSourceEpub(book,{wikisource:false}),/加密正文/);
+});
 test('不猜测多本压缩包，不递归解压，不接受外层路径穿越',async()=>{
   const options={sourceArchive:true,wikisource:false};
   await assert.rejects(parseSourceEpub(zip({'a.epub':epub(),'b.epub':epub()}),options),/恰好一本/);

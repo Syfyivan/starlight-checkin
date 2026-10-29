@@ -1,6 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync,mkdtempSync,writeFileSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {createHash} from 'node:crypto';
 import {deflateRawSync} from 'node:zlib';
 import {Store} from '../lib/store.mjs';
 import {BookSource} from '../lib/book-source.mjs';
@@ -116,4 +119,32 @@ test('shared source cache stays bounded to eight copies after open-source reads'
  const source=new BookSource(s,{fetcher:async()=>new Response(epub())});await source.download(directId);
  assert.equal(s.all('SELECT key FROM book_catalog_cache').length,8);assert.equal(s.get('SELECT key FROM book_catalog_cache WHERE key=?','old:0'),undefined);
  assert.ok(s.get('SELECT key FROM book_catalog_cache WHERE key=?',directId));
+});
+
+test('prepared public files work without upstream access and survive parsed-cache eviction',async t=>{
+ const dir=mkdtempSync(join(tmpdir(),'starlight-source-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));
+ const data=epub(),b=openBook(directId),manifest={version:1,books:[{id:b.id,url:b.downloadUrl,bytes:data.length,sha256:createHash('sha256').update(data).digest('hex')}]};
+ writeFileSync(join(dir,'manifest.json'),JSON.stringify(manifest));writeFileSync(join(dir,'dc-lunyu.bin'),data);
+ const s=store(t),source=new BookSource(s,{sourceCacheDir:dir,fetcher:()=>{throw Error('Network must not be used');}});
+ assert.equal((await source.download(directId)).book.title,b.title);
+ s.run('DELETE FROM book_catalog_cache');
+ assert.equal((await source.download(directId)).book.title,b.title);
+ for(const change of ['hash','url','size']){
+  s.run('DELETE FROM book_catalog_cache');const invalid=structuredClone(manifest);
+  if(change==='hash')invalid.books[0].sha256='0'.repeat(64);
+  if(change==='url')invalid.books[0].url='https://example.com/other.epub';
+  if(change==='size')invalid.books[0].bytes=10*1024*1024+1;
+  writeFileSync(join(dir,'manifest.json'),JSON.stringify(invalid));
+  await assert.rejects(source.download(directId),/副本校验/);assert.equal(source.running,0);
+ }
+});
+
+test('missing prepared source files use the normal bounded download; oversized index is rejected',async t=>{
+ const dir=mkdtempSync(join(tmpdir(),'starlight-source-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));
+ const s=store(t);let calls=0;const source=new BookSource(s,{sourceCacheDir:dir,fetcher:async()=>{calls++;return new Response(epub());}});
+ await source.download(directId);assert.equal(calls,1);s.run('DELETE FROM book_catalog_cache');
+ writeFileSync(join(dir,'manifest.json'),' '.repeat(32*1024+1));
+ await assert.rejects(source.download(directId),/副本暂不可用/);assert.equal(calls,1);
+ writeFileSync(join(dir,'manifest.json'),'null');
+ await assert.rejects(source.download(directId),e=>e.status===503);assert.equal(calls,1);
 });

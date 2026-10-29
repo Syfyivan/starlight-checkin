@@ -3,7 +3,7 @@ set -eu
 # Intentionally does not replace an existing container or alter the proxy.
 # Update/rollback should preserve /var/lib/starlight and use a new image tag.
 : "${PUBLIC_ORIGIN:?Set the final HTTPS origin without a trailing slash}"
-IMAGE="${IMAGE:-starlight-checkin:3.20.0}"
+IMAGE="${IMAGE:-starlight-checkin:3.20.1}"
 set --
 if [ -n "${ENV_FILE:-}" ]; then
   test -f "$ENV_FILE" || { echo 'Configured environment file is missing.'; exit 1; }
@@ -19,4 +19,5 @@ docker run -d --name starlight-checkin --restart unless-stopped \
   -v /var/lib/starlight:/var/lib/starlight \
   "$@" \
   -e PUBLIC_ORIGIN="$PUBLIC_ORIGIN" -e BASE_PATH=/starlight/ -e TRUST_PROXY=1 \
+  -e BOOK_SOURCE_CACHE_DIR=/var/lib/starlight/source-books \
   "$IMAGE"
