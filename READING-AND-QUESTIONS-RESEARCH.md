@@ -74,3 +74,60 @@ Gutendex 提供方便的元数据 API，但本次服务器探测出现 HTTP 错�
 - 手机可调字号/行距，翻页与目录跳转清楚，重开恢复具体阅读位置；图文 EPUB 的图片和脚注可用。完读与笔记奖励沿用幂等规则，换源/重导不借机重复计奖。
 
 本次交付是来源实查、根因定位与接入方案：只更新调研文档，没有变更线上读者数据、安装新依赖或宣称新的书源已上线。需要验证的登录、腾讯云网络、具体译本和 Android 真机项目已明确区分。
+
+## 开源项目与资源供应链补查（2026-10-29）
+
+这轮直接读取官方仓库的 README、文件树和关键源码，固定到下表提交；不把旧教程、项目星数或上游自报测试结果当成本应用的验证结果。公开源码仅供阅读，未安装这些项目、运行书源脚本、购买资源包或尝试登录第三方书库。
+
+### 哪些项目真正解决哪一步
+
+| 项目与核对版本 | 已查到的实现 | 对小小成就的用途与限制 |
+| --- | --- | --- |
+| [TaleBook](https://github.com/talebook/talebook/tree/b2d60b33b7476f7e64a125e22761b0194a6e1e48)，BSD-2-Clause | `booksource/engine.py` 实现搜索、详情、目录、正文；`save_service.py` 区分直接下载文件与逐章取文入库；另有 OPDS 导入、书源启停及体检 | 是最值得参考的完整书源管理链路。逐章正文转成 EPUB 不等于取得出版社原版 EPUB；网络小说源也不能保证找到儿童文学的特定译本。完整部署还带 Calibre/Python 与后台转换，当前不宜为了找书直接引入整套运行环境 |
+| [hectorqin/reader](https://github.com/hectorqin/reader/tree/8ec588b7742ad77f8143f690ea392775c7c9c776)，AGPL-3.0 | 当前服务端是 Node ≥22、Fastify/TypeScript；`sources/types.ts` 把浏览、搜索、详情、文件获取、章节获取分别定义；`acquisitions.ts` 有流式保存、体积检查及导入逻辑，附完整章节插件示例 | 更贴近本项目 Node 技术栈，适合借鉴来源能力与失败状态的设计。当前版本已含影音系统，不应照旧文章称其为 Java 服务，也不需要把影音功能搬进来；示例插件只有演示内容，不附送真实书库 |
+| [Readest](https://github.com/readest/readest/tree/578b50fa7e2064ac3da6d1b082a90541394c6a75)，整应用 AGPL-3.0 | 已读 OPDS 单书详情解析和格式选择源码：跟进具体版本详情、解析相对下载地址、优先适合阅读的格式。项目提供分页/滚动、图文、笔记等阅读能力 | 用作阅读体验参考，具体渲染可以单独评估其采用的 [foliate-js](https://github.com/johnfactotum/foliate-js)（MIT）或 EPUB.js。完整应用与渲染库的许可不同；旧 Android 内核兼容性仍需真机验证 |
+| [Calibre-Web](https://github.com/janeczku/calibre-web/tree/6e840acbda8d62fdd159bf3855c01872d629a914)，GPL-3.0 | 面向已有 Calibre 数据库和文件，提供上传、分类、在线阅读及 OPDS；`cps/opds.py` 实现搜索/浏览接口 | 适合以后接自己已经整理的书库。它的“元数据下载”主要补资料，不能等同于从全网下载书籍正文；不是买一个容器就拥有百万本书 |
+| [Book Searcher](https://github.com/zu1k/book-searcher/tree/64ac0b2bb73b23ab19e1a78c43c6a8bbd6706133)，BSD-3-Clause | README 明确要求自行准备 CSV 书目，支持书名、作者、出版社、语言、ISBN、格式检索；数据字段包含文件标识，但项目只提供搜索 | 解释了“庞大书库快速查找”如何实现。元数据索引与实际文件是两份东西；当前用户量没有引入千万级索引服务的必要。其性能宣传未在本机复测 |
+| [heartleo/zlib](https://github.com/heartleo/zlib/tree/c5cca35d92b5daaeaad5074035c7203064cac200)，MIT | EAPI 文档及 Go 源码覆盖登录、搜索、书籍详情和下载地址解析；文档明确没有公开、稳定的官方授权契约 | 证明社区有做接口封装，不能再笼统说“没有办法接”。但它不是独立书库，仍依赖上游账号、接口与可用性；本次只审阅代码，未访问此前被安全策略阻止的站点或换镜像绕过限制，不能列为可用接入 |
+| [原版 Legado 仓库](https://github.com/gedoor/legado/tree/9bb0569269ed557753fc3866250970de6d454fcf) | 本次官方文件树只剩 README 和公告图片，README 说明已删除项目内容 | 旧“导入书源 JSON”教程说明过一种机制，但不能把当前空仓库当作可直接集成的完整引擎。应检查仍有源码的实现及其兼容范围 |
+
+这里的“书源规则”是教程序去某个站点搜索、解析目录和提取章节的配置，**不是书籍文件本身**。同样，网盘索引返回的可能是分享页，OPDS 返回的可能是借阅/购买入口，书目 API 返回的可能只有封面和 ISBN。接入时必须保留这些差别。
+
+### 能具体借鉴的源码，而非只看介绍
+
+- TaleBook：[书源引擎](https://github.com/talebook/talebook/blob/b2d60b33b7476f7e64a125e22761b0194a6e1e48/webserver/services/booksource/engine.py#L168)、[保存文件或逐章装订](https://github.com/talebook/talebook/blob/b2d60b33b7476f7e64a125e22761b0194a6e1e48/webserver/services/booksource/save_service.py#L113)、[受限规则执行](https://github.com/talebook/talebook/blob/b2d60b33b7476f7e64a125e22761b0194a6e1e48/webserver/services/booksource/js_runtime.py#L17)。最后一项设置 QuickJS 时间、内存和栈限制，而且只支持部分字段处理，并非任意 Legado JavaScript 均可运行。这值得参考，但源码有这些限制不等于完成安全审计。
+- reader：[来源接口](https://github.com/hectorqin/reader/blob/8ec588b7742ad77f8143f690ea392775c7c9c776/server/src/sources/types.ts)、[文件获取](https://github.com/hectorqin/reader/blob/8ec588b7742ad77f8143f690ea392775c7c9c776/server/src/sources/acquisitions.ts)、[章节插件示例](https://github.com/hectorqin/reader/blob/8ec588b7742ad77f8143f690ea392775c7c9c776/examples/plugins/demo-chapters/main.mjs)。借鉴其能力分离，不直接把外部插件装进学习币服务。
+- Readest：[详情解析](https://github.com/readest/readest/blob/578b50fa7e2064ac3da6d1b082a90541394c6a75/apps/readest-app/src/app/opds/utils/opdsPublication.ts)、[格式选择](https://github.com/readest/readest/blob/578b50fa7e2064ac3da6d1b082a90541394c6a75/apps/readest-app/src/services/opds/formats.ts)。版本与格式选完后再获取文件，不能在搜到书名时就当作取得正文。
+
+TaleBook 甚至已有一份[公开免费书源调研](https://github.com/talebook/talebook/blob/b2d60b33b7476f7e64a125e22761b0194a6e1e48/research/public-free-book-sources-20260829/findings.md)，分别研究 Gutenberg、Gallica、Standard Ebooks、中文维基文库、OpenStax 和 DOAB。它能提供接口排查线索，但其中 2026-08-29 的连通性记录不是我们的今日实测；这些来源也偏公版或教材，不能解决所有现代中文读物。还发现其文档建议改用官方 Gutenberg OPDS，当前 `gutenberg.py` 却仍使用 Gutendex，因此不能把调研里的建议当成已完成实现。
+
+### 市面上卖资源的人从哪里拿书
+
+需要分清两层：**文件最初如何产生**，以及**卖家最后从哪里取得文件**。
+
+文件最初可以来自出版社制作的数字版本、纸书扫描及 OCR、志愿者校对重排。公开数字化也有完整的生产链，例如 [Standard Ebooks](https://standardebooks.org/)介绍了对照原书扫描校对文本和重新制作排版的流程。扫描图片、未经校对 OCR、完整图文 EPUB 的阅读质量不能混为一谈；改后缀或把 TXT 装进 EPUB 不会补回缺页和插图。
+
+关于转卖链路，[《出版人杂志》2026-10-26 的调查（新湖南转载）](https://www.hunantoday.cn/news/xhn/202610/34085148.html)通过实际咨询、购买和比对，记录了以下渠道：
+
+1. 从已有电子图书馆、资源索引和网盘分享寻找文件，再整理或打包交付。
+2. 有商家声称借助文献平台、阅读平台或图书馆账号取得资源；报道中的平台截图只能支持“疑似来源”，不能据此证明每个文件都来自该平台。
+3. 建立书名/ISBN 索引，收到询问后检索已有资源；一次收录可重复交付，也有人把分类合集和自动发货当作商品。
+
+这份报道支持的是受访交易的做法，不是所有卖家的来源比例。由此作出的产品判断是：不少代找服务的价值在渠道、整理和节省寻找时间，不能根据售价或“几十万册”宣传推断它有独家、高质量、可再分发的书库。
+
+大型集合本身也会靠用户上传积累。美国司法部 [2022 年起诉通报](https://www.justice.gov/usao-edny/pr/two-russian-nationals-charged-running-massive-e-book-piracy-website)描述过 Z-Library 的上传与下载机制；这是对历史案情的指控描述，不能外推为当前全部文件的来源，更不能当作每本书的质量或许可证明。
+
+### 本项目的具体选择
+
+**推荐保留小小成就，补一个轻量的多书源模块，配合保留原书的成熟阅读引擎。** 这轮不建议整套部署 TaleBook、reader、Readest 三个系统，更不建议先下载海量资源包。
+
+1. **统一找书与版本选择**：用作品别名检索，再按译者、语言、出版社、年份、格式和来源区分版本；下载前看真实目录及样章。没有取得全文的结果，不能放一个“直接阅读”按钮。书名相同也不自动合并不同译本。
+2. **来源分工**：中文古典正文优先验证维基文库；外文经典以 Gutenberg/Standard Ebooks 补充；Open Library 用于版本发现；已有文件及自有 OPDS 作为稳定书架。鸠摩等外部聚合保留“去来源找书”的能力，但要等原站恢复并验证接口；现代中文出版书若只能购买或借阅，就明确显示相应入口。当前仍未验证到可直接导入的《小海蒂》简体完整译本。
+3. **按需取书**：用户选定版本才获取和缓存文件，书目搜索先查缓存、远端结果逐个返回；设置超时、并发和文件大小上限，不让一个失效站点拖住整个搜索。书源状态要显示“可用、维护、需登录、仅目录”，且记录最近验证时间。
+4. **浏览器排版**：保留 EPUB 原文件、图片及脚注，浏览器负责解析、分页和样式；服务端负责权限、文件、阅读位置、笔记和奖励。先用相同 EPUB 比较 EPUB.js 与 foliate-js 的旧安卓兼容性，验收后再定引擎，不拿正文提取器继续充当完整阅读器。
+5. **控制服务器开销**：首版沿用现有 Node 服务和小规模书目缓存；不增加全文爬虫、OCR、批量转码或千万级搜索进程。若未来确实需要维护大量自有书，再单独部署一个书库，通过 OPDS 接入。这里是结构上的开销判断，尚未做腾讯云内存/并发压测，不能承诺具体 MB 或吞吐量。
+6. **计奖保持独立**：来源、文件与版本有自己的标识，任务/完读/笔记奖励仍按小屋规则执行。换源、切简繁和补排版均不重发已领取奖励；换译本不能仅凭文件哈希自动认定是一本全新的奖励书籍。
+
+实施先后：先修好已知《论语》章节与中文阅读体验，同时完成保留原书的样本验证；再做多书源和版本选择；最后才扩展需登录、需账号或不稳定的来源。验收至少覆盖古文分篇、简体儿童文学图文 EPUB、英文 EPUB、失效来源和手机断点续读；“能搜索出名字”不算找书链路通过。
+
+本轮只补充这一份调研文件。已完成官方仓库现状核对、关键代码阅读和报道全文核查；未执行上游测试套件、接通新书源或改动生产阅读器。旧 Android 真机、腾讯云网络、具体中文译本可取得性仍是实施验收项。
