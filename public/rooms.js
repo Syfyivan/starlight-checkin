@@ -36,12 +36,14 @@ export function roomNavigation(state, perspective) {
       {page:'admin', tab:'odds', icon:'spark', label:'抽奖配置'},
       {page:'admin', tab:'redemptions', icon:'card', label:'报销核销'},
       {page:'today', icon:'chart', label:state.family?'家人进展':'伙伴进展'},
+      {page:'reading', icon:'book', label:'阅读进展'},
       {page:'admin', tab:'settings', icon:'settings', label:'小屋规则'},
     ];
-    return state.space.status === 'active' ? items : items.filter(n=>n.page==='today'||n.tab==='redemptions');
+    return state.space.status === 'active' ? items : items.filter(n=>['today','reading'].includes(n.page)||n.tab==='redemptions');
   }
   return [
     {page:'today', icon:'sun', label:'今日计划'},
+    {page:'reading', icon:'book', label:'阅读小屋'},
     {page:'shop', icon:'gift', label:'奖励商城'},
     {page:'cards', icon:'card', label:perspective==='preview'?'卡包预览':'我的卡包'},
     {page:'lucky', icon:'spark', label:perspective==='preview'?'抽奖预览':'抽奖'},

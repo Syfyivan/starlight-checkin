@@ -36,7 +36,7 @@ test('预览不能用币、用卡或打卡，非发奖人不能进入管理或�
 
 test('管理导航直达配置与核销；预览卡包明确身份，家庭管家正常入口不消失',()=>{
   const manage=roomNavigation(pair(),'manage');
-  assert.deepEqual(manage.map(n=>n.tab||n.page),['prizes','odds','redemptions','today','settings']);
+  assert.deepEqual(manage.map(n=>n.tab||n.page),['prizes','odds','redemptions','today','reading','settings']);
   assert.ok(!manage.some(n=>['cards','lucky'].includes(n.page)));
   assert.equal(roomNavigation(pair(),'preview').find(n=>n.page==='cards').label,'卡包预览');
   assert.equal(roomNavigation(pair(true,false),'receive').find(n=>n.page==='cards').label,'我的卡包');
