@@ -4,6 +4,7 @@ import {randomUUID} from 'node:crypto';
 import {Store} from '../lib/store.mjs';
 import {migrate} from '../lib/migrate.mjs';
 import {COIN,dayAt} from '../lib/common.mjs';
+import {missedPenalty,DEFAULT_PENALTIES} from '../lib/task-plans.mjs';
 const DAY=86400000,START=Date.parse('2026-11-03T12:00:00+08:00');
 function fixture(t){
  let clock=START;t.mock.method(Date,'now',()=>clock);
@@ -26,13 +27,53 @@ test('没计划和未登录也每日结算，连续未学习5/10/15/20封顶；�
  const count=f.s.all('SELECT * FROM ledger').length;f.s.plans.settle(f.room);assert.equal(f.s.all('SELECT * FROM ledger').length,count);
  assert.equal(f.s.pets.state(f.room).xp,0);
 });
-test('完成会重置连续天数；未完成按每项最低2币与所得1%较大值，和缺席取高不叠加',t=>{
+test('完成会重置连续天数；固定扣币和收入比例可切换，和缺席取高不叠加',t=>{
  const f=fixture(t);f.seed();f.at(2);f.s.plans.settle(f.room);const a=f.add();f.add();f.done(a);
  let p=f.s.plans.preview(f.room,f.day(2));assert.equal(p.meta.streak,0);assert.equal(p.amount,2*COIN);
  f.at(3);f.s.plans.settle(f.room);assert.equal(f.row(2).amount,2*COIN);
  p=f.s.plans.preview(f.room,f.day(3));assert.equal(p.meta.streak,1);assert.equal(p.amount,5*COIN);
- const long=f.add({task_kind:'long',points:1000});f.done(long);p=f.s.plans.preview(f.room,f.day(3));assert.equal(p.meta.streak,0);assert.equal(p.amount,10*COIN);
+ const long=f.add({task_kind:'long',points:1000});f.done(long);p=f.s.plans.preview(f.room,f.day(3));assert.equal(p.meta.streak,0);assert.equal(p.amount,2*COIN);
+ f.rules({missedTaskMode:'income_percent',missedTaskPercent:1});p=f.s.plans.preview(f.room,f.day(3));assert.equal(p.amount,10*COIN);
  for(let i=0;i<20;i++)f.add();assert.equal(f.s.plans.preview(f.room,f.day(3)).amount,20*COIN);
+});
+
+test('三种模式只选一种；梯度只加在后面的项目，收入模式不设固定下限',()=>{
+ const tasks=[50,20,30,10,10].map(n=>({points:n*COIN})),r={...DEFAULT_PENALTIES,penaltyDailyCapCoins:100};
+ assert.equal(missedPenalty(tasks,100*COIN,r),10*COIN);
+ assert.equal(missedPenalty(tasks,100*COIN,{...r,missedTaskGradient:true}),14*COIN);
+ assert.equal(missedPenalty(tasks,100*COIN,{...r,missedTaskMode:'task_percent'}),12*COIN);
+ const graded={...r,missedTaskMode:'task_percent',missedTaskGradient:true};
+ assert.equal(missedPenalty(tasks,100*COIN,graded),14.5*COIN);assert.equal(missedPenalty(tasks.reverse(),100*COIN,graded),14.5*COIN);
+ assert.equal(missedPenalty(tasks.slice(0,3),100*COIN,{...r,missedTaskMode:'income_percent'}),6*COIN);
+ assert.equal(missedPenalty(tasks.slice(0,1),20*COIN,{...r,missedTaskMode:'income_percent'}),0.4*COIN);
+ assert.equal(missedPenalty(tasks,0,{...r,missedTaskMode:'income_percent'}),0);
+ assert.equal(missedPenalty(Array(50).fill({points:COIN}),10*COIN,{...r,missedTaskMode:'income_percent',missedTaskPercent:20,missedTaskGradient:true}),10*COIN);
+ assert.equal(missedPenalty(tasks,1000*COIN,{...graded,penaltyDailyCapCoins:5}),5*COIN);
+ assert.equal(missedPenalty([{points:1000000*COIN}],0,{...graded}),100*COIN);
+});
+
+test('任务分值模式采用发奖人定分；修改分数和方式前冻结昨天，退款仍按原扣款',t=>{
+ const f=fixture(t);f.seed();f.at(1);f.rules({missedTaskMode:'task_percent',inactivityBaseCoins:0,inactivityStepCoins:0});
+ const tid=f.add({difficulty:'hard'}),score=points=>f.s.tx(()=>f.s.progress.taskScore(f.g,{space_id:f.room,task_id:tid,points,expectedRevision:f.s.get('SELECT score_revision FROM tasks WHERE id=?',tid).score_revision}));
+ score(50);assert.equal(f.s.plans.preview(f.room,f.day(1)).amount,5*COIN);
+ f.at(2);score(10);assert.equal(f.row(1).amount,5*COIN);assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,COIN);
+ f.at(3);f.rules({missedTaskMode:'income_percent',missedTaskGradient:true});assert.equal(f.row(2).amount,COIN);
+ assert.equal(f.s.plans.preview(f.room,f.day(3)).amount,0);const historical=f.s.plans.preview(f.room,f.day(1));assert.equal(historical.meta.mode,'task_percent');assert.equal(historical.amount,5*COIN);
+ f.s.tx(()=>f.s.plans.refund(f.g,{space_id:f.room,day:f.day(1)}));assert.equal(f.s.balance(f.room),99*COIN);
+ for(const b of [{missedTaskMode:'hybrid'},{missedTaskGradient:'true'},{missedTaskScorePercent:101},{missedTaskScorePercent:1.5}])assert.throws(()=>f.rules(b));
+});
+
+test('任务分值模式变更等级计分前结算昨天，今天按新的等级分值计算',t=>{
+ const f=fixture(t);f.seed();f.at(1);f.rules({missedTaskMode:'task_percent',inactivityBaseCoins:0,inactivityStepCoins:0});f.add({difficulty:'standard'});
+ f.at(2);f.rules({difficultyPoints:{easy:10,standard:30,hard:40,challenge:50}});
+ assert.equal(f.row(1).amount,2*COIN);assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,3*COIN);
+});
+
+test('普通任务改为高分长期目标后，当天保留原分值的扣分基数而不会报错或放大',t=>{
+ const f=fixture(t);f.seed();f.at(1);f.rules({missedTaskMode:'task_percent',inactivityBaseCoins:0,inactivityStepCoins:0});const tid=f.add(),task=f.s.get('SELECT * FROM tasks WHERE id=?',tid);
+ f.s.tx(()=>f.s.plans.edit(f.a,{...task,space_id:f.room,task_id:tid,task_kind:'long',points:1000,deadline:'',expectedVersion:f.s.plans.editVersion(task)}));
+ const p=f.s.plans.preview(f.room,f.day(1));assert.equal(p.amount,2*COIN);assert.equal(p.missed[0].points,20*COIN);
+ f.at(2);f.s.plans.settle(f.room);assert.equal(f.row(1).amount,2*COIN);assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,0);
 });
 test('余额只扣到零，负余额不扩大，退回只退实际扣款；无权限与重复退回被保护',t=>{
  const f=fixture(t);f.seed(7);f.at(3);f.s.plans.settle(f.room);assert.equal(f.row(1).amount,5*COIN);assert.equal(f.row(2).amount,2*COIN);assert.equal(f.s.balance(f.room),0);
