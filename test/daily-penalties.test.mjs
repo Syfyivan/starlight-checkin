@@ -117,7 +117,7 @@ test('失败回滚账本与结算，v23迁移保留旧扣分并且不重设新�
  assert.throws(()=>f.s.plans.settle(f.room));assert.equal(f.row(1),undefined);assert.equal(f.s.balance(f.room),100*COIN);f.s.db.exec('DROP TRIGGER fail_daily');f.s.plans.settle(f.room);
  const ledger=f.s.all('SELECT * FROM ledger'),starts=f.s.get("SELECT value FROM settings WHERE key='daily_penalty_start'").value;
  f.s.db.exec('ALTER TABLE task_settlements DROP COLUMN penalty_meta;PRAGMA user_version=23');migrate(f.s.db);migrate(f.s.db);
- assert.deepEqual(f.s.all('SELECT * FROM ledger'),ledger);assert.equal(f.s.get("SELECT value FROM settings WHERE key='daily_penalty_start'").value,starts);assert.equal(f.s.get('PRAGMA user_version').user_version,24);assert.deepEqual(f.s.all('PRAGMA foreign_key_check'),[]);
+ assert.deepEqual(f.s.all('SELECT * FROM ledger'),ledger);assert.equal(f.s.get("SELECT value FROM settings WHERE key='daily_penalty_start'").value,starts);assert.equal(f.s.get('PRAGMA user_version').user_version,25);assert.deepEqual(f.s.all('PRAGMA foreign_key_check'),[]);
 });
 test('同日改日期或归档不擦除待完成项；重复任务非计划日及未到期长期目标不算漏做',t=>{
  const f=fixture(t);f.seed();f.at(1);const id=f.add(),repeat=f.add({task_kind:'repeat',repeat_days:2}),long=f.add({task_kind:'long',deadline:f.day(3)});

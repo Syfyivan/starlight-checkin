@@ -32,7 +32,7 @@ test('真实观察记录决定动态额度；新账号无收入为零，短期�
   assert.equal(state.assessment.tierLimitCoins,300);assert.equal(state.canBorrow,false);assert.match(state.reason,/稳定任务收入/);assert.ok(state.plans.every(p=>p.maxPrincipalCoins===0));
   assert.throws(()=>f.preview({amountCoins:1}),/目前最多可用 0/);f.seedDays();state=f.s.credit.state(f.a,f.room);
   assert.equal(state.assessment.observedDays,28);assert.equal(state.assessment.stableDailyIncome,100*COIN);assert.equal(state.assessment.tierLimitCoins,3000);
-  assert.equal(state.plans.length,9);assert.equal(state.plans.find(p=>p.key==='loan-7d').periodBudget,280*COIN);assert.equal(state.plans.find(p=>p.key==='loan-7d').maxPrincipalCoins,279);
+  assert.equal(state.plans.length,15);assert.equal(state.plans.find(p=>p.key==='loan-7d').periodBudget,280*COIN);assert.equal(state.plans.find(p=>p.key==='loan-7d').maxPrincipalCoins,279);
   assert.equal(state.plans.find(p=>p.key==='loan-3x30d').maxPrincipalCoins,3000);assert.equal(state.canBorrow,true);
   assert.throws(()=>f.preview({periods:1,termDays:7,amountCoins:280}),/279 学习币/);assert.throws(()=>f.preview({amountCoins:3001}),/3000 学习币/);
   assert.throws(()=>f.preview({periods:3,periodDays:7}),/长期借款每 30 天/);

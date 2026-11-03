@@ -12,7 +12,7 @@ import {createApp} from '../server.mjs';
 const DAY=86400000;
 // These legacy accounting tests isolate the agreed contract math from the new income assessment.
 // Real assessment records and approval integration are exercised in credit-approval.test.mjs.
-function stableReadiness(s){s.readiness.profile=()=>({tierName:'稳定样本',stableDailyIncome:1000*COIN});s.readiness.capacity=(_space,options)=>({maxPrincipalCoins:options.limitCoins,periodBudget:1000*COIN});}
+function stableReadiness(s){s.readiness.profile=()=>({tierName:'稳定样本',stableDailyIncome:1000*COIN,reasons:[],observedDays:28,activeDays:28,completionRate:1,lateLoans:0});s.readiness.capacity=(_space,options)=>({maxPrincipalCoins:options.limitCoins,periodBudget:1000*COIN});}
 function setup(t,{store=new Store(':memory:'),close=true}={}){
   const s=store;stableReadiness(s);if(close)t.after(()=>s.db.close());
   const a=s.newUser({username:'credit_a',name:'小芽',password:''}),g=s.newUser({username:'credit_g',name:'晴天',password:''}),other=s.newUser({username:'credit_o',name:'其他伙伴',password:''});
@@ -136,6 +136,7 @@ test('朋友家庭共用规则但个人负债隔离，普通家人看不到别�
   rules({},room,a);assert.equal(s.credit.rules(gRoom).enabled,true);const mine=accept(preview({},room,a),a,room).contract;accept(preview({},oRoom,other),other,oRoom);
   assert.notEqual(s.credit.state(other,oRoom).contract.id,mine.id);assert.equal(s.credit.state(g,room),null);assert.equal(s.credit.state(a,oRoom).contract.principal,100*COIN);
   assert.throws(()=>op(a,'waive',{space_id:room,contract_id:mine.id,expectedVersion:mine.version,reason:'自己免除'}),/不能给自己减免/);
+  for(const method of ['offer','consequence']){assert.throws(()=>s.tx(()=>s.credit.support[method](a,{space_id:room,contract_id:mine.id})),/另一位发奖人/);assert.throws(()=>s.tx(()=>s.credit.support[method](other,{space_id:room,contract_id:mine.id})));}
   assert.throws(()=>s.tx(()=>s.familyPlay.mode(a,{space_id:room,mode:'guardian',expected_mode:'friends'})),/先结清/);
   s.tx(()=>s.community.setAdmins(a,{space_id:room,user_ids:[a.id,g.id],expected_admins:[a.id]}));assert.equal(s.credit.state(g,room).contract.canWaive,true);
   const c=s.credit.state(g,room).contract;op(g,'waive',{space_id:room,contract_id:c.id,expectedVersion:c.version,reason:'共同决定结束这次体验'});
@@ -147,7 +148,7 @@ test('v21升级不增发币和债务、不改旧数据，重启保存合同且�
   const dir=mkdtempSync(join(tmpdir(),'starlight-credit-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));const path=join(dir,'db.sqlite');let s=new Store(path);
   const a=s.newUser({username:'oldcredit',name:'原领奖人',password:''}),g=s.newUser({username:'oldgiver',name:'原发奖人',password:''}),room=s.pair(a.id,g.id).space_id;a.space_id=room;s.post(room,123*COIN,'test','原有余额','fixture');const users=s.all('SELECT * FROM users'),ledger=s.all('SELECT * FROM ledger');
   s.db.exec('DROP TABLE credit_requests;DROP TABLE credit_days;DROP TABLE credit_payments;DROP TABLE credit_installments;DROP TABLE credit_contracts;DROP TABLE credit_quotes;DROP TABLE credit_rules;PRAGMA user_version=21');s.db.close();s=new Store(path);stableReadiness(s);
-  assert.equal(s.get('PRAGMA user_version').user_version,24);assert.deepEqual(s.all('SELECT * FROM users'),users);assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.equal(s.all('SELECT * FROM credit_contracts').length,0);assert.equal(s.credit.state(a,room).rules.enabled,false);
+  assert.equal(s.get('PRAGMA user_version').user_version,25);assert.deepEqual(s.all('SELECT * FROM users'),users);assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.equal(s.all('SELECT * FROM credit_contracts').length,0);assert.equal(s.credit.state(a,room).rules.enabled,false);
   s.tx(()=>s.credit.saveRules(g,{space_id:room,enabled:true,limitCoins:300,annualBps:600,expectedVersion:s.credit.rules(room).version}));const q=s.tx(()=>s.credit.preview(a,{space_id:room,kind:'loan',amountCoins:20,termDays:14})).quote;s.tx(()=>s.credit.accept(a,{space_id:room,quote_id:q.id}));s.db.close();s=new Store(path);
   try{assert.equal(s.balance(room),143*COIN);assert.equal(s.credit.state(a,room).contract.principal,20*COIN);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);assert.equal(s.get('PRAGMA integrity_check').integrity_check,'ok');}finally{s.db.close();}
 });
@@ -157,6 +158,7 @@ test('真实HTTP预览签约与还款幂等，CSRF和本人权限不因新增接
   const {a,g,room,rules}=setup(t,{store:s,close:false});rules();const session=s.session(a.id),giver=s.session(g.id),origin='http://127.0.0.1:'+server.address().port;
   const call=(action,body,key=randomUUID(),sess=session,csrf=sess.csrf)=>fetch(origin+'/api/credit/'+action,{method:'POST',headers:{Origin:origin,'Content-Type':'application/json',Cookie:'starlight_session='+sess.token,'X-CSRF-Token':csrf,'Idempotency-Key':key},body:JSON.stringify({space_id:room,...body})});
   assert.equal((await call('preview',{kind:'loan',amountCoins:100,termDays:7},randomUUID(),session,'wrong')).status,403);assert.equal((await call('preview',{kind:'loan',amountCoins:100,termDays:7},randomUUID(),giver)).status,403);
+  for(const action of ['delivery','consequence','help','recovery-offer','recovery-response'])assert.equal((await call(action,{},randomUUID(),session,'wrong')).status,403);
   const quote=(await(await call('preview',{kind:'loan',amountCoins:100,termDays:7})).json()).quote,key=randomUUID();const replies=await Promise.all([call('accept',{quote_id:quote.id},key),call('accept',{quote_id:quote.id},key)]);assert.ok(replies.every(r=>r.status===200));assert.equal(s.balance(room),100*COIN);assert.equal(s.all('SELECT * FROM credit_contracts').length,1);
   const c=s.credit.state(a,room).contract,repayKey=randomUUID(),body={contract_id:c.id,mode:'payoff',expectedVersion:c.version};const repaid=await Promise.all([call('repay',body,repayKey),call('repay',body,repayKey)]);assert.ok(repaid.every(r=>r.status===200));assert.equal(s.balance(room),0);assert.equal(s.all('SELECT * FROM credit_payments').length,1);
 });
