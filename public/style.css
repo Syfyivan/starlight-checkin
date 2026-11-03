@@ -562,3 +562,5 @@ body[data-perspective="manage"] .record-row{border-color:#efe9de}
 
 .daily-penalty-hint{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;padding:9px 12px;background:var(--bg,#f5f6f0);border-radius:10px;font-size:12px;color:var(--text-muted,#687466)}.daily-penalty-hint>span{min-width:0}.daily-penalty-hint>button{flex-shrink:0}.penalty-settings{margin:12px 0}.penalty-settings>summary{cursor:pointer;font-weight:600}
 @media(max-width:600px){.plan-heading{flex-direction:column;align-items:stretch;gap:12px}.plan-buttons{flex-wrap:wrap;justify-content:flex-start}.plan-buttons .btn{white-space:nowrap}}
+
+.credit-plain-rules{padding-left:20px;margin:14px 0;line-height:1.9}.credit-plain-rules li{margin:9px 0}.credit-help details{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
