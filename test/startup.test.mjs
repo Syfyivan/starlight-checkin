@@ -19,7 +19,7 @@ test('请求不依赖 AbortSignal.timeout，超时包含响应正文并真正中
   let signal;
   t.mock.method(globalThis,'fetch',async (_url,options)=>{
     signal=options.signal;
-    return {json:()=>new Promise((_resolve,reject)=>signal.addEventListener('abort',()=>reject(new Error('aborted'))))};
+    return {text:()=>new Promise((_resolve,reject)=>signal.addEventListener('abort',()=>reject(new Error('aborted'))))};
   });
   await assert.rejects(fetchJSON('/slow',{},10),/连接有点慢/);
   assert.equal(signal.aborted,true);
@@ -27,10 +27,26 @@ test('请求不依赖 AbortSignal.timeout，超时包含响应正文并真正中
 
 test('响应完成后清除超时定时器，保留 HTTP 错误供登录和权限处理',async t=>{
   let signal;
-  t.mock.method(globalThis,'fetch',async (_url,options)=>{signal=options.signal;return {ok:false,status:401,json:async()=>({error:'请先登录'})};});
+  t.mock.method(globalThis,'fetch',async (_url,options)=>{signal=options.signal;return {ok:false,status:401,text:async()=>JSON.stringify({error:'请先登录'})};});
   const {response,data}=await fetchJSON('/state',{},10);
   assert.equal(response.status,401);assert.equal(data.error,'请先登录');
   await new Promise(resolve=>setTimeout(resolve,20));assert.equal(signal.aborted,false);
+});
+
+test('空回复、截断JSON和代理HTML显示中文，不把未知保存结果说成失败或成功',async t=>{
+  let current;t.mock.method(globalThis,'fetch',async()=>new Response(current.body,{status:current.status}));
+  for(const [status,body] of [[200,''],[200,'{"ok":'],[200,'null'],[200,'"hello"'],[502,''],[503,'<html>bad gateway</html>']]){
+    current={body,status};
+    if(status===200)await assert.rejects(fetchJSON('/api/tasks',{method:'POST'}),e=>e.name==='ResponseError'&&/没收到完整回复/.test(e.message)&&!/JSON|已保存|未保存/.test(e.message));
+    else{const {response,data}=await fetchJSON('/api/tasks',{method:'POST'});assert.equal(response.status,status);assert.match(data.error,/保留当前页面/);assert.doesNotMatch(data.error,/html|gateway/i);}
+  }
+});
+
+test('代理空401仍保留登录状态处理，合法校验错误原样传递，断网只发一次请求',async t=>{
+  let mode=401,calls=0;t.mock.method(globalThis,'fetch',async()=>{if(mode==='offline'){calls++;throw new TypeError('Failed to fetch');}return new Response(mode===401?'':JSON.stringify({error:'任务名称不能为空'}),{status:mode});});
+  let r=await fetchJSON('/api/state');assert.equal(r.response.status,401);assert.match(r.data.error,/重新登录/);
+  mode=400;r=await fetchJSON('/api/tasks');assert.equal(r.data.error,'任务名称不能为空');
+  mode='offline';await assert.rejects(fetchJSON('/api/tasks',{method:'POST'}),/网络暂时没连上/);assert.equal(calls,1);
 });
 
 function startup(userAgent='Chrome/83.0 Android'){

@@ -15,9 +15,19 @@ export async function fetchJSON(url,options={},timeout=25000){
   const timer=setTimeout(()=>{expired=true;controller.abort();},timeout);
   try{
     const response=await fetch(url,{...options,signal:controller.signal});
-    const data=await response.json();return {response,data};
+    const text=await response.text();let data;
+    try{data=JSON.parse(text);}catch{}
+    if(data===null||typeof data!=='object'){
+      // A reverse proxy may return an empty body or an HTML error page. Never
+      // infer whether a write committed from an unreadable response.
+      const message=response.status===401?'登录状态过期啦，请重新登录':response.status===403?'这次操作暂时没有权限，请刷新后确认':response.status===429?'操作有点频繁，稍等一会儿再试吧':'暂时没收到完整回复，请保留当前页面，稍后再试一次';
+      if(!response.ok)return {response,data:{error:message}};
+      const error=new Error(message);error.name='ResponseError';error.status=response.status;throw error;
+    }
+    return {response,data};
   }catch(error){
-    if(expired)throw new Error('连接有点慢，请检查网络后再试一次');
+    if(expired)throw new Error('连接有点慢，请保留当前页面，检查网络后再试一次');
+    if(error instanceof TypeError||error.name==='NetworkError')throw new Error('网络暂时没连上，请保留当前页面，连接恢复后再试一次');
     throw error;
   }finally{clearTimeout(timer);}
 }
