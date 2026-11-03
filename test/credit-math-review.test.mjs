@@ -9,7 +9,7 @@ import {COIN} from '../lib/common.mjs';
 function fixture(t,{annualBps=600}={}){
   const s=new Store(':memory:');t.after(()=>s.db.close());
   // Preserve independent literal-value accounting fixtures; approval integration has real day records.
-  s.readiness.profile=()=>({tierName:'稳定算例',stableDailyIncome:1000*COIN});s.readiness.capacity=(_space,options)=>({maxPrincipalCoins:options.limitCoins,periodBudget:1000*COIN});
+  s.readiness.profile=()=>({tierName:'稳定算例',stableDailyIncome:1000*COIN,reasons:[],observedDays:28,activeDays:28,completionRate:1,lateLoans:0});s.readiness.capacity=(_space,options)=>({maxPrincipalCoins:options.limitCoins,periodBudget:1000*COIN});
   const learner=s.newUser({username:'math_learner',name:'算例领奖人',password:''});
   const giver=s.newUser({username:'math_giver',name:'算例发奖人',password:''});
   const space=s.pair(learner.id,giver.id).space_id;learner.space_id=space;
