@@ -35,6 +35,8 @@ test('兑换改名卡只扣币和库存；使用一次后双方看见新名，�
 
 test('改名自使用起七天有效，到期恢复默认名且只记一次日志，不影响资产',t=>{
   const {s,a,g,room,other,buy,rename}=fixture(t),card=buy(),at=Date.now(),realNow=Date.now;
+  // 单独验证改名到期的资产不变，七天未学习的扣分由 daily-penalties 测试覆盖。
+  s.tx(()=>s.saveSettings(g,{...s.settings(room),space_id:room,penaltyEnabled:false}));
   Date.now=()=>at;t.after(()=>{Date.now=realNow;});
   const r=rename(a,{card_id:card.id,name:'七日小星球',expected_name:''});assert.equal(r.expires,at+7*86400000);
   assert.equal(s.state(g,room).space.rename.expires,r.expires);assert.equal(s.state(a,room).space.rename.defaultName,'');
