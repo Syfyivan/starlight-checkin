@@ -6,7 +6,7 @@ import {COIN,dayAt} from '../lib/common.mjs';
 import {dayStart} from '../lib/progress.mjs';
 import {nextTaskDay,taskTypeLabel} from '../public/task-types.js';
 const plus=(day,n)=>dayAt(dayStart(day)+n*86400000);
-function setup(t){const s=new Store(':memory:');t.after(()=>s.db.close());const a=s.newUser({username:'student',name:'小芽',password:''}),g=s.newUser({username:'giver',name:'伙伴',password:''}),other=s.newUser({username:'other',name:'另一位',password:''}),room=s.pair(a.id,g.id).space_id;
+function setup(t){const s=new Store(':memory:');s.run("UPDATE settings SET value='2099-01-01' WHERE key='daily_penalty_start'");t.after(()=>s.db.close());const a=s.newUser({username:'student',name:'小芽',password:''}),g=s.newUser({username:'giver',name:'伙伴',password:''}),other=s.newUser({username:'other',name:'另一位',password:''}),room=s.pair(a.id,g.id).space_id;
  const task=(body={})=>s.createTasks(a,{space_id:room,tasks:[{title:'一项计划',task_kind:'normal',...body}]}).ids[0];
  const complete=(id,body={})=>s.complete(a,{space_id:room,task_id:id,done:true,...body});
  return {s,a,g,other,room,task,complete,day:dayAt()};}
@@ -92,5 +92,5 @@ test('v12旧库迁移保留任务、分数、账本与完成记录，旧每日�
  const {s,task,complete,room}=setup(t),daily=task({task_kind:'repeat'}),normal=task();complete(daily);
  const ledger=s.all('SELECT * FROM ledger'),completions=s.all('SELECT * FROM completions');
  s.db.exec("DROP TABLE task_settlements; ALTER TABLE tasks DROP COLUMN task_kind; ALTER TABLE tasks DROP COLUMN repeat_days; ALTER TABLE tasks DROP COLUMN deadline; ALTER TABLE tasks DROP COLUMN archived_at; DELETE FROM settings WHERE key='task_settlement_start'; PRAGMA user_version=12;");
- migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,23);assert.equal(s.get('SELECT task_kind FROM tasks WHERE id=?',daily).task_kind,'repeat');assert.equal(s.get('SELECT task_kind FROM tasks WHERE id=?',normal).task_kind,'normal');assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.deepEqual(s.all('SELECT * FROM completions'),completions);assert.equal(s.get('SELECT COUNT(*) n FROM task_settlements').n,0);assert.equal(s.balance(room),20*COIN);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
+ migrate(s.db);migrate(s.db);assert.equal(s.get('PRAGMA user_version').user_version,24);assert.equal(s.get('SELECT task_kind FROM tasks WHERE id=?',daily).task_kind,'repeat');assert.equal(s.get('SELECT task_kind FROM tasks WHERE id=?',normal).task_kind,'normal');assert.deepEqual(s.all('SELECT * FROM ledger'),ledger);assert.deepEqual(s.all('SELECT * FROM completions'),completions);assert.equal(s.get('SELECT COUNT(*) n FROM task_settlements').n,0);assert.equal(s.balance(room),20*COIN);assert.deepEqual(s.all('PRAGMA foreign_key_check'),[]);
 });
