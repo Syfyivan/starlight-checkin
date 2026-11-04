@@ -69,11 +69,35 @@ test('任务分值模式变更等级计分前结算昨天，今天按新的等�
  assert.equal(f.row(1).amount,2*COIN);assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,3*COIN);
 });
 
-test('普通任务改为高分长期目标后，当天保留原分值的扣分基数而不会报错或放大',t=>{
+test('普通任务改为高分长期目标后，当天按新安排结算，不从信用快照补回旧待办',t=>{
  const f=fixture(t);f.seed();f.at(1);f.rules({missedTaskMode:'task_percent',inactivityBaseCoins:0,inactivityStepCoins:0});const tid=f.add(),task=f.s.get('SELECT * FROM tasks WHERE id=?',tid);
  f.s.tx(()=>f.s.plans.edit(f.a,{...task,space_id:f.room,task_id:tid,task_kind:'long',points:1000,deadline:'',expectedVersion:f.s.plans.editVersion(task)}));
- const p=f.s.plans.preview(f.room,f.day(1));assert.equal(p.amount,2*COIN);assert.equal(p.missed[0].points,20*COIN);
- f.at(2);f.s.plans.settle(f.room);assert.equal(f.row(1).amount,2*COIN);assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,0);
+ assert.ok(JSON.parse(f.s.get('SELECT task_ids FROM credit_days WHERE space_id=? AND day=?',f.room,f.day(1)).task_ids).some(t=>t.id===tid));
+ const p=f.s.plans.preview(f.room,f.day(1));assert.equal(p.amount,0);assert.deepEqual(p.missed,[]);
+ f.at(2);f.s.plans.settle(f.room);assert.equal(f.row(1).amount,0);assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,0);
+});
+
+test('四项完成、一项待办与三项改长期的场景，只预估扣2币；双方可查看修改日志',t=>{
+ const f=fixture(t);f.seed();f.at(1);
+ const daily=Array.from({length:5},()=>f.add({task_kind:'repeat'}));daily.slice(0,4).forEach(f.done);
+ for(let i=0;i<3;i++){
+  const tid=f.add(),task=f.s.get('SELECT * FROM tasks WHERE id=?',tid),body={...task,space_id:f.room,task_id:tid,task_kind:'long',points:1000,deadline:'',expectedVersion:f.s.plans.editVersion(task)};
+  f.s.operation(f.a,randomUUID(),'/api/tasks/edit',body,()=>f.s.plans.edit(f.a,body));
+ }
+ const p=f.s.plans.preview(f.room,f.day(1));assert.equal(p.total,5);assert.equal(p.amount,2*COIN);assert.deepEqual(p.missed.map(t=>t.id),[daily[4]]);assert.equal(p.meta.inactiveCharge,0);
+ const logs=f.s.community.logs(f.g,{space_id:f.room}).entries.filter(l=>l.action==='/api/tasks/edit');assert.equal(logs.length,3);
+ for(const l of logs){assert.equal(l.detail.before.task_kind,'normal');assert.equal(l.detail.after.task_kind,'long');}
+ assert.throws(()=>f.s.community.logs(f.o,{space_id:f.room}));
+});
+
+test('重复任务改长期后无截止日或未来截止日不扣，当天到期仍扣；编辑不会重算昨天',t=>{
+ const f=fixture(t);f.seed();f.at(1);f.rules({inactivityBaseCoins:0,inactivityStepCoins:0});const tid=f.add({task_kind:'repeat'});
+ const edit=changes=>{const task=f.s.get('SELECT * FROM tasks WHERE id=?',tid);return f.s.tx(()=>f.s.plans.edit(f.a,{...task,points:task.points/COIN,task_id:tid,space_id:f.room,expectedVersion:f.s.plans.editVersion(task),...changes}));};
+ f.at(2);edit({task_kind:'long',start_date:f.day(2),points:1000,deadline:''});const yesterday=f.row(1);assert.equal(yesterday.amount,2*COIN);assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,0);
+ edit({deadline:f.day(3)});assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,0);
+ edit({deadline:f.day(2)});assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,2*COIN);
+ edit({deadline:''});assert.equal(f.s.plans.preview(f.room,f.day(2)).amount,0);
+ assert.deepEqual(f.row(1),yesterday);assert.equal(f.s.plans.preview(f.room,f.day(1)).amount,2*COIN);
 });
 test('余额只扣到零，负余额不扩大，退回只退实际扣款；无权限与重复退回被保护',t=>{
  const f=fixture(t);f.seed(7);f.at(3);f.s.plans.settle(f.room);assert.equal(f.row(1).amount,5*COIN);assert.equal(f.row(2).amount,2*COIN);assert.equal(f.s.balance(f.room),0);
@@ -102,6 +126,7 @@ test('改设置先按旧规则结算；关闭期间不扣且打断连续天数�
 test('个人空间和家长不扣；家庭领奖人独立结算，新加入首日不扣',t=>{
  const f=fixture(t),personal=f.s.personalSpaceId(f.a.id),family=f.s.tx(()=>f.s.community.createFamily(f.g,{name:'小家',mode:'guardian'})).space_id;
  const inv=f.s.community.familyInvite(f.g,{space_id:family}),child=f.s.tx(()=>f.s.acceptInvite(f.a,inv.code)).space_id;
+ f.s.run('UPDATE spaces SET created=? WHERE id IN (?,?)',new Date(START).toISOString(),family,child);
  for(const sid of [personal,family,child])f.seed(50,sid);
  f.at(2);for(const sid of [personal,family,child])f.s.plans.settle(sid);
  assert.equal(f.s.balance(personal),50*COIN);assert.equal(f.s.balance(family),50*COIN);assert.equal(f.s.balance(child),45*COIN);
@@ -119,13 +144,18 @@ test('失败回滚账本与结算，v23迁移保留旧扣分并且不重设新�
  f.s.db.exec('ALTER TABLE task_settlements DROP COLUMN penalty_meta;PRAGMA user_version=23');migrate(f.s.db);migrate(f.s.db);
  assert.deepEqual(f.s.all('SELECT * FROM ledger'),ledger);assert.equal(f.s.get("SELECT value FROM settings WHERE key='daily_penalty_start'").value,starts);assert.equal(f.s.get('PRAGMA user_version').user_version,25);assert.deepEqual(f.s.all('PRAGMA foreign_key_check'),[]);
 });
-test('同日改日期或归档不擦除待完成项；重复任务非计划日及未到期长期目标不算漏做',t=>{
+test('同日改日期按新安排检查；重复任务非计划日及未到期长期目标不算漏做',t=>{
  const f=fixture(t);f.seed();f.at(1);const id=f.add(),repeat=f.add({task_kind:'repeat',repeat_days:2}),long=f.add({task_kind:'long',deadline:f.day(3)});
  f.done(repeat);f.s.tx(()=>f.s.plans.edit(f.a,{space_id:f.room,task_id:id,expectedVersion:f.s.plans.editVersion({id,space_id:f.room}),title:'明天继续',task_kind:'normal',start_date:f.day(2),category:'学习',quadrant:'none',estimated_minutes:0}));
- f.s.archive(f.a,{space_id:f.room,task_id:id});assert.deepEqual(f.s.plans.preview(f.room,f.day(1)).missed.map(t=>t.id),[id]);
+ assert.deepEqual(f.s.plans.preview(f.room,f.day(1)).missed,[]);f.s.archive(f.a,{space_id:f.room,task_id:id});
  f.at(2);f.s.plans.settle(f.room);const begin=Date.parse(f.day(2)+'T08:00:00+08:00');f.s.run('INSERT INTO task_timers VALUES(?,?,?,?,?,?)',randomUUID(),long,f.room,f.a.id,begin,begin+10*60000);
  const p=f.s.plans.preview(f.room,f.day(2));assert.equal(p.missed.length,0);assert.equal(p.amount,0);assert.equal(p.meta.streak,0);
  f.at(3);f.s.plans.settle(f.room);assert.ok(f.s.plans.preview(f.room,f.day(3)).missed.some(t=>t.id===long));
+});
+
+test('归档撤下当天未结算待办，但没有学习记录时仍按未学习约定计算',t=>{
+ const f=fixture(t);f.seed();f.at(1);const tid=f.add();f.s.archive(f.a,{space_id:f.room,task_id:tid});
+ const p=f.s.plans.preview(f.room,f.day(1));assert.deepEqual(p.missed,[]);assert.equal(p.meta.missedCharge,0);assert.equal(p.meta.inactiveCharge,5*COIN);assert.equal(p.amount,5*COIN);
 });
 test('关闭小屋不再持续扣款，额度设置为零能单独关闭缺席扣分',t=>{
  const f=fixture(t);f.seed();f.at(1);f.rules({inactivityBaseCoins:0,inactivityStepCoins:0});assert.equal(f.s.plans.preview(f.room,f.day(1)).amount,0);
