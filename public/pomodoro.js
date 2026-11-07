@@ -1,80 +1,106 @@
-const durations = { focus: 25 * 60_000, rest: 5 * 60_000 };
-const names = { focus: '专注', rest: '休息' };
-const storageKey = 'starlight:pomodoro:v1:' + new URL('.', location.href).pathname;
-const ready = phase => ({ phase, remaining: durations[phase], endsAt: null });
+import { labels, ready, currentClock, validClock, validSettings, timeLeft, migrateLegacy } from './pomodoro-cycle.js';
+import { createBell } from './pomodoro-bell.js';
+
+const scope = new URL('.', location.href).pathname;
+const storageKey = 'starlight:pomodoro:v2:' + scope;
+const legacyKey = 'starlight:pomodoro:v1:' + scope;
 let memoryOnly = false;
 
 function loadClock(fallback) {
   if (memoryOnly) return fallback;
   try {
-    const value = JSON.parse(localStorage.getItem(storageKey));
-    if (value && Object.hasOwn(durations, value.phase) &&
-        Number.isSafeInteger(value.remaining) && value.remaining >= 0 && value.remaining <= durations[value.phase] &&
-        (value.endsAt === null || (Number.isSafeInteger(value.endsAt) && value.endsAt > 0))) return value;
-    return ready('focus');
+    const stored = localStorage.getItem(storageKey);
+    if (stored === null) return migrateLegacy(JSON.parse(localStorage.getItem(legacyKey)));
+    const value = JSON.parse(stored);
+    return validClock(value) ? value : ready();
   } catch {
     return fallback;
   }
 }
 
-let clock = loadClock(ready('focus'));
+let saved = loadClock(ready());
 let mini = null;
 let tickHost = window;
 let tick;
 const main = document.querySelector('.clock');
 const pin = document.querySelector('#pin');
 const hint = document.querySelector('#pin-hint');
+const form = document.querySelector('#settings-form');
+const feedback = document.querySelector('#settings-feedback');
+const automatic = document.querySelector('#automatic');
+const sound = document.querySelector('#sound');
+const enableSound = document.querySelector('#enable-sound');
+const bell = createBell(storageKey + ':bell', render);
+const numberFields = ['focus', 'short', 'long', 'rounds'];
+let displayedSettings = '';
+const current = (now = Date.now()) => currentClock(loadClock(saved), now);
 
-function remaining() {
-  if (clock.endsAt === null) return clock.remaining;
-  return Math.max(0, Math.min(clock.remaining, clock.endsAt - Date.now()));
+function save(clock) {
+  saved = clock;
+  try { localStorage.setItem(storageKey, JSON.stringify(clock)); } catch { memoryOnly = true; }
+  render();
 }
 
-function save(value) {
-  clock = value;
-  try { localStorage.setItem(storageKey, JSON.stringify(value)); } catch { memoryOnly = true; }
-  render();
+function updateSettings(clock, busy) {
+  const settings = clock.settings;
+  const signature = numberFields.map(key => settings[key]).join('/');
+  if (displayedSettings !== signature) {
+    for (const key of numberFields) form.elements[key].value = settings[key];
+    displayedSettings = signature;
+  }
+  form.querySelector('fieldset').disabled = busy;
+  document.querySelector('#settings-hint').textContent = busy
+    ? '要调整时长或回合数，请先重置本段。'
+    : '长休息结束后，从第 1 轮重新开始。';
+  automatic.checked = settings.auto;
+  sound.checked = settings.sound;
+  enableSound.hidden = !settings.sound || clock.endsAt === null || bell.available();
 }
 
 function render() {
   tickHost.clearTimeout(tick);
-  const left = remaining();
+  const now = Date.now();
+  const clock = currentClock(saved, now);
+  const left = timeLeft(clock, now);
+  const total = clock.settings[clock.phase] * 60_000;
   const seconds = Math.ceil(left / 1000);
   const time = String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0');
-  const running = left > 0 && clock.endsAt !== null;
-  const paused = left > 0 && !running && left < durations[clock.phase];
-  const label = names[clock.phase];
+  const running = clock.endsAt !== null;
+  const paused = !running && left < total;
+  const label = labels[clock.phase];
   let message = '准备' + label;
   let action = '开始' + label;
-  if (left === 0) {
-    message = label + '结束';
-    action = clock.phase === 'focus' ? '开始休息' : '开始专注';
-  } else if (running) {
+  if (running) {
     message = label + '中';
     action = '暂停';
   } else if (paused) {
     message = label + '已暂停';
     action = '继续' + label;
   }
+  const position = clock.phase === 'focus'
+    ? '第 ' + (clock.completed + 1) + '/' + clock.settings.rounds + ' 轮'
+    : '已完成 ' + clock.completed + '/' + clock.settings.rounds + ' 轮';
   document.title = time + ' · ' + message + ' · 小小成就';
   for (const view of [main, mini?.document.querySelector('.clock')]) {
     if (!view) continue;
     view.dataset.phase = clock.phase;
     const status = view.querySelector('.status');
-    if (status.textContent !== message) status.textContent = message;
+    const caption = message + ' · ' + position;
+    if (status.textContent !== caption) status.textContent = caption;
     view.querySelector('.digits').textContent = time;
     const progress = view.querySelector('progress');
-    progress.max = durations[clock.phase];
-    progress.value = progress.max - left;
+    progress.max = total;
+    progress.value = total - left;
     const toggle = view.querySelector('[data-command="toggle"]');
     if (toggle.textContent !== action) toggle.textContent = action;
-    view.querySelector('[data-command="reset"]').disabled = left === durations[clock.phase] && !running;
+    view.querySelector('[data-command="reset"]').disabled = !running && !paused;
     for (const mode of view.querySelectorAll('[data-mode]')) {
       mode.setAttribute('aria-pressed', String(mode.dataset.mode === clock.phase));
       mode.disabled = running || paused;
     }
   }
-  // Update only when the displayed second changes, using the visible window.
+  updateSettings(clock, running || paused);
+  bell.arm(clock.settings.sound ? clock.endsAt : null);
   tickHost = mini || window;
   if (running) tick = tickHost.setTimeout(render, left % 1000 || 1000);
 }
@@ -82,24 +108,55 @@ function render() {
 function control(event) {
   const button = event.target.closest('button');
   if (!button || button.disabled) return;
-  clock = loadClock(clock);
-  const left = remaining();
+  const now = Date.now();
+  const clock = current(now);
+  const left = timeLeft(clock, now);
   if (button.dataset.mode) {
-    if (left === 0 || (clock.endsAt === null && left === durations[clock.phase])) save(ready(button.dataset.mode));
+    if (clock.endsAt === null && left === clock.settings[clock.phase] * 60_000) {
+      const phase = button.dataset.mode;
+      const completed = phase === 'focus' ? clock.completed % clock.settings.rounds : clock.completed;
+      save(ready(phase, clock.settings, completed));
+    }
     return;
   }
-  if (button.dataset.command === 'reset') return save(ready(clock.phase));
+  if (button.dataset.command === 'reset') return save(ready(clock.phase, clock.settings, clock.completed));
   if (button.dataset.command !== 'toggle') return;
-  if (clock.endsAt !== null && left > 0) return save({ phase: clock.phase, remaining: left, endsAt: null });
-  const next = left === 0 ? ready(clock.phase === 'focus' ? 'rest' : 'focus') : clock;
-  save({ ...next, endsAt: Date.now() + next.remaining });
+  if (clock.settings.sound) void bell.unlock();
+  if (clock.endsAt !== null && left > 0) return save({ ...clock, remaining: left, endsAt: null });
+  save({ ...clock, endsAt: now + clock.remaining });
 }
 
 main.addEventListener('click', control);
-window.addEventListener('storage', event => {
-  if (event.key === storageKey || event.key === null) { clock = loadClock(clock); render(); }
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const clock = current();
+  if (clock.endsAt !== null || clock.remaining < clock.settings[clock.phase] * 60_000) return;
+  const settings = { ...clock.settings };
+  for (const key of numberFields) settings[key] = form.elements[key].valueAsNumber;
+  if (!validSettings(settings)) return;
+  const newGroup = settings.rounds !== clock.settings.rounds;
+  save(ready(newGroup ? 'focus' : clock.phase, settings, newGroup ? 0 : clock.completed));
+  feedback.textContent = newGroup ? '已保存，从新一组的第 1 轮开始。' : '时长已保存。';
 });
-window.addEventListener('pageshow', () => { clock = loadClock(clock); render(); });
+for (const [input, key] of [[automatic, 'auto'], [sound, 'sound']]) {
+  input.addEventListener('change', () => {
+    const clock = current();
+    if (key === 'sound' && input.checked) void bell.unlock();
+    save({ ...clock, settings: { ...clock.settings, [key]: input.checked } });
+    feedback.textContent = '';
+  });
+}
+enableSound.addEventListener('click', async () => {
+  if (!await bell.unlock()) hint.textContent = '浏览器未能播放提示音，请检查此网站的声音权限。';
+  render();
+});
+document.querySelector('#preview-bell').addEventListener('click', async () => {
+  feedback.textContent = await bell.preview() ? '已播放提示音。' : '请检查浏览器的声音权限。';
+});
+window.addEventListener('storage', event => {
+  if (event.key === storageKey || event.key === null) { saved = loadClock(saved); render(); }
+});
+window.addEventListener('pageshow', () => { saved = loadClock(saved); render(); });
 document.addEventListener('visibilitychange', render);
 const pinHelp = '保留番茄钟标签页，小窗可以拖到桌面一角。';
 if (!window.documentPictureInPicture?.requestWindow) {
@@ -110,6 +167,7 @@ if (!window.documentPictureInPicture?.requestWindow) {
   pin.addEventListener('click', async () => {
     if (mini && !mini.closed) { mini.close(); return; }
     pin.disabled = true;
+    if (current().settings.sound) void bell.unlock();
     try {
       const child = await window.documentPictureInPicture.requestWindow({ width: 266, height: 167 });
       mini = child;

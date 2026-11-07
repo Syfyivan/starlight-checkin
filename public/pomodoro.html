@@ -14,17 +14,38 @@
     <header><a class="brand" href="./">小小成就</a><h1>番茄钟</h1></header>
     <section class="clock" aria-label="番茄钟">
       <div class="modes" aria-label="计时模式" role="group">
-        <button type="button" data-mode="focus" aria-pressed="true">专注 25 分钟</button>
-        <button type="button" data-mode="rest" aria-pressed="false">休息 5 分钟</button>
+        <button type="button" data-mode="focus" aria-pressed="true">专注</button>
+        <button type="button" data-mode="short" aria-pressed="false">短休息</button>
+        <button type="button" data-mode="long" aria-pressed="false">长休息</button>
       </div>
       <p class="status" role="status">准备专注</p>
       <div class="digits" role="timer" aria-label="剩余时间">25:00</div>
       <progress aria-label="本轮进度" value="0" max="1500000"></progress>
       <div class="controls">
         <button class="primary" type="button" data-command="toggle">开始专注</button>
-        <button type="button" data-command="reset" disabled>重置</button>
+        <button type="button" data-command="reset" disabled>重置本段</button>
       </div>
     </section>
+    <button type="button" id="enable-sound" hidden>启用本页提示音</button>
+    <details class="settings">
+      <summary>时长与循环</summary>
+      <form id="settings-form">
+        <fieldset>
+          <legend>每段时长（分钟）</legend>
+          <div class="lengths">
+            <label>专注<input name="focus" type="number" min="1" max="180" step="1" required value="25"></label>
+            <label>短休息<input name="short" type="number" min="1" max="180" step="1" required value="5"></label>
+            <label>长休息<input name="long" type="number" min="1" max="180" step="1" required value="15"></label>
+          </div>
+          <label class="interval">几轮专注后长休息<input name="rounds" type="number" min="1" max="20" step="1" required value="4"></label>
+          <button type="submit">保存时长与回合数</button>
+        </fieldset>
+        <p id="settings-hint">长休息结束后，从第 1 轮重新开始。</p>
+        <label class="option"><input id="automatic" type="checkbox" checked>到点自动开始下一段</label>
+        <div class="sound-option"><label class="option"><input id="sound" type="checkbox" checked>到点响铃</label><button type="button" id="preview-bell">试听</button></div>
+        <p role="status" id="settings-feedback"></p>
+      </form>
+    </details>
     <div class="pin-tools">
       <button type="button" id="pin">桌面置顶</button>
       <p id="pin-hint" role="status"></p>

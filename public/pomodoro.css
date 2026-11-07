@@ -16,7 +16,8 @@ h1 { margin: 6px 0 0; font-size: 1.65rem; }
   background: #fdfdf9; border: 1px solid #dce1d4; border-radius: 18px;
   padding: 24px; text-align: center;
 }
-.clock[data-phase="rest"] { --accent: #82572e; }
+.clock[data-phase="short"] { --accent: #82572e; }
+.clock[data-phase="long"] { --accent: #476184; }
 button { font: inherit; cursor: pointer; color: inherit; }
 button:focus-visible, a:focus-visible { outline: 3px solid #ba8336; outline-offset: 3px; }
 .modes { display: inline-flex; padding: 4px; background: #eeefe7; border-radius: 9px; }
@@ -42,3 +43,19 @@ button:disabled { cursor: default; opacity: .52; }
 .pinned-body .digits { font-size: clamp(2.3rem, 27vh, 4.3rem); }
 .pinned-body progress { margin: 6px auto 10px; }
 .pinned-body .controls button { min-height: 30px; padding: 4px 10px; }
+.settings { margin-top: 12px; padding: 12px 16px; background: #fdfdf9; border: 1px solid #dce1d4; border-radius: 10px; }
+.settings summary { cursor: pointer; font-weight: 600; font-size: .9rem; }
+.settings fieldset { margin: 14px 0 0; padding: 0; border: 0; min-width: 0; }
+.settings legend, .settings label { font-size: .87rem; }
+.settings legend { font-weight: 600; margin-bottom: 8px; }
+.lengths { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+.settings input[type="number"] { font: inherit; color: inherit; min-width: 0; border: 1px solid #cbd4c6; padding: 6px; border-radius: 6px; background: #fff; width: 100%; }
+.lengths input { display: block; margin-top: 4px; }
+.interval, .sound-option { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; gap: 8px; }
+.interval input[type="number"] { width: 64px; }
+.option { display: inline-flex; align-items: center; gap: 6px; }
+.option input { accent-color: #315841; }
+.settings button, #enable-sound { background: white; border: 1px solid #cbd4c6; border-radius: 6px; font-size: .84rem; padding: 6px 11px; }
+#enable-sound { margin-top: 8px; }
+.settings p { color: #58705f; font-size: .8rem; margin: 8px 0; }
+.settings p:empty { display: none; }
