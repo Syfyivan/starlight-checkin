@@ -83,7 +83,13 @@ function render() {
   document.title = time + ' · ' + message + ' · 小小成就';
   for (const view of [main, mini?.document.querySelector('.clock')]) {
     if (!view) continue;
-    view.dataset.phase = clock.phase;
+    const root = view.ownerDocument.documentElement;
+    if (root.dataset.phase !== clock.phase) {
+      root.dataset.phase = clock.phase;
+      if (view === main) {
+        document.querySelector('meta[name="theme-color"]').content = getComputedStyle(root).getPropertyValue('--page').trim();
+      }
+    }
     const status = view.querySelector('.status');
     const caption = message + ' · ' + position;
     if (status.textContent !== caption) status.textContent = caption;
