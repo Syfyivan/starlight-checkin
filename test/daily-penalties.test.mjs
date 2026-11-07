@@ -7,12 +7,12 @@ import {COIN,dayAt} from '../lib/common.mjs';
 import {missedPenalty,DEFAULT_PENALTIES} from '../lib/task-plans.mjs';
 const DAY=86400000,START=Date.parse('2026-11-03T12:00:00+08:00');
 function fixture(t){
- let clock=START;t.mock.method(Date,'now',()=>clock);
+ t.mock.timers.enable({apis:['Date'],now:START});
  const s=new Store(':memory:');t.after(()=>s.db.close());
  const a=s.newUser({username:'penalty_a',name:'小芽',password:''}),g=s.newUser({username:'penalty_g',name:'晴天',password:''}),o=s.newUser({username:'penalty_o',name:'另一位',password:''}),room=s.pair(a.id,g.id).space_id;a.space_id=room;s.run('UPDATE spaces SET created=?',new Date(START).toISOString());
  s.run("UPDATE settings SET value=? WHERE key='daily_penalty_start'",dayAt(START+DAY));
- s.run("UPDATE settings SET value=? WHERE key='task_settlement_start'",dayAt(START));
- const at=n=>{clock=START+n*DAY;},day=n=>dayAt(START+n*DAY);
+ s.run("UPDATE settings SET value=? WHERE key IN ('task_settlement_start','credit_readiness_start')",dayAt(START));
+ const at=n=>t.mock.timers.setTime(START+n*DAY),day=n=>dayAt(START+n*DAY);
  const seed=(coins=100,space=room)=>s.post(space,coins*COIN,'test','测试余额',randomUUID());
  const add=(body={})=>s.createTasks(a,{space_id:room,tasks:[{title:'一个小计划',task_kind:'normal',...body}]}).ids[0];
  const done=id=>s.complete(a,{space_id:room,task_id:id,done:true});

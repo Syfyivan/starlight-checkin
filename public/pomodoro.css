@@ -1,0 +1,44 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #243e33;
+  background: #f6f5ef;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.desk { width: min(100% - 32px, 420px); margin: clamp(24px, 12vh, 108px) auto; }
+header { margin-bottom: 18px; }
+.brand { color: #52675c; font-size: .86rem; text-decoration: none; }
+.brand:hover { text-decoration: underline; }
+h1 { margin: 6px 0 0; font-size: 1.65rem; }
+.clock {
+  --accent: #315841;
+  background: #fdfdf9; border: 1px solid #dce1d4; border-radius: 18px;
+  padding: 24px; text-align: center;
+}
+.clock[data-phase="rest"] { --accent: #82572e; }
+button { font: inherit; cursor: pointer; color: inherit; }
+button:focus-visible, a:focus-visible { outline: 3px solid #ba8336; outline-offset: 3px; }
+.modes { display: inline-flex; padding: 4px; background: #eeefe7; border-radius: 9px; }
+.modes button { padding: 7px 12px; border: 0; border-radius: 6px; background: transparent; font-size: .86rem; }
+.modes [aria-pressed="true"] { background: #fff; color: var(--accent); box-shadow: 0 1px 3px #253a291a; }
+.status { display: flex; gap: 7px; justify-content: center; align-items: center; margin: 28px 0 3px; color: var(--accent); font-size: .86rem; }
+.status::before { content: ""; width: 7px; height: 7px; background: currentColor; border-radius: 50%; }
+.digits { font-size: clamp(3.8rem, 18vw, 5.7rem); font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.13; letter-spacing: -.045em; }
+progress { display: block; appearance: none; width: 84%; height: 4px; margin: 14px auto 24px; border: 0; border-radius: 8px; background: #e6e9df; color: var(--accent); overflow: hidden; }
+progress::-webkit-progress-bar { background: #e6e9df; }
+progress::-webkit-progress-value { background: var(--accent); }
+progress::-moz-progress-bar { background: var(--accent); }
+.controls { display: flex; justify-content: center; gap: 8px; }
+.controls button, #pin { border: 1px solid #cbd4c6; background: #fff; padding: 8px 14px; min-height: 36px; border-radius: 8px; font-weight: 600; font-size: .88rem; }
+.controls .primary { min-width: 96px; background: var(--accent); border-color: var(--accent); color: white; }
+button:disabled { cursor: default; opacity: .52; }
+.pin-tools { margin-top: 14px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+#pin-hint { flex: 1 1 180px; margin: 0; color: #59705f; font-size: .82rem; line-height: 1.6; }
+.pinned-body { background: #fdfdf9; }
+.pinned-body .clock { border: 0; border-radius: 0; padding: 10px 12px; }
+.pinned-body .modes { display: none; }
+.pinned-body .status { margin: 0 0 2px; font-size: .76rem; }
+.pinned-body .digits { font-size: clamp(2.3rem, 27vh, 4.3rem); }
+.pinned-body progress { margin: 6px auto 10px; }
+.pinned-body .controls button { min-height: 30px; padding: 4px 10px; }
