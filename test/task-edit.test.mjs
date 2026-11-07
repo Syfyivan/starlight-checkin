@@ -49,7 +49,7 @@ test('有历史打卡的重复计划可改为长期新目标，旧计分口径�
  edit(id,{task_kind:'long',points:5000,start_date:plus(day,1)});
  assert.equal(s.plans.dailyEarned(room,day),20*COIN);assert.equal(s.todayTasks(room,plus(day,1)).find(x=>x.id===id).done,null);
  complete(id,{points:5000});assert.equal(s.balance(room),5020*COIN);assert.equal(s.plans.dailyEarned(room,plus(day,1)),0);
- assert.equal(s.todayTasks(room,plus(day,2)).find(x=>x.id===id).done,1);assert.equal(s.get('SELECT COUNT(*) n FROM completions').n,2);
+ assert.ok(!s.todayTasks(room,plus(day,2)).some(x=>x.id===id));assert.equal(s.get('SELECT COUNT(*) n FROM completions').n,2);
  at=dayStart(plus(day,2))+3600000;assert.throws(()=>complete(id),/已经完成/);
 });
 

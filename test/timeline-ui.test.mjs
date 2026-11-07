@@ -16,6 +16,17 @@ test('全天图在六小时分界处拆开同一时间段，时刻可表示24:00
 test('双方和历史小屋都有时间轴入口',()=>{
   for(const perspective of ['receive','manage','preview'])for(const status of ['active','closed'])assert.ok(roomNavigation({...state,space:{...state.space,status}},perspective).some(n=>n.page==='timeline'));
 });
+test('切换到长期任务的完成日期，可回看当时的记录，即使没有计时',async()=>{
+  let dialog;
+  const past='2026-10-28',goal={title:'<习题册>',note:'重做了 <3> 道题'};
+  const ui=timelineUI({getState:()=>state,esc,render:()=>{},openDialog:(title,body)=>{dialog={title,body};},
+    api:async url=>url.endsWith(past)?payload(past,{completedGoals:[goal]}):payload()});
+  await ui.load('timeline');assert.doesNotMatch(ui.page(),/timeline-goals/);
+  await ui.change({value:past});assert.match(ui.page(),/查看当天完成的长期任务（1）/);
+  await ui.click('timeline-goals');assert.match(dialog.title,/2026-10-28/);
+  assert.match(dialog.body,/&lt;习题册/);assert.match(dialog.body,/重做了 &lt;3/);
+  await ui.click('timeline-today');assert.doesNotMatch(ui.page(),/timeline-goals/);
+});
 test('切换小屋后旧请求不能覆盖新小屋，离开页面后不渲染旧请求',async()=>{
   let current=structuredClone(state),resolveOld,first=true;
   const ui=timelineUI({getState:()=>current,esc,render:()=>{},openDialog:()=>{},api:async()=>first?(first=false,new Promise(r=>resolveOld=r)):payload(undefined,{sessions:[{id:'new',title:'新小屋的任务',category:'学习',started_ms:start+hour,ended_ms:start+2*hour,duration_ms:hour}],total_ms:hour,task_count:1})});

@@ -18,11 +18,26 @@ test('长期奖励可自填1000币并独立于普通日上限，撤销及发奖�
  complete(long,{done:false});assert.equal(s.balance(room),20*COIN);assert.equal(complete(long,{points:9999}).awarded,2000*COIN);
  assert.throws(()=>s.progress.taskScore(a,{space_id:room,task_id:long,points:9999,expectedRevision:1}),/发奖人/);
 });
-test('长期保留且只奖励一次；跨日已完成目标可查看但不能重复领奖',t=>{
- const {s,room,task,complete,day}=setup(t),id=task({task_kind:'long',points:1000});
- assert.equal(s.todayTasks(room,plus(day,30)).some(t=>t.id===id&&!t.done),true);
- complete(id);const later=s.todayTasks(room,plus(day,1)).find(t=>t.id===id);assert.equal(later.done,1);assert.equal(later.completion_day,day);assert.equal(later.daily_due,false);
- t.mock.method(Date,'now',()=>dayStart(plus(day,1))+3600000);assert.throws(()=>complete(id),/已经完成/);assert.equal(s.balance(room),1000*COIN);
+test('长期任务完成当天可见，跨日退出双方清单，原日记录和奖励保留',t=>{
+ const {s,a,g,room,task,complete,day}=setup(t),id=task({task_kind:'long',points:1000});
+ const tomorrow=plus(day,1),note='做完了最后一道练习';
+ assert.ok(s.todayTasks(room,plus(day,30)).find(row=>row.id===id&&!row.done));
+ complete(id,{note});complete(id,{done:false});
+ assert.ok(s.todayTasks(room,tomorrow).some(row=>row.id===id));
+ complete(id,{note});
+ for(const user of [a,g])assert.equal(s.state(user,room).tasks.find(row=>row.id===id).note,note);
+ t.mock.method(Date,'now',()=>dayStart(tomorrow));
+ for(const user of [a,g]){
+   const state=s.state(user,room);
+   assert.ok(!state.tasks.some(row=>row.id===id));
+   assert.equal(state.earnedToday,0);
+   const goals=s.progress.timeline(user,{space_id:room,day}).completedGoals;
+   assert.deepEqual(goals.map(goal=>[goal.title,goal.note]),[['一项计划',note]]);
+   assert.deepEqual(s.progress.timeline(user,{space_id:room,day:tomorrow}).completedGoals,[]);
+ }
+ assert.equal(s.todayTasks(room,day).find(row=>row.id===id).completion_day,day);
+ assert.throws(()=>complete(id),/已经完成/);
+ assert.equal(s.balance(room),1000*COIN);
 });
 test('普通任务不能伪装为长期高分，长奖励整数和日期边界受校验',t=>{
  const {s,task,complete,day}=setup(t),normal=task();assert.equal(complete(normal,{task_kind:'long',points:1000}).awarded,20*COIN);
