@@ -13,3 +13,19 @@ export function postcardScene(placeId,{locked=false}={}){
  if(locked)return '<svg class="travel-landscape postcard-locked" viewBox="0 0 680 300" aria-hidden="true"><rect width="680" height="300" fill="#e9e9e1"/><path d="M0 244 153 102l142 145L422 75l258 185v40H0Z" fill="#cccec3"/><circle cx="548" cy="64" r="28" fill="#d6d7cd"/><path d="M310 171v-20a30 30 0 0 1 60 0v20m-68 0h76v61h-76Z" fill="none" stroke="#a3a896" stroke-width="9"/></svg>';
  return `<svg class="travel-landscape postcard-landscape" viewBox="0 0 680 300" aria-hidden="true"><rect width="680" height="300" fill="#edf1e6"/><circle class="postcard-sun" cx="557" cy="49" r="27" fill="#eddaac"/><g class="postcard-cloud" fill="#fffcf0" opacity=".9"><path d="M55 57q0-17 20-13 16-30 36-7 23-8 29 20Z"/><path d="M395 52q2-13 16-11 12-20 29-8 14-3 19 19Z"/></g><path d="M0 179q95-73 197-12t235-25 248 20v138H0Z" fill="#d3dfc4"/><path d="M0 220q152-52 339 9t341-29v100H0Z" fill="#c2d0b1"/>${landmarks[placeId]||landmarks['great-wall']}<g fill="none" stroke="#fbfaf2" opacity=".6"><path d="M15 15h650v270H15Z"/><path d="M22 22h636v256H22Z"/></g></svg>`;
 }
+
+// Small paper crafts that the companion makes on its travels.
+export function keepsakeIcon(place){
+ const shapes={
+  'great-wall':'<path d="M21 9h24v45l-12-7-12 7z" fill="#d9ab71"/><path d="M24 32l6-5v-5h5v4l6-6M25 38l16-11" fill="none"/><circle cx="33" cy="16" r="2"/>',
+  'fujian-tulou':'<ellipse cx="32" cy="30" rx="23" ry="12" fill="#c48260"/><path d="M9 30v11c6 14 40 14 46 0V30c-5 15-40 15-46 0z" fill="#edd4a1"/><ellipse cx="32" cy="29" rx="11" ry="5" fill="#e9d9b8"/><path d="M18 40v5m9-4v6m11-6v6m8-9v6"/>',
+  'lijiang':'<path d="M8 19l16-6 15 5 16-5v33l-16 6-15-5-16 5z" fill="#eddebb"/><path d="M24 13v34m15-29v34" fill="none"/><path d="M13 38q12-18 21-7t16-5" fill="none" stroke="#749f9d" stroke-width="3"/><path d="M27 32q4-9 11-2" fill="none"/>',
+  'kyoto':'<path d="M32 49L8 26q22-28 48 0z" fill="#eac5a2"/><path d="M32 49L18 19m14 30-4-35m4 35 9-33m-9 33 17-27m-17 27-2 5" fill="none"/><path d="M17 25q8-7 14-5m5 0 8 4" stroke="#859869" fill="none"/>',
+  'taj-mahal':'<path d="M14 48V26l9 7V23l9-11 9 11v10l9-7v22z" fill="#f7e8c9"/><path d="M23 33h18M27 48V36q5-6 10 0v12M13 51h38"/>',
+  'quirigua':'<path d="M18 49l1-31 8-7 17 4 3 34z" fill="#c8b28e"/><path d="M24 23l7-5 8 5-8 5zm2 11h13m-13 6h10" fill="none"/>',
+  'niokolo-koba':'<path d="M13 15l36-3 3 36-36 3z" fill="#e7d7a6"/><path d="M20 21l20-2m-19 7 23-2" stroke="#b9b18e"/><g fill="#917b53"><ellipse cx="34" cy="38" rx="5" ry="4"/><circle cx="28" cy="33" r="2"/><circle cx="33" cy="30" r="2"/><circle cx="39" cy="32" r="2"/></g>',
+  'los-glaciares':'<path d="M10 40l8-19 20-9 15 17-8 19-22 4z" fill="#b5d9d7"/><path d="M18 21l12 12 8-21m-8 21 23-4m-23 4-7 19m7-19 15 15" fill="none"/>'
+ };
+ if(!shapes[place])return '';
+ return '<svg class="keepsake-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="#fbf2d9"/><g fill="#aa8052" stroke="#775f46" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round">'+shapes[place]+'</g></svg>';
+}

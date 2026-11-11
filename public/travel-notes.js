@@ -15,3 +15,14 @@ export const GEAR_ROUTES={pet_tent:'nature',pet_lantern:'culture',pet_map:'cultu
 export const ROUTE_NAMES={surprise:'随心漫游',culture:'人文小巷',nature:'山野自然'};
 export function routeFor(choice,effects=[]){return choice==='auto'?(effects.map(e=>GEAR_ROUTES[e]).find(Boolean)||'surprise'):choice||'surprise';}
 export function packingHint(choice,effects=[]){const route=routeFor(choice,effects);return (route==='surprise'?'这一趟随心走走':`这一趟偏向${ROUTE_NAMES[route]}`)+'，优先探索还没去过的地方。';}
+// Each object is an imaginary souvenir made or collected by the travelling pet.
+export const KEEPSAKES={
+ 'great-wall':{clue:'我把山脊上一高一低的城墙画在纸条上，想夹进你正在读的书。',items:['山脊书签','雨滴玻璃珠','蓝格手帕'],answer:0},
+ 'fujian-tulou':{clue:'我用牛皮纸折了一圈房屋，正中间留了个小小的院子。',items:['木头风车','圆院纸模型','月牙饼干'],answer:1},
+ 'lijiang':{clue:'我沿着小巷画了一路，蓝线是流水，弯弯的线交会处画着一座桥。',items:['花纹纽扣','竹叶信封','水巷手绘图'],answer:2},
+ 'kyoto':{clue:'我把庭园里最喜欢的树影画在扇面上，一打开就能扇起小风。',items:['庭园纸扇','绒线帽','小木勺'],answer:0},
+ 'taj-mahal':{clue:'我对着白色建筑画了一半，把纸一折，左右两边就碰面了。',items:['贝壳哨','对折建筑画','花布袋'],answer:1},
+ 'quirigua':{clue:'我把看过的石碑轮廓画在小本上，铅笔灰还沾在爪尖。',items:['晴天风铃','圆叶杯垫','石碑速写'],answer:2},
+ 'niokolo-koba':{clue:'我躲在远处观察，把河边看到的小小脚印描在方格纸上。',items:['足迹观察卡','白云橡皮','纸折小船'],answer:0},
+ 'los-glaciares':{clue:'真的冰会融化，所以我用蓝色透明纸叠出了冰川的棱角。',items:['晒干的花瓣','蓝冰折纸','小铜铃'],answer:1}
+};

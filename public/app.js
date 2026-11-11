@@ -25,7 +25,7 @@ let taskTypeFilter='all',taskCategoryFilter='all';
 let perspective='receive',perspectiveScope='';
 const canAct=()=>canUseRewards(state,perspective);
 const canRedeemOld=()=>state?.space.isSelf&&perspective!=='preview'&&(state.space.status!=='active'||state.family?.mode==='guardian');
-const recipientActions=['credit-borrow','credit-installment','wish-pin','wish-clear','edit-task','pet-feed','pet-evolve','task-timer','travel-pack','task-estimate','pet-use','pet-dress','complete','score-task','task','import','note','archive','buy','draw','merge','convert','claim-bonus','rename-room','use-effect','redeem','share','cancel-redeem'];
+const recipientActions=['credit-borrow','credit-installment','wish-pin','wish-clear','edit-task','pet-feed','pet-greet','trip-keepsake','pet-evolve','task-timer','travel-pack','task-estimate','pet-use','pet-dress','complete','score-task','task','import','note','archive','buy','draw','merge','convert','claim-bonus','rename-room','use-effect','redeem','share','cancel-redeem'];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const coins=n=>new Intl.NumberFormat('zh-CN',{maximumFractionDigits:2}).format((n||0)/UNIT),yuan=n=>new Intl.NumberFormat('zh-CN',{maximumFractionDigits:2}).format((n||0)/100);
 const date=s=>new Date(s).toLocaleDateString('zh-CN',{month:'numeric',day:'numeric',timeZone:'Asia/Shanghai'}),time=s=>new Date(s).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Shanghai'});
@@ -178,7 +178,17 @@ const lessons=[
   ['blockchain','🔗','账本与区块链','“有虚拟币”并不等于“使用区块链”。','<p>本站由服务器保存账本，属于<strong>中心化系统</strong>。平台服务与数据库负责维护记录，学习币没有上链。</p><p>区块链通常将交易打包成区块，使用密码学哈希连接，并通过共识规则让多个参与者对记录达成一致。不同区块链的具体规则并不相同。</p><p>区块链不能保证资产价格上涨，也不能保证每个链上的项目都可信。理解技术机制和判断投资风险是两件事。</p>']
 ];
 function growthUtilities(){return perspective==='preview'?'<p class="subtext">这里仅预览小屋的成长内容；信箱和日记各自私密。</p>':`<div class="growth-utilities panel"><button class="btn secondary" data-action="diary-open">${icon('note')} 写日记</button><button class="text-btn" data-page="logs">${icon('history')} 小屋日志</button><button class="text-btn" data-page="inbox">${icon('card')} 信箱与好友</button></div>`;}
-function growthPage(){const earned=state.earnedTotal/UNIT,threshold=state.settings.marketThreshold,reached=earned>=threshold;return `${heading('','成长伙伴','每天的努力，都在陪它长大。')}${progress.album()}${pets.panel()}${progress.panel()}${growthUtilities()}<div class="growth-header"><h2>知识小课</h2><small>已读 ${state.lessons.length} / ${lessons.length}</small></div><div class="lesson-grid">${lessons.map(([id,emoji,title,sub])=>`<button class="lesson" data-action="lesson" data-id="${id}"><span><strong>${title}</strong><p>${sub}</p></span>${icon(state.lessons.includes(id)?'check':'chevron')}</button>`).join('')}</div><details class="market-preview panel mt"><summary>模拟市场 · 尚未开放 <span>${reached?'已达到门槛':coins(state.earnedTotal)+' / '+threshold+' 币'}</span></summary><p class="subtext mt">未来计划支持 A 股、ETF 和比特币的模拟学习。累计完成任务获得 ${threshold} 币达到门槛，消费不影响进度，撤销或改分会同步更新。</p><progress class="progress mt" max="${threshold}" value="${Math.min(earned,threshold)}"></progress></details>`;}
+let petSection='home', petSectionScope='';
+function growthPage(){
+ const scope=state.space.id+'|'+perspective;
+ if(scope!==petSectionScope){petSection='home';petSectionScope=scope;}
+ const sections=[['home','宠物小屋'],['travel','旅行手账'],['study','学习成长']];
+ const nav='<nav class="cottage-tabs" aria-label="成长记录分区">'+sections.map(([key,label])=>'<button data-action="pet-section" data-section="'+key+'" aria-pressed="'+(key===petSection)+'">'+label+'</button>').join('')+'</nav>';
+ if(petSection==='home')return nav+pets.panel();
+ if(petSection==='travel')return nav+progress.panel();
+ return nav+studyGrowthPage();
+}
+function studyGrowthPage(){const earned=state.earnedTotal/UNIT,threshold=state.settings.marketThreshold,reached=earned>=threshold;return `${progress.album()}${growthUtilities()}<div class="growth-header"><h2>知识小课</h2><small>已读 ${state.lessons.length} / ${lessons.length}</small></div><div class="lesson-grid">${lessons.map(([id,emoji,title,sub])=>`<button class="lesson" data-action="lesson" data-id="${id}"><span><strong>${title}</strong><p>${sub}</p></span>${icon(state.lessons.includes(id)?'check':'chevron')}</button>`).join('')}</div><details class="market-preview panel mt"><summary>模拟市场 · 尚未开放 <span>${reached?'已达到门槛':coins(state.earnedTotal)+' / '+threshold+' 币'}</span></summary><p class="subtext mt">未来计划支持 A 股、ETF 和比特币的模拟学习。累计完成任务获得 ${threshold} 币达到门槛，消费不影响进度，撤销或改分会同步更新。</p><progress class="progress mt" max="${threshold}" value="${Math.min(earned,threshold)}"></progress></details>`;}
 function ledgerPage(){return `${credit.notice()}<div class="credit-ledger-entry">${credit.entry()}</div>${familyPlay.penaltyPanel()}${heading('EVERY LITTLE EFFORT COUNTS',`每一枚${cn()}，都有来处。`,'收入、消费与撤销，都会认真记下来。',state.space.isSelf&&perspective==='receive'?`<a class="btn secondary" href="./api/export?space=${encodeURIComponent(state.space.id)}" download>导出账本</a>`:'')}<section class="panel">${state.ledger.map(l=>`<div class="record-row"><span class="record-icon">${icon(l.amount>0?'check':'history')}</span><div class="record-main"><strong>${esc(l.note)}</strong><small>${time(l.created)}</small></div><span class="record-amount ${l.amount>0?'positive':'negative'}">${l.amount>0?'+':''}${coins(l.amount)}</span></div>`).join('')||empty('📒','第一笔努力，还在路上','完成一个小计划，就有第一笔收入。')}</section>${state.ticketLedger.length?`<section class="panel mt"><h2>🎟 免费抽奖机会账本</h2><p class="subtext">${state.ticketBalance<0?'待补 '+(-state.ticketBalance):'可用 '+state.ticketBalance} 次 · 只在这间小屋使用</p>${state.ticketLedger.map(l=>`<div class="record-row"><div class="record-main"><strong>${esc(l.note)}</strong><small>${time(l.created)}</small></div><span class="record-amount ${l.amount>0?'positive':'negative'}">${l.amount>0?'+':''}${l.amount} 次</span></div>`).join('')}</section>`:''}`;}
 let adminCategory='all';
 function renameOfferPanel(){
@@ -280,6 +290,7 @@ case 'auth-mode':authMode=el.dataset.mode;emailChallenge='';renderAuth();break;
 case 'demo':busy=true;await api('demo',{});await boot();break;
 case 'demo-role':busy=true;await api('demo',{username:el.dataset.username});space='';page='today';dialog.close();await boot();break;
 case 'task':taskDialog();break;
+case 'pet-section':if(['home','travel','study'].includes(el.dataset.section)){petSection=el.dataset.section;dialog.close();render();}break;
 case 'pet-shop':shopFilter='pets';await navigatePage('shop');break;
 case 'edit-task':taskDialog([...state.tasks,...state.futureTasks].find(t=>t.id===el.dataset.id));break;
 case 'task-estimate':{const t=state.tasks.find(t=>t.id===el.dataset.id);openDialog('给计划留一点时间',`<form id="task-estimate-form" data-id="${t.id}" data-minutes="${t.estimated_minutes}"><p>${esc(t.title)}</p>${field('预估用时（分钟）','estimated_minutes','number',t.estimated_minutes||'','min="1" max="1440" placeholder="留空可清除"')}<p class="field-help">只是规划用的参考，不会改变任务分数。</p>${actions('保存用时')}</form>`);break;}

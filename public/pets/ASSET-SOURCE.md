@@ -19,3 +19,5 @@ image_gen tool, using young.png and winged.png as visual references. These are
 new sibling assets, not replacements. Transparent output was copied without
 bitmap edits; each new pose has its own outfit anchors. Eggs are native SVG.
 See ../../docs/PET-EVOLUTION-ART.md in the repository for the generation brief.
+
+窗边小屋背景 `window-cottage.webp` 为本项目使用 ImageGen 生成的原创场景。画面为暖色木屋、拱窗、草编地毯与旅行包，中央留白供既有宠物和配饰叠加。

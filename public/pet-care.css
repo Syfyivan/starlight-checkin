@@ -57,3 +57,34 @@
 @keyframes care-travel-bob{0%,100%{transform:none}50%{transform:translateY(-4px) rotate(2deg)}}
 @media(max-width:600px){.pet-moment{width:245px;max-width:100%}.pet-food-shelf{max-height:330px;gap:8px}.food-choice{padding:8px 10px;gap:9px}.food-choice-art{width:55px}.food-choice strong{font-size:12px}.food-choice small{font-size:10px}.wardrobe-preview{padding:5px 12px;min-height:120px;gap:8px}.wardrobe-preview>.pet-portrait{width:125px}.wardrobe-preview strong{font-size:12px}.wardrobe-preview small{font-size:10px}.care-outcome strong{font-size:18px}.care-unlocks{padding:10px 12px}.pet-use-illustration{width:125px}.travel-pet-marker{width:68px;right:10px}.pet-home .pet-buttons{gap:7px;flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.pet-moment *,.travel-pet-marker .pet-assembly{animation:none!important;transition:none!important}.moment-before,.moment-crack,.moment-shells,.moment-bites,.moment-sparks,.moment-heart{display:none}.moment-after{opacity:1!important;transform:none!important}.food-choice{transition:none}.food-choice:hover:not(:disabled){transform:none}}
+
+.cottage-tabs {display:flex;align-items:center;gap:6px;margin:0 0 16px;border-bottom:1px solid #e2dac8}
+.cottage-tabs button {position:relative;border:0;background:transparent;color:#6e715e;padding:10px 16px 14px;min-height:44px;font:inherit;font-weight:600}
+.cottage-tabs button[aria-pressed="true"] {color:#335d48}
+.cottage-tabs button[aria-pressed="true"]::after {content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:3px;border-radius:3px;background:#538268}
+.cottage-home {background:#fffdf6;border-color:#e7ddc9}
+.cottage-home .pet-main {grid-template-columns:minmax(0,1.45fr) minmax(220px,1fr);gap:clamp(20px,4vw,48px);margin:14px 0 0}
+.cottage-scene {position:relative;isolation:isolate;aspect-ratio:1.53;overflow:hidden;border-radius:12px;background:#e8d5a8 url('./pets/window-cottage.webp') center / cover no-repeat;box-shadow:inset 0 0 0 1px #78664933}
+.cottage-pet {position:absolute;bottom:8%;left:30%;width:40%;padding:0;border:0;background:none;border-radius:45%;filter:drop-shadow(0 5px 3px #47372142);touch-action:manipulation}
+button.cottage-pet {cursor:pointer}
+.cottage-pet:focus-visible {outline:3px solid #41735c;outline-offset:4px}
+.cottage-pet .pet-portrait {min-height:0;max-width:none;margin:0}
+.cottage-caption {position:absolute;left:50%;bottom:3%;transform:translateX(-50%);width:max-content;max-width:94%;padding:4px 11px;border:1px solid #b59a6c77;border-radius:16px;background:#fff9e8ef;color:#56482b;line-height:1.45;font-size:12px;text-align:center;pointer-events:none}
+.cottage-home .pet-buttons {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 18px}
+.cottage-home .pet-buttons button {min-height:44px}
+.cottage-letter {display:block;background:#f3eedc;color:#624d32;border:1px solid #dccdb1;border-radius:8px;padding:9px 12px;margin:8px 0 12px;font:inherit;text-align:left}
+.keepsake-pocket {background:#f8efdb;border:1px solid #e8d7b6;border-radius:12px;padding:14px 17px;margin:16px 0}
+.keepsake-pocket h3 {font-size:16px;margin:0}
+.keepsake-pocket p,.keepsake-pocket small {font-size:13px;line-height:1.65}
+.keepsake-pocket small {display:block;margin-top:8px}
+.keepsake-found {color:#665126;display:inline-flex;align-items:center;gap:10px}
+.keepsake-icon {width:56px;height:56px;flex:none}
+.passport-place .keepsake-icon {width:32px;height:32px;margin:5px auto 0}
+@media(max-width:700px){
+ .cottage-home .pet-main {grid-template-columns:1fr;gap:14px}
+ .cottage-home .pet-progress {width:100%}
+ .cottage-home .pet-buttons {margin:0 0 12px}
+ .cottage-tabs {gap:2px;margin-bottom:10px}
+ .cottage-tabs button {flex:1;padding:8px 4px;font-size:14px}
+ .cottage-tabs button[aria-pressed="true"]::after {left:15%;right:15%}
+}
