@@ -3,3 +3,16 @@
 @media(max-width:600px){.task-time-tools{gap:4px 10px}.task-time-tools .text-btn{min-height:30px}.travel-home{padding:18px}.travel-home h2{font-size:18px}.mail-gift{padding:14px}.task-row .task-reward{font-size:12px}.task-time-tools .task-clock{font-size:11px}}
 
 .timer-help{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8}.timer-help p{max-width:620px;margin:8px 0}
+.study-album{margin-bottom:16px}
+.study-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.study-heading h2{margin:0}.study-heading span,.study-stamp small{font-size:.8rem;color:var(--muted)}
+.study-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;list-style:none;padding:0;margin:16px 0;color:var(--muted)}
+.study-week li{display:grid;justify-items:center;gap:4px;font-size:.73rem}
+.study-week b{display:grid;place-items:center;width:26px;height:26px;border:1px dashed var(--line);border-radius:50%}
+.study-week .marked b{border:1px solid #859c77;background:#e1ead9;color:#355740}
+.study-stamps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.study-stamp{min-width:0;padding:6px 6px 9px;border:1px solid var(--line);border-radius:8px;background:#fafaf5;color:var(--ink);text-align:left}
+.study-stamp strong,.study-stamp small{display:block;margin:3px 4px 0}
+.study-stamp svg{display:block;width:100%;height:auto;border-radius:4px}
+.study-stamp:disabled{color:var(--muted);cursor:default}
+@media(max-width:600px){.study-stamps{grid-template-columns:repeat(2,minmax(0,1fr))}}

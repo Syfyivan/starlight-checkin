@@ -169,6 +169,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .breadcrumb span{color:#919c84;font-size:12px}
 .mobile-brand{display:none}
 .top-actions{display:flex;align-items:center;gap:14px}
+.focus-entry{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:7px 13px;background:#f9ead6;color:#754022;border:1px solid #e6c9a5;border-radius:10px;text-decoration:none;font-weight:650;white-space:nowrap}
+.focus-entry:hover{background:#f6dfc1}
+.focus-entry:focus-visible{outline:2px solid #875026;outline-offset:2px}
+.sidebar>.focus-entry{justify-content:flex-start;margin-bottom:8px}
+.top-actions>.focus-entry{display:none}
 .coin-pill{display:flex;align-items:center;gap:7px;border:1px solid #dfe6d4;border-radius:24px;background:#fafbf7;min-height:38px;padding:6px 12px;font-size:12px}
 .coin-pill strong{font-variant-numeric:tabular-nums;font-weight:650}
 .coin-icon{height:18px;width:18px;border:1px solid #b3a278;border-radius:50%;display:inline-grid;place-items:center;color:#9b8350;font-size:11px;flex-shrink:0}

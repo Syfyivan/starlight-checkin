@@ -23,6 +23,9 @@ let mini = null;
 let tickHost = window;
 let tick;
 const main = document.querySelector('.clock');
+const garden = document.querySelector('.tomato-garden');
+const stages = ['sprout', 'flower', 'fruit'];
+const gardenLabels = { seed:'待种的小番茄', sprout:'番茄发芽了', flower:'番茄开花了', fruit:'果实正长大', ripe:'这轮番茄熟了' };
 const pin = document.querySelector('#pin');
 const hint = document.querySelector('#pin-hint');
 const form = document.querySelector('#settings-form');
@@ -67,6 +70,15 @@ function render() {
   const time = String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0');
   const running = clock.endsAt !== null;
   const paused = !running && left < total;
+  const fraction = 1 - left / total;
+  const stage = clock.phase === 'focus'
+    ? (running || paused ? stages[Math.min(2, Math.floor(fraction * 3))] : 'seed')
+    : (clock.harvested ? 'ripe' : '');
+  if (garden.dataset.stage !== stage) {
+    garden.dataset.stage = stage;
+    garden.hidden = !stage;
+    garden.querySelector('figcaption').textContent = gardenLabels[stage] || '';
+  }
   const label = labels[clock.phase];
   let message = '准备' + label;
   let action = '开始' + label;

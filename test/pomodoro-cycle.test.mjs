@@ -32,7 +32,8 @@ test('one-round groups take a long break every time and the default group takes 
 test('manual advance waits at the next phase, paused time and manual breaks never earn an extra round', () => {
   const manual = begin({ ...defaults, auto: false });
   const after = currentClock(manual, start + 600 * minute);
-  assert.deepEqual(after, ready('short', manual.settings, 1));
+  assert.deepEqual(after, { ...ready('short', manual.settings, 1), harvested: true });
+  assert.equal(ready('short').harvested, undefined);
   const paused = { ...manual, endsAt: null, remaining: 3200 };
   assert.equal(currentClock(paused, start + 99 * minute), paused);
   expectPhase({ ...ready('short'), endsAt: start + minute }, 1, 'focus', 0, 25);

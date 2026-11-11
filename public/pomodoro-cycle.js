@@ -30,7 +30,7 @@ function following(clock) {
   const { phase, settings, completed } = clock;
   if (phase === 'focus') {
     const count = completed + 1;
-    return ready(count >= settings.rounds ? 'long' : 'short', settings, count);
+    return { ...ready(count >= settings.rounds ? 'long' : 'short', settings, count), harvested: true };
   }
   return ready('focus', settings, phase === 'long' ? 0 : completed % settings.rounds);
 }

@@ -35,6 +35,11 @@ body{font-size:14px}
 .mobile-brand>div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mobile-brand small,.mail-label{display:none}
 .top-actions{gap:5px;max-width:62%;flex-shrink:0}
+.sidebar>.focus-entry{display:none}
+.top-actions>.focus-entry{display:inline-flex;gap:4px;padding:5px 8px;font-size:12px;min-height:44px}
+.top-actions>.focus-entry .icon{width:15px;height:15px}
+.topbar .top-actions{max-width:none}
+.topbar{position:sticky;top:0;z-index:5}
 .top-actions>.avatar{width:34px;min-height:40px;background:transparent;font-size:13px}
 .mail-button{width:36px;justify-content:center;padding:4px;min-height:40px}
 .mail-button b{position:absolute;top:0;right:0}

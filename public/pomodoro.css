@@ -39,7 +39,23 @@
 * { box-sizing: border-box; }
 body { margin: 0; }
 .desk { width: min(100% - 32px, 420px); margin: clamp(24px, 12vh, 108px) auto; }
-header { margin-bottom: 18px; }
+header { display: flex; justify-content: space-between; align-items: end; gap: 8px; margin-bottom: 18px; }
+.tomato-garden { display: flex; align-items: end; gap: 8px; margin: 0; color: var(--muted); font-size: .78rem; }
+.tomato-garden[hidden] { display: none; }
+.tomato-garden figcaption { padding-bottom: 3px; }
+.plant { position: relative; width: 42px; height: 48px; }
+.plant i { position: absolute; display: block; }
+.pot { bottom: 0; left: 8px; width: 27px; height: 16px; border-top: 4px solid #ad6240; background: #cb8866; border-radius: 2px 2px 8px 8px; }
+.stem { bottom: 12px; left: 20px; width: 3px; height: 24px; border-radius: 4px; transform: rotate(5deg); background: #507446; }
+.leaves { left: 8px; bottom: 25px; width: 15px; height: 8px; background: #628550; border-radius: 1px 90%; }
+.leaves::after { content: ""; position: absolute; left: 13px; bottom: 5px; width: 13px; height: 8px; background: #708e55; border-radius: 85% 1px; }
+.plant .blossom, .plant .fruit { display: none; }
+.tomato-garden[data-stage="seed"] .leaves { display: none; }
+.tomato-garden[data-stage="seed"] .stem { height: 9px; width: 6px; border-radius: 80% 10%; }
+.tomato-garden[data-stage="flower"] .blossom { display: block; left: 23px; top: 5px; width: 7px; height: 7px; border-radius: 50%; background: #9b6825; box-shadow: 0 -4px #f6bc48, 4px 0 #f6bc48, 0 4px #f6bc48, -4px 0 #f6bc48; }
+.tomato-garden[data-stage="fruit"] .fruit, .tomato-garden[data-stage="ripe"] .fruit { display: block; left: 22px; top: 10px; width: 15px; height: 14px; border-radius: 48% 50% 55% 52%; background: #9fb65a; box-shadow: inset -3px -2px #0002; }
+.fruit::before { content: ""; position: absolute; left: 4px; top: -2px; width: 7px; height: 4px; border-radius: 50%; background: #496d3b; }
+.tomato-garden[data-stage="ripe"] .fruit { background: #de604b; }
 .brand { color: var(--muted); font-size: .86rem; text-decoration: none; }
 .brand:hover { text-decoration: underline; }
 h1 { margin: 6px 0 0; font-size: 1.65rem; }
