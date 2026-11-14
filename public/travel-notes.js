@@ -1,6 +1,12 @@
+import {WORLD_STOPS} from './world-stops.js';
+
 // Original activities based on the UNESCO references saved with each postcard.
 // These are optional learning prompts; reading or answering never awards coins.
 export const TRAVEL_NOTES={
+ 'mogao':{theme:'culture',stamp:'石窟里的颜色',fact:'敦煌莫高窟地处丝绸之路沿线，洞窟中保存着壁画和雕塑。',question:'在莫高窟可以看到哪两种艺术作品？',choices:['壁画和雕塑','冰雕和沙雕','剪纸和刺绣'],answer:0,practice:'选一件小物，试着用画和捏两种方式表现它',minutes:15,midway:'我沿着崖壁数洞口，数到一半，被本子上画歪的一条飘带逗笑了。等我回来给你看。'},
+ 'terracotta-army':{theme:'culture',stamp:'陶俑的眉眼',fact:'秦始皇陵的兵马俑用陶土制成，人物的面貌和细节各有不同。',question:'仔细观察兵马俑，能发现什么？',choices:['每张脸都完全相同','不同陶俑的细节有差别','每个都骑着马'],answer:1,practice:'用相同的轮廓画三张脸，每张只改两个细节',minutes:10,midway:'今天在速写本上试了三种眉毛。同一张圆脸，换一对眉毛，神情就变啦。'},
+ 'jiuzhaigou':{theme:'nature',stamp:'湖边的水声',fact:'九寨沟的山林间分布着湖泊、瀑布和石灰岩阶地。',question:'哪一组景观可以在九寨沟看到？',choices:['沙丘和盐壳','火山和熔岩','湖泊和瀑布'],answer:2,practice:'画出平静和流动的水，各给它配一个声音',minutes:10,midway:'今天记了两种声音：溪水淌过去的轻响，和瀑布落下的哗啦声。猜猜哪种被我写得更大？'},
+ 'grand-canyon':{theme:'nature',stamp:'峡谷的岩层',fact:'科罗拉多河切开岩层，形成了美国亚利桑那州的大峡谷。',question:'哪条河塑造了这座大峡谷？',choices:['科罗拉多河','多瑙河','黄河'],answer:0,practice:'用不同颜色的纸叠出岩层，画一条穿过它们的河',minutes:15,midway:'峡谷的岩壁是一层一层的。我在每一层旁边点了不同颜色，免得回家画乱顺序。'},
  'great-wall':{theme:'culture',stamp:'山脊上的城墙',fact:'长城由不同时期的城墙逐渐连接、修筑而成，建设延续到明代。',question:'长城是怎样慢慢形成的？',choices:['一天建完','不同时期逐渐修建','只是一座城门'],answer:1,practice:'查一查长城的修建过程，画一条小时间线',minutes:15,midway:'我沿着山脊慢慢走，远处的城墙像一条弯弯的线。带来的行囊很安心，等回家给你看我的小画。'},
  'fujian-tulou':{theme:'culture',stamp:'围坐的小院',fact:'福建土楼有圆形，也有方形；许多家庭围着中央院落生活。',question:'土楼的平面形状有什么特点？',choices:['只有三角形','只有圆形','有圆形，也有方形'],answer:2,practice:'画一个有中央院子的家，标出大家共享的地方',minutes:15,midway:'今天钻进了一个热闹的小院，转了一圈，差点绕回刚才的门。留了一个关于房子的小发现，回家告诉你。'},
  'lijiang':{theme:'culture',stamp:'流水小巷',fact:'丽江古城拥有古老的供水系统，建筑也融合了多种文化的特点。',question:'丽江古城的小巷里，有什么值得留意？',choices:['古老的供水系统','海底隧道','冰川洞穴'],answer:0,practice:'观察家附近的水流，画出它经过的路线',minutes:10,midway:'沿着小巷听了一会儿流水，水拐了弯，我也拐了弯。今天想慢一点走，把细小的声音装进信里。'},
@@ -14,9 +20,13 @@ export const TRAVEL_ROUTES=[['auto','让行囊带路'],['culture','逛逛人文�
 export const GEAR_ROUTES={pet_tent:'nature',pet_lantern:'culture',pet_map:'culture'};
 export const ROUTE_NAMES={surprise:'随心漫游',culture:'人文小巷',nature:'山野自然'};
 export function routeFor(choice,effects=[]){return choice==='auto'?(effects.map(e=>GEAR_ROUTES[e]).find(Boolean)||'surprise'):choice||'surprise';}
-export function packingHint(choice,effects=[]){const route=routeFor(choice,effects);return (route==='surprise'?'这一趟随心走走':`这一趟偏向${ROUTE_NAMES[route]}`)+'，优先探索还没去过的地方。';}
+export function packingHint(choice,effects=[]){const route=routeFor(choice,effects);return (route==='surprise'?'这一趟随心走走':`这一趟偏向${ROUTE_NAMES[route]}`)+'。先去新地点，这条路线走完就换一条；全部走过后，优先重游去得少的地方。';}
 // Each object is an imaginary souvenir made or collected by the travelling pet.
 export const KEEPSAKES={
+ 'mogao':{clue:'我画了一条能在纸上飞舞的飘带，折起来放进信封了。',items:['飘带画片','小石碗','松果印章'],answer:0},
+ 'terracotta-army':{clue:'我用铅笔给陶俑画了三副眉眼，装订成一本巴掌大的册子。',items:['铜色纸铃','陶俑速写册','河流拼图'],answer:1},
+ 'jiuzhaigou':{clue:'我把蓝纸剪成细条，贴在湖面上方，纸梢垂下来像水在流。',items:['山谷风筝','年轮拓片','纸瀑布'],answer:2},
+ 'grand-canyon':{clue:'我把几张土黄色和红色的纸叠好，剪了一道弯口，露出一层一层的边。',items:['岩层剪纸','稻草小帽','湖面书签'],answer:0},
  'great-wall':{clue:'我把山脊上一高一低的城墙画在纸条上，想夹进你正在读的书。',items:['山脊书签','雨滴玻璃珠','蓝格手帕'],answer:0},
  'fujian-tulou':{clue:'我用牛皮纸折了一圈房屋，正中间留了个小小的院子。',items:['木头风车','圆院纸模型','月牙饼干'],answer:1},
  'lijiang':{clue:'我沿着小巷画了一路，蓝线是流水，弯弯的线交会处画着一座桥。',items:['花纹纽扣','竹叶信封','水巷手绘图'],answer:2},
@@ -26,3 +36,13 @@ export const KEEPSAKES={
  'niokolo-koba':{clue:'我躲在远处观察，把河边看到的小小脚印描在方格纸上。',items:['足迹观察卡','白云橡皮','纸折小船'],answer:0},
  'los-glaciares':{clue:'真的冰会融化，所以我用蓝色透明纸叠出了冰川的棱角。',items:['晒干的花瓣','蓝冰折纸','小铜铃'],answer:1}
 };
+
+for(const [index,stop] of WORLD_STOPS.entries()){
+  const answer=index%3,choices=[...stop.distractors];
+  choices.splice(answer,0,stop.answer);
+  TRAVEL_NOTES[stop.id]={theme:stop.theme,stamp:stop.era,fact:stop.fact,question:stop.question,choices,answer,
+    practice:stop.practice,minutes:10,midway:stop.letter.split(/[。！？]/u)[0]+'。'};
+  const items=[WORLD_STOPS[(index+1)%WORLD_STOPS.length].keepsake,WORLD_STOPS[(index+2)%WORLD_STOPS.length].keepsake];
+  items.splice(answer,0,stop.keepsake);
+  KEEPSAKES[stop.id]={clue:stop.letter,items,answer};
+}
