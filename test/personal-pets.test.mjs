@@ -18,7 +18,7 @@ function fixture(t){
 
 test('个人空间可独立购粮、喂食跨级、买装扮和旅行，全程不需要发奖人权限',t=>{
  const {s,u,space,op,buy,use}=fixture(t);
- let state=s.state(u,space);assert.equal(state.personalPetShop,true);assert.ok(!state.admin);assert.equal(state.prizes.length,17);assert.equal(state.pet.xp,0);
+ let state=s.state(u,space);assert.equal(state.personalPetShop,true);assert.ok(!state.admin);assert.equal(state.prizes.length,47);assert.equal(state.pet.xp,0);
  for(let i=0;i<5;i++)use(buy('pet_feast'));
  assert.equal(s.pets.state(space).level,2);assert.equal(s.pets.state(space).xp,100);
  use(buy('pet_scarf'));assert.equal(s.pets.state(space).outfit,'pet_scarf');assert.equal(s.pets.state(space).xp,135);

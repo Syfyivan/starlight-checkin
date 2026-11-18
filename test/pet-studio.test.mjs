@@ -16,11 +16,14 @@ function fixture(t){const s=new Store(':memory:');t.after(()=>s.db.close());cons
  const prize=(effect)=>{const p=PET_ITEMS[effect];const r=s.savePrize(g,{space_id:room,title:p.name,description:'一份用品',category:'custom',face_cents:0,effect,channel:'shop',emoji:p.emoji,cost:p.cost,stock:10,wait_days:0,active:true});return s.get('SELECT * FROM prizes WHERE id=?',r.id);};
  const card=(effect)=>s.issue(a,prize(effect),'shop');return {s,a,g,room,goal,complete,prize,card};}
 
-test('17款可用用品和2个预留款，预留款不可发布，既有六款维持原使用等级',t=>{
- const {s,g,room}=fixture(t);assert.equal(PET_TEMPLATES.length,17);assert.equal(Object.values(PET_ITEMS).filter(i=>i.ready===false).length,2);
+test('51款宠物用品全部完成可用，既有六款维持原使用等级，地域特产仅在小屋模板或旅行中提供',t=>{
+ const {s}=fixture(t);assert.equal(PET_TEMPLATES.length,51);assert.equal(Object.values(PET_ITEMS).filter(i=>i.ready===false).length,0);
  assert.ok(['pet_pack','pet_tent','pet_snack','pet_feast','pet_bow','pet_star'].every(id=>PET_ITEMS[id].level===1));
- assert.throws(()=>s.savePrize(g,{space_id:room,title:'未完成',description:'x',category:'custom',face_cents:0,effect:'pet_space',channel:'shop',emoji:'x',cost:10,stock:1,wait_days:0,active:true}),/准备中/);
- assert.ok(!PET_TEMPLATES.some(p=>p.effect==='pet_space'));
+ assert.ok(PET_TEMPLATES.some(p=>p.effect==='pet_space'));
+ assert.equal(Object.values(PET_ITEMS).filter(i=>i.specialty).length,4);
+ const personal=s.newUser({username:'personal_pet_user',name:'独行者',password:''});
+ s.run('INSERT INTO pets VALUES(?,?,?,?)',personal.id,'nuonuo-seal','',new Date().toISOString());
+ assert.equal(s.pets.personalShop(personal.id).length,47);
 });
 test('等级锁同时保护购买、使用和旅行，失败不扣币也不消耗卡',t=>{
  const {s,a,room,prize,card,goal,complete}=fixture(t),p=prize('pet_berry'),c=card('pet_berry'),balance=s.balance(room);
@@ -38,9 +41,9 @@ test('降级暂时隐藏高等级配饰，不删除所有权，升级后可重�
  const {s,a,room,goal,complete,card}=fixture(t),id=goal(100);complete(id);const c=card('pet_scarf');s.pets.use(a,{space_id:room,card_id:c.id});assert.equal(s.pets.state(room).outfit,'pet_scarf');
  complete(id,false);assert.equal(s.pets.state(room).outfit,'');assert.ok(s.pets.state(room).outfits.includes('pet_scarf'));assert.throws(()=>s.pets.dress(a,{space_id:room,outfit:'pet_scarf'}),/未解锁/);complete(id);s.pets.dress(a,{space_id:room,outfit:'pet_scarf'});assert.equal(s.pets.state(room).itemXp,35);
 });
-test('未解锁形象只输出轮廓，不生成真实图像地址；配饰按六个形象姿态定位',()=>{
+test('未解锁形象只输出轮廓，不生成真实图像地址；36款装扮与6种伙伴×4个阶段共864种组合逐一精准定位',()=>{
  assert.ok(!petPortrait({owned:true,form:'pocket-glider',stage:'young'},{locked:true}).includes('<img'));
- for(const form of ['nuonuo-seal','pocket-glider','cottonpod-hermit'])for(const stage of ['young','winged'])for(const [outfit,i] of Object.entries(PET_ITEMS).filter(([,i])=>i.kind==='outfit'&&i.ready!==false)){
+ for(const form of ['nuonuo-seal','cloud-fox','pocket-glider','moon-bunny','cottonpod-hermit','moss-dragon'])for(const stage of ['young','winged','moon','star'])for(const [outfit,i] of Object.entries(PET_ITEMS).filter(([,i])=>i.kind==='outfit'&&i.ready!==false)){
   const html=petPortrait({owned:true,form,stage,outfit});assert.match(html,/fitted-outfit/);assert.match(html,/transform="translate/);assert.ok(!html.includes(i.emoji));assert.ok(!html.includes('NaN'));
  }
 });

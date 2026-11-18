@@ -10,7 +10,7 @@ import {BookSource} from '../lib/book-source.mjs';
 import {openBook,searchOpenBooks} from '../lib/open-books.mjs';
 
 const catalog=JSON.parse(readFileSync(new URL('../lib/open-books-catalog.json',import.meta.url),'utf8')).books;
-const directId='oa:dc-lunyu',archiveId='oa:hk-9789882379749';
+const directId='oa:dc-lienvzhuan-hans',archiveId='oa:hk-9789882379749';
 const body='学习需要认真思考，也需要理解书中的知识。读过之后，试着把新的发现分享给身边的朋友。'.repeat(50);
 function store(t){const s=new Store(':memory:');t.after(()=>s.db.close());return s;}
 // Small synthetic EPUBs exercise parsing without fetching or storing real books.
@@ -35,7 +35,7 @@ function epub(text=body){return zip({
 test('reviewed catalog contains only size-bounded Chinese EPUBs with unique edition URLs',()=>{
  assert.equal(new Set(catalog.map(b=>b.id)).size,catalog.length);
  assert.equal(new Set(catalog.map(b=>b.sourceUrl)).size,catalog.length);
- assert.ok(catalog.some(b=>b.provider==='openbookshk'));
+ assert.ok(catalog.every(b=>b.script==='Hans'));
  assert.ok(catalog.some(b=>b.provider==='digitalclassics'));
  for(const b of catalog){
   assert.equal(b.language,'中文');assert.equal(b.format,'epub');assert.equal(b.complete,true);
@@ -49,9 +49,9 @@ test('reviewed catalog contains only size-bounded Chinese EPUBs with unique edit
 
 test('mixed search is local, supports catalog aliases and never invents modern Chinese full texts',async t=>{
  const source=new BookSource(store(t),{fetcher:()=>{throw Error('search must not fetch');}});
- for(const q of ['论语','論語'])assert.equal((await source.searchAll(q)).books[0].id,directId);
- for(const q of ['历史不止一种写法','歷史不止一種寫法'])assert.ok((await source.searchAll(q)).books.some(b=>b.id===archiveId));
- assert.ok((await source.searchAll('戰國策')).books.some(b=>b.id==='oa:dc-zhanguoce'));
+ for(const q of ['列女传','列女傳'])assert.equal((await source.searchAll(q)).books[0].id,directId);
+ for(const q of ['历史不止一种写法','歷史不止一種寫法'])assert.ok(!(await source.searchAll(q)).books.some(b=>b.id===archiveId));
+ assert.ok(!(await source.searchAll('戰國策')).books.some(b=>b.id==='oa:dc-zhanguoce'));
  for(const q of ['三体','算法导论','小海蒂'])assert.equal((await source.searchAll(q)).books.some(b=>String(b.id).startsWith('oa:')),false);
  for(const q of ['论语','毛升','孟子'])assert.ok((await source.searchAll(q)).books.every(b=>b.language==='中文'));
  assert.deepEqual(searchOpenBooks(''),[]);
@@ -62,14 +62,6 @@ test('oa whitelist is checked before cache; IDs cannot supply a remote URL',asyn
  s.run('INSERT INTO book_catalog_cache VALUES(?,?,?)','oa:unknown','{"book":{"title":"not reviewed"}}',Date.now());
  for(const id of ['oa:unknown','oa:https://example.com/book.epub','oa:../book','oa:dc-lunyu?url=https://example.com'])await assert.rejects(source.download(id),/搜索结果/);
  assert.equal(fetched,0);
-});
-
-test('download dispatch preserves existing wiki and Gutenberg paths',async t=>{
- const s=store(t),source=new BookSource(s);source.downloadWiki=async id=>({route:'wiki',id});source.downloadOpen=async id=>({route:'open',id});
- assert.deepEqual(await source.download('ws:6'),{route:'wiki',id:'ws:6'});
- assert.deepEqual(await source.download(directId),{route:'open',id:directId});
- s.run('INSERT INTO book_catalog_cache VALUES(?,?,?)','pg:23839','{"route":"gutenberg"}',Date.now());
- assert.deepEqual(await source.download(23839),{route:'gutenberg'});
 });
 
 test('direct EPUB verifies Chinese body, overrides broken metadata, preserves attribution and caches',async t=>{
@@ -84,12 +76,11 @@ test('direct EPUB verifies Chinese body, overrides broken metadata, preserves at
  assert.deepEqual(await source.download(directId),result);assert.equal(fetched,1);assert.equal(source.running,0);
 });
 
-test('HK outer ZIP is unwrapped with the same 10 MiB and 30 second read budget',async t=>{
- const source=new BookSource(store(t)),detail=openBook(archiveId);let calls=0;
- source.read=async (url,max,timeout,binary)=>{calls++;assert.equal(url,detail.downloadUrl);assert.equal(max,10*1024*1024);assert.equal(timeout,30000);assert.equal(binary,true);return zip({'publication.epub':epub()});};
- const result=await source.download(archiveId);
- assert.equal(calls,1);assert.equal(result.book.title,detail.title);assert.equal(result.book.author,detail.author);
- assert.ok(result.book.chapters.at(-1).text.includes('CC BY-NC-ND 4.0'));assert.equal(result.source.url,detail.sourceUrl);
+test('nested EPUB parser still supports a publisher archive without registering a traditional edition',async()=>{
+ const {parseSourceEpub}=await import('../lib/wikisource.mjs');
+ const book=await parseSourceEpub(zip({'publication.epub':epub()}),{sourceArchive:true,wikisource:false});
+ assert.ok(book.chapters.some(c=>c.text.includes(body)));
+ assert.throws(()=>openBook(archiveId),/搜索结果/);
 });
 
 test('failed or changed sources cannot be cached as a book and do not disable other search',async t=>{
@@ -103,14 +94,14 @@ test('failed or changed sources cannot be cached as a book and do not disable ot
  ]){
   const source=new BookSource(s,{fetcher:async()=>response()});await assert.rejects(source.download(directId),pattern);
   assert.equal(source.running,0);assert.equal(s.get('SELECT value FROM book_catalog_cache WHERE key=?',directId),undefined);
-  assert.ok((await source.searchAll('历史不止一种写法')).books.some(b=>b.id===archiveId));
+  assert.ok((await source.searchAll('列女傳')).books.some(b=>b.id===directId));
  }
 });
 
 test('open source parsing is serialized and the running slot is released',async t=>{
  let release;const ready=new Promise(resolve=>{release=resolve;}),source=new BookSource(store(t),{fetcher:async()=>{await ready;return new Response(epub());}});
  const first=source.download(directId);assert.equal(source.running,1);
- await assert.rejects(source.download('oa:dc-mengzi'),/稍等/);release();await first;assert.equal(source.running,0);
+ await assert.rejects(source.download(directId),/稍等/);release();await first;assert.equal(source.running,0);
 });
 
 test('shared source cache stays bounded to eight copies after open-source reads',async t=>{
@@ -124,7 +115,7 @@ test('shared source cache stays bounded to eight copies after open-source reads'
 test('prepared public files work without upstream access and survive parsed-cache eviction',async t=>{
  const dir=mkdtempSync(join(tmpdir(),'starlight-source-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));
  const data=epub(),b=openBook(directId),manifest={version:1,books:[{id:b.id,url:b.downloadUrl,bytes:data.length,sha256:createHash('sha256').update(data).digest('hex')}]};
- writeFileSync(join(dir,'manifest.json'),JSON.stringify(manifest));writeFileSync(join(dir,'dc-lunyu.bin'),data);
+ writeFileSync(join(dir,'manifest.json'),JSON.stringify(manifest));writeFileSync(join(dir,directId.slice(3)+'.bin'),data);
  const s=store(t),source=new BookSource(s,{sourceCacheDir:dir,fetcher:()=>{throw Error('Network must not be used');}});
  assert.equal((await source.download(directId)).book.title,b.title);
  s.run('DELETE FROM book_catalog_cache');

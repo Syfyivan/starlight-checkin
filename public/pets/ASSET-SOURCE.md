@@ -1,23 +1,26 @@
-# Kodama character assets
+# Pet & Cottage Art Assets
 
-Reused at the owner's explicit request from their local `Syfyivan/kodama`
-project, `src/renderer/pets/`. Characters: 糯糯海豹 (nuonuo-seal),
-兜兜鼯鼠 (pocket-glider), 棉桃寄居蟹 (cottonpod-hermit).
+## 1. Unified Storybook Watercolor Pet Roster (6 Species × 4 Stages)
 
-The static PNGs and existing animated PNGs are copied without alteration.
-The original project, including its uncommitted changes, was not modified.
-This reuse does not grant others a license to redistribute these characters.
-No Live2D runtime, third-party model, or added dependency is involved.
+All 6 companion species in `public/pets/<species>/` share a unified warm-brown-ink (`#553828`) + soft pastel watercolor storybook illustration style matching `window-cottage.webp`:
 
-Each original character includes young.png, winged.png, young-idle-animated.png,
-and winged-idle-animated.png. Since 3.9 the fitted-outfit renderer uses the
-static PNG with a gentle CSS breathing motion so accessories stay aligned.
-Reduced-motion preference disables that motion. Animated originals remain unchanged.
+- `nuonuo-seal` — **糯糯海豹**（观星慢行家）
+- `cloud-fox` — **晴空云狐**（追云气象员）
+- `pocket-glider` — **兜兜鼯鼠**（森果采集家）
+- `moon-bunny` — **月桂垂耳兔**（草木调香师）
+- `cottonpod-hermit` — **棉桃寄居蟹**（海岛拾贝客）
+- `moss-dragon` — **墨墨小书龙**（博物藏书家）
 
-In 3.10, nuonuo-seal/moon.png and star.png were generated with the built-in
-image_gen tool, using young.png and winged.png as visual references. These are
-new sibling assets, not replacements. Transparent output was copied without
-bitmap edits; each new pose has its own outfit anchors. Eggs are native SVG.
-See ../../docs/PET-EVOLUTION-ART.md in the repository for the generation brief.
+Each species directory includes 6 PNG assets (512 × 512 RGBA transparent canvas):
+- `young.png` — 幼年态静态立绘
+- `winged.png` — 成长态静态立绘
+- `moon.png` — 灵阶初绽静态立绘（第二次孵化后）
+- `star.png` — 满阶星海静态立绘（最终成长形态）
+- `young-idle-animated.png` — 幼年态轻呼吸双帧 APNG
+- `winged-idle-animated.png` — 成长态轻呼吸双帧 APNG
 
-窗边小屋背景 `window-cottage.webp` 为本项目使用 ImageGen 生成的原创场景。画面为暖色木屋、拱窗、草编地毯与旅行包，中央留白供既有宠物和配饰叠加。
+Eggs (`云朵蛋` & `星辉灵蛋` with species-specific markings) and all 22 wearable multi-slot outfits (`head`, `neck`, `body`, `companion`) are native SVG layers aligned via `FIT` anchor coordinates in `public/pets.js`.
+
+## 2. Cottage Scene
+
+窗边小屋背景 `window-cottage.webp` 为本项目使用内置图像生成工具绘制的原创绘本木屋场景。画面包含暖色木屋、拱窗、书桌、草编地毯与旅行皮箱，支持「暖阳午后 / 春樱微风 / 听雨屋檐 / 星夜灯火」四档光影氛围与最多 3 件旅行纪念物陈列。

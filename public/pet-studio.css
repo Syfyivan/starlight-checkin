@@ -20,6 +20,27 @@
 .road-letter p{font-size:13px;white-space:pre-line;line-height:2.25;color:#63705a}
 .road-letter small{font-size:10px;color:#8c937e}
 .travel-passport{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.themed-routes-box{background:#f5f2e4;border:1px solid #e2dcc6;border-radius:12px;padding:14px 16px;margin:0 0 18px}
+.themed-routes-box h3{font-size:14px;margin:0 0 10px;color:#4f6246}
+.themed-routes-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.route-stamp-card{display:flex;flex-direction:column;gap:3px;padding:9px 11px;border-radius:10px;background:#fffef8;border:1px dashed #d6d0ba;color:#6d755e}
+.route-stamp-card strong{font-size:12px;color:#475a3f}
+.route-stamp-card span{font-size:11px;color:#7e6b48}
+.route-stamp-card small{font-size:10px;color:#8c937e}
+.route-stamp-card.completed{background:#eef4e6;border:1px solid #8aa47b;box-shadow:inset 0 0 0 1px #dce8cf}
+.route-stamp-card.completed strong{color:#2f5438}
+.passport-filters{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px}
+.midway-choice-card{margin:16px 0 8px;padding:14px 16px;border-radius:12px;background:#f7f2e2;border:1px solid #dfd4b8}
+.midway-choice-card strong{display:block;font-size:13px;color:#5c4b2e;margin-bottom:6px}
+.midway-choice-card p{font-size:12px;line-height:1.7;color:#6d644f;margin:4px 0 10px}
+.midway-choice-card small{display:block;font-size:11px;color:#8b8169;margin-top:9px}
+.midway-choice-card.chosen{background:#eef3e7;border-color:#c8d6bb}
+.midway-choice-card.chosen strong{color:#3c5b41}
+.postcard-tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}
+.travel-postscript{margin:14px 0;padding:12px 15px;border-radius:10px;background:#f5efe0;border-left:3px solid #b5915b}
+.travel-postscript strong{display:block;font-size:12px;color:#6c522c;margin-bottom:5px}
+.travel-postscript p{font-size:13px;line-height:1.8;color:#594c38;margin:0}
+.keepsake-found-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:6px}
 .passport-place{display:flex;flex-direction:column;text-align:left;border:1px solid #dfdfcf;border-radius:8px;background:#faf8ed;padding:8px;color:#57644e;min-width:0;overflow:hidden}
 button.passport-place{cursor:pointer;transition:box-shadow .2s}
 button.passport-place:hover{box-shadow:0 3px 12px #425b3d1a}

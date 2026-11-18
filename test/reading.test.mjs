@@ -58,14 +58,14 @@ test('家庭阅读规则共享，个人进度和币分开，管家看见记录',
  const r=s.tx(()=>s.reading.import(g,{space_id:other,book:b}));s.tx(()=>s.reading.note(g,{space_id:other,book_id:r.book_id,chapter:0,text:'一起读书的时候，我想和大家交流自己的想法，把看到的新知识记下来。',version:s.reading.rules(other).version}));
  assert.equal(s.balance(space),0);assert.equal(s.balance(other),3*COIN);assert.equal(s.reading.list(a,{space_id:other}).books.length,1);assert.throws(()=>s.reading.list(x,{space_id:other}),/没有向你开放/);
 });
-test('公开书源只取白名单书目、核实许可、限流和体积；正文缓存复用',async t=>{
- const {s}=fixture(t);let requests=[];const source=new BookSource(s,{fetcher:async url=>{requests.push(url);return new Response(url.endsWith('.rdf')?'<dcterms:rights>Public domain in the USA.</dcterms:rights>':'Project Gutenberg\n'+longText);}});
- assert.ok(source.search('论语').books.some(b=>b.id===23839));assert.ok(source.search('').books.every(b=>b.language==='中文'));assert.ok(source.search('').books.length<=30);
- const r=await source.download(23839);assert.ok(r.book.chapters.length);await source.download(23839);assert.equal(requests.length,2);assert.ok(requests.every(u=>u.startsWith('https://gutenberg.pglaf.org/cache/epub/23839/')));
- await assert.rejects(source.download('https://127.0.0.1'),/书目编号/);await assert.rejects(source.download(999999),/搜索结果/);
- s.run('DELETE FROM book_catalog_cache');source.fetcher=async()=>new Response('<dcterms:rights>Copyrighted.</dcterms:rights>');await assert.rejects(source.download(23839),/许可/);
- source.fetcher=async()=>new Response('x',{headers:{'content-length':'9000000'}});await assert.rejects(source.download(23839),/太大/);
- assert.equal(source.running,0);
+test('旧古腾堡书目不返回未经核实的版本，过期缓存不触发请求',async t=>{
+ const {s}=fixture(t),source=new BookSource(s,{fetcher:()=>assert.fail('不应取回未核实书源')});
+ s.run('INSERT INTO book_catalog_cache VALUES(?,?,?)','pg:23839','{}',0);
+ source.clearUnlistedCache();
+ assert.equal(s.get('SELECT key FROM book_catalog_cache WHERE key=?','pg:23839'),undefined);
+ assert.deepEqual(source.search('论语').books,[]);
+ await assert.rejects(source.download(23839),/搜索结果/);
+ await assert.rejects(source.download('https://127.0.0.1'),/书目编号/);
 });
 
 // Tiny stored-ZIP fixture: the production test runner needs no npm dependencies.
@@ -90,34 +90,29 @@ test('HTTP 阅读路径需要登录与 CSRF，新增静态资源能访问且服�
  const app=await createApp({dbPath:':memory:'}),s=app.store;await new Promise(r=>app.server.listen(0,'127.0.0.1',r));t.after(async()=>{await new Promise(r=>app.server.close(r));s.db.close();});const origin='http://127.0.0.1:'+app.server.address().port;
  assert.equal((await fetch(origin+'/api/reading/library')).status,401);for(const path of ['reading.js','reading.css','book-text.js','ebook-worker.js','vendor/ebook-parser.js','vendor/book-display.js','vendor/OPENCC-LICENSES.txt'])assert.equal((await fetch(origin+'/'+path)).status,200);assert.equal((await fetch(origin+'/lib/book-catalog.json')).status,404);
  const u=s.newUser({username:'httpreader',name:'小芽',password:''}),session=s.session(u.id),cookie='starlight_session='+session.token;
- for(const q of ['','论语','小海蒂','Heidi','Alice']){const r=await fetch(origin+'/api/reading/search?q='+encodeURIComponent(q),{headers:{Cookie:cookie}});assert.equal(r.status,200);const data=await r.json();assert.ok(data.books.every(b=>b.language==='中文'));if(q==='论语')assert.ok(data.books.some(b=>b.id==='ws:6'));}
+ for(const q of ['','论语','小海蒂','Heidi','Alice']){const r=await fetch(origin+'/api/reading/search?q='+encodeURIComponent(q),{headers:{Cookie:cookie}});assert.equal(r.status,200);const data=await r.json();assert.ok(data.books.every(b=>b.language==='中文'));if(q==='论语')assert.ok(data.books.some(b=>b.id==='ed:classic-lunyu'));}
  const r=await fetch(origin+'/api/reading/import',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json',Cookie:cookie},body:JSON.stringify({})});assert.equal(r.status,403);
 });
 
 test('多书源仅返回中文，简繁兼容，旧英文编号及缓存也不能用于取书',async t=>{
  const {s}=fixture(t);let requests=0;const source=new BookSource(s,{fetcher:async()=>{requests++;throw new Error('Search must not use network');}});
  for(const q of ['小海蒂','Heidi','Alice','Pride and Prejudice']){const r=await source.searchAll(q);assert.ok(r.books.every(b=>b.language==='中文'));assert.ok(!r.books.some(b=>[1448,46409,11,1342].includes(b.id)));}
- const first=await source.searchAll('小海蒂');assert.equal(first.books.length,0);assert.match(first.message,/暂未找到.*中文/);
+ const first=await source.searchAll('小海蒂');assert.equal(first.books.length,0);assert.match(first.message,/暂未收录.*中文正文/);assert.equal(first.external[0].title,'小海蒂');
  const catalog=JSON.parse(readFileSync(new URL('../lib/book-catalog.json',import.meta.url),'utf8'));assert.ok(catalog.books.length>0);assert.ok(catalog.books.every(b=>b.language==='中文'));
  s.run('INSERT INTO book_catalog_cache(key,value,updated) VALUES(?,?,?)','pg:1448',JSON.stringify({book:{title:'Heidi'}}),Date.now());
  await assert.rejects(source.download(1448),/中文书/);await assert.rejects(source.download(11),/中文书/);
- for(const name of ['论语','論語']){const results=await source.searchAll(name);assert.ok(results.books.some(b=>b.id==='ws:6'));assert.ok(results.books.some(b=>b.id===23839));assert.ok(!results.books.some(b=>/判决|裁定/.test(b.title)));}
+ for(const name of ['论语','論語']){const results=await source.searchAll(name);assert.ok(results.books.some(b=>b.id==='ed:classic-lunyu'));assert.ok(!results.books.some(b=>b.id==='ws:6'||b.id===23839));assert.ok(!results.books.some(b=>/判决|裁定/.test(b.title)));}
  assert.ok(!(await source.searchAll('朝花夕拾')).books.some(b=>b.id==='ws:13866'));
  assert.equal(requests,0);await assert.rejects(source.searchAll('x'.repeat(101)),/100/);
 });
 
-test('维基文库取书使用固定域名、全览去重、隔离解析、缓存和计奖去许可',async t=>{
- const {s,a,space}=fixture(t),requests=[],entries=epubFixture();
+test('EPUB 隔离解析、排除导航与未完成正文、许可不计奖',async t=>{
+ const {s,a,space}=fixture(t),entries=epubFixture();
  entries['book.opf']=entries['book.opf'].replace('</manifest>','<item id="about" href="about.xhtml" media-type="application/xhtml+xml"/></manifest>').replace('</spine>','<itemref idref="about"/></spine>');
  entries['c1.xhtml']='<html><head><title>学而第一</title></head><body><table class="ws-header"><tr><td>不要出现在正文的导航</td></tr></table><p>学而第一</p><p>'+longText+'</p></body></html>';
  entries['about.xhtml']='<html><body><p>'+longText.repeat(2)+'</p></body></html>';
- const bytes=zip(entries),source=new BookSource(s,{fetcher:async raw=>{requests.push(raw);const u=new URL(raw);assert.equal(u.hostname,'ws-export.wmcloud.org');assert.equal(u.searchParams.get('page'),'論語/全覽');return new Response(bytes);}});
- const r=await source.download('ws:6');assert.equal(r.book.title,'論語');assert.ok(!r.book.chapters[0].text.includes('不要出现'));assert.equal(r.book.chapters.at(-1).title,'来源与许可');
- const imported=s.tx(()=>s.reading.import(a,{space_id:space,book:r.book},r.source));const row=s.get('SELECT characters FROM reading_books WHERE id=?',imported.book_id);assert.equal(row.characters,r.book.chapters[0].text.replace(/\s/g,'').length);
- assert.equal(s.tx(()=>s.reading.import(a,{space_id:space,book:r.book},r.source)).book_id,imported.book_id);await source.download('ws:6');assert.equal(requests.length,1);
- assert.ok(requests.every(u=>['ws-export.wmcloud.org'].includes(new URL(u).hostname)));assert.equal(source.running,0);
- await assert.rejects(source.download('ws:../127.0.0.1'),/搜索结果/);
- await assert.rejects(source.download('ws:9999999999'),/搜索结果/);assert.equal(requests.length,1);
+ const book=await parseSourceEpub(zip(entries));assert.ok(!book.chapters[0].text.includes('不要出现'));assert.equal(book.chapters.at(-1).title,'来源与许可');
+ const imported=s.tx(()=>s.reading.import(a,{space_id:space,book},{url:'https://example.com/edition',name:'测试书源'}));const row=s.get('SELECT characters FROM reading_books WHERE id=?',imported.book_id);assert.equal(row.characters,book.chapters[0].text.replace(/\s/g,'').length);
  await assert.rejects(parseSourceEpub(Buffer.from('invalid')),/整理好/);
  await assert.rejects(parseSourceEpub(zip({...entries,'c1.xhtml':'<html><body><p>此文档未完成，一部分的原作內容還未录入。</p></body></html>'})),/尚未收齐/);
 });
@@ -126,3 +121,28 @@ test('中文篇名识别与简体显示不会改写原文',async()=>{
  const chapters=textChapters('學而第一\n子曰：學而時習之。\n堯曰第二十\n末篇文字。');assert.equal(chapters.length,2);assert.equal(chapters[1].title,'堯曰第二十');
  const {simplify}=await import('../public/vendor/book-display.js');const original='學而時習之，不亦說乎？';assert.equal(simplify(original),'学而时习之，不亦说乎？');assert.equal(original,'學而時習之，不亦說乎？');
 });
+
+test('传统中文 MOBI 经阅读导入保存纯文字，拒绝 DRM 和截断文件',t=>{
+ const {parseMobi}=mobiParser();
+ const text=Buffer.from('<html><body><h1>第一章</h1><p>读书与思考。</p><img src="sample.png"><script>hidden()</script><h1>第二章</h1><p>结束。</p></body></html>');
+ const header=Buffer.alloc(108),table=Buffer.alloc(94);
+ table.write('BOOKMOBI',60);table.writeUInt16BE(2,76);
+ table.writeUInt32BE(table.length,78);table.writeUInt32BE(table.length+header.length,86);
+ header.writeUInt16BE(2);header.writeUInt32BE(text.length,4);header.writeUInt16BE(1,8);
+ header.write('MOBI',16);header.writeUInt32BE(92,20);header.writeUInt32BE(65001,28);header.writeUInt32BE(6,104);
+ const blocks=[];
+ for(let i=0;i<text.length;i+=8){const part=text.subarray(i,i+8);blocks.push(Buffer.from([part.length]),part);}
+ const bytes=Buffer.concat([table,header,...blocks]);
+ const book=parseMobi(bytes,'阅读.mobi');assert.equal(book.title,'阅读');assert.equal(book.chapters.length,2);
+ const {op,s,a,space}=fixture(t),added=op(a,'import',{book});
+ assert.equal(s.reading.detail(a,{space_id:space,book_id:added.book_id,chapter:1}).content,'第二章\n结束。');
+ assert.doesNotMatch(JSON.stringify(book),/sample.png|hidden/);
+ assert.throws(()=>parseMobi(bytes.subarray(0,-1),'阅读.mobi'),/不完整/);
+ bytes.writeUInt16BE(1,table.length+12);assert.throws(()=>parseMobi(bytes,'阅读.mobi'),/加密/);
+});
+
+function mobiParser(){
+ const context={Uint8Array,ArrayBuffer,DataView,TextDecoder,TextEncoder,Promise,setTimeout,clearTimeout,setImmediate};
+ vm.runInNewContext(readFileSync(new URL('../public/vendor/ebook-parser.js',import.meta.url),'utf8'),context);
+ return context.StarlightEbooks;
+}

@@ -38,23 +38,24 @@ test('从抽到第一只宠物开始，逐个跨过 Lv.1–10 边界，花币不
  assert.equal(s.pets.state(room).nextXp,null);assert.equal(s.pets.state(room).level,10);
 });
 
-test('一级衣橱的后两种形象只有轮廓；升级后分别开放，喂食可以跨过升级线',async t=>{
+test('一级衣橱的后五种形象只有轮廓；逐级开放直至全部6种形象解锁，喂食可跨过升级线',async t=>{
  const {s,learner,room,hit,use,buy,earn,dress}=fixture(t);use(hit);
  let html='';const ui=petUI({getState:()=>s.state(learner,room),esc:String,canAct:()=>true,openDialog:(_title,body)=>{html=body;},actions:()=>'',mutation:()=>{throw Error('Unexpected mutation');}});
  await ui.click('pet-dress',{});
  assert.match(html,/pets\/nuonuo-seal\/young.png/);
  for(const form of PET_FORMS.slice(1)){assert.ok(!html.includes('pets/'+form.id+'/'));assert.ok(!html.includes(form.name));assert.throws(()=>dress(form.id),/解锁/);}
- assert.equal((html.match(/pet-form-option locked/g)||[]).length,2);
+ assert.equal((html.match(/pet-form-option locked/g)||[]).length,5);
  assert.equal(petItemLock(s.pets.state(room),'pet_scarf'),'未解锁 · Lv.2');
  earn(95);const food=buy('pet_snack');use(food);assert.equal(s.pets.state(room).xp,100);assert.equal(s.pets.state(room).level,2);
  assert.equal(petItemLock(s.pets.state(room),'pet_scarf'),'');
  earn(200);dress('pocket-glider');await ui.click('pet-dress',{});assert.match(html,/pets\/pocket-glider\/young.png/);assert.ok(!html.includes('pets/cottonpod-hermit/'));
- earn(700);dress('cottonpod-hermit');await ui.click('pet-dress',{});assert.match(html,/pets\/cottonpod-hermit\/winged.png/);assert.equal((html.match(/pet-form-option locked/g)||[]).length,0);
+ earn(700);dress('cottonpod-hermit');await ui.click('pet-dress',{});assert.match(html,/pets\/cottonpod-hermit\/winged.png/);assert.equal((html.match(/pet-form-option locked/g)||[]).length,1);
+ earn(600);dress('moss-dragon');await ui.click('pet-dress',{});assert.match(html,/pets\/moss-dragon\/winged.png/);assert.equal((html.match(/pet-form-option locked/g)||[]).length,0);
 });
 
-test('8款装扮逐件购买、使用并在3种形象切换，重复请求和重复穿戴不加经验',t=>{
- const {s,room,hit,use,buy,earn,dress}=fixture(t);use(hit);earn(6000);
- const outfits=Object.entries(PET_ITEMS).filter(([,i])=>i.kind==='outfit'&&i.ready!==false);assert.equal(outfits.length,8);
+test('36款装扮逐件购买、多槽位混搭并在6种形象切换，重复请求和重复穿戴不加经验',t=>{
+ const {s,learner,room,op,hit,use,buy,earn,dress}=fixture(t);use(hit);earn(6000);
+ const outfits=Object.entries(PET_ITEMS).filter(([,i])=>i.kind==='outfit'&&i.ready!==false);assert.equal(outfits.length,36);
  let expected=6000;
  for(const [effect,item] of outfits){
   const balance=s.balance(room),card=buy(effect),key=randomUUID();
@@ -64,8 +65,14 @@ test('8款装扮逐件购买、使用并在3种形象切换，重复请求和重
   for(const form of PET_FORMS){dress(form.id,effect);const state=s.pets.state(room);assert.equal(state.form,form.id);assert.equal(state.outfit,effect);assert.equal(state.xp,expected);}
   dress('nuonuo-seal');assert.equal(s.pets.state(room).outfit,'');assert.equal(s.pets.state(room).xp,expected);
  }
- assert.equal(s.pets.state(room).outfits.length,8);assert.equal(s.all('SELECT * FROM pet_experience').length,8);
- for(const effect of ['pet_raincoat','pet_space']){assert.match(petItemLock(s.pets.state(room),effect),/正在准备/);assert.throws(()=>dress('nuonuo-seal',effect),/准备/);}
+ assert.equal(s.pets.state(room).outfits.length,36);assert.equal(s.all('SELECT * FROM pet_experience').length,36);
+ // Test simultaneous 4-slot mix-and-match + set resonance + cottage theme!
+ op('/api/pets/dress',{form:'cloud-fox',equipped:{head:'pet_beret',neck:'pet_scarf',body:'pet_camera',companion:'pet_firefly'},cottage_theme:'starlight'},b=>s.pets.dress(learner,b));
+ const multi=s.pets.state(room);
+ assert.equal(multi.form,'cloud-fox');
+ assert.equal(multi.cottageTheme,'starlight');
+ assert.deepEqual(multi.equipped,{head:'pet_beret',neck:'pet_scarf',body:'pet_camera',companion:'pet_firefly'});
+ assert.ok(multi.activeSets.some(st=>st.id==='artist'));
 });
 
 test('行囊消费、旅途锁定、归来升级、明信片及礼物领取形成完整且不重复的流程',t=>{

@@ -6,3 +6,5 @@
 .reader-text.reader-size-16{font-size:16px}.reader-text.reader-size-17{font-size:17px}.reader-text.reader-size-18{font-size:18px}.reader-text.reader-size-19{font-size:19px}.reader-text.reader-size-20{font-size:20px}.reader-text.reader-size-21{font-size:21px}.reader-text.reader-size-22{font-size:22px}.reader-text.reader-size-23{font-size:23px}.reader-text.reader-size-24{font-size:24px}.reader-text.reader-size-25{font-size:25px}.reader-text.reader-size-26{font-size:26px}
 .reader-controls>.text-btn{white-space:nowrap;flex-shrink:0}
 @media(max-width:600px){.reader-controls{gap:10px;flex-wrap:wrap}.reader-controls label{flex-basis:100%}.reader-controls>.text-btn{padding:5px 0}.reader-text{padding-top:18px}}
+
+.publisher-results a{white-space:nowrap;text-decoration:none}

@@ -1,40 +1,68 @@
 import {textChapters} from './book-text.js';
 export function readingUI({getState,canAct,api,refresh,render,esc,field,textarea,actions,openDialog,toast}){
-  let scope='',library=null,opened=null,search=[],sourceMessage='',searchTerm='',chapter=0,readStyle='paper',simplify=s=>s,appearance={script:'simplified',size:18};
-  try{const saved=JSON.parse(localStorage.getItem('starlight-reader-appearance')||'{}');if(saved.script==='original')appearance.script='original';if(Number.isInteger(saved.size)&&saved.size>=16&&saved.size<=26)appearance.size=saved.size;}catch{}
-  const display=text=>appearance.script==='simplified'?simplify(String(text)):String(text);
-  let converterReady=false;
+  let scope='',library=null,opened=null,search=[],external=[],quark=[],searchRequest=0,sourceMessage='',searchTerm='',chapter=0,readStyle='paper',simplify,appearance={size:18};
+  try{const saved=JSON.parse(localStorage.getItem('starlight-reader-appearance')||'{}');if(Number.isInteger(saved.size)&&saved.size>=16&&saved.size<=26)appearance.size=saved.size;}catch{}
+  const display=text=>simplify(String(text));
   const current=()=>getState(),query=()=>'?space_id='+encodeURIComponent(current().space.id);
   async function load(page){
-    const key=current().user.id+':'+current().space.id;if(key!==scope){scope=key;library=null;opened=null;search=[];sourceMessage='';searchTerm='';chapter=0;}
-    if(page!=='reading')return;if(!converterReady){try{({simplify}=await import('./vendor/book-display.js'));converterReady=true;}catch{appearance.script='original';}}library=await api('reading/library'+query());if(opened)opened=await api('reading/book'+query()+'&book_id='+encodeURIComponent(opened.book.id)+'&chapter='+chapter);
+    const key=current().user.id+':'+current().space.id;if(key!==scope){scope=key;library=null;opened=null;search=[];external=[];quark=[];searchRequest++;sourceMessage='';searchTerm='';chapter=0;}
+    if(page!=='reading')return;if(!simplify)({simplify}=await import('./vendor/book-display.js'));library=await api('reading/library'+query());if(opened)opened=await api('reading/book'+query()+'&book_id='+encodeURIComponent(opened.book.id)+'&chapter='+chapter);
   }
   const link=()=>'<button class="text-btn" data-page="reading">▤ 阅读小屋</button>';
   const ruleText=r=>r.enabled?`读完一本 +${r.finish} 币 · 每条笔记 +${r.note} 币（每本前 ${r.noteLimit} 条）`:'这间小屋暂未开启阅读奖励，阅读和笔记照常保存。';
   function rules(){const r=library.rules;openDialog('阅读，也是一点点成长',`<p>${esc(ruleText(r))}</p><p class="subtext">读完每个小节，写下至少 40 字的读后小结，再领取整本奖励。笔记写至少 20 字自己的想法；同一内容不重复计奖。</p><p class="subtext">阅读按自觉打卡，不把翻页当作真正读懂。相同正文重新导入不会重复发奖；少于 1,000 字的短文可以阅读，暂不发币。阅读奖励单独计算，不占每日任务上限，也不参与未完成扣分；获得的学习币同时增长经验。</p><p class="subtext">进度、笔记和小结对本小屋伙伴可见；自己导入的正文只对本人开放。修改规则只影响之后提交的记录。</p>${library.canConfigure&&current().space.status==='active'?`<form id="reading-rules-form" data-version="${r.version}"><label class="check-label"><input name="enabled" type="checkbox" ${r.enabled?'checked':''}> 开启阅读奖励</label><div class="form-row mt">${field('读完一本送多少币','finish','number',r.finish,'required min="0" max="10000"')}${field('一条笔记送多少币','note','number',r.note,'required min="0" max="100"')}</div>${field('每本前几条笔记有奖励','noteLimit','number',r.noteLimit,'required min="0" max="20"')}${actions('保存约定')}</form>`:'<button class="btn" data-action="close">记住啦</button>'}`);}
+  async function findBooks(term){
+    const request=++searchRequest;
+    const r=await api('reading/search?q='+encodeURIComponent(term),undefined,{timeout:25000});
+    if(request!==searchRequest)return;
+    searchTerm=term;search=r.books;external=r.external||[];quark=r.quark||[];sourceMessage=r.message;render();
+  }
+  function publisherResults(){
+    if(!external.length)return '';
+    return '<div class="book-search-results publisher-results">'+external.map(b=>`<article><div><strong>${esc(b.title)}</strong><p>${esc(display(b.author))}</p><small>外站试读 · 豆瓣阅读 · 简体文字，全本按平台规则获取</small></div><a class="btn secondary sm" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">试读简体文字 ↗</a></article>`).join('')+'</div>';
+  }
+  function stationResults(books){
+    return books.length?`<div class="book-search-results">${books.map(b=>`<article><span class="book-mini" aria-hidden="true">▤</span><div><strong>${esc(display(b.title))}</strong><p>${esc(display(b.author||'作者未标注'))}</p><small>站内全文 · ${esc(b.language||'')} · ${esc(b.provider||'古腾堡')} · ${esc(b.format||'文字版')}</small></div><button class="btn secondary sm" data-action="reading-get" data-id="${esc(b.id)}">加入并阅读</button></article>`).join('')}</div>`:'';
+  }
+  function quarkResults(){
+    if(!quark.length)return '';
+    return '<section><h3>夸克网盘文件</h3><p class="field-help">在夸克下载后，回这里点“导入我的书”。</p><div class="book-search-results">'+quark.map(b=>{
+      const size=b.size<1024*1024?Math.ceil(b.size/1024)+' KB':(b.size/1024/1024).toFixed(1)+' MB';
+      if(b.fileLink)return `<article><div><strong><a href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(display(b.name))} ↗</a></strong><p>夸克单本分享 · ${esc(b.format)} · ${size}</p></div></article>`;
+      return `<article><div><strong>${esc(display(b.name))}</strong><p>${esc(display(b.folder))}</p><small>外站文件 · ${esc(b.format)} · ${size}${b.note?" · "+esc(b.note):""}</small> <button class="text-btn" data-action="reading-copy-name" data-name="${esc(b.name)}">复制文件名</button></div><a class="btn secondary sm" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${b.folderLink?"打开所在目录":"打开合集"} ↗</a></article>`;
+    }).join('')+'</div></section>';
+  }
   function page(){
     if(!library)return '<p role="status">正在整理书架…</p>';
     if(opened)return reader();
     return `<section class="reading-home"><div class="compact-heading"><div><h1>${library.isSelf?'阅读小屋':'伙伴的书架'}</h1><p class="subtext">留一点安静的时间，给一本书。</p></div><button class="text-btn" data-action="reading-rules">奖励约定</button></div><p class="reading-reward-line">${esc(ruleText(library.rules))}</p>
-    ${canAct()?`<div class="reading-find"><form id="reading-search-form"><label class="sr-only" for="book-search">搜索书名</label><input id="book-search" name="search" value="${esc(searchTerm)}" maxlength="100" placeholder="搜索中文书名或作者"><button class="btn" type="submit">找本书</button></form><button class="btn secondary" data-action="reading-import">导入我的书</button></div><p class="field-help">只显示中文版本，选中后加入书架。当前书源以经典作品为主，尚未覆盖所有图书。</p>${sourceMessage?'<p class="reading-source-status" role="status">'+esc(sourceMessage)+'</p>':''}${search.length?`<div class="book-search-results">${search.map(b=>`<article><span class="book-mini" aria-hidden="true">▤</span><div><strong>${esc(display(b.title))}</strong><p>${esc(b.author||'作者未标注')}</p><small>${esc(b.language||'')} · ${esc(b.provider||'古腾堡')} · ${esc(b.format||'文字版')}</small></div><button class="btn secondary sm" data-action="reading-get" data-id="${esc(b.id)}">加入并阅读</button></article>`).join('')}</div>`:''}`:''}
+    ${canAct()?`<div class="reading-find"><form id="reading-search-form"><label class="sr-only" for="book-search">搜索书名</label><input id="book-search" name="search" value="${esc(searchTerm)}" maxlength="100" placeholder="搜索中文书名或作者"><button class="btn" type="submit">找本书</button></form><button class="btn secondary" data-action="reading-import">导入我的书</button></div><p class="field-help">找一本中文书，或逛逛 <button class="text-btn" data-action="reading-browse" data-term="儿童故事">儿童故事</button> · <button class="text-btn" data-action="reading-browse" data-term="古诗文">古诗文</button></p>${sourceMessage?'<p class="reading-source-status" role="status">'+esc(sourceMessage)+(searchTerm.trim()?' <a href="https://read.douban.com/search?q='+encodeURIComponent(searchTerm)+'" target="_blank" rel="noopener noreferrer">去豆瓣阅读查这个书名 ↗</a>':'')+'</p>':''}${stationResults(search)}${publisherResults()}${quarkResults()}`:''}
     <div class="reading-shelf-head"><h2>${library.isSelf?'我的书架':'阅读进展'}</h2><small>${library.books.length} 本</small></div><div class="book-shelf">${library.books.length?library.books.map((b,i)=>`<button class="shelf-book" data-action="reading-open" data-id="${b.id}"><span class="book-cover book-color-${i%4}"><small>${esc(b.author||'读一点，想一点')}</small><strong>${esc(display(b.title))}</strong><span aria-hidden="true">✳</span></span><span class="book-progress"><strong>${b.finished?'已读完':Math.round(b.readCount/b.chapter_count*100)+'%'} <span>· ${b.notes} 条笔记</span></strong><progress max="${b.chapter_count}" value="${b.readCount}"></progress><small>${b.finished?'回味这本书':library.isSelf?'继续读 →':'看看伙伴的收获 →'}</small></span></button>`).join(''):'<div class="reading-empty"><span aria-hidden="true">▤</span><h3>这层书架，等着第一个故事</h3><p>找一本喜欢的书，或把手边的电子书带过来。</p></div>'}</div></section>`;
   }
-  function reader(){const d=opened,b=d.book,self=d.content!==null,done=d.readChapters.includes(chapter),complete=d.readChapters.length===d.chapters.length;
-    return `<section class="book-reader reading-${readStyle}"><div class="reader-toolbar"><button class="text-btn" data-action="reading-back">← 书架</button><strong>${esc(display(b.title))}</strong><button class="text-btn" data-action="reading-rules">奖励约定</button></div><div class="reader-meta">${esc(b.author)} · ${d.readChapters.length}/${d.chapters.length} 节已读 ${d.finished?'· 全书已读完':''}</div>
+  function reader(){const d=opened,b=d.book,self=d.content!==null,done=d.readChapters.includes(chapter),complete=d.readChapters.length===d.chapters.length,earns=d.rules.enabled&&b.characters>=1000;
+    return `<section class="book-reader reading-${readStyle}"><div class="reader-toolbar"><button class="text-btn" data-action="reading-back">← 书架</button><strong>${esc(display(b.title))}</strong><button class="text-btn" data-action="reading-rules">奖励约定</button></div><div class="reader-meta">${esc(display(b.author))} · ${d.readChapters.length}/${d.chapters.length} 节已读 ${d.finished?'· 全书已读完':''}</div>
     ${self?`<div class="reader-controls"><label>目录 <select id="reading-chapter">${d.chapters.map(c=>`<option value="${c.ordinal}" ${chapter===c.ordinal?'selected':''}>${c.ordinal+1}. ${esc(display(c.title))}</option>`).join('')}</select></label><button class="text-btn" data-action="reading-appearance">排版</button><button class="text-btn" data-action="reading-style">${readStyle==='paper'?'夜读':'纸色'}</button></div><article class="reader-text reader-size-${appearance.size}"><h2>${esc(display(d.chapters[chapter].title))}</h2>${d.content.split('\n').filter(p=>p.trim()).filter((p,i)=>i!==0||p.trim()!==d.chapters[chapter].title).map(p=>`<p>${esc(display(p))}</p>`).join('')}</article><div class="reader-bottom"><button class="btn secondary" data-action="reading-chapter" data-index="${chapter-1}" ${chapter===0?'disabled':''}>上一节</button>${canAct()?`<button class="btn" data-action="reading-done" ${done?'disabled':''}>${done?'这一节已读完':'这一节读完啦'}</button>`:''}<button class="btn secondary" data-action="reading-chapter" data-index="${chapter+1}" ${chapter===d.chapters.length-1?'disabled':''}>下一节</button></div>`:'<div class="notice soft">这里可以看伙伴的进度和心得。自己导入的书籍正文只向导入者开放。</div>'}
-    <section class="reading-notes"><div class="reading-shelf-head"><h2>书页旁的小发现</h2>${canAct()?'<button class="btn secondary sm" data-action="reading-note">写笔记</button>':''}</div>${d.finished?`<article class="book-reflection"><h3>读后小结 · 已收下 ${d.finishCoins} 币</h3><p>${esc(d.review)}</p></article>`:canAct()?`<button class="btn" data-action="reading-finish" ${complete?'':'disabled'}>我读完这本书啦</button><p class="field-help">${complete?'写一点读后小结，就能收下整本奖励。':'读完所有小节后，可以写小结领取整本奖励。'}</p>`:''}${d.notes.map(n=>`<article class="reading-note"><small>第 ${n.chapter+1} 节 · ${esc(new Date(n.created).toLocaleDateString('zh-CN'))} · +${n.coins} 币</small><p>${esc(n.text)}</p></article>`).join('')||'<p class="subtext mt">一句新的理解，也值得留下。</p>'}</section><footer class="reader-source">${b.source_url?`书源：<a href="${esc(b.source_url)}" target="_blank" rel="noopener noreferrer">${esc(b.source_name)}</a>`:'书源：自己导入'} · 阅读记录靠自觉，奖励留在本小屋</footer></section>`;
+    <section class="reading-notes"><div class="reading-shelf-head"><h2>书页旁的小发现</h2>${canAct()?'<button class="btn secondary sm" data-action="reading-note">写笔记</button>':''}</div>${d.finished?`<article class="book-reflection"><h3>读后小结 · 已收下 ${d.finishCoins} 币</h3><p>${esc(d.review)}</p></article>`:canAct()?`<button class="btn" data-action="reading-finish" ${complete?'':'disabled'}>我读完这本书啦</button><p class="field-help">${!earns?'可以记笔记、留小结，本次阅读不发学习币。':complete?'写一点读后小结，就能收下整本奖励。':'读完所有小节后，可以写小结领取整本奖励。'}</p>`:''}${d.notes.map(n=>`<article class="reading-note"><small>第 ${n.chapter+1} 节 · ${esc(new Date(n.created).toLocaleDateString('zh-CN'))} · +${n.coins} 币</small><p>${esc(n.text)}</p></article>`).join('')||'<p class="subtext mt">一句新的理解，也值得留下。</p>'}</section><footer class="reader-source">${b.source_url?`书源：<a href="${esc(b.source_url)}" target="_blank" rel="noopener noreferrer">${esc(b.source_name)}</a>`:'书源：自己导入'} · 阅读记录靠自觉，奖励留在本小屋</footer></section>`;
   }
-  async function open(id,index){opened=await api('reading/book'+query()+'&book_id='+encodeURIComponent(id)+(index===undefined?'':'&chapter='+index));chapter=opened.position;render();scrollTo({top:0});}
+  async function open(id,index){opened=await api('reading/book'+query()+'&book_id='+encodeURIComponent(id)+(index===undefined?'':'&chapter='+index));chapter=opened.position;
+    render();scrollTo({top:0});
+  }
   async function click(action,el){
     if(!action.startsWith('reading-'))return false;
+    if(action==='reading-copy-name'){
+      const name=el.dataset.name;
+      try{await navigator.clipboard.writeText(name);toast('已复制完整文件名');}
+      catch{openDialog('复制完整文件名',`<input class="full-width" id="reading-copy-name" readonly value="${esc(name)}"><p class="field-help">选中文件名后复制。</p>`);document.querySelector('#reading-copy-name')?.select();}
+    }
     if(action==='reading-rules')rules();
+    if(action==='reading-browse')await findBooks(el.dataset.term);
     if(action==='reading-back'){opened=null;render();scrollTo({top:0});}
     if(action==='reading-open')await open(el.dataset.id);
-    if(action==='reading-appearance')openDialog('调成舒服的样子',`<form id="reading-appearance-form"><label class="field">文字<select name="script"><option value="simplified" ${appearance.script==='simplified'?'selected':''}>简体显示</option><option value="original" ${appearance.script==='original'?'selected':''}>保留原文</option></select></label>${field('字号','size','number',appearance.size,'min="16" max="26" required')}<p class="field-help">只调整显示，原书、笔记和阅读奖励不受影响。</p>${actions('就这样读')}</form>`);
+    if(action==='reading-appearance')openDialog('调成舒服的样子',`<form id="reading-appearance-form">${field('字号','size','number',appearance.size,'min="16" max="26" required')}<p class="field-help">只调整显示，原书、笔记和阅读奖励不受影响。</p>${actions('就这样读')}</form>`);
     if(action==='reading-style'){readStyle=readStyle==='paper'?'night':'paper';render();}
     if(action==='reading-chapter'){await move(Number(el.dataset.index));}
-    if(action==='reading-import'&&canAct())openDialog('把手边的书带过来',`<form id="reading-import-form"><label class="field">选择电子书<input name="file" type="file" accept=".epub,.txt,.md,.markdown" required></label>${field('TXT / Markdown 的书名','title','text','','maxlength="160" placeholder="可留空，使用文件名"')}<p class="field-help">EPUB 最大 10 MB，在本机解析；TXT / Markdown 最大 2 MB，支持 UTF-8 和 GB18030。只保存不超过 2 MB 的正文，不上传图片、字体和脚本。</p><p class="field-help">同样的正文再次导入，会回到已有进度；请导入你有权使用的文件。</p>${actions('解析并加入书架')}</form>`);
-    if(action==='reading-get'&&canAct()){el.disabled=true;el.textContent='取书中，请稍候…';try{const r=await api('reading/download',{source_id:/^(ws|oa):/.test(el.dataset.id)?el.dataset.id:Number(el.dataset.id)},{timeout:70000});await load('reading');await open(r.book_id);}finally{if(el.isConnected){el.disabled=false;el.textContent='加入并阅读';}}}
+    if(action==='reading-import'&&canAct())openDialog('把手边的书带过来',`<form id="reading-import-form"><label class="field">选择电子书<input name="file" type="file" accept=".epub,.mobi,.txt,.md,.markdown" required></label>${field('TXT / Markdown 的书名','title','text','','maxlength="160" placeholder="可留空，使用文件名"')}<p class="field-help">EPUB 和传统 MOBI（未加密、无压缩或 PalmDOC 压缩）最大 10 MB，在本机解析；TXT / Markdown 最大 2 MB，支持 UTF-8 和 GB18030。只保存不超过 2 MB 的正文，不上传图片、字体和脚本。</p><p class="field-help">同样的正文再次导入，会回到已有进度；请导入你有权使用的文件。</p>${actions('解析并加入书架')}</form>`);
+    if(action==='reading-get'&&canAct()){el.disabled=true;el.textContent='取书中，请稍候…';try{const r=await api('reading/download',{source_id:/^(ws|oa|ed):/.test(el.dataset.id)?el.dataset.id:Number(el.dataset.id)},{timeout:70000});await load('reading');await open(r.book_id);}finally{if(el.isConnected){el.disabled=false;el.textContent='加入并阅读';}}}
     if(action==='reading-done'&&canAct()){await api('reading/position',{book_id:opened.book.id,chapter,done:true});await open(opened.book.id,chapter);toast('这一节的收获，记好啦');}
     if(['reading-note','reading-finish'].includes(action)&&canAct()){const finish=action==='reading-finish';openDialog(finish?'为这本书留一段回忆':'书页旁的小发现',`<form id="${finish?'reading-finish-form':'reading-note-form'}" data-id="${opened.book.id}" data-chapter="${chapter}" data-version="${opened.rules.version}"><p>${esc(opened.book.title)} · ${finish?'读后小结':'第 '+(chapter+1)+' 节'}</p>${textarea(finish?'你记住了什么，又想到什么？':'这一页给了你什么新想法？',finish?'review':'text','','required minlength="'+(finish?40:20)+'" maxlength="2000" rows="6"')}<p class="field-help">${finish?'至少 40 字，整本奖励只领一次。':'至少 20 字，写自己的理解；相同笔记不会重复计奖。'}</p>${actions(finish?'记下小结，收下奖励':'保存这点收获')}</form>`);}
     return true;
@@ -42,18 +70,19 @@ export function readingUI({getState,canAct,api,refresh,render,esc,field,textarea
   async function move(index){if(!opened||index<0||index>=opened.chapters.length)return;if(canAct())await api('reading/position',{book_id:opened.book.id,chapter:index});await open(opened.book.id,index);}
   document.addEventListener('change',e=>{if(e.target.id==='reading-chapter')move(Number(e.target.value)).catch(e=>toast(e.message));});
   async function parseFile(file,title){
-    if(/\.epub$/i.test(file.name)){
-      if(file.size>10*1024*1024)throw new Error('EPUB 最大 10 MB，请选择小一点的文件');
-      const buffer=await file.arrayBuffer();return new Promise((resolve,reject)=>{const worker=new Worker(new URL('./ebook-worker.js',import.meta.url)),timer=setTimeout(()=>{worker.terminate();reject(new Error('这本书解析时间太长，请换成 TXT 试试'));},20000);const close=()=>{clearTimeout(timer);worker.terminate();};worker.onmessage=e=>{close();e.data.error?reject(new Error(e.data.error)):resolve(e.data.book);};worker.onerror=()=>{close();reject(new Error('解析器没有正常启动，请刷新后再试'));};worker.postMessage(buffer,[buffer]);});
+    if(/\.(epub|mobi)$/i.test(file.name)){
+      if(file.size>10*1024*1024)throw new Error('EPUB 和 MOBI 最大 10 MB，请选择小一点的文件');
+      const buffer=await file.arrayBuffer();return new Promise((resolve,reject)=>{const worker=new Worker(new URL('./ebook-worker.js',import.meta.url)),timer=setTimeout(()=>{worker.terminate();reject(new Error('这本书解析时间太长，请换成 TXT 试试'));},20000);const close=()=>{clearTimeout(timer);worker.terminate();};worker.onmessage=e=>{close();e.data.error?reject(new Error(e.data.error)):resolve(e.data.book);};worker.onerror=()=>{close();reject(new Error('解析器没有正常启动，请刷新后再试'));};worker.postMessage({buffer,name:file.name},[buffer]);});
     }
-    if(!/\.(txt|md|markdown)$/i.test(file.name)||file.size>2*1024*1024)throw new Error('请选择 2 MB 以内的 TXT 或 Markdown');
+    if(!/\.(txt|md|markdown)$/i.test(file.name))throw new Error('请选择 EPUB、MOBI、TXT 或 Markdown');
+    if(file.size>2*1024*1024)throw new Error('请选择 2 MB 以内的 TXT 或 Markdown');
     const data=await file.arrayBuffer();let text;try{text=new TextDecoder('utf-8',{fatal:true}).decode(data);}catch{text=new TextDecoder('gb18030',{fatal:true}).decode(data);}
     return {title:title||file.name.replace(/\.[^.]+$/,''),chapters:textChapters(text)};
   }
   async function submit(form,data,formData,key){
     if(!form.id.startsWith('reading-'))return false;
-    if(form.id==='reading-search-form'){searchTerm=data.search;const r=await api('reading/search?q='+encodeURIComponent(data.search),undefined,{timeout:25000});search=r.books;sourceMessage=r.message;render();return true;}
-    if(form.id==='reading-appearance-form'){appearance={script:data.script==='original'?'original':'simplified',size:Math.round(Math.max(16,Math.min(26,Number(data.size)||18)))};try{localStorage.setItem('starlight-reader-appearance',JSON.stringify(appearance));}catch{}document.querySelector('#dialog').close();render();return true;}
+    if(form.id==='reading-search-form'){await findBooks(data.search);return true;}
+    if(form.id==='reading-appearance-form'){appearance={size:Math.round(Math.max(16,Math.min(26,Number(data.size)||18)))};try{localStorage.setItem('starlight-reader-appearance',JSON.stringify(appearance));}catch{}document.querySelector('#dialog').close();render();return true;}
     if(form.id==='reading-rules-form'){await api('reading/rules',{enabled:formData.has('enabled'),finish:Number(data.finish),note:Number(data.note),noteLimit:Number(data.noteLimit),version:form.dataset.version},{key});document.querySelector('#dialog').close();await load('reading');render();toast('阅读奖励约定好啦');return true;}
     if(!canAct())throw new Error('这项阅读记录由领奖人自己完成');
     if(form.id==='reading-import-form'){const file=formData.get('file');if(!file?.size)throw new Error('先选一本书吧');const button=form.querySelector('[type="submit"]');button.textContent='正在本机解析…';const book=await parseFile(file,data.title);button.textContent='正在保存正文…';const r=await api('reading/import',{book},{key});document.querySelector('#dialog').close();await load('reading');await open(r.book_id);toast(r.existing?'回到已有进度啦':'新故事上架啦');return true;}

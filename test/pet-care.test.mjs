@@ -29,10 +29,10 @@ test('喂食、蛋内温暖、破壳、成长与换装使用不同的反馈，�
  assert.match(petMoment(spirit,moon,{kind:'evolve',portrait:petPortrait}),/moment-hatch/);
  for(const kind of ['dress','depart','welcome'])assert.ok(petMoment(p,p,{kind,portrait:petPortrait}).includes('moment-'+kind));
 });
-test('升级反馈只揭晓刚解锁的可用物品，跨级也不展示未完成套装',()=>{
- const before=pet(),after=pet({level:2,xp:100});assert.deepEqual(newlyUnlocked(before,after).map(i=>i.effect),['pet_berry','pet_scarf']);
+test('升级反馈只揭晓刚解锁的可用物品，全部套装现已完成上线',()=>{
+ const before=pet(),after=pet({level:2,xp:100});assert.deepEqual(newlyUnlocked(before,after).map(i=>i.effect),['pet_berry','pet_sketchbook','pet_scarf','pet_rainhat','pet_glasses']);
  const html=careOutcome(before,after,5,esc,petPortrait);assert.match(html,/95 → 100/);assert.match(html,/奶油格子围巾/);assert.ok(!html.includes('栗子画家帽'));
- const all=careOutcome(before,pet({level:10,xp:6000}),5905,esc,petPortrait);assert.ok(!all.includes('雨后散步套装'));assert.ok(!all.includes('星际探险套装'));assert.match(all,/pocket-glider/);
+ const all=careOutcome(before,pet({level:10,xp:6000}),5905,esc,petPortrait);assert.match(all,/雨后散步披风/);assert.match(all,/星际探险披风/);assert.match(all,/cloud-fox/);assert.match(all,/moss-dragon/);
 });
 test('失败的喂食请求不播放成功动画；成功后展示服务端真实经验',async()=>{
  let s=state({cards:[card('food','pet_snack')]}),html='',fail=true,calls=0;

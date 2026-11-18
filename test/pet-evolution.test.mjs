@@ -57,12 +57,15 @@ test('每个经验门槛生效，旅行冻结成长，出发快照在以后进�
  assert.equal(JSON.parse(s.get('SELECT story FROM pet_trips WHERE id=?',trip.id).story).pet.growth.stage,2);
 });
 
-test('进化权限属于领奖人，不能替另一个小屋操作，其他物种暂不冒充海豹进化',t=>{
+test('进化权限属于领奖人，不能替另一个小屋操作，全部6种伙伴均支持完整6段进化',t=>{
  const {s,u,g,room,evolve,earn}=setup(t);
  assert.throws(()=>s.pets.evolve(g,{space_id:room,from:0}),/领奖人/);
  const other=s.newUser({username:'another_evolution',name:'旁观者',password:''});assert.throws(()=>s.pets.evolve(other,{space_id:room,from:0}),/没有向你开放/);
- evolve(0);earn(6000);s.pets.dress(u,{form:'pocket-glider'});assert.throws(()=>evolve(1),/换回糯糯海豹/);
+ evolve(0);earn(6000);s.pets.dress(u,{form:'pocket-glider'});
  assert.match(petPortrait(s.pets.state(room)),/pocket-glider\/winged.png/);
+ evolve(2);assert.equal(s.pets.state(room).growth.isEgg,true);
+ evolve(3);assert.match(petPortrait(s.pets.state(room)),/pocket-glider\/moon.png/);
+ evolve(4);assert.match(petPortrait(s.pets.state(room)),/pocket-glider\/star.png/);
  assert.ok(!petPortrait(s.pets.state(room),{locked:true}).includes('.png'));
 });
 

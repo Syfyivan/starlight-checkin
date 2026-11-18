@@ -4,7 +4,7 @@ set -eu
 # Rollback plan: keep the stopped old container plus a consistent database snapshot.
 # Never start an older version against a newer database schema: restore its snapshot first.
 : "${PUBLIC_ORIGIN:?Set the exact existing HTTPS origin, including port 8443}"
-IMAGE="${IMAGE:-starlight-checkin:3.29.0}"
+IMAGE="${IMAGE:-starlight-checkin:3.31.0}"
 test -f server.mjs && test -f lib/migrate.mjs && test -f test/v2.test.mjs
 if [ -n "${ENV_FILE:-}" ]; then
   test -r "$ENV_FILE" || { echo 'Configured environment file is unreadable; application left running.'; exit 1; }
@@ -37,4 +37,5 @@ until curl --fail --silent http://127.0.0.1:8801/healthz >/dev/null; do
   sleep 2
 done
 docker exec starlight-checkin node -e "const {DatabaseSync}=require('node:sqlite');const db=new DatabaseSync(process.env.DB_PATH,{readOnly:true});if(db.prepare('PRAGMA integrity_check').get().integrity_check!=='ok')process.exit(1);console.log('Database integrity: ok; schema version:',db.prepare('PRAGMA user_version').get().user_version);db.close()"
+python3 deploy/prune-traditional-books.py /var/lib/starlight/source-books
 echo "Application upgraded. Previous container retained as $old_container. Verify the public URL before announcing completion."

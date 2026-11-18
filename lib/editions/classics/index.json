@@ -1,0 +1,116 @@
+[
+ {
+  "id": "daxue",
+  "title": "大学",
+  "author": "《礼记》篇目",
+  "path": "四书五经/daxue.json"
+ },
+ {
+  "id": "mengzi",
+  "title": "孟子",
+  "author": "孟子及其弟子",
+  "path": "四书五经/mengzi.json"
+ },
+ {
+  "id": "zhongyong",
+  "title": "中庸",
+  "author": "《礼记》篇目",
+  "path": "四书五经/zhongyong.json"
+ },
+ {
+  "id": "caocao",
+  "title": "曹操诗集",
+  "author": "曹操",
+  "path": "曹操诗集/caocao.json"
+ },
+ {
+  "id": "chuci",
+  "title": "楚辞",
+  "author": "屈原、宋玉等",
+  "path": "楚辞/chuci.json"
+ },
+ {
+  "id": "baijiaxing",
+  "title": "百家姓",
+  "author": "佚名",
+  "path": "蒙学/baijiaxing.json"
+ },
+ {
+  "id": "dizigui",
+  "title": "弟子规",
+  "author": "李毓秀",
+  "path": "蒙学/dizigui.json"
+ },
+ {
+  "id": "guwenguanzhi",
+  "title": "古文观止",
+  "author": "吴楚材、吴调侯 编",
+  "path": "蒙学/guwenguanzhi.json"
+ },
+ {
+  "id": "qianjiashi",
+  "title": "千家诗",
+  "author": "南宋谢枋得/明代王相",
+  "path": "蒙学/qianjiashi.json"
+ },
+ {
+  "id": "qianziwen",
+  "title": "千字文",
+  "author": "周兴嗣",
+  "path": "蒙学/qianziwen.json"
+ },
+ {
+  "id": "sanzijing-new",
+  "title": "三字经（新版）",
+  "author": "王应麟",
+  "path": "蒙学/sanzijing-new.json"
+ },
+ {
+  "id": "sanzijing-traditional",
+  "title": "三字经（传统版）",
+  "author": "王应麟",
+  "path": "蒙学/sanzijing-traditional.json"
+ },
+ {
+  "id": "shenglvqimeng",
+  "title": "声律启蒙",
+  "author": "车万育",
+  "path": "蒙学/shenglvqimeng.json"
+ },
+ {
+  "id": "tangshisanbaishou",
+  "title": "唐诗三百首",
+  "author": "蘅塘退士 编",
+  "path": "蒙学/tangshisanbaishou.json"
+ },
+ {
+  "id": "youxueqionglin",
+  "title": "幼学琼林",
+  "author": "程登吉",
+  "path": "蒙学/youxueqionglin.json"
+ },
+ {
+  "id": "zengguangxianwen",
+  "title": "增广贤文",
+  "author": "佚名",
+  "path": "蒙学/zengguangxianwen.json"
+ },
+ {
+  "id": "zhuzijiaxun",
+  "title": "朱子家训",
+  "author": "朱柏庐",
+  "path": "蒙学/zhuzijiaxun.json"
+ },
+ {
+  "id": "lunyu",
+  "title": "论语",
+  "author": "孔子弟子及再传弟子",
+  "path": "论语/lunyu.json"
+ },
+ {
+  "id": "shijing",
+  "title": "诗经",
+  "author": "佚名",
+  "path": "诗经/shijing.json"
+ }
+]

@@ -6,6 +6,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {Store} from '../lib/store.mjs';
 import {COIN} from '../lib/common.mjs';
+import {PET_ITEMS} from '../lib/pets.mjs';
 import {TRAVEL_DURATION_ODDS,TRAVEL_GIFT_ODDS,TRAVEL_STORIES} from '../lib/travel.mjs';
 
 const AT=Date.parse('2030-01-01T00:00:00Z'),DAY=86400_000;
@@ -85,9 +86,9 @@ test('时长与礼物边界概率正确，全部目的地具有知识来源',t=>
   for(const [roll,hours] of [[0,12],[4999,12],[5000,24],[7999,24],[8000,48],[9499,48],[9500,72],[9999,72]]){
     const trip=depart([card()],{},random(roll,0,0)).trip;assert.equal(trip.durationHours,hours);s.travel.maintain(trip.returnAt);
   }
-  for(const [roll,kind,effect] of [[0,null,null],[6999,null,null],[7000,'ticket',null],[8999,'ticket',null],[9000,'item','pet_snack'],[9799,'item','pet_snack'],[9800,'item','pet_bow'],[9999,'item','pet_bow']]){
+  for(const [roll,kind,itemKind] of [[0,null,null],[6999,null,null],[7000,'ticket',null],[8999,'ticket',null],[9000,'item','food'],[9799,'item','food'],[9800,'item','outfit'],[9999,'item','outfit']]){
     const trip=depart([card()],{},random(0,0,roll)).trip,gift=JSON.parse(s.get('SELECT gift FROM pet_trips WHERE id=?',trip.id).gift);
-    assert.equal(gift?.kind||null,kind);assert.equal(gift?.effect||null,effect);s.travel.maintain(trip.returnAt);
+    assert.equal(gift?.kind||null,kind);assert.equal(gift?.effect?PET_ITEMS[gift.effect].kind:null,itemKind);s.travel.maintain(trip.returnAt);
   }
   assert.equal(TRAVEL_DURATION_ODDS.reduce((n,p)=>n+Math.round(p.probability*100),0),100);
   assert.equal(TRAVEL_GIFT_ODDS.reduce((n,p)=>n+Math.round(p.probability*100),0),100);
@@ -96,11 +97,11 @@ test('时长与礼物边界概率正确，全部目的地具有知识来源',t=>
   assert.equal(s.travel.state(room).away,false);
 });
 
-test('重复装扮改口粮，出发后新解锁也不会带回重复装扮',t=>{
+test('重复装扮改口粮或地域特产，出发后新解锁也不会带回重复装扮',t=>{
   const {s,room,pet,card,depart}=setup(t);pet();const first=depart([card()],{},random(0,0,9800)).trip;
   s.run('INSERT INTO pet_outfits VALUES(?,?,?)',room,'pet_bow',new Date(AT).toISOString());
-  s.travel.maintain(first.returnAt);let gift=JSON.parse(s.get('SELECT gift FROM mail_gifts').gift);assert.equal(gift.effect,'pet_snack');
-  const second=depart([card()],{},random(0,0,9800)).trip;gift=JSON.parse(s.get('SELECT gift FROM pet_trips WHERE id=?',second.id).gift);assert.equal(gift.effect,'pet_snack');
+  s.travel.maintain(first.returnAt);let gift=JSON.parse(s.get('SELECT gift FROM mail_gifts').gift);assert.equal(PET_ITEMS[gift.effect].kind,'food');
+  const second=depart([card()],{},random(0,0,9800)).trip;gift=JSON.parse(s.get('SELECT gift FROM pet_trips WHERE id=?',second.id).gift);assert.equal(PET_ITEMS[gift.effect].kind,'food');
 });
 
 test('旅行邀请最多每周一封，归来先休息一天，关闭的小屋仍能收归来信',t=>{

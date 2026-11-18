@@ -5,12 +5,13 @@ import {Store} from '../lib/store.mjs';
 import {COIN,dayAt} from '../lib/common.mjs';
 import {TRAVEL_STORIES} from '../lib/travel.mjs';
 import {KEEPSAKES,TRAVEL_NOTES,routeFor} from '../public/travel-notes.js';
-import {postcardScene} from '../public/travel-art.js';
+import {keepsakeIcon,postcardScene} from '../public/travel-art.js';
 import {passport} from '../public/travel-journal.js';
 import {createApp} from '../server.mjs';
 
 function setup(t){const s=new Store(':memory:');t.after(()=>s.db.close());const a=s.newUser({username:'journal_a',name:'小树',password:''}),b=s.newUser({username:'journal_b',name:'小芽',password:''}),g=s.newUser({username:'journal_g',name:'伙伴',password:''});
- const room=s.pair(a.id,g.id).space_id;a.space_id=room;s.run('INSERT INTO pets VALUES(?,?,?,?)',room,'nuonuo-seal','',new Date().toISOString());s.tx(()=>s.post(room,2000*COIN,'test','测试补给','fixture'));s.addTemplates(g,{space_id:room,templates:['pet_snack','pet_feast','pet_tent','pet_pack']});
+ const room=s.pair(a.id,g.id).space_id;a.space_id=room;s.run('INSERT INTO pets VALUES(?,?,?,?)',room,'nuonuo-seal','',new Date().toISOString());s.tx(()=>s.post(room,20000*COIN,'test','测试补给','fixture'));s.addTemplates(g,{space_id:room,templates:['pet_snack','pet_feast','pet_tent','pet_pack']});
+ s.run("UPDATE prizes SET stock=200 WHERE room_id=? AND effect='pet_snack'",room);
  const op=(route,body,fn,key=randomUUID())=>s.operation(a,key,route,{space_id:room,...body},()=>fn({space_id:room,...body}));
  const buy=(effect='pet_snack')=>op('/api/buy',{prize_id:s.get('SELECT id FROM prizes WHERE room_id=? AND effect=?',room,effect).id},b=>s.buy(a,b)).card;
  const depart=(extra={},effect='pet_snack',rolls=[0,0,7500])=>{const card=buy(effect),at=Date.now();return op('/api/pets/travel',{card_ids:[card.id],...extra},b=>s.travel.depart(a,b,max=>{const value=rolls.shift();assert.ok(value<max);return value;},at)).trip;};
@@ -19,9 +20,33 @@ function setup(t){const s=new Store(':memory:');t.after(()=>s.db.close());const 
 
 test('路线和行囊影响去向，所选路线优先新地点，礼物与时长规则独立',t=>{
  const {s,room,depart,back}=setup(t);const one=depart({route:'auto'},'pet_tent');assert.equal(one.route,'nature');assert.equal(TRAVEL_NOTES[one.placeId].theme,'nature');back(one);
- const two=depart({route:'nature'});assert.notEqual(two.placeId,one.placeId);back(two);const three=depart({route:'nature'});assert.equal(three.placeId,one.placeId);back(three);
+ const two=depart({route:'nature'});assert.notEqual(two.placeId,one.placeId);back(two);
  const city=depart({route:'culture'});assert.equal(TRAVEL_NOTES[city.placeId].theme,'culture');assert.equal(city.durationHours,12);assert.equal(JSON.parse(s.get('SELECT gift FROM pet_trips WHERE id=?',city.id).gift).kind,'ticket');
  assert.equal(routeFor('auto',['pet_map']),'culture');assert.equal(routeFor('auto',['pet_lantern']),'culture');assert.equal(routeFor('auto',['pet_pack']),'surprise');assert.equal(s.travel.state(room).trip.gift,undefined);
+});
+test('反复选择同一主题也先走完全图，全图走完才重游并避开上一站',t=>{
+ const {depart,back}=setup(t);
+ const cultureCount=TRAVEL_STORIES.filter(place=>TRAVEL_NOTES[place.id].theme==='culture').length;
+ const seen=new Set();
+ let last;
+ for(let i=0;i<TRAVEL_STORIES.length;i++){
+   const trip=depart({route:'culture'});
+   assert.equal(trip.route,i<cultureCount?'culture':'nature');
+   assert.equal(TRAVEL_NOTES[trip.placeId].theme,trip.route);
+   assert.ok(!seen.has(trip.placeId));
+   seen.add(trip.placeId);
+   back(trip);
+   last=trip;
+ }
+ // Switching to the previous stop's theme must still exclude that stop.
+ const revisit=depart({route:last.route});
+ assert.notEqual(revisit.placeId,last.placeId);
+ back(revisit);
+ const next=depart({route:revisit.route});
+ assert.notEqual(next.placeId,revisit.placeId);
+ back(next);
+ const third=depart({route:revisit.route});
+ assert.notEqual(third.placeId,revisit.placeId,'prefer places with fewer visits');
 });
 test('半程来信只寄一次，不加经验或礼物；归来快照仍只结算一次',t=>{
  const {s,room,depart,back}=setup(t),trip=depart(),mid=(trip.departure+trip.returnAt)/2,before=s.pets.state(room).xp;
@@ -36,10 +61,11 @@ test('服务离线跨过整个旅程只补归来信，旧快照保持原目的�
  const next=depart();s.travel.maintain(next.returnAt+86400000);assert.equal(s.get("SELECT COUNT(*) n FROM progress_events WHERE event_key LIKE 'travel-road:%'").n,0);
 });
 test('护照收集全部地点，最近六封之外仍可读信；未到访只显示轮廓',t=>{
- const {s,a,room,depart,back}=setup(t);const before=s.travel.state(room),html=passport(before,String);assert.ok(!html.includes('中国'));assert.ok(!html.includes('长城'));assert.equal((html.match(/passport-place locked/g)||[]).length,8);
- const ids=[];for(let i=0;i<8;i++){const trip=depart({route:'surprise'});ids.push(trip.id);back(trip);}
- const state=s.travel.state(room);assert.equal(state.history.length,6);assert.equal(state.album.filter(a=>a.visits).length,8);assert.ok(state.album.every(a=>a.visits===1));assert.ok(s.travel.readPostcard(a,{space_id:room,trip_id:ids[0]}).knowledge);
- assert.equal(new Set(TRAVEL_STORIES.map(s=>postcardScene(s.id))).size,8);assert.ok(TRAVEL_STORIES.every(s=>TRAVEL_NOTES[s.id]?.choices[TRAVEL_NOTES[s.id].answer]));
+ const {s,a,room,depart,back}=setup(t);const before=s.travel.state(room),html=passport(before,String);assert.ok(!html.includes('中国'));assert.ok(!html.includes('长城'));assert.equal((html.match(/passport-place locked/g)||[]).length,TRAVEL_STORIES.length);
+ const ids=[];for(let i=0;i<TRAVEL_STORIES.length;i++){const trip=depart({route:'surprise'});ids.push(trip.id);back(trip);}
+ const state=s.travel.state(room);assert.equal(state.history.length,6);assert.equal(state.album.filter(a=>a.visits).length,TRAVEL_STORIES.length);assert.ok(state.album.every(a=>a.visits===1));assert.ok(s.travel.readPostcard(a,{space_id:room,trip_id:ids[0]}).knowledge);
+ assert.equal(new Set(TRAVEL_STORIES.map(s=>postcardScene(s.id))).size,TRAVEL_STORIES.length);assert.ok(TRAVEL_STORIES.every(s=>TRAVEL_NOTES[s.id]?.choices[TRAVEL_NOTES[s.id].answer]));
+ assert.ok(TRAVEL_STORIES.every(({id})=>KEEPSAKES[id]?.items[KEEPSAKES[id].answer]&&keepsakeIcon(id)));
 });
 test('小发现只能本人写，保存不加币，冲突不覆盖；发奖人可以看',t=>{
  const {s,a,b,g,room,op,depart,back}=setup(t),trip=depart();back(trip);const before=s.balance(room),xp=s.pets.state(room).xp;
@@ -63,7 +89,7 @@ test('返程礼物可从旧明信片领取，两次领取只得到一次，其�
 });
 test('新接口与插画模块可达，明信片需要登录和房间权限',async t=>{
  const app=await createApp({dbPath:':memory:',demo:false}),s=app.store;await new Promise(r=>app.server.listen(0,'127.0.0.1',r));t.after(async()=>{await new Promise(r=>app.server.close(r));s.db.close();});const base='http://127.0.0.1:'+app.server.address().port;
- for(const file of ['travel-notes.js','travel-art.js','travel-journal.js'])assert.equal((await fetch(base+'/'+file)).status,200);
+ for(const file of ['world-stops.js','travel-notes.js','travel-art.js','travel-journal.js'])assert.equal((await fetch(base+'/'+file)).status,200);
  assert.equal((await fetch(base+'/api/pets/postcard?trip_id=x')).status,401);
  const a=s.newUser({username:'journal_http',name:'测试',password:''}),session=s.session(a.id),headers={Cookie:'starlight_session='+session.token,Origin:base,'Content-Type':'application/json'};
  assert.equal((await fetch(base+'/api/pets/postcard?trip_id=x',{headers})).status,404);
@@ -80,9 +106,17 @@ test('每周三天打卡换一次指定地点，失效的邀约不会消耗行�
  assert.equal(offer().days,2);assert.deepEqual(offer().choices,[]);
  s.run('UPDATE completions SET done=1 WHERE task_id=? AND day=?',ids[0],'2030-05-07');
  const unlocked=offer();assert.equal(unlocked.choices.length,2);assert.deepEqual(offer(),unlocked);
+ // One place left: even a weekly selection must lead to that unvisited place.
+ const remaining=unlocked.choices[0].id;
+ for(const place of TRAVEL_STORIES.filter(place=>place.id!==remaining)){
+   s.run("INSERT INTO pet_trips(id,space_id,departure,return_at,duration_hours,xp,supplies,destination,story,gift,status,created) VALUES(?,?,?,?,12,5,'[]',?,?,'null','returned',?)",
+     randomUUID(),room,at-86400000,at-43200000,place.place,JSON.stringify(place),new Date(at).toISOString());
+ }
+ assert.deepEqual(offer().choices,[unlocked.choices[0]]);
  const card=buy(),destination=unlocked.choices[0].id;
  const go=(week,dest,id)=>s.travel.depart(a,{space_id:room,card_ids:[id],destination:dest,week},()=>0,at);
  assert.throws(()=>go('2030-04-29',destination,card.id),/更新/);
+ assert.throws(()=>go(week,unlocked.choices[1].id,card.id),/更新/);
  assert.throws(()=>go(week,'invalid',card.id),/更新/);
  assert.equal(s.get('SELECT status FROM cards WHERE id=?',card.id).status,'ready');
  const {trip}=go(week,destination,card.id);assert.equal(trip.placeId,destination);
