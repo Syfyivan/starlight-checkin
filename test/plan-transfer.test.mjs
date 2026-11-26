@@ -57,6 +57,12 @@ test('JSON backup can be previewed before destination scoring settings are loade
  assert.equal(preview.points,20);
  assert.equal(preview.start_date,'2026-11-26');
 });
+test('rebased schedule dates must stay in the supported calendar range',()=>{
+ const doc=planDocument([task({start_date:'2026-11-27'})],'personal','2026-11-26');
+ assert.throws(()=>readPlanJSON(JSON.stringify(doc),{start_date:'9999-12-31',settings:{}}),/第 1 项.*开始日期/);
+ const long=planDocument([task({task_kind:'long',start_date:'2026-11-26',deadline:'2026-11-27'})],'personal','2026-11-26');
+ assert.throws(()=>readPlanJSON(JSON.stringify(long),{start_date:'9999-12-31',settings:{}}),/第 1 项.*截止日期/);
+});
 test('shared plans export once per participating plan and import with newly selected members, without shared money',t=>{
  const {s,a,b}=setup(t),room=s.tx(()=>s.community.createFamily(a,{name:'共进',mode:'friends'})).space_id,invite=s.tx(()=>s.community.familyInvite(a,{space_id:room})),rb=s.tx(()=>s.acceptInvite(b,invite.code)).space_id;
  const body={space_id:room,scope:'shared',user_ids:[a.id,b.id],tasks:[task({mode:'together',task_kind:'repeat',repeat_days:2}),task({title:'一起读书',mode:'each'})]};assert.equal(transfer(s,a,body).added,2);

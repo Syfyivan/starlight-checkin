@@ -51,7 +51,12 @@ export function readPlanJSON(text,{scope='personal',start_date,defaults={},setti
     let offset=Math.max(0,distance(original,anchor));
     if(t.task_kind==='repeat'&&original<anchor)offset=(t.repeat_days-distance(anchor,original)%t.repeat_days)%t.repeat_days;
     t.start_date=add(start_date,offset);
-    if(t.deadline){if(!date(t.deadline)||t.deadline<original)error('截止日期无效');t.deadline=add(start_date,Math.max(offset,distance(t.deadline,anchor)));}
+    if(!date(t.start_date))error('换算后的开始日期超出范围');
+    if(t.deadline){
+      if(!date(t.deadline)||t.deadline<original)error('截止日期无效');
+      t.deadline=add(start_date,Math.max(offset,distance(t.deadline,anchor)));
+      if(!date(t.deadline))error('换算后的截止日期超出范围');
+    }
     if(t.task_kind!=='long')t.deadline='';
     t.recurrence=t.task_kind==='repeat'?'daily':'once';
     if(scope==='shared'){t.mode=raw.mode||defaults.mode||'each';if(!['each','together'].includes(t.mode))error('共同完成方式无效');}else delete t.mode;
