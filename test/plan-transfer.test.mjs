@@ -66,7 +66,7 @@ test('rebased schedule dates must stay in the supported calendar range',()=>{
 test('shared plans export once per participating plan and import with newly selected members, without shared money',t=>{
  const {s,a,b}=setup(t),room=s.tx(()=>s.community.createFamily(a,{name:'共进',mode:'friends'})).space_id,invite=s.tx(()=>s.community.familyInvite(a,{space_id:room})),rb=s.tx(()=>s.acceptInvite(b,invite.code)).space_id;
  const body={space_id:room,scope:'shared',user_ids:[a.id,b.id],tasks:[task({mode:'together',task_kind:'repeat',repeat_days:2}),task({title:'一起读书',mode:'each'})]};assert.equal(transfer(s,a,body).added,2);
- const doc=exportPlans(s,a,{space:room,scope:'shared'});assert.equal(doc.tasks.length,2);assert.equal(exportPlans(s,a,{space:room}).tasks.length,0);assert.equal(exportPlans(s,b,{space:rb,scope:'shared'}).tasks.length,2);
+ const doc=exportPlans(s,a,{space:room,scope:'shared'});assert.equal(doc.tasks.length,2);assert.deepEqual(doc.tasks.map(t=>t.mode),['together','each']);assert.equal(exportPlans(s,a,{space:room}).tasks.length,0);assert.equal(exportPlans(s,b,{space:rb,scope:'shared'}).tasks.length,2);
  assert.equal(transfer(s,a,body).skipped,2);assert.equal(s.familyPlay.balance(s.community.family(a,room).id),0);assert.equal(s.balance(rb),0);
  const second=s.tx(()=>s.community.createFamily(a,{name:'新的共进',mode:'friends'})).space_id,inv=s.tx(()=>s.community.familyInvite(a,{space_id:second}));s.tx(()=>s.acceptInvite(b,inv.code));
  const rows=readPlanJSON(JSON.stringify(doc),{scope:'shared',start_date:dayAt(),settings:s.settings(second)});assert.equal(transfer(s,a,{...body,space_id:second,tasks:rows}).added,2);assert.equal(s.get('SELECT COUNT(*) n FROM tasks WHERE space_id=?',second).n,2);
