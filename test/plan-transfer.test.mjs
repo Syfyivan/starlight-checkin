@@ -50,6 +50,13 @@ test('Markdown export remains a clean check-list with quadrant and estimate impo
  const doc=planDocument([task({quadrant:'urgent-important'}),task({title:'看新闻',estimated_minutes:0,quadrant:'none'})],'personal','2026-10-29'),text=plansMarkdown(doc),parsed=parseMarkdown(text);
  assert.equal(parsed.tasks.length,2);assert.equal(parsed.tasks.find(t=>t.title==='认真阅读').estimated_minutes,25);assert.equal(parsed.tasks.find(t=>t.title==='认真阅读').quadrant,'urgent-important');assert.equal(parsed.checked,0);
 });
+test('JSON backup can be previewed before destination scoring settings are loaded',()=>{
+ const saved=task({start_date:'2026-11-26',points:20});
+ const doc=planDocument([saved],'personal','2026-11-26');
+ const [preview]=readPlanJSON(JSON.stringify(doc),{start_date:'2026-11-26'});
+ assert.equal(preview.points,20);
+ assert.equal(preview.start_date,'2026-11-26');
+});
 test('shared plans export once per participating plan and import with newly selected members, without shared money',t=>{
  const {s,a,b}=setup(t),room=s.tx(()=>s.community.createFamily(a,{name:'共进',mode:'friends'})).space_id,invite=s.tx(()=>s.community.familyInvite(a,{space_id:room})),rb=s.tx(()=>s.acceptInvite(b,invite.code)).space_id;
  const body={space_id:room,scope:'shared',user_ids:[a.id,b.id],tasks:[task({mode:'together',task_kind:'repeat',repeat_days:2}),task({title:'一起读书',mode:'each'})]};assert.equal(transfer(s,a,body).added,2);

@@ -43,7 +43,7 @@ export function readPlanJSON(text,{scope='personal',start_date,defaults={},setti
     t.estimated_minutes=Number(t.estimated_minutes);
     if(!Number.isInteger(t.estimated_minutes)||t.estimated_minutes<0||t.estimated_minutes>1440)error('预估时间需要 0–1440 分钟');
     if(t.difficulty&&!['easy','standard','hard','challenge'].includes(t.difficulty))error('任务等级无效');
-    if(t.task_kind!=='long'&&settings.taskScoreMode==='difficulty'){
+    if(t.task_kind!=='long'&&settings?.taskScoreMode==='difficulty'){
       t.difficulty=t.difficulty||settings.defaultDifficulty;t.points=settings.difficultyPoints[t.difficulty];
     }else {t.points=Number(t.points);t.difficulty='';}
     if(!Number.isInteger(t.points)||t.points<1||t.points>(t.task_kind==='long'?1000000:100))error('分数超出本屋允许的范围');
