@@ -15,6 +15,16 @@ function setup(t){const s=new Store(':memory:');t.after(()=>s.db.close());const 
  const adjust=(id,extra={})=>{const c=s.get('SELECT * FROM completions WHERE task_id=? AND day=?',id,dayAt());return complete(id,{rescore:true,expectedUpdated:c.updated,expectedPoints:c.points,...extra});};
  return {s,a,g,o,room,task,complete,config,adjust,op};}
 
+test('state scores and edit versions match direct calculation for current and future tasks',t=>{
+ const {s,a,room,task,config}=setup(t);task({difficulty:'hard'});task({start_date:'2099-01-01'});
+ config({difficultyPoints:{easy:10,standard:20,hard:43,challenge:60}});
+ const view=s.state(a,room);
+ assert.equal(view.scoreVersion,s.scoreVersion(room));
+ assert.equal(view.tasks[0].points,43*COIN);
+ assert.equal(view.futureTasks.length,1);
+ for(const t of [...view.tasks,...view.futureTasks])assert.equal(t.editVersion,s.plans.editVersion(t));
+});
+
 test('新小屋默认难度模式，等级由发奖人定分，不能手填高分绕过',t=>{const {s,room,task,complete}=setup(t);assert.equal(s.settings(room).taskScoreMode,'difficulty');const id=task({points:100});assert.equal(s.get('SELECT points FROM tasks WHERE id=?',id).points,20*COIN);const r=complete(id,{difficulty:'easy',points:100});assert.equal(r.amount,10*COIN);assert.equal(r.scoreMode,'difficulty');assert.equal(s.get('SELECT difficulty FROM completions').difficulty,'easy');assert.throws(()=>task({difficulty:'made-up'}));});
 test('默认等级和等级分数可设置，首次入账用当前规则；已经完成的不重算',t=>{const {s,a,room,task,complete,config}=setup(t);config({defaultDifficulty:'hard',difficultyPoints:{easy:8,standard:15,hard:35,challenge:60}});const id=task();assert.equal(s.state(a,room).tasks[0].points,35*COIN);config({difficultyPoints:{easy:10,standard:20,hard:40,challenge:70}});complete(id);assert.equal(s.balance(room),40*COIN);config({difficultyPoints:{easy:10,standard:20,hard:50,challenge:80}});assert.equal(s.state(a,room).tasks[0].awarded,40*COIN);});
 test('自由模式支持完成时填写和当天改分，账本只补差，重放不重复发放',t=>{const {s,room,task,complete,config,adjust}=setup(t);config({taskScoreMode:'manual',defaultPoints:15});const id=task();assert.equal(s.get('SELECT points FROM tasks WHERE id=?',id).points,15*COIN);const key=randomUUID();complete(id,{points:37},key);complete(id,{points:37},key);assert.equal(s.balance(room),37*COIN);const up=adjust(id,{points:52});assert.equal(up.amount,15*COIN);const audit=JSON.parse(s.get("SELECT detail FROM room_audit WHERE summary LIKE '调整任务得分%' ORDER BY seq DESC LIMIT 1").detail);assert.equal(audit.task.previous.points,37);assert.equal(audit.task.awarded,52);const down=adjust(id,{points:12});assert.equal(down.amount,-40*COIN);assert.equal(s.balance(room),12*COIN);assert.equal(s.ticketBalance(room),1);assert.equal(s.all('SELECT * FROM ticket_ledger').length,1);complete(id,{done:false});assert.equal(s.balance(room),0);assert.equal(s.ticketBalance(room),0);complete(id);assert.equal(s.balance(room),12*COIN);assert.equal(s.ticketBalance(room),1);});
