@@ -16,11 +16,23 @@ function setup(t){const s=new Store(':memory:');t.after(()=>s.db.close());const 
  return {s,a,g,o,room,task,complete,config,adjust,op};}
 
 test('state scores and edit versions match direct calculation for current and future tasks',t=>{
- const {s,a,room,task,config}=setup(t);task({difficulty:'hard'});task({start_date:'2099-01-01'});
+ const {s,a,room,task,complete,config,op}=setup(t);
+ const finished=task({difficulty:'hard'});
+ task({start_date:'2099-01-01'});
+ op('/api/tasks',{tasks:Array.from({length:48},(_,i)=>({title:'计划 '+i,recurrence:'daily'}))},'createTasks');
  config({difficultyPoints:{easy:10,standard:20,hard:43,challenge:60}});
+ complete(finished);
+ const queries=[];
+ for(const method of ['get','all']){
+  const read=s[method].bind(s);
+  t.mock.method(s,method,(sql,...params)=>{queries.push(sql);return read(sql,...params);});
+ }
  const view=s.state(a,room);
+ const editReads=queries.filter(sql=>/^SELECT \* FROM (tasks WHERE id|completions WHERE (task_id|day=\? AND task_id))/.test(sql));
+ assert.equal(editReads.length,2);
  assert.equal(view.scoreVersion,s.scoreVersion(room));
- assert.equal(view.tasks[0].points,43*COIN);
+ assert.equal(view.tasks.length,49);
+ assert.equal(view.tasks.find(t=>t.id===finished).points,43*COIN);
  assert.equal(view.futureTasks.length,1);
  for(const t of [...view.tasks,...view.futureTasks])assert.equal(t.editVersion,s.plans.editVersion(t));
 });
